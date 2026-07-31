@@ -180,18 +180,15 @@
     <div class="container">
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I goes to school yesterday)..."></textarea>
         <button id="translate">Translate & Learn (පරිවර්තනය කර ඉගෙන ගන්න)</button>
-        <div id="output">පිළිතුර මෙහි දිස් වනු ඇ...</div>
+        <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
 
     <script>
-        // 🔑 Base64 Encode කරන ලද Google AI Studio API Keys (AIzaSy...) ඇතුළත් කරන්න
+        // 🔑 Base64 Encode කරන ලද API Keys ඇතුළත් කරන්න
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
-            "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
-            "QVEuQWI4Uk42SVAxaXhhLTVhTTNSaGFjU2Z1YkI3YWtadmRqcXBuaVZWc2RRaEJqbGZIYXc",
-            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUU4Z2VrMVNsVUE",
-            "QVEuQWI4Uk42S0QtbDI3MlhWcGtDYWExeXl5VlVBdHJlOE03ZzJtbE1CUWZDXzFhajFnV2c"
-
+            "QVEuQWI4Uk42STl6VE9GdzFnNXVsWEJKYlMzNmpqM3ZEeWNrX2pOcUM4czFXQ2h5TDNvSGc",
+            "QVEuQWI4Uk42TGI5bWt2SXBYWGoyQ0tVb3lRUjh2bnIwZ3g5aGNmOUtaZTF1WC1MUjd1V3c",
+            "QVEuQWI4Uk42SlpQZ1NoeFREU3hXZXRZSjRpODJ6MkVoVVd3WEFOeWdFRWdSSjdIWFFWVXc"
         ];
 
         let currentKeyIndex = 0;
@@ -264,20 +261,20 @@ Format your responses neatly with clear headings:
 
         async function askGemini(promptText) {
             let attempts = 0;
-            const maxAttempts = ENCODED_KEYS.length * 2;
+            const activeKeysCount = ENCODED_KEYS.filter(k => k && !k.includes("YOUR_")).length;
+            const maxAttempts = (activeKeysCount || 1) * 2;
             let collectedErrors = [];
 
             while (attempts < maxAttempts) {
                 const currentApiKey = getActiveApiKey();
 
                 if (!currentApiKey) {
-                    collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Invalid or empty API key format.`);
                     rotateApiKey();
                     attempts++;
                     continue;
                 }
 
-                // Standard Gemini REST API Endpoint
+                // 🌟 REST URL එක සහ Header Authentication හරහා ද්විත්ව පරීක්ෂාව
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
@@ -293,7 +290,10 @@ Format your responses neatly with clear headings:
                 try {
                     const response = await fetch(url, {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        headers: { 
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${currentApiKey}`
+                        },
                         body: JSON.stringify(payload)
                     });
 
