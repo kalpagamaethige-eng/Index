@@ -184,23 +184,18 @@
     </div>
 
     <script>
+        // ⚠️ Google AI Studio එකෙන් ගත් 'AIzaSy...' API Key එක Base64 Encode කර මෙතැනට දමන්න!
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42SjNzdUtVRUFORmlPMm56R2lQU2NVUjluc2xCXzBIOG5wWGxCbTRJLVQtNFE=",
-            "QVEuQWI4Uk42SVNIelRaQVdwSzRuUlBFcVNMSHhJSUlvTGVHQk1icWxLTzFacFZ2X1hkdVE=",
-            "QVEuQWI4Uk42SU10S2RXNnVsTS1vRjZnQ0VkckRUMmJUdFdTRzdsWTJibE9uVGJrWmJDQlE=",
-            "QVEuQWI4Uk42SUhrd2sxS0tDNjBQSHlQQklIVlRvV250OHVtVGlMM3RBRExtUk9kRTZSQ2c=",
-            "QVEuQWI4Uk42Sng1cFZrMWY1ZGY1UUJRRGtESEVFZVNZa241WTk1VFRwY3FOMVJHRTRTSnc="
+            "QVEuQWI4Uk42SlpQZ1NoeFREU3hXZXRZSjRpODJ6MkVoVVd3WEFOeWdFRWdSSjdIWFFWVXc="
         ];
 
         let currentKeyIndex = 0;
-        let lastLoggedError = "";
 
         function getActiveApiKey() {
             try {
                 const encodedKey = ENCODED_KEYS[currentKeyIndex];
                 return atob(encodedKey.trim());
             } catch (e) {
-                lastLoggedError = "Key Decoding Error: " + e.message;
                 return "";
             }
         }
@@ -235,7 +230,7 @@ Format your responses neatly with clear headings:
         async function askGemini(promptText) {
             let attempts = 0;
             const maxAttempts = ENCODED_KEYS.length;
-            let errorsList = [];
+            let lastError = "";
 
             while (attempts < maxAttempts) {
                 const currentApiKey = getActiveApiKey();
@@ -258,32 +253,31 @@ Format your responses neatly with clear headings:
                         body: JSON.stringify(payload)
                     });
 
+                    const data = await response.json();
+
                     if (!response.ok) {
-                        const errText = await response.text();
-                        errorsList.push(`Key [${currentKeyIndex}] Status ${response.status}: ${errText}`);
+                        lastError = `API Error [${response.status}]: ${data.error?.message || 'Unknown error'}`;
                         rotateApiKey();
                         attempts++;
                         continue;
                     }
 
-                    const data = await response.json();
-
                     if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
                         return data.candidates[0].content.parts[0].text;
                     } else {
-                        errorsList.push(`Key [${currentKeyIndex}] Invalid Structure: ${JSON.stringify(data)}`);
+                        lastError = "API Response Format Error";
                         rotateApiKey();
                         attempts++;
                     }
 
                 } catch (error) {
-                    errorsList.push(`Key [${currentKeyIndex}] Fetch Error: ${error.message}`);
+                    lastError = "Network / Fetch Error: " + error.message;
                     rotateApiKey();
                     attempts++;
                 }
             }
 
-            throw new Error(errorsList.join("\n\n"));
+            throw new Error(lastError);
         }
 
         function formatMarkdown(text) {
@@ -299,9 +293,7 @@ Format your responses neatly with clear headings:
             });
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
             formatted = formatted.replace(/^\*\s+/gim, '• ');
-
             formatted = formatted.replace(/\n\s*\n/g, '<br><br>');
             formatted = formatted.replace(/\n/g, '<br>');
 
@@ -329,8 +321,7 @@ Format your responses neatly with clear headings:
                 const response = await askGemini(text);
                 outputDiv.innerHTML = formatMarkdown(response);
             } catch (err) {
-                // දෝෂය තිරය මත පැහැදිලිව පෙන්වීම
-                outputDiv.innerHTML = `<div class="error-box">⚠️ දෝෂයක් හඳුනා ගැනුණි:\n\n${err.message}</div>`;
+                outputDiv.innerHTML = `<div class="error-box">⚠️ දෝෂයක් සිදු විය:\n${err.message}\n\nකරුණාකර නිවැරදි Google AI Studio API Key එකක් යෙදීමට වගබලා ගන්න.</div>`;
             } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
