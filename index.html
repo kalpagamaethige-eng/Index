@@ -137,6 +137,39 @@
             font-size: 14px;
         }
 
+        /* 🔊 Speaker/Audio Highlights */
+        .speak-btn {
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            vertical-align: middle;
+            transition: background 0.2s;
+        }
+
+        .speak-btn:hover {
+            background: #38bdf8;
+        }
+
+        .main-translation-box {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: #ffffff;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
         .loading {
             color: var(--accent-color);
             font-style: italic;
@@ -183,14 +216,13 @@
     </div>
 
     <script>
-        // 🔑 Base64 Encode කරන ලද 'AIzaSy...' API Keys 5 දක්වා ඇතුළත් කරන්න
+        // 🔑 Base64 Encode කරන ලද API Keys 5 ඇතුළත් කර ඇත
         const ENCODED_KEYS = [
             "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
             "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
             "QVEuQWI4Uk42SVAxaXhhLTVhTTNSaGFjU2Z1YkI3YWtadmRqcXBuaVZWc2RRaEJqbGZIYXc",
-            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUU4Z2VrMVNsVUE",
+            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUE4Z2VrMVNsVUE",
             "QVEuQWI4Uk42S0QtbDI3MlhWcGtDYWExeXl5VlVBdHJlOE03ZzJtbE1CUWZDXzFhajFnV2c"
-            
         ];
 
         let currentKeyIndex = 0;
@@ -217,19 +249,27 @@
 Your responsibilities:
 1. Translate English ↔ Sinhala accurately.
 2. Correct grammar mistakes and awkward phrasing in the user's input.
-3. Explain grammar in simple Sinhala.
-4. Give beginner and advanced examples based on the structure.
-5. Explain difficult vocabulary clearly.
-6. Teach pronunciation guidance (using simple Sinhala phonetic representation).
-7. Encourage conversation practice and maintain a friendly, professional, and supportive language teacher tone.
-8. Always ask a relevant follow-up question in both English and Sinhala to keep the learning practice going.
+3. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT].
+4. Break down sentence structure clearly (Identify: Subject / උක්තය, Verb / ක්‍රියාපදය, Object / කර්මය, Modifiers/Other / වෙනත් කොටස්).
+5. If the input is a question, answer the underlying query clearly with key information and explanatory points in Sinhala.
+6. Provide multiple alternative meanings or contexts if a single word or phrase has multiple senses.
+7. Provide similar sentences, patterns, or vocabulary examples to enrich learning.
+8. Encourage practice with a clear follow-up question.
 
 Format your responses neatly with clear headings:
-### 🇱🇰 පරිවර්තනය (Translation)
+### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation)
+[EN_TEXT] || [SI_TEXT]
+
 ### ✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)
-### 📖 ව්‍යාකරණ පැහැදිලි කිරීම (Grammar Explanation)
-### 💡 උදාහරණ (Examples - Beginner & Advanced)
-### 🗣️ උච්චාරණය හා වචන මාලාව (Pronunciation & Vocabulary)
+### 🧩 වාක්‍ය ව්‍යුහය විශ්ලේෂණය (Sentence Breakdown)
+- **උක්ත පදය (Subject)**: ...
+- **ක්‍රියා පදය (Verb)**: ...
+- **කර්ම පදය (Object)**: ...
+- **අනෙකුත් කොටස් (Modifiers/Other)**: ...
+
+### 📖 ව්‍යාකරණ පැහැදිලි කිරීම සහ පිළිතුර (Grammar & Answer Details)
+### 📚 බහු-අර්ථ සහ වෙනත් භාවිතයන් (Multiple Meanings & Uses)
+### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples)
 ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
         function startCountdown(seconds, errorMessage) {
@@ -277,7 +317,6 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
-                // Standard Gemini REST Endpoint
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
@@ -301,7 +340,7 @@ Format your responses neatly with clear headings:
 
                     if (response.status === 429 || response.status === 403) {
                         const rateMsg = data.error?.message || "Rate limit exceeded";
-                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}] (Status ${response.status}): ${rateMsg}`);
+                        collectedErrors.push(`Key [${currentKeyIndex + 1}] (Status ${response.status}): ${rateMsg}`);
                         rotateApiKey();
                         attempts++;
                         await new Promise(res => setTimeout(res, 1500));
@@ -310,7 +349,7 @@ Format your responses neatly with clear headings:
 
                     if (!response.ok) {
                         const errDetails = data.error?.message || 'Request failed';
-                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}] (Status ${response.status}): ${errDetails}`);
+                        collectedErrors.push(`Key [${currentKeyIndex + 1}] (Status ${response.status}): ${errDetails}`);
                         rotateApiKey();
                         attempts++;
                         continue;
@@ -319,13 +358,13 @@ Format your responses neatly with clear headings:
                     if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
                         return { text: data.candidates[0].content.parts[0].text, error: null };
                     } else {
-                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Invalid response structure.`);
+                        collectedErrors.push(`Key [${currentKeyIndex + 1}]: Invalid response structure.`);
                         rotateApiKey();
                         attempts++;
                     }
 
                 } catch (error) {
-                    collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Network Error (${error.message})`);
+                    collectedErrors.push(`Key [${currentKeyIndex + 1}]: Network Error (${error.message})`);
                     rotateApiKey();
                     attempts++;
                 }
@@ -334,24 +373,89 @@ Format your responses neatly with clear headings:
             return { text: null, error: collectedErrors.join('\n') };
         }
 
+        // 🔊 Text-To-Speech Function
+        function speakBilingual(enText, siText) {
+            if (!('speechSynthesis' in window)) {
+                alert("ඔබගේ Browser එකෙහි Voice/Speech පහසුකම සහය නොදක්වයි.");
+                return;
+            }
+
+            window.speechSynthesis.cancel();
+
+            if (enText) {
+                const enUtterance = new SpeechSynthesisUtterance(enText);
+                enUtterance.lang = 'en-US';
+                enUtterance.rate = 0.9;
+                
+                enUtterance.onend = () => {
+                    if (siText) {
+                        const siUtterance = new SpeechSynthesisUtterance(siText);
+                        siUtterance.lang = 'si-LK';
+                        siUtterance.rate = 0.95;
+                        window.speechSynthesis.speak(siUtterance);
+                    }
+                };
+
+                window.speechSynthesis.speak(enUtterance);
+            } else if (siText) {
+                const siUtterance = new SpeechSynthesisUtterance(siText);
+                siUtterance.lang = 'si-LK';
+                siUtterance.rate = 0.95;
+                window.speechSynthesis.speak(siUtterance);
+            }
+        }
+
+        // 🧹 Formatter Function
         function formatMarkdown(text) {
             if (!text) return "";
 
             let formatted = text;
 
+            // 1. Horizontal Rules (---) ඉවත් කිරීම
             formatted = formatted.replace(/^---$/gim, '');
 
-            formatted = formatted.replace(/(?:###|- \*\*|\*\*)\s*(.*?)(?:\*\*|$)/gim, (match, title) => {
-                let cleanTitle = title.replace(/\*\*/g, '').replace(/^###\s*/, '').trim(); 
+            // 2. [EN_TEXT] || [SI_TEXT] Highlight Box සහ Speaker Button
+            formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
+                let cleanEn = enText.replace(/\*\*/g, '').trim();
+                let cleanSi = siText.replace(/\*\*/g, '').trim();
+                if (!cleanEn && !cleanSi) return "";
+                
+                let safeEn = cleanEn.replace(/'/g, "\\'");
+                let safeSi = cleanSi.replace(/'/g, "\\'");
+
+                return `<div class="main-translation-box">
+                    🇬🇧 <strong>${cleanEn}</strong><br>
+                    🇱🇰 <strong>${cleanSi}</strong>
+                    <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
+                </div>`;
+            });
+
+            // 3. මාතෘකා හෝ Sub-headings Highlight Boxes බවට හැරවීම
+            formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
+                let cleanTitle = title.replace(/\*\*/g, '').trim(); 
                 if (!cleanTitle) return "";
                 return `<span class="heading-highlight">${cleanTitle}</span>`;
             });
 
-            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            formatted = formatted.replace(/^\*\s+/gim, '• ');
+            formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*/gim, (match, title) => {
+                return `<span class="heading-highlight">${title.trim()}</span>`;
+            });
 
-            formatted = formatted.replace(/\n\s*\n/g, '<br><br>');
-            formatted = formatted.replace(/\n/g, '<br>');
+            // 4. **Bold** අකුරු strong බවට හැරවීම
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // 5. තනිව පවතින අනවශ්‍ය තිත් ( standalone dots ) සහ Bullet points Clean කිරීම
+            formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
+            formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
+
+            // 6. හිස් පේළි පිරිසිදු කර <br> සකස් කිරීම
+            formatted = formatted.split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .join('<br>');
+
+            // 7. Highlight Box එකකට පසුව එන අතිරික්ත <br> ඉවත් කිරීම
+            formatted = formatted.replace(/<\/span><br>/g, '</span>');
 
             return formatted;
         }
