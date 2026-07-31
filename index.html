@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kalpa AI English Translator & Teacher</title>
-    <!-- PWA සඳහා අවශ්‍ය Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
@@ -184,11 +183,14 @@
     </div>
 
     <script>
-        // 🔑 Base64 Encode කරන ලද API Keys ඇතුළත් කරන්න
+        // 🔑 Base64 Encode කරන ලද 'AIzaSy...' API Keys 5 දක්වා ඇතුළත් කරන්න
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42STl6VE9GdzFnNXVsWEJKYlMzNmpqM3ZEeWNrX2pOcUM4czFXQ2h5TDNvSGc",
-            "QVEuQWI4Uk42TGI5bWt2SXBYWGoyQ0tVb3lRUjh2bnIwZ3g5aGNmOUtaZTF1WC1MUjd1V3c",
-            "QVEuQWI4Uk42SlpQZ1NoeFREU3hXZXRZSjRpODJ6MkVoVVd3WEFOeWdFRWdSSjdIWFFWVXc"
+            "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
+            "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
+            "QVEuQWI4Uk42SVAxaXhhLTVhTTNSaGFjU2Z1YkI3YWtadmRqcXBuaVZWc2RRaEJqbGZIYXc",
+            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUU4Z2VrMVNsVUE",
+            "QVEuQWI4Uk42S0QtbDI3MlhWcGtDYWExeXl5VlVBdHJlOE03ZzJtbE1CUWZDXzFhajFnV2c"
+            
         ];
 
         let currentKeyIndex = 0;
@@ -261,20 +263,21 @@ Format your responses neatly with clear headings:
 
         async function askGemini(promptText) {
             let attempts = 0;
-            const activeKeysCount = ENCODED_KEYS.filter(k => k && !k.includes("YOUR_")).length;
-            const maxAttempts = (activeKeysCount || 1) * 2;
+            const validKeys = ENCODED_KEYS.filter(k => k && !k.includes("YOUR_"));
+            const maxAttempts = (validKeys.length || 1) * 2;
             let collectedErrors = [];
 
             while (attempts < maxAttempts) {
                 const currentApiKey = getActiveApiKey();
 
                 if (!currentApiKey) {
+                    collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Invalid or empty API key format.`);
                     rotateApiKey();
                     attempts++;
                     continue;
                 }
 
-                // 🌟 REST URL එක සහ Header Authentication හරහා ද්විත්ව පරීක්ෂාව
+                // Standard Gemini REST Endpoint
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
@@ -290,17 +293,14 @@ Format your responses neatly with clear headings:
                 try {
                     const response = await fetch(url, {
                         method: "POST",
-                        headers: { 
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${currentApiKey}`
-                        },
+                        headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(payload)
                     });
 
                     const data = await response.json();
 
                     if (response.status === 429 || response.status === 403) {
-                        const rateMsg = data.error?.message || "Rate limit exceeded (Too many requests)";
+                        const rateMsg = data.error?.message || "Rate limit exceeded";
                         collectedErrors.push(`Key Index [${currentKeyIndex + 1}] (Status ${response.status}): ${rateMsg}`);
                         rotateApiKey();
                         attempts++;
@@ -319,7 +319,7 @@ Format your responses neatly with clear headings:
                     if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
                         return { text: data.candidates[0].content.parts[0].text, error: null };
                     } else {
-                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Invalid response structure received from Google server.`);
+                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Invalid response structure.`);
                         rotateApiKey();
                         attempts++;
                     }
@@ -384,7 +384,7 @@ Format your responses neatly with clear headings:
                     startCountdown(60, result.error);
                 }
             } catch (error) {
-                startCountdown(60, `General Execution Exception: ${error.message}`);
+                startCountdown(60, `Execution Exception: ${error.message}`);
             } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
