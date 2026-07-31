@@ -150,10 +150,24 @@
             background: #450a0a;
             border: 1px solid #ef4444;
             color: #fca5a5;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 12px;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 12.5px;
             white-space: pre-wrap;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+
+        .countdown-text {
+            color: #facc15;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 8px;
+            background: #291805;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #eab308;
         }
     </style>
 </head>
@@ -171,18 +185,22 @@
     </div>
 
     <script>
-        // Encoded API Keys කිහිපයක් එකතු කළ හැක
+        // 🔑 Base64 Encode කරන ලද API Keys 5 දක්වා ඇතුළත් කරන්න
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42STl6VE9GdzFnNXVsWEJKYlMzNmpqM3ZEeWNrX2pOcUM4czFXQ2h5TDNvSGc",
-            "QVEuQWI4Uk42TGI5bWt2SXBYWGoyQ0tVb3lRUjh2bnIwZ3g5aGNmOUtaZTF1WC1MUjd1V3c"
-            // "YOUR_SECOND_BASE64_ENCODED_KEY_HERE"
+            "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
+            "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
+            "QVEuQWI4Uk42SVAxaXhhLTVhTTNSaGFjU2Z1YkI3YWtadmRqcXBuaVZWc2RRaEJqbGZIYXc",
+            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUU4Z2VrMVNsVUE",
+            "QVEuQWI4Uk42S0QtbDI3MlhWcGtDYWExeXl5VlVBdHJlOE03ZzJtbE1CUWZDXzFhajFnV2c"
         ];
 
         let currentKeyIndex = 0;
+        let countdownTimer = null;
 
         function getActiveApiKey() {
             try {
                 const encodedKey = ENCODED_KEYS[currentKeyIndex];
+                if (!encodedKey || encodedKey.includes("YOUR_")) return "";
                 return atob(encodedKey.trim());
             } catch (e) {
                 console.error("Error decoding API Key:", e);
@@ -215,14 +233,54 @@ Format your responses neatly with clear headings:
 ### 🗣️ උච්චාරණය හා වචන මාලාව (Pronunciation & Vocabulary)
 ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
+        // Countdown පෙන්නන Function එක
+        function startCountdown(seconds, errorMessage) {
+            const outputDiv = document.getElementById("output");
+            let remaining = seconds;
+
+            if (countdownTimer) clearInterval(countdownTimer);
+
+            function updateDisplay() {
+                outputDiv.innerHTML = `
+                    <div class="error-box">
+                        ⚠️ <strong>දෝෂයක් සිදුවී ඇත (Error Display):</strong>\n
+                        ${errorMessage}\n\n
+                        ⏳ <strong>නැවත සක්‍රිය වන වේලාව (Countdown):</strong><br>
+                        <span class="countdown-text">තත්පර ${remaining} කින් නැවත උත්සාහ කරන්න...</span>
+                    </div>`;
+            }
+
+            updateDisplay();
+
+            countdownTimer = setInterval(() => {
+                remaining--;
+                if (remaining <= 0) {
+                    clearInterval(countdownTimer);
+                    outputDiv.innerHTML = `<div class="loading" style="color: #4ade80;">✅ API එක නැවත සක්‍රිය විය! කරුණාකර 'Translate & Learn' මත නැවත Click කරන්න.</div>`;
+                } else {
+                    updateDisplay();
+                }
+            }, 1000);
+        }
+
         async function askGemini(promptText) {
             let attempts = 0;
-            const maxAttempts = ENCODED_KEYS.length;
-            let lastError = "";
+            const maxAttempts = ENCODED_KEYS.length * 2;
+            let collectedErrors = [];
 
             while (attempts < maxAttempts) {
                 const currentApiKey = getActiveApiKey();
-                const url = `https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=${currentApiKey}`;
+
+                if (!currentApiKey) {
+                    collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Invalid or empty API key format.`);
+                    rotateApiKey();
+                    attempts++;
+                    continue;
+                }
+
+                // 🌟 Gemini හි නවතම Active Model එක
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
+
                 const payload = {
                     contents: [{
                         role: "user",
@@ -242,37 +300,40 @@ Format your responses neatly with clear headings:
 
                     const data = await response.json();
 
-                    // 429 Limit එකක් ආවොත් Auto ඊළඟ Key එකට Rotate වීම
+                    // 429 Quota / Rate limit එකක් පැමිණි විට
                     if (response.status === 429 || response.status === 403) {
-                        lastError = `API Quota Exceeded (429). Please wait a minute or add more API keys.`;
+                        const rateMsg = data.error?.message || "Rate limit exceeded (Too many requests)";
+                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}] (Status ${response.status}): ${rateMsg}`);
                         rotateApiKey();
                         attempts++;
+                        await new Promise(res => setTimeout(res, 1500));
                         continue;
                     }
 
                     if (!response.ok) {
-                        lastError = `API Error [Status ${response.status}]: ${data.error?.message || 'Request failed'}`;
+                        const errDetails = data.error?.message || 'Request failed';
+                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}] (Status ${response.status}): ${errDetails}`);
                         rotateApiKey();
                         attempts++;
                         continue;
                     }
 
                     if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
-                        return data.candidates[0].content.parts[0].text;
+                        return { text: data.candidates[0].content.parts[0].text, error: null };
                     } else {
-                        lastError = "API Response format error";
+                        collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Invalid response structure received from Google server.`);
                         rotateApiKey();
                         attempts++;
                     }
 
                 } catch (error) {
-                    lastError = "Network Error: " + error.message;
+                    collectedErrors.push(`Key Index [${currentKeyIndex + 1}]: Network Error (${error.message})`);
                     rotateApiKey();
                     attempts++;
                 }
             }
 
-            throw new Error(lastError);
+            return { text: null, error: collectedErrors.join('\n') };
         }
 
         // Markdown Clean කර Highlight කරපු HTML බවට හරවන Function එක
@@ -309,6 +370,8 @@ Format your responses neatly with clear headings:
                 return;
             }
 
+            if (countdownTimer) clearInterval(countdownTimer);
+
             translateBtn.disabled = true;
             translateBtn.style.opacity = "0.6";
             translateBtn.style.cursor = "not-allowed";
@@ -316,10 +379,16 @@ Format your responses neatly with clear headings:
             outputDiv.innerHTML = "<div class='loading'>ගුරුවරයා පිළිතුරු සකස් කරමින් පවතී...</div>";
 
             try {
-                let result = await askGemini(text);
-                outputDiv.innerHTML = formatMarkdown(result);
+                const result = await askGemini(text);
+
+                if (result.text) {
+                    outputDiv.innerHTML = formatMarkdown(result.text);
+                } else {
+                    // API එක වැඩ නොකරන විට තත්පර 60 ක Countdown එකක් ක්‍රියාත්මක කිරීම
+                    startCountdown(60, result.error);
+                }
             } catch (error) {
-                outputDiv.innerHTML = `<div class='error-box'>⚠️ දෝෂයක් සිදු විය:\n${error.message}</div>`;
+                startCountdown(60, `General Execution Exception: ${error.message}`);
             } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
@@ -329,3 +398,4 @@ Format your responses neatly with clear headings:
     </script>
 </body>
 </html>
+8
