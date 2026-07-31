@@ -180,17 +180,18 @@
     <div class="container">
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I goes to school yesterday)..."></textarea>
         <button id="translate">Translate & Learn (පරිවර්තනය කර ඉගෙන ගන්න)</button>
-        <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
+        <div id="output">පිළිතුර මෙහි දිස් වනු ඇ...</div>
     </div>
 
     <script>
-        // 🔑 Base64 Encode කරන ලද API Keys 5 දක්වා ඇතුළත් කරන්න
+        // 🔑 Base64 Encode කරන ලද Google AI Studio API Keys (AIzaSy...) ඇතුළත් කරන්න
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42Sms1TEFBV3JhYTUtU010WWEyaFB5YUpsYS4uLg==", // ඔබගේ AQ.Ab8RN6... Key එක Base64 කේතනය කර
-            "QVEuQWI4Uk42STl6VE9GdzFnNXVsWEJKYlMzNmpqM3ZEeWNrX2pOcUM4czFXQ2h5TDNvSGc",
-            "QVEuQWI4Uk42TGI5bWt2SXBYWGoyQ0tVb3lRUjh2bnIwZ3g5aGNmOUtaZTF1WC1MUjd1V3c",
-            "YOUR_FOURTH_BASE64_ENCODED_KEY_HERE",
-            "YOUR_FIFTH_BASE64_ENCODED_KEY_HERE"
+            "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
+            "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
+            "QVEuQWI4Uk42SVAxaXhhLTVhTTNSaGFjU2Z1YkI3YWtadmRqcXBuaVZWc2RRaEJqbGZIYXc",
+            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUU4Z2VrMVNsVUE",
+            "QVEuQWI4Uk42S0QtbDI3MlhWcGtDYWExeXl5VlVBdHJlOE03ZzJtbE1CUWZDXzFhajFnV2c"
+
         ];
 
         let currentKeyIndex = 0;
@@ -276,8 +277,8 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
-                // Gemini 2.5 Flash Endpoint
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
+                // Standard Gemini REST API Endpoint
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
                     contents: [{
@@ -290,13 +291,9 @@ Format your responses neatly with clear headings:
                 };
 
                 try {
-                    // 🌟 Header එක හරහා x-goog-api-key ලෙස Key එක යැවීම (AQ.Ab8... මුද්‍රාවන් සඳහා)
                     const response = await fetch(url, {
                         method: "POST",
-                        headers: { 
-                            "Content-Type": "application/json",
-                            "x-goog-api-key": currentApiKey
-                        },
+                        headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(payload)
                     });
 
