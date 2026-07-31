@@ -159,7 +159,8 @@
     </div>
 
     <script>
-        const API_KEY = "AQ.Ab8RN6ILEhj0O5NtB3J5XwLNDGGcNltddF8ahLgVl-GRG6NeUg";
+        // ⚠️ මෙතැනට උඩුකොමා (" ") ඇතුළත ඔබේ අලුත්ම API Key එක ඇතුළත් කරන්න
+        const API_KEY = "AQ.Ab8RN6Lexqqq1tnR1s_SqBuCdiZ7awdXzp1byrpZMarmsT9LYQ";
 
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
@@ -180,41 +181,35 @@ Format your responses neatly with clear headings:
 - **උච්චාරණය හා වචන මාලාව (Pronunciation & Vocabulary)**:
 - **අභ්‍යාස ප්‍රශ්නය (Practice Question)**:`;
 
-        async function askGemini(prompt) {
-            // Updated Endpoint URL to Google's standard API model
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+        async function askGemini(promptText) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
             
-            for (let attempt = 0; attempt < 5; attempt++) {
-                try {
-                    const response = await fetch(url, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [{ text: prompt }]
-                            }],
-                            systemInstruction: {
-                                parts: [{ text: systemPrompt }]
-                            }
-                        })
-                    });
-
-                    if (!response.ok) {
-                        const errDetails = await response.json().catch(() => ({}));
-                        console.error("API Response Error:", errDetails);
-                        throw new Error(`API Error: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    return data.candidates?.[0]?.content?.parts?.[0]?.text || "සමාවන්න, පිළිතුරක් ලැබුණේ නැත.";
-                } catch (err) {
-                    if (attempt === 4) throw err;
-                    const delay = Math.pow(2, attempt) * 1000;
-                    await new Promise(res => setTimeout(res, delay));
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [{ text: promptText }]
+                }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
                 }
+            };
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errData = await response.json().catch(() => ({}));
+                const msg = errData.error?.message || `HTTP Status ${response.status}`;
+                throw new Error(msg);
             }
+
+            const data = await response.json();
+            return data.candidates?.[0]?.content?.parts?.[0]?.text || "පිළිතුරක් ලැබුණේ නැත.";
         }
 
         document.getElementById("translate").onclick = async () => {
@@ -226,11 +221,10 @@ Format your responses neatly with clear headings:
             
             try {
                 let result = await askGemini(text);
-                // Markdown formatting හරියාකාරව පෙන්වීමට 
                 outputDiv.innerText = result;
             } catch (error) {
-                console.error(error);
-                outputDiv.innerHTML = "සමාවන්න, තාක්ෂණික දෝෂයක් ඇති විය. (API Key එක අවලංගු වී ඇත්නම් Google AI Studio වෙතින් අලුත් Key එකක් ලබාගෙන ඇතුළත් කරන්න).";
+                // සැබෑ Error එක තිරයේ රතු පාටින් පෙන්වයි
+                outputDiv.innerHTML = `<b style="color: #ef4444;">දෝෂය:</b> ${error.message}`;
             }
         };
     </script>
