@@ -162,7 +162,6 @@
         // ⚠️ Base64 Encode කරගත් API Key එක පහත උඩුකොමා (" ") ඇතුළට Paste කරන්න
         const ENCODED_KEY = "QVEuQWI4Uk42SWl4Rm1yMFBweUwyQ2FCQ0pUQkd2SU1OZ2lta1VjQ2JrRXF1a0wtZk9XOWc=";
 
-        // Auto-decode logic
         function getApiKey() {
             try {
                 return atob(ENCODED_KEY.trim());
@@ -192,7 +191,8 @@ Format your responses neatly with clear headings:
 
         async function askGemini(promptText) {
             const apiKey = getApiKey();
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+            // Modern gemini-2.5-flash endpoint
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
             
             const payload = {
                 contents: [{
