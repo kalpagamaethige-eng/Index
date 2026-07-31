@@ -2,189 +2,176 @@
 <html lang="si">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kalpa AI English Translator & Teacher</title>
+    <!-- PWA සඳහා අවශ්‍ය Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f172a">
+    
     <style>
         :root {
             --bg-primary: #0f172a;
             --bg-card: #1e293b;
             --border-color: #334155;
-            --accent-color: #06b6d4;
-            --accent-hover: #22d3ee;
+            --accent-color: #38bdf8;
+            --accent-hover: #0ea5e9;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 20px;
+            padding: 12px;
             background: var(--bg-primary);
             color: var(--text-primary);
             max-width: 600px;
             margin: 0 auto;
-            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
 
         .header-box {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 20px;
-            border-radius: 16px;
+            padding: 15px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             color: var(--accent-color);
-            margin: 0 0 8px 0;
-            font-size: 24px;
-            letter-spacing: -0.5px;
+            margin: 0 0 5px 0;
+            font-size: 20px;
         }
 
         .creator-tag {
             color: var(--accent-hover);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             display: block;
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 13px;
+            font-size: 11px;
             margin: 0;
         }
 
         .container {
             background: var(--bg-card);
-            padding: 20px;
-            border-radius: 16px;
+            padding: 16px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         textarea {
             width: 100%;
-            height: 130px;
+            height: 110px;
             background: var(--bg-primary);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px;
-            font-size: 15px;
-            resize: vertical;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 14px;
+            resize: none;
             box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         textarea:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
         }
 
         button {
-            background: linear-gradient(135deg, #06b6d4, #0284c7);
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: none;
-            padding: 14px 20px;
-            margin-top: 12px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: bold;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
             cursor: pointer;
+            font-weight: bold;
             width: 100%;
+            font-size: 14px;
             transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
-        }
-
-        button:hover {
-            background: linear-gradient(135deg, #22d3ee, #0369a1);
-            transform: translateY(-1px);
         }
 
         button:active {
-            transform: translateY(0);
+            transform: scale(0.98);
         }
 
         #output {
-            margin-top: 20px;
+            margin-top: 15px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: 10px;
             line-height: 1.7;
-            min-height: 120px;
+            font-size: 13.5px;
             color: #e2e8f0;
-            font-size: 15px;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 50vh;
         }
 
+        /* 🌟 මාතෘකා Highlight පෙන්වන Box එක */
         .heading-highlight {
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
-            color: var(--accent-hover);
-            padding: 10px 14px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-color);
-            margin-top: 20px;
-            margin-bottom: 10px;
+            color: var(--accent-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border-left: 3.5px solid var(--accent-hover);
+            margin-top: 15px;
+            margin-bottom: 8px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 14px;
+        }
+
+        .loading {
+            color: var(--accent-color);
+            font-style: italic;
+            text-align: center;
+            margin-top: 20px;
         }
 
         .error-box {
             background: #450a0a;
             border: 1px solid #ef4444;
             color: #fca5a5;
-            padding: 12px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 13px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
             white-space: pre-wrap;
-            word-break: break-all;
-        }
-
-        .loading {
-            color: var(--accent-color);
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .loading::after {
-            content: "";
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--accent-color);
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-
     <div class="header-box">
         <span class="creator-tag">Created by Kalpa Gamaethige</span>
         <h1>KALPA AI English Translator & Teacher</h1>
-        <p class="subtitle">දිනපතා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉංග්‍රීසි ඉගෙනුම් සහකරු</p>
+        <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉගෙනුම් සහකරු</p>
     </div>
 
     <div class="container">
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I goes to school yesterday)..."></textarea>
-        <button id="translate" onclick="handleTranslate()">Translate & Learn (පරිවර්තනය කර ඉගෙන ගන්න)</button>
+        <button id="translate">Translate & Learn (පරිවර්තනය කර ඉගෙන ගන්න)</button>
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
 
     <script>
-        // ⚠️ Google AI Studio එකෙන් ගත් 'AIzaSy...' API Key එක Base64 Encode කර මෙතැනට දමන්න!
+        // ඔබ ලබා දුන් Encoded Key එක මෙහි ඇතුළත් කර ඇත
         const ENCODED_KEYS = [
             "QVEuQWI4Uk42SlpQZ1NoeFREU3hXZXRZSjRpODJ6MkVoVVd3WEFOeWdFRWdSSjdIWFFWVXc="
         ];
@@ -196,6 +183,7 @@
                 const encodedKey = ENCODED_KEYS[currentKeyIndex];
                 return atob(encodedKey.trim());
             } catch (e) {
+                console.error("Error decoding API Key:", e);
                 return "";
             }
         }
@@ -208,24 +196,22 @@
 
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
-1. Translate English - Sinhala accurately.
+1. Translate English ↔ Sinhala accurately.
 2. Correct grammar mistakes and awkward phrasing in the user's input.
 3. Explain grammar in simple Sinhala.
 4. Give beginner and advanced examples based on the structure.
 5. Explain difficult vocabulary clearly.
 6. Teach pronunciation guidance (using simple Sinhala phonetic representation).
 7. Encourage conversation practice and maintain a friendly, professional, and supportive language teacher tone.
-8. Always ask a follow-up question in both English and Sinhala to keep the learning practice going.
-
-If the user asks a direct question or query, respond with a helpful, friendly answer in simple Sinhala using clear structure.
+8. Always ask a relevant follow-up question in both English and Sinhala to keep the learning practice going.
 
 Format your responses neatly with clear headings:
 ### 🇱🇰 පරිවර්තනය (Translation)
 ### ✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)
 ### 📖 ව්‍යාකරණ පැහැදිලි කිරීම (Grammar Explanation)
 ### 💡 උදාහරණ (Examples - Beginner & Advanced)
-### 🗣️ උච්චාරණය සහ වචන මාලාව (Pronunciation & Vocabulary)
-### 💬 ප්‍රායෝගික ප්‍රශ්නය (Practice Question)`;
+### 🗣️ උච්චාරණය හා වචන මාලාව (Pronunciation & Vocabulary)
+### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
         async function askGemini(promptText) {
             let attempts = 0;
@@ -234,7 +220,7 @@ Format your responses neatly with clear headings:
 
             while (attempts < maxAttempts) {
                 const currentApiKey = getActiveApiKey();
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
                     contents: [{
@@ -256,7 +242,7 @@ Format your responses neatly with clear headings:
                     const data = await response.json();
 
                     if (!response.ok) {
-                        lastError = `API Error [${response.status}]: ${data.error?.message || 'Unknown error'}`;
+                        lastError = `API Error [Status ${response.status}]: ${data.error?.message || 'Request failed'}`;
                         rotateApiKey();
                         attempts++;
                         continue;
@@ -265,13 +251,13 @@ Format your responses neatly with clear headings:
                     if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
                         return data.candidates[0].content.parts[0].text;
                     } else {
-                        lastError = "API Response Format Error";
+                        lastError = "API Response format error";
                         rotateApiKey();
                         attempts++;
                     }
 
                 } catch (error) {
-                    lastError = "Network / Fetch Error: " + error.message;
+                    lastError = "Network Error: " + error.message;
                     rotateApiKey();
                     attempts++;
                 }
@@ -280,27 +266,36 @@ Format your responses neatly with clear headings:
             throw new Error(lastError);
         }
 
+        // Markdown Clean කර Highlight කරපු HTML බවට හරවන Function එක
         function formatMarkdown(text) {
             if (!text) return "";
 
             let formatted = text;
 
+            // --- ඉරි ඉවත් කිරීම
             formatted = formatted.replace(/^---$/gim, '');
 
-            formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
-                let cleanTitle = title.replace(/\*\*/g, '').trim(); 
+            // ### හෝ - ** මාතෘකා Highlight Box එකක් බවට පත් කිරීම
+            formatted = formatted.replace(/(?:###|- \*\*|\*\*)\s*(.*?)(?:\*\*|$)/gim, (match, title) => {
+                let cleanTitle = title.replace(/\*\*/g, '').replace(/^###\s*/, '').trim(); 
+                if (!cleanTitle) return "";
                 return `<span class="heading-highlight">${cleanTitle}</span>`;
             });
 
+            // **Bold** අකුරු strong බවට හැරවීම
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // * Bullet points පිරිසිදු කිරීම
             formatted = formatted.replace(/^\*\s+/gim, '• ');
+
+            // Line breaks සකස් කිරීම
             formatted = formatted.replace(/\n\s*\n/g, '<br><br>');
             formatted = formatted.replace(/\n/g, '<br>');
 
             return formatted;
         }
 
-        async function handleTranslate() {
+        document.getElementById("translate").onclick = async () => {
             const inputField = document.getElementById("input");
             const outputDiv = document.getElementById("output");
             const translateBtn = document.getElementById("translate");
@@ -311,23 +306,24 @@ Format your responses neatly with clear headings:
                 return;
             }
 
+            // Request එක අතරතුර Button එක Lock කිරීම
             translateBtn.disabled = true;
             translateBtn.style.opacity = "0.6";
             translateBtn.style.cursor = "not-allowed";
 
-            outputDiv.innerHTML = '<div class="loading">ඇල්ගොරිතම පිළිතුර සකස් කරමින් පවතී...</div>';
+            outputDiv.innerHTML = "<div class='loading'>ගුරුවරයා පිළිතුරු සකස් කරමින් පවතී...</div>";
 
             try {
-                const response = await askGemini(text);
-                outputDiv.innerHTML = formatMarkdown(response);
-            } catch (err) {
-                outputDiv.innerHTML = `<div class="error-box">⚠️ දෝෂයක් සිදු විය:\n${err.message}\n\nකරුණාකර නිවැරදි Google AI Studio API Key එකක් යෙදීමට වගබලා ගන්න.</div>`;
+                let result = await askGemini(text);
+                outputDiv.innerHTML = formatMarkdown(result);
+            } catch (error) {
+                outputDiv.innerHTML = `<div class='error-box'>⚠️ දෝෂයක් සිදු විය:\n${error.message}\n\n(කරුණාකර Google AI Studio වෙතින් ගත් 'AIzaSy...' ලෙස පටන් ගන්නා නිවැරදි API Key එකක් Encode කර යොදන්න.)</div>`;
             } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
                 translateBtn.style.cursor = "pointer";
             }
-        }
+        };
     </script>
 </body>
 </html>
