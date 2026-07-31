@@ -108,7 +108,6 @@
             transform: translateY(0);
         }
 
-        /* white-space: pre-wrap; ඉවත් කර HTML styling සබල කර ඇත */
         #output {
             margin-top: 20px;
             background: var(--bg-primary);
@@ -121,7 +120,7 @@
             font-size: 15px;
         }
 
-        /* ඉමෝජි සහිත මාතෘකා Highlight Box ලෙස වෙනස් කිරීම */
+        /* 🌟 ඉමෝජි සහිත මාතෘකා Highlight Box ලෙස වෙනස් කිරීම */
         .heading-highlight {
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
@@ -201,6 +200,7 @@
             }
         }
 
+        // AI එකෙන්ම කෙලින්ම HTML Tags (<div class="heading-highlight">) සහිතව පිළිතුර ලබාගන්නා System Prompt එක
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
 1. Translate English - Sinhala accurately.
@@ -212,15 +212,20 @@ Your responsibilities:
 7. Encourage conversation practice and maintain a friendly, professional, and supportive language teacher tone.
 8. Always ask a follow-up question in both English and Sinhala to keep the learning practice going.
 
-If the user asks a direct question or query, respond with a helpful, friendly answer in simple Sinhala using clear structure.
+CRITICAL FORMATTING INSTRUCTIONS:
+- Do NOT use markdown symbols like ###, ---, or **.
+- Use simple HTML tags for styling:
+  - For section headings, wrap the heading text inside: <div class="heading-highlight">Heading Text</div>
+  - For bold text, use <b>text</b>.
+  - For line breaks, use <br>.
 
-Format your responses neatly with clear headings:
-### 🇱🇰 පරිවර්තනය (Translation)
-### ✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)
-### 📖 ව්‍යාකරණ පැහැදිලි කිරීම (Grammar Explanation)
-### 💡 උදාහරණ (Examples - Beginner & Advanced)
-### 🗣️ උච්චාරණය සහ වචන මාලාව (Pronunciation & Vocabulary)
-### 💬 ප්‍රායෝගික ප්‍රශ්නය (Practice Question)`;
+Use these exact heading structures with the HTML div wrapper:
+<div class="heading-highlight">🇱🇰 පරිවර්තනය (Translation)</div>
+<div class="heading-highlight">✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)</div>
+<div class="heading-highlight">📖 ව්‍යාකරණ පැහැදිලි කිරීම (Grammar Explanation)</div>
+<div class="heading-highlight">💡 උදාහරණ (Examples - Beginner & Advanced)</div>
+<div class="heading-highlight">🗣️ උච්චාරණය සහ වචන මාලාව (Pronunciation & Vocabulary)</div>
+<div class="heading-highlight">💬 ප්‍රායෝගික ප්‍රශ්නය (Practice Question)</div>`;
 
         async function askGemini(promptText) {
             let attempts = 0;
@@ -271,34 +276,6 @@ Format your responses neatly with clear headings:
             }
         }
 
-        // Markdown සංකේත සියල්ල පිරිසිදු කර පිරිසිදු HTML බවට හරවන Function එක
-        function formatMarkdown(text) {
-            if (!text) return "";
-
-            let formatted = text;
-
-            // 1. --- (Horizontal lines) සම්පූර්ණයෙන්ම ඉවත් කිරීම
-            formatted = formatted.replace(/^---$/gim, '');
-
-            // 2. ### මාතෘකා Highlight Box එකක් බවට පත් කිරීම
-            formatted = formatted.replace(/###\s*([^\n]+)/g, (match, title) => {
-                let cleanTitle = title.replace(/\*\*/g, '').trim(); 
-                return `<span class="heading-highlight">${cleanTitle}</span>`;
-            });
-
-            // 3. **Bold** අකුරු strong බවට හැරවීම
-            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-            // 4. * Bullet points පිරිසිදු කර ලස්සන Dot එකක් යෙදීම
-            formatted = formatted.replace(/^\*\s+/gim, '• ');
-
-            // 5. Line breaks නිවැරදි කිරීම
-            formatted = formatted.replace(/\n\s*\n/g, '<br><br>');
-            formatted = formatted.replace(/\n/g, '<br>');
-
-            return formatted;
-        }
-
         async function handleTranslate() {
             const inputField = document.getElementById("input");
             const outputDiv = document.getElementById("output");
@@ -313,8 +290,8 @@ Format your responses neatly with clear headings:
 
             try {
                 const response = await askGemini(text);
-                // HTML ලෙස Render කිරීම
-                outputDiv.innerHTML = formatMarkdown(response);
+                // AI එකෙන්ම කෙලින්ම ලැබෙන HTML පිළිතුර Render කිරීම
+                outputDiv.innerHTML = response;
             } catch (err) {
                 outputDiv.innerText = "දෝෂයක් සිදු විය: සියලුම API Keys වල සීමාවන් අවසන් වී ඇත හෝ සම්බන්ධතාවය බිඳ වැටී ඇත. " + err.message;
             }
