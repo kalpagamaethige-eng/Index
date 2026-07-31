@@ -171,9 +171,10 @@
     </div>
 
     <script>
-        // ඔබ ලබා දුන් Encoded Key එක මෙහි ඇතුළත් කර ඇත
+        // Encoded API Keys කිහිපයක් එකතු කළ හැක
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42SlpQZ1NoeFREU3hXZXRZSjRpODJ6MkVoVVd3WEFOeWdFRWdSSjdIWFFWVXc="
+            "QVEuQWI4Uk42SlpQZ1SheFREU3hXZXRZSjRpODJ6MkVoVVd3WEFOeWdFRWdSSjdIWFFWVXc="
+            // "YOUR_SECOND_BASE64_ENCODED_KEY_HERE"
         ];
 
         let currentKeyIndex = 0;
@@ -241,6 +242,14 @@ Format your responses neatly with clear headings:
 
                     const data = await response.json();
 
+                    // 429 Limit එකක් ආවොත් Auto ඊළඟ Key එකට Rotate වීම
+                    if (response.status === 429 || response.status === 403) {
+                        lastError = `API Quota Exceeded (429). Please wait a minute or add more API keys.`;
+                        rotateApiKey();
+                        attempts++;
+                        continue;
+                    }
+
                     if (!response.ok) {
                         lastError = `API Error [Status ${response.status}]: ${data.error?.message || 'Request failed'}`;
                         rotateApiKey();
@@ -272,23 +281,17 @@ Format your responses neatly with clear headings:
 
             let formatted = text;
 
-            // --- ඉරි ඉවත් කිරීම
             formatted = formatted.replace(/^---$/gim, '');
 
-            // ### හෝ - ** මාතෘකා Highlight Box එකක් බවට පත් කිරීම
             formatted = formatted.replace(/(?:###|- \*\*|\*\*)\s*(.*?)(?:\*\*|$)/gim, (match, title) => {
                 let cleanTitle = title.replace(/\*\*/g, '').replace(/^###\s*/, '').trim(); 
                 if (!cleanTitle) return "";
                 return `<span class="heading-highlight">${cleanTitle}</span>`;
             });
 
-            // **Bold** අකුරු strong බවට හැරවීම
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            
-            // * Bullet points පිරිසිදු කිරීම
             formatted = formatted.replace(/^\*\s+/gim, '• ');
 
-            // Line breaks සකස් කිරීම
             formatted = formatted.replace(/\n\s*\n/g, '<br><br>');
             formatted = formatted.replace(/\n/g, '<br>');
 
@@ -306,7 +309,6 @@ Format your responses neatly with clear headings:
                 return;
             }
 
-            // Request එක අතරතුර Button එක Lock කිරීම
             translateBtn.disabled = true;
             translateBtn.style.opacity = "0.6";
             translateBtn.style.cursor = "not-allowed";
@@ -317,7 +319,7 @@ Format your responses neatly with clear headings:
                 let result = await askGemini(text);
                 outputDiv.innerHTML = formatMarkdown(result);
             } catch (error) {
-                outputDiv.innerHTML = `<div class='error-box'>⚠️ දෝෂයක් සිදු විය:\n${error.message}\n\n(කරුණාකර Google AI Studio වෙතින් ගත් 'AIzaSy...' ලෙස පටන් ගන්නා නිවැරදි API Key එකක් Encode කර යොදන්න.)</div>`;
+                outputDiv.innerHTML = `<div class='error-box'>⚠️ දෝෂයක් සිදු විය:\n${error.message}</div>`;
             } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
