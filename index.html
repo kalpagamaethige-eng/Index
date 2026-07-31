@@ -62,29 +62,23 @@
             border-radius: 16px;
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
         }
 
-        input[type="password"], textarea {
+        textarea {
             width: 100%;
+            height: 130px;
             background: var(--bg-primary);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 14px;
-            font-size: 14px;
+            font-size: 15px;
+            resize: none;
             box-sizing: border-box;
             transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        textarea {
-            height: 130px;
-            resize: none;
-        }
-
-        input[type="password"]:focus, textarea:focus {
+        textarea:focus {
             outline: none;
             border-color: var(--accent-color);
             box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
@@ -95,6 +89,7 @@
             color: white;
             border: none;
             padding: 14px 20px;
+            margin-top: 12px;
             border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
@@ -114,7 +109,7 @@
         }
 
         #output {
-            margin-top: 12px;
+            margin-top: 24px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
             padding: 20px;
@@ -158,17 +153,23 @@
     </div>
 
     <div class="container">
-        <!-- API Key එක එක පාරක් ඇතුළත් කිරීමට input box එකක් -->
-        <input type="password" id="apiKeyInput" placeholder="ඔබගේ Gemini API Key එක මෙතැනට ඇතුළත් කරන්න...">
-        
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I goes to school yesterday)..."></textarea>
         <button id="translate">Translate & Learn (පරිවර්තනය කර ඉගෙන ගන්න)</button>
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
 
     <script>
-        // LocalStorage එකේ කලින් Save කරපු Key එකක් තිබේ නම් Load කිරීම
-        document.getElementById("apiKeyInput").value = localStorage.getItem("gemini_api_key") || "";
+        // ⚠️ Base64 Encode කරගත් API Key එක පහත උඩුකොමා (" ") ඇතුළට Paste කරන්න
+        const ENCODED_KEY = "QVEuQWI4Uk42SWl4Rm1yMFBweUwyQ2FCQ0pUQkd2SU1OZ2lta1VjQ2JrRXF1a0wtZk9XOWc=";
+
+        // Auto-decode logic
+        function getApiKey() {
+            try {
+                return atob(ENCODED_KEY.trim());
+            } catch (e) {
+                return "";
+            }
+        }
 
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
@@ -189,7 +190,8 @@ Format your responses neatly with clear headings:
 - **උච්චාරණය හා වචන මාලාව (Pronunciation & Vocabulary)**:
 - **අභ්‍යාස ප්‍රශ්නය (Practice Question)**:`;
 
-        async function askGemini(promptText, apiKey) {
+        async function askGemini(promptText) {
+            const apiKey = getApiKey();
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
             
             const payload = {
@@ -221,23 +223,14 @@ Format your responses neatly with clear headings:
         }
 
         document.getElementById("translate").onclick = async () => {
-            let apiKey = document.getElementById("apiKeyInput").value.trim();
             let text = document.getElementById("input").value.trim();
-            
-            if (!apiKey) {
-                alert("කරුණාකර API Key එක ඇතුළත් කරන්න!");
-                return;
-            }
             if (!text) return;
             
-            // API Key එක Browser එකේ Save කර තබා ගැනීම
-            localStorage.setItem("gemini_api_key", apiKey);
-
             let outputDiv = document.getElementById("output");
             outputDiv.innerHTML = "<div class='loading'>ගුරුවරයා පිළිතුරු සකස් කරමින් පවතී...</div>";
             
             try {
-                let result = await askGemini(text, apiKey);
+                let result = await askGemini(text);
                 outputDiv.innerText = result;
             } catch (error) {
                 outputDiv.innerHTML = `<b style="color: #ef4444;">දෝෂය:</b> ${error.message}`;
