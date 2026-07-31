@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalpa AI English Translator & Teacher</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --border-color: #334155;
+            --accent-color: #06b6d4;
+            --accent-hover: #22d3ee;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .header-box {
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--accent-color);
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .creator-tag {
+            color: var(--accent-hover);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin: 0;
+        }
+
+        .container {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 130px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 15px;
+            resize: vertical;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+        }
+
+        button {
+            background: linear-gradient(135deg, #06b6d4, #0284c7);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            margin-top: 12px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #22d3ee, #0369a1);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #output {
+            margin-top: 20px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 12px;
+            white-space: pre-wrap;
+            line-height: 1.7;
+            min-height: 120px;
+            color: #e2e8f0;
+            font-size: 15px;
+        }
+
+        .loading {
+            color: var(--accent-color);
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .loading::after {
+            content: "";
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--accent-color);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <span class="creator-tag">Created by Kalpa Gamaethige</span>
+        <h1>KALPA AI English Translator & Teacher</h1>
+        <p class="subtitle">දිනපතා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉංග්‍රීසි ඉගෙනුම් සහකරු</p>
+    </div>
+
+    <div class="container">
+        <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I goes to school yesterday)..."></textarea>
+        <button id="translate" onclick="handleTranslate()">Translate & Learn (පරිවර්තනය කර ඉගෙන ගන්න)</button>
+        <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
+    </div>
+
+    <script>
+        // Base64 Encode කරන ලද API Keys මෙහි ඇතුළත් කරන්න
+        const ENCODED_KEYS = [
+            "QVEuQWI4Uk42SjNzdUtVRUFORmlPMm56R2lQU2NVUjluc2xCXzBIOG5wWGxCbTRJLVQtNFE=",
+            "QVEuQWI4Uk42SVNIelRaQVdwSzRuUlBFcVNMSHhJSUlvTGVHQk1icWxLTzFacFZ2X1hkdVE=",
+            "QVEuQWI4Uk42SW10S2RXNnVsTS1vRjZnQ0VkckRUMmJUdFdTRzdsWTJibE9uVGJrWmJDQlE=",
+            "QVEuQWI4Uk42SUhrd2sxS0tDNjBQSHlQQklIVlRvV250OHVtVGlMM3RBRExtUk9kRTZSQ2c=",
+            "QVEuQWI4Uk42Sng1cFZrMWY1ZGY1UUJRRGtESEVFZVNZa241WTk1VFRwY3FOMVJHRTRTSnc="
+        ];
+
+        let currentKeyIndex = 0;
+
+        function getActiveApiKey() {
+            try {
+                const encodedKey = ENCODED_KEYS[currentKeyIndex];
+                return atob(encodedKey.trim());
+            } catch (e) {
+                console.error("Error decoding API Key:", e);
+                return "";
+            }
+        }
+
+        function rotateApiKey() {
+            if (ENCODED_KEYS.length > 1) {
+                currentKeyIndex = (currentKeyIndex + 1) % ENCODED_KEYS.length;
+                console.warn(`API Limit hit. Switch to Key Index: ${currentKeyIndex}`);
+            }
+        }
+
+        const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
+Your responsibilities:
+1. Translate English - Sinhala accurately.
+2. Correct grammar mistakes and awkward phrasing in the user's input.
+3. Explain grammar in simple Sinhala.
+4. Give beginner and advanced examples based on the structure.
+5. Explain difficult vocabulary clearly.
+6. Teach pronunciation guidance (using simple Sinhala phonetic representation).
+7. Encourage conversation practice and maintain a friendly, professional, and supportive language teacher tone.
+8. Always ask a follow-up question in both English and Sinhala to keep the learning practice going.
+
+If the user asks a direct question or query, respond with a helpful, friendly answer in simple Sinhala using clear structure.
+
+Format your responses neatly with clear headings:
+### 🇱🇰 පරිවර්තනය (Translation)**
+### ✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)**
+### 📖 ව්‍යාකරණ පැහැදිලි කිරීම (Grammar Explanation)**
+### 💡 උදාහරණ (Examples - Beginner & Advanced)**
+### 🗣️ උච්චාරණය සහ වචන මාලාව (Pronunciation & Vocabulary)**
+### 💬 ප්‍රායෝගික ප්‍රශ්නය (Practice Question)**`;
+
+        async function askGemini(promptText) {
+            let attempts = 0;
+            const maxAttempts = ENCODED_KEYS.length;
+
+            while (attempts < maxAttempts) {
+                const currentApiKey = getActiveApiKey();
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
+
+                const payload = {
+                    contents: [{
+                        role: "user",
+                        parts: [{ text: promptText }]
+                    }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
+                };
+
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429 || response.status === 403) {
+                        rotateApiKey();
+                        attempts++;
+                        continue;
+                    }
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error?.message || "Request failed");
+                    }
+
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+
+                } catch (error) {
+                    rotateApiKey();
+                    attempts++;
+                    if (attempts >= maxAttempts) {
+                        throw error;
+                    }
+                }
+            }
+        }
+
+        async function handleTranslate() {
+            const inputField = document.getElementById("input");
+            const outputDiv = document.getElementById("output");
+            const text = inputField.value.trim();
+
+            if (!text) {
+                outputDiv.innerText = "කරුණාකර යම් වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න.";
+                return;
+            }
+
+            outputDiv.innerHTML = '<div class="loading">පිළිතුර සකස් කරමින් පවතී...</div>';
+
+            try {
+                const response = await askGemini(text);
+                outputDiv.innerText = response;
+            } catch (err) {
+                outputDiv.innerText = "දෝෂයක් සිදු විය: සියලුම API Keys වල සීමාවන් අවසන් වී ඇත හෝ සම්බන්ධතාවය බිඳ වැටී ඇත. " + err.message;
+            }
+        }
+    </script>
+</body>
+</html>
+9
