@@ -182,8 +182,8 @@ Format your responses neatly with clear headings:
 - **අභ්‍යාස ප්‍රශ්නය (Practice Question)**:`;
 
         async function askGemini(promptText) {
-            // gemini-2.0-flash ලෙස Model Name එක නිවැරදි කර ඇත
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+            // Free Tier quota එක සාර්ථකව ක්‍රියාත්මක වන gemini-1.5-flash භාවිතා කර ඇත
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
             
             const payload = {
                 contents: [{
