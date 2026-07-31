@@ -120,7 +120,6 @@
             font-size: 15px;
         }
 
-        /* 🌟 ඉමෝජි සහිත මාතෘකා Highlight Box ලෙස වෙනස් කිරීම */
         .heading-highlight {
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
@@ -132,6 +131,18 @@
             margin-bottom: 10px;
             font-weight: bold;
             font-size: 16px;
+        }
+
+        .error-box {
+            background: #450a0a;
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
 
         .loading {
@@ -182,13 +193,14 @@
         ];
 
         let currentKeyIndex = 0;
+        let lastLoggedError = "";
 
         function getActiveApiKey() {
             try {
                 const encodedKey = ENCODED_KEYS[currentKeyIndex];
                 return atob(encodedKey.trim());
             } catch (e) {
-                console.error("Error decoding API Key:", e);
+                lastLoggedError = "Key Decoding Error: " + e.message;
                 return "";
             }
         }
@@ -223,6 +235,7 @@ Format your responses neatly with clear headings:
         async function askGemini(promptText) {
             let attempts = 0;
             const maxAttempts = ENCODED_KEYS.length;
+            let errorsList = [];
 
             while (attempts < maxAttempts) {
                 const currentApiKey = getActiveApiKey();
@@ -245,13 +258,9 @@ Format your responses neatly with clear headings:
                         body: JSON.stringify(payload)
                     });
 
-                    if (response.status === 429 || response.status === 403) {
-                        rotateApiKey();
-                        attempts++;
-                        continue;
-                    }
-
                     if (!response.ok) {
+                        const errText = await response.text();
+                        errorsList.push(`Key [${currentKeyIndex}] Status ${response.status}: ${errText}`);
                         rotateApiKey();
                         attempts++;
                         continue;
@@ -259,45 +268,40 @@ Format your responses neatly with clear headings:
 
                     const data = await response.json();
 
-                    // undefined වීම වැළැක්වීම සඳහා Safe Response Extraction
                     if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
                         return data.candidates[0].content.parts[0].text;
                     } else {
-                        throw new Error("Invalid response format received.");
+                        errorsList.push(`Key [${currentKeyIndex}] Invalid Structure: ${JSON.stringify(data)}`);
+                        rotateApiKey();
+                        attempts++;
                     }
 
                 } catch (error) {
+                    errorsList.push(`Key [${currentKeyIndex}] Fetch Error: ${error.message}`);
                     rotateApiKey();
                     attempts++;
-                    if (attempts >= maxAttempts) {
-                        throw error;
-                    }
                 }
             }
+
+            throw new Error(errorsList.join("\n\n"));
         }
 
-        // Markdown Clean කර HTML බවට හරවන සකස් කළ Function එක
         function formatMarkdown(text) {
             if (!text) return "";
 
             let formatted = text;
 
-            // 1. --- (Horizontal lines) ඉවත් කිරීම
             formatted = formatted.replace(/^---$/gim, '');
 
-            // 2. ### මාතෘකා Highlight Box එකක් බවට හැරවීම
             formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
                 let cleanTitle = title.replace(/\*\*/g, '').trim(); 
                 return `<span class="heading-highlight">${cleanTitle}</span>`;
             });
 
-            // 3. **Bold** අකුරු strong බවට හැරවීම
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-            // 4. * Bullet points පිරිසිදු කර Dot එකක් යෙදීම
             formatted = formatted.replace(/^\*\s+/gim, '• ');
 
-            // 5. Line breaks හරියාකාරව සකස් කිරීම
             formatted = formatted.replace(/\n\s*\n/g, '<br><br>');
             formatted = formatted.replace(/\n/g, '<br>');
 
@@ -315,21 +319,19 @@ Format your responses neatly with clear headings:
                 return;
             }
 
-            // Multiple Taps වැළැක්වීමට Button එක Lock කිරීම
             translateBtn.disabled = true;
             translateBtn.style.opacity = "0.6";
             translateBtn.style.cursor = "not-allowed";
 
-            outputDiv.innerHTML = '<div class="loading">පිළිතුර සකස් කරමින් පවතී...</div>';
+            outputDiv.innerHTML = '<div class="loading">ඇල්ගොරිතම පිළිතුර සකස් කරමින් පවතී...</div>';
 
             try {
                 const response = await askGemini(text);
-                // Safe Output Rendering
                 outputDiv.innerHTML = formatMarkdown(response);
             } catch (err) {
-                outputDiv.innerText = "දෝෂයක් සිදු විය: සියලුම API Keys වල සීමාවන් අවසන් වී ඇත හෝ සම්බන්ධතාවය බිඳ වැටී ඇත. " + err.message;
+                // දෝෂය තිරය මත පැහැදිලිව පෙන්වීම
+                outputDiv.innerHTML = `<div class="error-box">⚠️ දෝෂයක් හඳුනා ගැනුණි:\n\n${err.message}</div>`;
             } finally {
-                // Button එක Unlock කිරීම
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
                 translateBtn.style.cursor = "pointer";
