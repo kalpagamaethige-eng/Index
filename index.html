@@ -159,7 +159,7 @@
     </div>
 
     <script>
-        // ⚠️ මෙතැනට උඩුකොමා (" ") ඇතුළත ඔබේ අලුත්ම API Key එක ඇතුළත් කරන්න
+        // ⚠️ මෙතැනට ඔබගේ active API Key එක ලබා දෙන්න
         const API_KEY = "AQ.Ab8RN6Lexqqq1tnR1s_SqBuCdiZ7awdXzp1byrpZMarmsT9LYQ";
 
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
@@ -182,7 +182,8 @@ Format your responses neatly with clear headings:
 - **අභ්‍යාස ප්‍රශ්නය (Practice Question)**:`;
 
         async function askGemini(promptText) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+            // gemini-1.5-flash ලෙස Model Name එක නිවැරදි කර ඇත
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
             
             const payload = {
                 contents: [{
@@ -223,7 +224,6 @@ Format your responses neatly with clear headings:
                 let result = await askGemini(text);
                 outputDiv.innerText = result;
             } catch (error) {
-                // සැබෑ Error එක තිරයේ රතු පාටින් පෙන්වයි
                 outputDiv.innerHTML = `<b style="color: #ef4444;">දෝෂය:</b> ${error.message}`;
             }
         };
