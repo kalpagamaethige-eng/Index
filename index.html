@@ -125,7 +125,6 @@
             max-height: 50vh;
         }
 
-        /* 🌟 මාතෘකා Highlight පෙන්වන Box එක */
         .heading-highlight {
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
@@ -187,11 +186,11 @@
     <script>
         // 🔑 Base64 Encode කරන ලද API Keys 5 දක්වා ඇතුළත් කරන්න
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
-            "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
-            "QVEuQWI4Uk42SVAxaXhhLTVhTTNSaGFjU2Z1YkI3YWtadmRqcXBuaVZWc2RRaEJqbGZIYXc",
-            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUU4Z2VrMVNsVUE",
-            "QVEuQWI4Uk42S0QtbDI3MlhWcGtDYWExeXl5VlVBdHJlOE03ZzJtbE1CUWZDXzFhajFnV2c"
+            "QVEuQWI4Uk42Sms1TEFBV3JhYTUtU010WWEyaFB5YUpsYS4uLg==", // ඔබගේ AQ.Ab8RN6... Key එක Base64 කේතනය කර
+            "QVEuQWI4Uk42STl6VE9GdzFnNXVsWEJKYlMzNmpqM3ZEeWNrX2pOcUM4czFXQ2h5TDNvSGc",
+            "QVEuQWI4Uk42TGI5bWt2SXBYWGoyQ0tVb3lRUjh2bnIwZ3g5aGNmOUtaZTF1WC1MUjd1V3c",
+            "YOUR_FOURTH_BASE64_ENCODED_KEY_HERE",
+            "YOUR_FIFTH_BASE64_ENCODED_KEY_HERE"
         ];
 
         let currentKeyIndex = 0;
@@ -233,7 +232,6 @@ Format your responses neatly with clear headings:
 ### 🗣️ උච්චාරණය හා වචන මාලාව (Pronunciation & Vocabulary)
 ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
-        // Countdown පෙන්නන Function එක
         function startCountdown(seconds, errorMessage) {
             const outputDiv = document.getElementById("output");
             let remaining = seconds;
@@ -278,8 +276,8 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
-                // 🌟 Gemini හි නවතම Active Model එක
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${currentApiKey}`;
+                // Gemini 2.5 Flash Endpoint
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
 
                 const payload = {
                     contents: [{
@@ -292,15 +290,18 @@ Format your responses neatly with clear headings:
                 };
 
                 try {
+                    // 🌟 Header එක හරහා x-goog-api-key ලෙස Key එක යැවීම (AQ.Ab8... මුද්‍රාවන් සඳහා)
                     const response = await fetch(url, {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        headers: { 
+                            "Content-Type": "application/json",
+                            "x-goog-api-key": currentApiKey
+                        },
                         body: JSON.stringify(payload)
                     });
 
                     const data = await response.json();
 
-                    // 429 Quota / Rate limit එකක් පැමිණි විට
                     if (response.status === 429 || response.status === 403) {
                         const rateMsg = data.error?.message || "Rate limit exceeded (Too many requests)";
                         collectedErrors.push(`Key Index [${currentKeyIndex + 1}] (Status ${response.status}): ${rateMsg}`);
@@ -336,7 +337,6 @@ Format your responses neatly with clear headings:
             return { text: null, error: collectedErrors.join('\n') };
         }
 
-        // Markdown Clean කර Highlight කරපු HTML බවට හරවන Function එක
         function formatMarkdown(text) {
             if (!text) return "";
 
@@ -384,7 +384,6 @@ Format your responses neatly with clear headings:
                 if (result.text) {
                     outputDiv.innerHTML = formatMarkdown(result.text);
                 } else {
-                    // API එක වැඩ නොකරන විට තත්පර 60 ක Countdown එකක් ක්‍රියාත්මක කිරීම
                     startCountdown(60, result.error);
                 }
             } catch (error) {
@@ -398,4 +397,3 @@ Format your responses neatly with clear headings:
     </script>
 </body>
 </html>
-8
