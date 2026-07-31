@@ -200,7 +200,6 @@
             }
         }
 
-        // AI එකෙන්ම කෙලින්ම HTML Tags (<div class="heading-highlight">) සහිතව පිළිතුර ලබාගන්නා System Prompt එක
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
 1. Translate English - Sinhala accurately.
@@ -279,6 +278,7 @@ Use these exact heading structures with the HTML div wrapper:
         async function handleTranslate() {
             const inputField = document.getElementById("input");
             const outputDiv = document.getElementById("output");
+            const translateBtn = document.getElementById("translate");
             const text = inputField.value.trim();
 
             if (!text) {
@@ -286,14 +286,23 @@ Use these exact heading structures with the HTML div wrapper:
                 return;
             }
 
+            // Request එකක් අතරතුර Button එක Disable කිරීම
+            translateBtn.disabled = true;
+            translateBtn.style.opacity = "0.6";
+            translateBtn.style.cursor = "not-allowed";
+
             outputDiv.innerHTML = '<div class="loading">පිළිතුර සකස් කරමින් පවතී...</div>';
 
             try {
                 const response = await askGemini(text);
-                // AI එකෙන්ම කෙලින්ම ලැබෙන HTML පිළිතුර Render කිරීම
                 outputDiv.innerHTML = response;
             } catch (err) {
                 outputDiv.innerText = "දෝෂයක් සිදු විය: සියලුම API Keys වල සීමාවන් අවසන් වී ඇත හෝ සම්බන්ධතාවය බිඳ වැටී ඇත. " + err.message;
+            } finally {
+                // Request එක අවසන් වූ පසු නැවත Button එක Enable කිරීම
+                translateBtn.disabled = false;
+                translateBtn.style.opacity = "1";
+                translateBtn.style.cursor = "pointer";
             }
         }
     </script>
