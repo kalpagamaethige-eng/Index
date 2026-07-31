@@ -2,13 +2,8 @@
 <html lang="si">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI English Translator & Teacher</title>
-    <!-- PWA සඳහා අවශ්‍ය Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0f172a">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalpa AI English Translator & Teacher</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -22,115 +17,131 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 12px;
+            padding: 20px;
             background: var(--bg-primary);
             color: var(--text-primary);
-            max-width: 600px;
+            max-width: 850px;
             margin: 0 auto;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
+            line-height: 1.5;
         }
 
         .header-box {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 15px;
-            border-radius: 14px;
+            padding: 20px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
             color: var(--accent-color);
-            margin: 0 0 5px 0;
-            font-size: 20px;
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            letter-spacing: 0.5px;
         }
 
         .creator-tag {
             color: var(--accent-hover);
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
             display: block;
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 11px;
+            font-size: 13px;
             margin: 0;
         }
 
         .container {
             background: var(--bg-card);
-            padding: 16px;
-            border-radius: 14px;
+            padding: 24px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         textarea {
             width: 100%;
-            height: 110px;
+            height: 130px;
             background: var(--bg-primary);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 14px;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 15px;
             resize: none;
             box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
         textarea:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
         }
 
         button {
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: none;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 10px;
+            padding: 14px 20px;
+            margin-top: 12px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
             width: 100%;
-            font-size: 14px;
+            font-size: 15px;
             transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            transform: translateY(-1px);
         }
 
         button:active {
-            transform: scale(0.98);
+            transform: translateY(0);
         }
 
         #output {
-            margin-top: 15px;
+            margin-top: 24px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            padding: 14px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 12px;
             white-space: pre-wrap;
-            line-height: 1.6;
-            font-size: 13px;
+            line-height: 1.7;
+            min-height: 120px;
+            font-size: 14px;
             color: #e2e8f0;
-            flex: 1;
-            overflow-y: auto;
-            max-height: 40vh;
         }
 
         .loading {
             color: var(--accent-color);
             font-style: italic;
-            text-align: center;
-            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .loading::after {
+            content: "";
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--accent-color);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -138,7 +149,7 @@
     <div class="header-box">
         <span class="creator-tag">Created by Kalpa Gamaethige</span>
         <h1>KALPA AI English Translator & Teacher</h1>
-        <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉගෙනුම් සහකරු</p>
+        <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉංග්‍රීසි ඉගෙනුම් සහකරු</p>
     </div>
 
     <div class="container">
@@ -148,9 +159,7 @@
     </div>
 
     <script>
-        const API_KEY = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
-
+        const API_KEY = "AQ.Ab8RN6ILEhj0O5NtB3J5XwLNDGGcNltddF8ahLgVl-GRG6NeUg";
 
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
@@ -172,20 +181,31 @@ Format your responses neatly with clear headings:
 - **අභ්‍යාස ප්‍රශ්නය (Practice Question)**:`;
 
         async function askGemini(prompt) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+            // Updated Endpoint URL to Google's standard API model
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
             
             for (let attempt = 0; attempt < 5; attempt++) {
                 try {
                     const response = await fetch(url, {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
                         body: JSON.stringify({
-                            contents: [{ parts: [{ text: prompt }] }],
-                            systemInstruction: { parts: [{ text: systemPrompt }] }
+                            contents: [{
+                                parts: [{ text: prompt }]
+                            }],
+                            systemInstruction: {
+                                parts: [{ text: systemPrompt }]
+                            }
                         })
                     });
 
-                    if (!response.ok) throw new Error('Network response error');
+                    if (!response.ok) {
+                        const errDetails = await response.json().catch(() => ({}));
+                        console.error("API Response Error:", errDetails);
+                        throw new Error(`API Error: ${response.status}`);
+                    }
 
                     const data = await response.json();
                     return data.candidates?.[0]?.content?.parts?.[0]?.text || "සමාවන්න, පිළිතුරක් ලැබුණේ නැත.";
@@ -206,9 +226,11 @@ Format your responses neatly with clear headings:
             
             try {
                 let result = await askGemini(text);
-                outputDiv.innerHTML = result;
+                // Markdown formatting හරියාකාරව පෙන්වීමට 
+                outputDiv.innerText = result;
             } catch (error) {
-                outputDiv.innerHTML = "සමාවන්න, තාක්ෂණික දෝෂයක් ඇති විය. කරුණාකර නැවත උත්සාහ කරන්න.";
+                console.error(error);
+                outputDiv.innerHTML = "සමාවන්න, තාක්ෂණික දෝෂයක් ඇති විය. (API Key එක අවලංගු වී ඇත්නම් Google AI Studio වෙතින් අලුත් Key එකක් ලබාගෙන ඇතුළත් කරන්න).";
             }
         };
     </script>
