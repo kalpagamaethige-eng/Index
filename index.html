@@ -196,7 +196,6 @@
         function rotateApiKey() {
             if (ENCODED_KEYS.length > 1) {
                 currentKeyIndex = (currentKeyIndex + 1) % ENCODED_KEYS.length;
-                console.warn(`API Limit hit. Switch to Key Index: ${currentKeyIndex}`);
             }
         }
 
@@ -211,20 +210,15 @@ Your responsibilities:
 7. Encourage conversation practice and maintain a friendly, professional, and supportive language teacher tone.
 8. Always ask a follow-up question in both English and Sinhala to keep the learning practice going.
 
-CRITICAL FORMATTING INSTRUCTIONS:
-- Do NOT use markdown symbols like ###, ---, or **.
-- Use simple HTML tags for styling:
-  - For section headings, wrap the heading text inside: <div class="heading-highlight">Heading Text</div>
-  - For bold text, use <b>text</b>.
-  - For line breaks, use <br>.
+If the user asks a direct question or query, respond with a helpful, friendly answer in simple Sinhala using clear structure.
 
-Use these exact heading structures with the HTML div wrapper:
-<div class="heading-highlight">🇱🇰 පරිවර්තනය (Translation)</div>
-<div class="heading-highlight">✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)</div>
-<div class="heading-highlight">📖 ව්‍යාකරණ පැහැදිලි කිරීම (Grammar Explanation)</div>
-<div class="heading-highlight">💡 උදාහරණ (Examples - Beginner & Advanced)</div>
-<div class="heading-highlight">🗣️ උච්චාරණය සහ වචන මාලාව (Pronunciation & Vocabulary)</div>
-<div class="heading-highlight">💬 ප්‍රායෝගික ප්‍රශ්නය (Practice Question)</div>`;
+Format your responses neatly with clear headings:
+### 🇱🇰 පරිවර්තනය (Translation)
+### ✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)
+### 📖 ව්‍යාකරණ පැහැදිලි කිරීම (Grammar Explanation)
+### 💡 උදාහරණ (Examples - Beginner & Advanced)
+### 🗣️ උච්චාරණය සහ වචන මාලාව (Pronunciation & Vocabulary)
+### 💬 ප්‍රායෝගික ප්‍රශ්නය (Practice Question)`;
 
         async function askGemini(promptText) {
             let attempts = 0;
@@ -258,12 +252,19 @@ Use these exact heading structures with the HTML div wrapper:
                     }
 
                     if (!response.ok) {
-                        const errorData = await response.json();
-                        throw new Error(errorData.error?.message || "Request failed");
+                        rotateApiKey();
+                        attempts++;
+                        continue;
                     }
 
                     const data = await response.json();
-                    return data.candidates[0].content.parts[0].text;
+
+                    // undefined වීම වැළැක්වීම සඳහා Safe Response Extraction
+                    if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+                        return data.candidates[0].content.parts[0].text;
+                    } else {
+                        throw new Error("Invalid response format received.");
+                    }
 
                 } catch (error) {
                     rotateApiKey();
@@ -273,6 +274,34 @@ Use these exact heading structures with the HTML div wrapper:
                     }
                 }
             }
+        }
+
+        // Markdown Clean කර HTML බවට හරවන සකස් කළ Function එක
+        function formatMarkdown(text) {
+            if (!text) return "";
+
+            let formatted = text;
+
+            // 1. --- (Horizontal lines) ඉවත් කිරීම
+            formatted = formatted.replace(/^---$/gim, '');
+
+            // 2. ### මාතෘකා Highlight Box එකක් බවට හැරවීම
+            formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
+                let cleanTitle = title.replace(/\*\*/g, '').trim(); 
+                return `<span class="heading-highlight">${cleanTitle}</span>`;
+            });
+
+            // 3. **Bold** අකුරු strong බවට හැරවීම
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // 4. * Bullet points පිරිසිදු කර Dot එකක් යෙදීම
+            formatted = formatted.replace(/^\*\s+/gim, '• ');
+
+            // 5. Line breaks හරියාකාරව සකස් කිරීම
+            formatted = formatted.replace(/\n\s*\n/g, '<br><br>');
+            formatted = formatted.replace(/\n/g, '<br>');
+
+            return formatted;
         }
 
         async function handleTranslate() {
@@ -286,7 +315,7 @@ Use these exact heading structures with the HTML div wrapper:
                 return;
             }
 
-            // Request එකක් අතරතුර Button එක Disable කිරීම
+            // Multiple Taps වැළැක්වීමට Button එක Lock කිරීම
             translateBtn.disabled = true;
             translateBtn.style.opacity = "0.6";
             translateBtn.style.cursor = "not-allowed";
@@ -295,11 +324,12 @@ Use these exact heading structures with the HTML div wrapper:
 
             try {
                 const response = await askGemini(text);
-                outputDiv.innerHTML = response;
+                // Safe Output Rendering
+                outputDiv.innerHTML = formatMarkdown(response);
             } catch (err) {
                 outputDiv.innerText = "දෝෂයක් සිදු විය: සියලුම API Keys වල සීමාවන් අවසන් වී ඇත හෝ සම්බන්ධතාවය බිඳ වැටී ඇත. " + err.message;
             } finally {
-                // Request එක අවසන් වූ පසු නැවත Button එක Enable කිරීම
+                // Button එක Unlock කිරීම
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
                 translateBtn.style.cursor = "pointer";
