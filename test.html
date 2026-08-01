@@ -19,25 +19,27 @@
             --text-secondary: #94a3b8;
         }
 
-        /* මෙතැන් සිට Loading Spinner එකට මෙම අලුත් කොටස 46 වෙනි line එක දක්වා එකතු කරන ලදී */
-        
+        /* මෙතැන් සිට Loading Spinner එකට මෙම අලුත් කොටස 47 වෙනි line එක දක්වා එකතු කරන ලදී */
+
 .spinner-container {
     display: flex;
-    align-items: center;
+    flex-direction: column; /* අකුරු සහ ස්පිනර් එක පේළි දෙකකට වෙන් කරයි */
+    align-items: center;    /* තිරයේ මැදට ගෙනෙයි */
     justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 15px;              /* අකුරු සහ ස්පිනර් එක අතර පරතරය */
+    margin-top: 30px;
     color: var(--text-primary);
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .spinner {
-    border: 3px solid var(--border-color);
-    border-top: 3px solid var(--accent-color);
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--accent-color);
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 45px;            /* ස්පිනර් එකේ ප්‍රමාණය ලොකු කළා */
+    height: 45px;           /* ස්පිනර් එකේ ප්‍රමාණය ලොකු කළා */
     animation: spin 1s linear infinite;
+
 }
 
 @keyframes spin {
@@ -533,7 +535,9 @@ Format your responses neatly with clear headings:
             translateBtn.style.opacity = "0.6";
             translateBtn.style.cursor = "not-allowed";
 
-            outputDiv.innerHTML = "<div class='spinner-container'><div class='spinner'></div><div>ගුරුවරයා පිළිතුරක් සකස් කරමින් පවති...</div></div>";
+    
+            outputDiv.innerHTML = "<div class='spinner-container'><div>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
+
 
 
             try {
