@@ -20,13 +20,13 @@
         }
 
         /* මෙතැන් සිට Loading Spinner එකට මෙම අලුත් කොටස 47 වෙනි line එක දක්වා එකතු කරන ලදී */
-
+        
 .spinner-container {
     display: flex;
-    flex-direction: column; /* අකුරු සහ ස්පිනර් එක පේළි දෙකකට වෙන් කරයි */
-    align-items: center;    /* තිරයේ මැදට ගෙනෙයි */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 15px;              /* අකුරු සහ ස්පිනර් එක අතර පරතරය */
+    gap: 15px;
     margin-top: 30px;
     color: var(--text-primary);
     font-size: 16px;
@@ -36,16 +36,16 @@
     border: 4px solid var(--border-color);
     border-top: 4px solid var(--accent-color);
     border-radius: 50%;
-    width: 45px;            /* ස්පිනර් එකේ ප්‍රමාණය ලොකු කළා */
-    height: 45px;           /* ස්පිනර් එකේ ප්‍රමාණය ලොකු කළා */
+    width: 45px;
+    height: 45px;
     animation: spin 1s linear infinite;
-
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
