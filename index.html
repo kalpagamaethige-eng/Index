@@ -92,7 +92,7 @@
             box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
         }
 
-        button {
+        button#translate {
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: none;
@@ -106,7 +106,7 @@
             transition: all 0.2s;
         }
 
-        button:active {
+        button#translate:active {
             transform: scale(0.98);
         }
 
@@ -114,9 +114,9 @@
             margin-top: 15px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            padding: 14px;
+            padding: 16px;
             border-radius: 10px;
-            line-height: 1.7;
+            line-height: 1.8;
             font-size: 13.5px;
             color: #e2e8f0;
             flex: 1;
@@ -124,50 +124,84 @@
             max-height: 50vh;
         }
 
+        /* 🌟 ප්‍රධාන මාතෘකා අතර කියවීමට පහසු වන සේ Spacing ඇතුළත් කිරීම */
         .heading-highlight {
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
-            padding: 8px 12px;
-            border-radius: 6px;
-            border-left: 3.5px solid var(--accent-hover);
-            margin-top: 15px;
-            margin-bottom: 8px;
+            padding: 9px 13px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-hover);
+            margin-top: 24px;   /* මාතෘකාවට ඉහළින් පැහැදිලි ඉඩක් */
+            margin-bottom: 12px; /* මාතෘකාවට පහළින් ඉඩක් */
             font-weight: bold;
             font-size: 14px;
         }
 
-        /* 🔊 Speaker/Audio Highlights */
-        .speak-btn {
-            background: #0284c7;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
+        .heading-highlight:first-child {
+            margin-top: 4px;
+        }
+
+        /* 🌟 පරිවර්තනය සහ Speaker වැඩකරන Modern Tab Card එක */
+        .main-translation-box {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #38bdf8;
+            border-left: 5px solid #0ea5e9;
+            color: #ffffff;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin: 12px 0 20px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .translation-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .lang-line {
+            font-size: 14.5px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #f8fafc;
+        }
+
+        .lang-line.sinhala {
+            color: #38bdf8;
             font-size: 14px;
+        }
+
+        .speak-btn {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            border: 1px solid #38bdf8;
+            border-radius: 10px;
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-left: 8px;
-            vertical-align: middle;
-            transition: background 0.2s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+            transition: all 0.2s ease;
         }
 
         .speak-btn:hover {
-            background: #38bdf8;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(56, 189, 248, 0.4);
         }
 
-        .main-translation-box {
-            background: linear-gradient(135deg, #0284c7, #0369a1);
-            color: #ffffff;
-            padding: 12px 15px;
-            border-radius: 10px;
-            margin: 10px 0;
-            font-size: 15px;
-            font-weight: 600;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        .speak-btn:active {
+            transform: scale(0.95);
         }
 
         .loading {
@@ -211,17 +245,17 @@
 
     <div class="container">
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I goes to school yesterday)..."></textarea>
-        <button id="translate">Translate & Learn (පරිවර්තනය කර ඉගෙන ගන්න)</button>
+        <button id="translate">🔴 Translate (මෙතනින් පරිවර්තනය සිදුකරන්න)</button>
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
 
     <script>
-        // 🔑 Base64 Encode කරන ලද API Keys 5 ඇතුළත් කර ඇත
+        // 🔑 401 Error එක වැළැක්වීමට 4 වන Key එක නිවැරදි කළ Base64 Keys 5
         const ENCODED_KEYS = [
             "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
             "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
             "QVEuQWI4Uk42SVAxaXhhLTVhTTNSaGFjU2Z1YkI3YWtadmRqcXBuaVZWc2RRaEJqbGZIYXc",
-            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUE4Z2VrMVNsVUE",
+            "QVEuQWI4Uk42SS04b1FzZ000M095QWNIVjBYSzVTYTdFNHVyYkt1bFRXSUU4Z2VrMVNsVUE",
             "QVEuQWI4Uk42S0QtbDI3MlhWcGtDYWExeXl5VlVBdHJlOE03ZzJtbE1CUWZDXzFhajFnV2c"
         ];
 
@@ -317,6 +351,7 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
+                // 🌟 ඔබ ලබාදුන් සාර්ථක Endpoint එක: gemini-3.6-flash
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
@@ -343,7 +378,7 @@ Format your responses neatly with clear headings:
                         collectedErrors.push(`Key [${currentKeyIndex + 1}] (Status ${response.status}): ${rateMsg}`);
                         rotateApiKey();
                         attempts++;
-                        await new Promise(res => setTimeout(res, 1500));
+                        await new Promise(res => setTimeout(res, 2000));
                         continue;
                     }
 
@@ -411,10 +446,8 @@ Format your responses neatly with clear headings:
 
             let formatted = text;
 
-            // 1. Horizontal Rules (---) ඉවත් කිරීම
             formatted = formatted.replace(/^---$/gim, '');
 
-            // 2. [EN_TEXT] || [SI_TEXT] Highlight Box සහ Speaker Button
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
                 let cleanEn = enText.replace(/\*\*/g, '').trim();
                 let cleanSi = siText.replace(/\*\*/g, '').trim();
@@ -424,13 +457,14 @@ Format your responses neatly with clear headings:
                 let safeSi = cleanSi.replace(/'/g, "\\'");
 
                 return `<div class="main-translation-box">
-                    🇬🇧 <strong>${cleanEn}</strong><br>
-                    🇱🇰 <strong>${cleanSi}</strong>
+                    <div class="translation-content">
+                        <div class="lang-line english">🇬🇧 ${cleanEn}</div>
+                        <div class="lang-line sinhala">🇱🇰 ${cleanSi}</div>
+                    </div>
                     <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
                 </div>`;
             });
 
-            // 3. මාතෘකා හෝ Sub-headings Highlight Boxes බවට හැරවීම
             formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
                 let cleanTitle = title.replace(/\*\*/g, '').trim(); 
                 if (!cleanTitle) return "";
@@ -441,20 +475,16 @@ Format your responses neatly with clear headings:
                 return `<span class="heading-highlight">${title.trim()}</span>`;
             });
 
-            // 4. **Bold** අකුරු strong බවට හැරවීම
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-            // 5. තනිව පවතින අනවශ්‍ය තිත් ( standalone dots ) සහ Bullet points Clean කිරීම
             formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
             formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
 
-            // 6. හිස් පේළි පිරිසිදු කර <br> සකස් කිරීම
             formatted = formatted.split('\n')
                 .map(line => line.trim())
                 .filter(line => line.length > 0)
                 .join('<br>');
 
-            // 7. Highlight Box එකකට පසුව එන අතිරික්ත <br> ඉවත් කිරීම
             formatted = formatted.replace(/<\/span><br>/g, '</span>');
 
             return formatted;
