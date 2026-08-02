@@ -366,7 +366,7 @@ Format your responses neatly with clear headings:
 
                     <!-- නිර්මාණකරුට පමණක් බලාගැනීමට ඇති රහස් බොත්තම (PIN ආරක්ෂිත) -->
                     <div style="text-align: right; margin-top: 15px;">
-                        <span onclick="var el=document.getElementById('dev-error-logs'); if(el.style.display === 'none') { var p = prompt('⚙️ Developer PIN එක ඇතුළත් කරන්න (රහස්‍ය අංකය 1979):'); if(p === '1234') { el.style.display = 'block'; } else if(p !== null) { alert('❌ මුරපදය වැරදියි!'); } } else { el.style.display = 'none'; }" 
+                        <span onclick="var el=document.getElementById('dev-error-logs'); if(el.style.display === 'none') { var p = prompt('⚙️ Developer PIN එක ඇතුළත් කරන්න (රහස්‍ය අංකය 1979):'); if(p === '1979') { el.style.display = 'block'; } else if(p !== null) { alert('❌ මුරපදය වැරදියි!'); } } else { el.style.display = 'none'; }" 
                               style="cursor: pointer; opacity: 0.2; font-size: 14px; transition: opacity 0.3s;" 
                               onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.2" 
                               title="Kalpa's Developer Logs">⚙️</span>
@@ -393,8 +393,6 @@ Format your responses neatly with clear headings:
                     if (timerElement) timerElement.innerText = remaining;
                 }
             }, 1000);
-        }
-
         }
 
         async function askGemini(promptText) {
