@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI English Translator & Teacher</title>
+    <title>Kalpa English Translator & AI Teacher</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
@@ -152,22 +152,22 @@
             max-height: 55vh;
         }
 
-        /* මාතෘකා කොටු අතර ඉඩ හැදීම තවත් අවම කිරීම */
+        /* කොටු සහ මාතෘකා අතර හිඩැස් දැඩි ලෙස අවම කිරීම */
         .heading-highlight {
             display: block;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: var(--accent-color);
-            padding: 7px 10px;
+            padding: 6px 10px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
             border-top: 1px solid var(--border-color);
             border-right: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            margin-top: 6px !important;   
+            margin-top: 4px !important;   
             margin-bottom: 2px !important; 
             font-weight: bold;
-            font-size: 13.5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-size: 13px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .heading-highlight:first-child {
@@ -189,25 +189,23 @@
             gap: 12px;
         }
 
-        /* ස්පීකර් බොත්තම සහ ලාංඡනය හරියටම සෙන්ටර් කිරීම */
+        /* ස්පීකර් බොත්තම පෙට්ටිය තුළටම වී හරියටම මැදට (Center) වන සේ සැකසීම */
         .speak-btn {
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: 1px solid #38bdf8;
-            border-radius: 12px;
-            width: 44px;
-            height: 44px;
-            font-size: 20px;
+            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            font-size: 18px;
             cursor: pointer;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
             transition: all 0.2s ease;
-            line-height: 1;
-            padding: 0;
-            text-align: center;
+            margin: auto 0;
         }
 
         .speak-btn:hover {
@@ -615,7 +613,7 @@ Format your responses neatly with clear headings:
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             
             // වැඩිපුර එකතු වන හිස් පේළි ඉවත් කිරීම
-            formatted = formatted.replace(/(<br>\s*){3,}/g, '<br><br>');
+            formatted = formatted.replace(/(<br>\s*){2,}/g, '<br>');
             formatted = formatted.replace(/\n/g, '<br>');
 
             return formatted;
