@@ -332,10 +332,20 @@ Format your responses neatly with clear headings:
             const outputDiv = document.getElementById("output");
             let remaining = fallbackSeconds;
             
+            // සැබෑ කාලයට තත්පර 5ක ආරක්ෂිත කාලයක් (buffer) එක් කිරීම
             if (errorMessage) {
-                const timeMatch = errorMessage.match(/retry in ([\d\.]+)s/);
-                if (timeMatch && timeMatch[1]) {
-                    remaining = Math.ceil(parseFloat(timeMatch[1])); 
+                const timeRegex = /retry in\s*([\d\.]+)/gi; 
+                let match;
+                let extractedTimes = [];
+                
+                while ((match = timeRegex.exec(errorMessage)) !== null) {
+                    if (match[1]) {
+                        extractedTimes.push(parseFloat(match[1]));
+                    }
+                }
+                
+                if (extractedTimes.length > 0) {
+                    remaining = Math.ceil(Math.min(...extractedTimes)) + 5; 
                 }
             }
 
