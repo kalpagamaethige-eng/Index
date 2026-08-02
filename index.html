@@ -144,7 +144,7 @@
             border: 1px solid var(--border-color);
             padding: 14px;
             border-radius: 10px;
-            line-height: 1.6;
+            line-height: 1.5; /* ජේද අතර පරතරය පාලනය කිරීමට */
             font-size: 13.5px;
             color: #e2e8f0;
             flex: 1;
@@ -152,26 +152,26 @@
             max-height: 55vh;
         }
 
-        /* මාතෘකා කොටු අතර පරතරය අඩු කර එකිනෙකට සමීප කර ඇත */
+        /* මාතෘකා කොටු අතර ඉඩ හැදීම දැඩි ලෙස පාලනය කිරීම */
         .heading-highlight {
             display: block;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: var(--accent-color);
-            padding: 9px 12px;
+            padding: 8px 12px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
             border-top: 1px solid var(--border-color);
             border-right: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            margin-top: 14px;   
-            margin-bottom: 6px; 
+            margin-top: 10px !important;   
+            margin-bottom: 4px !important; 
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13.5px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
         .heading-highlight:first-child {
-            margin-top: 2px;
+            margin-top: 0 !important;
         }
 
         .main-translation-box {
@@ -181,7 +181,7 @@
             color: #ffffff;
             padding: 12px 14px;
             border-radius: 10px;
-            margin: 10px 0 14px 0;
+            margin: 6px 0 10px 0 !important;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
@@ -194,9 +194,9 @@
             color: white;
             border: 1px solid #38bdf8;
             border-radius: 10px;
-            width: 42px;
-            height: 42px;
-            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            font-size: 17px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -595,8 +595,8 @@ Format your responses neatly with clear headings:
                 return `
                     <div class="main-translation-box">
                         <div style="flex-grow: 1;">
-                            <div style="color: #ffffff; font-size: 16px; font-weight: bold; margin-bottom: 5px;">${cleanEn}</div>
-                            <div style="color: #e2e8f0; font-size: 14.5px; line-height: 1.5;">${cleanSi}</div>
+                            <div style="color: #ffffff; font-size: 15.5px; font-weight: bold; margin-bottom: 4px;">${cleanEn}</div>
+                            <div style="color: #e2e8f0; font-size: 14px; line-height: 1.4;">${cleanSi}</div>
                         </div>
                         <button class="speak-btn" onclick="speakText('${safeEn}')" title="ශ්‍රවණය කරන්න">
                             🔊
@@ -605,10 +605,13 @@ Format your responses neatly with clear headings:
                 `;
             });
 
-            // මාතෘකා කොටු අතර පරතරය අඩු කරමින් හැඩතල ගැන්වීම
+            // මාතෘකා කොටු අතර පරතරය දැඩි ලෙස පාලනය කිරීම
             formatted = formatted.replace(/### (.*?)\n/g, '<span class="heading-highlight">$1</span>');
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // වැඩිපුර එකතු වන හිස් පේළි ඉවත් කිරීම
+            formatted = formatted.replace(/(<br>\s*){3,}/g, '<br><br>');
             formatted = formatted.replace(/\n/g, '<br>');
 
             return formatted;
