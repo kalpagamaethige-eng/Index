@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kalpa English Translator & AI Teacher</title>
+    <title>Kalpa AI English Translator & Teacher</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
@@ -24,7 +24,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 15px;
+            margin-top: 20px;
             padding: 10px;
         }
 
@@ -35,7 +35,7 @@
             border-top: 4px solid var(--accent-color); 
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-top: 10px; 
+            margin-top: 15px; 
             display: inline-block;
         }
 
@@ -59,9 +59,9 @@
 
         .header-box {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 14px;
+            padding: 15px;
             border-radius: 14px;
             border: 1px solid var(--border-color);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
@@ -69,8 +69,8 @@
 
         h1 {
             color: var(--accent-color);
-            margin: 0 0 4px 0;
-            font-size: 19px;
+            margin: 0 0 5px 0;
+            font-size: 20px;
         }
 
         .creator-tag {
@@ -89,10 +89,10 @@
 
         .container {
             background: var(--bg-card);
-            padding: 14px;
+            padding: 16px;
             border-radius: 14px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -100,7 +100,7 @@
 
         textarea {
             width: 100%;
-            height: 100px;
+            height: 110px;
             background: var(--bg-primary);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
@@ -109,21 +109,19 @@
             font-size: 14px;
             resize: none;
             box-sizing: border-box;
-            word-spacing: -1px;
-            letter-spacing: normal;
         }
 
         textarea:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
         }
 
         button#translate {
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: none;
-            padding: 11px;
+            padding: 12px;
             margin-top: 10px;
             border-radius: 10px;
             cursor: pointer;
@@ -131,7 +129,6 @@
             width: 100%;
             font-size: 14px;
             transition: all 0.2s;
-            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         }
 
         button#translate:active {
@@ -139,81 +136,91 @@
         }
 
         #output {
-            margin-top: 14px;
+            margin-top: 15px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            padding: 14px;
+            padding: 16px;
             border-radius: 10px;
-            line-height: 1.4;
+            line-height: 1.8;
             font-size: 13.5px;
             color: #e2e8f0;
             flex: 1;
             overflow-y: auto;
-            max-height: 55vh;
+            max-height: 50vh;
         }
 
-        /* මාතෘකා කොටු අතර ඉඩ හැදීම අවම කිරීම */
         .heading-highlight {
             display: block;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
-            padding: 6px 10px;
+            padding: 9px 13px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
-            border-top: 1px solid var(--border-color);
-            border-right: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            margin-top: 4px !important;   
-            margin-bottom: 2px !important; 
+            margin-top: 24px;   
+            margin-bottom: 12px; 
             font-weight: bold;
-            font-size: 13px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 14px;
         }
 
         .heading-highlight:first-child {
-            margin-top: 0 !important;
+            margin-top: 4px;
         }
 
-        /* ප්‍රධාන පරිවර්තන පෙට්ටිය (පිටතට පැනීම් වැළැක්වීමට overflow එක සකසා ඇත) */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #38bdf8;
             border-left: 5px solid #0ea5e9;
             color: #ffffff;
-            padding: 10px 12px;
-            border-radius: 10px;
-            margin: 2px 0 4px 0 !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin: 12px 0 20px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            overflow: hidden;
-            box-sizing: border-box;
+            gap: 12px;
         }
 
-        /* ස්පීකර් බොත්තම සම්පූර්ණයෙන්ම පෙට්ටිය ඇතුළේ මැදට (Center) වන සේ සැකසීම */
+        .translation-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .lang-line {
+            font-size: 14.5px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #f8fafc;
+        }
+
+        .lang-line.sinhala {
+            color: #38bdf8;
+            font-size: 14px;
+        }
+
         .speak-btn {
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: 1px solid #38bdf8;
             border-radius: 10px;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             font-size: 18px;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            box-shadow: 0 3px 8px rgba(14, 165, 233, 0.3);
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
             transition: all 0.2s ease;
-            margin: 0;
         }
 
         .speak-btn:hover {
             background: linear-gradient(135deg, #38bdf8, #0ea5e9);
             transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(56, 189, 248, 0.4);
         }
 
         .speak-btn:active {
@@ -224,17 +231,17 @@
             color: var(--accent-color);
             font-style: italic;
             text-align: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .error-box {
             background: #450a0a;
             border: 1px solid #ef4444;
             color: #fca5a5;
-            padding: 15px;
+            padding: 16px;
             border-radius: 8px;
             font-size: 12.5px;
-            line-height: 1.5;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center !important;
@@ -249,11 +256,11 @@
         .countdown-text {
             color: #facc15;
             font-weight: bold;
-            font-size: 13.5px;
+            font-size: 14px;
             display: inline-block;
             margin-top: 8px;
             background: #291805;
-            padding: 5px 10px;
+            padding: 4px 10px;
             border-radius: 6px;
             border: 1px solid #eab308;
             text-align: center !important;
@@ -343,32 +350,32 @@
             "QVEuQWI4Uk42THcySEF1d0lINVhRdE9ORm1GTDVWaHlSLTE1TWZjT1U3THdzemVKZWYtckEKCg",
             "QVEuQWI4Uk42S3ozVjBtbDdsWVBPdzVMUGQ0clZ2dk1kY29VeW53TUtKRlhpaS1ZVTVsancK",
             "QVEuQWI4Uk42SzRHS1ZnWkVKb3FZdWJJV1N6MTQ1RVBRT1JBTHFCN2hvTVZBSWo1VGZ1VHc",
-            "QVEuQWI4Uk42TEswMjdtb2xLUVNNN1FWYWtjY3laTEhVV2Z2ZWxIcXR4ZHhZdklzeGdDcVU4eWcKCgo",
+            "QVEuQWI4Uk42TEkwMjdtb2xLUVNNN1FWYWtjY3laTEhVV2Z2ZWxIcXR4ZHhZdklzeGdDcVU4eWcKCgo",
             "QVEuQWI4Uk42TG1saXZtR0ktQndFcEduXzJyOXdOMVFiWUg5b25UNXRBUWlQcVdMVDdjUEEKCgoKCgo",
             "QVEuQWI4Uk42SlBBbFJRbzVqNWRJRkhSRlotZ3lzY1Q1ZzhxWFlaUTNuOENJdUJpbHpCUmc",
             "CkFRLkFiOFJONklTTEVrQTZsRGRsMS02SzZjd0czNE56LUpaNnJQbEhhQm9ndWxWSHJYYWhR",
             "QVEuQWI4Uk42SXJkMGllejF0cnBNSk9LVHZjY0xSUl9tMEtOWk9rdFBUR3RvQkFkNW94dGcK",
             "QVEuQWI4Uk42SmxvM3huZ3F5XzF0YV8tTmZueFBNcEdUV3hyUkNxV212XzF1REluTVlvcWcK",
-            "QVEuQWI4Uk42Sl8xNmZPZThDMmNYOVRabFdjZUF2cTRLbjV5aXNOR3c4NDlGMXoxZW1maVE",
+            "QVEuQWI4Uk42Sl_1NmZPZThDMmNYOVRabFdjZUF2cTRLbjV5aXNOR3c4NDlGMXoxZW1maVE",
             "QVEuQWI4Uk42SjQxTmhld1A3dVZsUVZCcllHbkVLN2hYTXBUUXZ6a0JKTTAwZS1OX2lOU2cK",
             "QVEuQWI4Uk42TGkwM0wtbEQ1UFgtOUVCOUhIeDdUalU1V2tRQ1lyRW9lUklmYjhiczhyX3cKCg",
             "QVEuQWI4Uk42SkZOX3BOemJCZS1JM3JpN2pPWnpmdXU2ZzlYRzFTeW92LWJJbVBrdXQ2RWcKCgoKCg",
             "QVEuQWI4Uk42SXVFS3R6SDFJTE9NcHExUkhQY012V1g2YmRZdm51c0VDb2dTY0pwVmRMRWcKCgoKCgo",
             "QVEuQWI4Uk42TGp2bVJ1bEtLYTJzRHFBNF9Fc1ZRS3FnbFJUOWtobm1ieEVMcWpNZ0ZHR1EKCgoKCgo",
             "QVEuQWI4Uk42SUc4Qkl5NzRtTXZacGlNTjQ0aDRIOEtTb2JvNGdLN0JmaVJIcFpnYkhiOGcKCgoKCgo",
-            "QVEuQWI4Uk42TFhZYlRwSUZQbVE1d2JZRnpBZWQxckJyX2NSVEFkc0RodXFsVDhGU3NWN2cKCgoKCgoK",
+            "QVEuQWI4Uk42TFXZYlRwSUZQbVE1d2JZRnpBZWQxckJyX2NSVEFkc0RodXFsVDhGU3NWN2cKCgoKCgoK",
             "QVEuQWI4Uk42S3hIMEhDWHNkd2tmQkh4eWM3UXhERkxydkhERUk3UzE2bEpiMlNWV3AwQXcKCgoKCgoK",
-            "QVEuQWI4Uk42S0JCWENDUFFtb0xQeFZfcXpVbDV4X3pSVEtOdS1KTVhvLVNXSEhXeUVGR2cKCgoKCgoK",
+            "QVEuQWI4Uk42S0JCWENDUFFtb0xQeFZfcXpVbDV4X3pSVEtOdS1KTVhvLVNXSEHXeUVGR2cKCgoKCgoK",
             "QVEuQWI4Uk42THhfMmpVUE5zbERRRjk3ZHZPVnRiZS1pUGxRMTlUX2RCR1ZIZmw5NDVwT0EKCgoKCgoKCgoKCg",
             "QVEuQWI4Uk42Sk5EU0xuZEx3THpyZ1hDRWhCUks1MVdIcVNEeU1uV2R2WlFGeGJ2MkFnVGcKCgoKCgoKCgoK",
             "QVEuQWI4Uk42SWN2bXdJbjNVVjR5YVFyS1hzQ2xTQm9FUGh2ckh1MXZfelREbVMzT2p0b2cKCgoKCgoKCgoK",
             "QVEuQWI4Uk42SlRrejhjbERHWWlpdHhidDF6bWVtemk2VXFycTlSVmhsWHpmZndjaUl4bHcKCgoKCgoKCgoKCg",
             "QVEuQWI4Uk42STZjMnJkMnJVYldINXVEc3NudU5DWEF0MGVjTVNELThzTVNIekVlTGtGS0EKCgoKCgoKCgoKCg",
             "QVEuQWI4Uk42S3o0UXNKSHFIUnlUSUpfbkFWRWlzWmNDeWdtbEdIaWN2RGxsN0Zoc194bHcKCgoKCgoKCgoK",
-            "QVEuQWI4Uk42SnBtZzRVZU9UcFQ2X1BzNGhESXBoZHM4dzJKb3ZDcDNwT1JwZmJOSTA5NHcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SnBtZzRVZU9UcFQ2X1BzNGhESXBoZHM8dzJKb3ZDcDNwT1JwZmJOSTA5NHcKCgoKCgoKCgoK",
             "QVEuQWI4Uk42SVBDT3dhOTZoN2t6WVNIWm41cUpDMlFhR1hUR1dUeVdYUkFHZXdkUW9JdWc",
-            "QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0EKCg",
-            "QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0E",
+            "QVEuQWI4Uk42S3NYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0EKCg",
+            "QVEuQWI4Uk42S3NYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0E",
             "QVEuQWI4Uk42THp1U2RobTBoTEdJR2pFeXZUQVRBdDl1Z2p6TXh4bi1qWW02dDdKS1J1UXc",
 
             //📍API KEY : 04 > ENCODE 👇
@@ -381,7 +388,7 @@
             "QVEuQWI4Uk42TGg0U0tvLW9FTGdNM25UcExxMWVzV3JCT01PYmNxRF9xOVFrTldvb3c0eEE",
             "CkFRLkFiOFJONktRRWFEakFXRTdEUTlwYkxmTGlxZTJ5Q2lETmRlNVlfQktFRk5QWXl1QUJRCgo",
             "QVEuQWI4Uk42THd4MTZ2aW0yVnlCU3BULWM3YWNoWWdIN2ZCX1FDQzNTcFI4OUFBUEVJLVEKCg",
-            "QVEuQWI4Uk42SV9hZGVOSlVacFFralR1T1JINlRkU0VENlNCSGRiWDRiVEdQM2ZFcWtOSXcK",
+            "QVEuQWI4Uk42SV_hZGVOSlVacFFralR1T1JINlRkU0VENlNCSGRiWDRiVEdQM2ZFcWtOSXcK",
             "QVEuQWI4Uk42SnI2Mll6VEJubk16eFNlQ2dCeGN5eTdRRWxNU0wzZ0dKeWlKUEhEU3hoYlEK",
             "CkFRLkFiOFJONklRTy1YdHVtNjRibkJwOFI2ZWVUeXF0bDRhaWZsOGR5TzNZZmZrclB3NjdBCgoK",
             "QVEuQWI4Uk42THdZUnFSLWNZQkctUlFmbmR1UWpORDVVU2RhUHhEdmFZZkIwQVV1cE1tSlEKCgoKCg",
@@ -391,7 +398,7 @@
             "QVEuQWI4Uk42SnR6VU1sVUYySURNaFZkdVgxZXhhOTZTVUtJclV0WUFvbTRCcno0SDdib0EKCgoKCgoK",
             "QVEuQWI4Uk42SmxJb3c0QUI3SGJBTzVhRG5EdzhiSlF1ZkNQM3FyaWRDRlpDUGpEMFlNaHcKCgoKCgoK",
             "QVEuQWI4Uk42SUNocUhHQVdqOC1ERnJsZjNVOUxDWHpTNEhtQ1dCNm9yM2taYjJWa1NkTlEKCgoKCgoK",
-            "QVEuQWI4Uk42SVRFSEhDb2tDaFFlUHhfVG01SHp6Q2RINjdMdjZ3U3dxejJQUkNFcXNnd3cKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42SVRFSEHDb2tDaFFlUHhfVG01SHp6Q2RINjdMdjZ3U3dxejJQUkNFcXNnd3cKCgoKCgoKCgoKCg",
             "QVEuQWI4Uk42S2JFb0pJVFVIdHJvQTlid3RydFlkNGpTanFrbW0yRnhPeDEzbEdCZFhfZ0EKCgoKCgoKCgoK",
             "QVEuQWI4Uk42S3hZbUdkN0wzOThTT1BtYzI3aERPeFVXSklxZGh3cDRVelpQUF9tUHMtUkEKCgoKCgoKCgoKCgo",
             "QVEuQWI4Uk42SW9YTVg5RFhYT0dUX21Hb3RJTkRvdnA5UUlmSjBCZ1B0dlhsRXdLcHZ6eVEKCgoKCgoKCgoKCg",
@@ -445,6 +452,7 @@
             }
         }
 
+        // මෙහි වාක්‍යයේ කාලය (Tense) හඳුනාගෙන පිළිතුරු ලබා දීමට උපදෙස් ඇතුළත් කර ඇත
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
 1. Translate English ↔ Sinhala accurately.
@@ -459,7 +467,7 @@ Your responsibilities:
 
 Format your responses neatly with clear headings:
 ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation)
-[EN_TEXT] || [SI_TEXT]
+EN_TEXT || SI_TEXT
 
 ### ⏰ වාක්‍යයේ කාලය
 - (උදා: Past Simple Tense / සරල අතීත කාලය)
@@ -496,13 +504,13 @@ Format your responses neatly with clear headings:
             if (countdownTimer) clearInterval(countdownTimer);
 
             outputDiv.innerHTML = `
-                <div class="error-box">
-                    <span style="font-size: 24px; margin-bottom: 10px; display: block;">⏳</span>
-                    <strong style="color: #facc15; font-size: 15px; display: block; margin-bottom: 6px;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
-                    <p style="font-size: 13px; margin: 10px auto; color: #cbd5e1; line-height: 1.5; max-width: 95%;">
+                <div class="error-box" style="background: #1e293b; border: 1px solid #eab308; color: #f8fafc; padding: 25px 20px;">
+                    <span style="font-size: 24px; margin-bottom: 12px; display: block;">⏳</span>
+                    <strong style="color: #facc15; font-size: 16px; display: block; margin-bottom: 8px;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
+                    <p style="font-size: 13.5px; margin: 12px auto; color: #cbd5e1; line-height: 1.6; max-width: 95%;">
                         ඔබ නොමිලේ භාවිතා කල සීමාව අවසන් වී ඇත. කරුණාකර පසුව නැවත උත්සාහ කරන්න.
                     </p>
-                    <div class="countdown-text">
+                    <div class="countdown-text" style="font-size: 12px; padding: 8px 18px; margin-top: 10px;">
                         තත්පර <span id="timer-count">${remaining}</span> කින් නැවත සක්‍රිය වේ...
                     </div>
                 </div>`;
@@ -512,7 +520,7 @@ Format your responses neatly with clear headings:
                 const timerElement = document.getElementById("timer-count");
                 if (remaining <= 0) {
                     clearInterval(countdownTimer);
-                    outputDiv.innerHTML = `<div class="loading" style="color: #4ade80; text-align: center; margin-top: 15px; font-weight: bold;">✅ සේවාව නැවත සක්‍රියයි. Translate බොත්තම ඔබන්න.</div>`;
+                    outputDiv.innerHTML = `<div class="loading" style="color: #4ade80; text-align: center; margin-top: 20px; font-weight: bold;">✅ සේවාව නැවත සක්‍රියයි. Translate බොත්තම ඔබන්න.</div>`;
                 } else {
                     if (timerElement) timerElement.innerText = remaining;
                 }
@@ -535,7 +543,7 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
-                // Gemini 3.6 අනුවාදය නිවැරදිව රඳවා ඇත
+                // Gemini 3.6 අනුවාදය රඳවා ඇත
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
                 const payload = {
                     contents: [{ role: "user", parts: [{ text: promptText }] }],
@@ -570,16 +578,35 @@ Format your responses neatly with clear headings:
             return { text: null, error: collectedErrors.join('\n') };
         }
 
-        function speakText(text) {
+        function speakBilingual(enText, siText) {
             if (!('speechSynthesis' in window)) {
-                alert("ඔබගේ Browser එකෙහි Voice පහසුකම සහය නොදක්වයි.");
+                alert("ඔබගේ Browser එකෙහි Voice/Speech පහසුකම සහය නොදක්වයි.");
                 return;
             }
+
             window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'en-US';
-            utterance.rate = 0.9;
-            window.speechSynthesis.speak(utterance);
+
+            if (enText) {
+                const enUtterance = new SpeechSynthesisUtterance(enText);
+                enUtterance.lang = 'en-US';
+                enUtterance.rate = 0.9;
+                
+                enUtterance.onend = () => {
+                    if (siText) {
+                        const siUtterance = new SpeechSynthesisUtterance(siText);
+                        siUtterance.lang = 'si-LK';
+                        siUtterance.rate = 0.95;
+                        window.speechSynthesis.speak(siUtterance);
+                    }
+                };
+
+                window.speechSynthesis.speak(enUtterance);
+            } else if (siText) {
+                const siUtterance = new SpeechSynthesisUtterance(siText);
+                siUtterance.lang = 'si-LK';
+                siUtterance.rate = 0.95;
+                window.speechSynthesis.speak(siUtterance);
+            }
         }
 
         function formatMarkdown(text) {
@@ -589,35 +616,48 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/^---$/gim, '');
 
-            // ප්‍රධාන පරිවර්තන පෙට්ටිය (වරහන් රහිතව සහ නිවැරදි ඉඩපරතරය සමඟ)
+            // ඉහළ ප්‍රධාන සුදු පැහැති පරිවර්තන පෙට්ටිය සඳහා පමණක් වරහන් ඉවත් කරනු ලැබේ
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
-                let cleanEn = enText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
-                let cleanSi = siText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
+                let cleanEn = enText.replace(/\*\*/g, '').trim();
+                let cleanSi = siText.replace(/\*\*/g, '').trim();
                 if (!cleanEn && !cleanSi) return "";
+                
+                let displayEn = cleanEn.replace(/[()]/g, '');
+                let displaySi = cleanSi.replace(/[()]/g, '');
 
                 let safeEn = cleanEn.replace(/'/g, "\\'");
+                let safeSi = cleanSi.replace(/'/g, "\\'");
 
-                return `
-                    <div class="main-translation-box">
-                        <div style="flex-grow: 1; min-width: 0;">
-                            <div style="color: #ffffff; font-size: 15px; font-weight: bold; margin-bottom: 3px; word-break: break-word;">${cleanEn}</div>
-                            <div style="color: #e2e8f0; font-size: 13.5px; line-height: 1.35; word-break: break-word;">${cleanSi}</div>
-                        </div>
-                        <button class="speak-btn" onclick="speakText('${safeEn}')" title="ශ්‍රවණය කරන්න">
-                            🔊
-                        </button>
+                return `<div class="main-translation-box">
+                    <div class="translation-content">
+                        <div class="lang-line english">🇬🇧 ${displayEn}</div>
+                        <div class="lang-line sinhala">🇱🇰 ${displaySi}</div>
                     </div>
-                `;
+                    <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
+                </div>`;
             });
 
-            // මාතෘකා කොටු හැඩතල ගැන්වීම සහ පරතරයන් දැඩි ලෙස අවම කිරීම
-            formatted = formatted.replace(/### (.*?)\n/g, '<span class="heading-highlight">$1</span>');
+            formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
+                let cleanTitle = title.replace(/\*\*/g, '').trim(); 
+                if (!cleanTitle) return "";
+                return `<span class="heading-highlight">${cleanTitle}</span>`;
+            });
+
+            formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*/gim, (match, title) => {
+                return `<span class="heading-highlight">${title.trim()}</span>`;
+            });
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            
-            // වැඩිපුර එකතු වන හිස් පේළි ඉවත් කිරීම
-            formatted = formatted.replace(/(<br>\s*){2,}/g, '<br>');
-            formatted = formatted.replace(/\n/g, '<br>');
+
+            formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
+            formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
+
+            formatted = formatted.split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .join('<br>');
+
+            formatted = formatted.replace(/<\/span><br>/g, '</span>');
 
             return formatted;
         }
@@ -645,12 +685,14 @@ Format your responses neatly with clear headings:
 
             translateBtn.disabled = true;
             translateBtn.style.opacity = "0.8";
+            translateBtn.style.cursor = "not-allowed";
             translateBtn.innerHTML = "↻ Please wait...";
 
-            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
+            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
 
             try {
                 const result = await askGemini(text);
+
                 if (result.text) {
                     localStorage.setItem(cacheKey, result.text);
                     outputDiv.innerHTML = formatMarkdown(result.text);
@@ -662,7 +704,8 @@ Format your responses neatly with clear headings:
             } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
-                translateBtn.innerHTML = "✨ Translate Now (පරිවර්තනය)";
+                translateBtn.style.cursor = "pointer";
+                translateBtn.innerHTML = "✨ Translate (පරිවර්තනය මෙතනින් සිදුකරන්න)";
             }
         };
     </script>
