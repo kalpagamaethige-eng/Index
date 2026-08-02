@@ -144,7 +144,7 @@
             border: 1px solid var(--border-color);
             padding: 14px;
             border-radius: 10px;
-            line-height: 1.5; /* ජේද අතර පරතරය පාලනය කිරීමට */
+            line-height: 1.5;
             font-size: 13.5px;
             color: #e2e8f0;
             flex: 1;
@@ -152,22 +152,22 @@
             max-height: 55vh;
         }
 
-        /* මාතෘකා කොටු අතර ඉඩ හැදීම දැඩි ලෙස පාලනය කිරීම */
+        /* මාතෘකා කොටු අතර ඉඩ හැදීම තවත් අවම කිරීම */
         .heading-highlight {
             display: block;
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: var(--accent-color);
-            padding: 8px 12px;
+            padding: 7px 10px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
             border-top: 1px solid var(--border-color);
             border-right: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
-            margin-top: 10px !important;   
-            margin-bottom: 4px !important; 
+            margin-top: 6px !important;   
+            margin-bottom: 2px !important; 
             font-weight: bold;
             font-size: 13.5px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .heading-highlight:first-child {
@@ -181,7 +181,7 @@
             color: #ffffff;
             padding: 12px 14px;
             border-radius: 10px;
-            margin: 6px 0 10px 0 !important;
+            margin: 4px 0 6px 0 !important;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
@@ -189,14 +189,15 @@
             gap: 12px;
         }
 
+        /* ස්පීකර් බොත්තම සහ ලාංඡනය හරියටම සෙන්ටර් කිරීම */
         .speak-btn {
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: 1px solid #38bdf8;
-            border-radius: 10px;
-            width: 40px;
-            height: 40px;
-            font-size: 17px;
+            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            font-size: 20px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -204,6 +205,9 @@
             flex-shrink: 0;
             box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
             transition: all 0.2s ease;
+            line-height: 1;
+            padding: 0;
+            text-align: center;
         }
 
         .speak-btn:hover {
@@ -273,7 +277,7 @@
             //📍API KEY  01 > ENCODE 👇
             "QVEuQWI4Uk42SnhMUGlHS1BrazljakE2ajNIaDhjT01lTXktMHlIeU5TZkZwZk5JWV9SaGcK",
             "CkFRLkFiOFJONktBTTQxUGkwem9XRXVHSHFRRlpkWmFBSlJiTzJyQVpRNnN2QWRxdkhyby1B",
-            "CkFRLkFiOFJONktGQWFNYkxRandEdjNKcHRMZld0a1pOZ2s2YXh4Qmo4amxkUGJTMHFVR29B",
+            "CkFRLkFiOFJONktGQWFNYkxRandEdjNKcHRMZld0a1pOZ2s2YXx4Qmo4amxkUGJTMHFVR29B",
             "QVEuQWI4Uk42TDhpcWxDa2JyY1lRZXNxdkFiOWI3bHhMSDBhcW1fdnJiX0F3SWdkMHNRencKCgo",
             "QVEuQWI4Uk42SzVMWHowWFJPMmtTbE9RTWZXa1hiQWZFMTBTa2l3Y0gwZUpSb1ZSSDlQTmcKCgoKCgo",
             "QVEuQWI4Uk42SW05ekNzNkhfanFsN19kR0Y3RUFLU2gwT05wWlA3UWl1TklyUFo0dXhCLWc",
@@ -584,7 +588,7 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/^---$/gim, '');
 
-            // ප්‍රධාන පරිවර්තන පෙට්ටිය (වරහන් රහිතව)
+            // ප්‍රධාන පරිවර්තන පෙට්ටිය (වරහන් රහිතව, ස්පීකර් බොත්තම හරියටම සෙන්ටර් කර ඇත)
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
                 let cleanEn = enText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
                 let cleanSi = siText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
@@ -605,7 +609,7 @@ Format your responses neatly with clear headings:
                 `;
             });
 
-            // මාතෘකා කොටු අතර පරතරය දැඩි ලෙස පාලනය කිරීම
+            // මාතෘකා කොටු හැඩතල ගැන්වීම සහ පරතරයන් අවම කිරීම
             formatted = formatted.replace(/### (.*?)\n/g, '<span class="heading-highlight">$1</span>');
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
