@@ -19,35 +19,30 @@
             --text-secondary: #94a3b8;
         }
 
-        /* මෙතැන් සිට Loading Spinner එකට මෙම අලුත් කොටස 47 වෙනි line එක දක්වා එකතු කරන ලදී */
-        
+        .spinner-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
+        }
 
-.spinner-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 10px;
-}
+        .spinner {
+            width: 32px;  
+            height: 32px; 
+            border: 4px solid rgba(255, 255, 255, 0.15); 
+            border-top: 4px solid var(--accent-color); 
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 15px; 
+            display: inline-block;
+        }
 
-.spinner {
-    width: 32px;  /* ප්‍රමාණය කුඩා කරන ලදී */
-    height: 32px; /* ප්‍රමාණය කුඩා කරන ලදී */
-    border: 4px solid rgba(255, 255, 255, 0.15); 
-    border-top: 4px solid var(--accent-color); 
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-top: 15px; /* අකුරුවලට පහළින් පරතරයක් ලබා දීමට margin-top භාවිත කර ඇත */
-    display: inline-block;
-}
-
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -154,7 +149,6 @@
             max-height: 50vh;
         }
 
-        /* 🌟 ප්‍රධාන මාතෘකා අතර කියවීමට පහසු වන සේ Spacing ඇතුළත් කිරීම */
         .heading-highlight {
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
@@ -162,8 +156,8 @@
             padding: 9px 13px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
-            margin-top: 24px;   /* මාතෘකාවට ඉහළින් පැහැදිලි ඉඩක් */
-            margin-bottom: 12px; /* මාතෘකාවට පහළින් ඉඩක් */
+            margin-top: 24px;   
+            margin-bottom: 12px; 
             font-weight: bold;
             font-size: 14px;
         }
@@ -172,7 +166,6 @@
             margin-top: 4px;
         }
 
-        /* 🌟 පරිවර්තනය සහ Speaker වැඩකරන Modern Tab Card එක */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #38bdf8;
@@ -280,7 +273,6 @@
     </div>
 
     <script>
-        // 🔑 401 Error එක වැළැක්වීමට 4 වන Key එක නිවැරදි කළ Base64 Keys 5
         const ENCODED_KEYS = [
             "QVEuQWI4Uk42S3VlcXNDajZ6cEFMM1BjNVVCT0xPWG9TM1FHclg1d3JlNDdOYWdyVjBqVFE",
             "QVEuQWI4Uk42TFVEeG1kNG5KZ3lvSkxzX1IzbmJxRVAxZm1VaGNQdkpyZ3NoUWFSSTFtRXc",
@@ -336,21 +328,19 @@ Format your responses neatly with clear headings:
 ### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples)
 ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
-            function startCountdown(fallbackSeconds, errorMessage) {
+        function startCountdown(fallbackSeconds, errorMessage) {
             const outputDiv = document.getElementById("output");
             let remaining = fallbackSeconds;
             
-            // API දෝෂයෙන් 'retry in X s' තත්පර ගණන ස්වයංක්‍රීයව වෙන්කර ගැනීම
             if (errorMessage) {
                 const timeMatch = errorMessage.match(/retry in ([\d\.]+)s/);
                 if (timeMatch && timeMatch[1]) {
-                    remaining = Math.ceil(parseFloat(timeMatch[1])); // දශම ගණන් වටයා ගැනීම
+                    remaining = Math.ceil(parseFloat(timeMatch[1])); 
                 }
             }
 
             if (countdownTimer) clearInterval(countdownTimer);
 
-            // පාරිභෝගිකයාට පෙන්වන ලස්සන කොටුව (රහස්‍ය Developer අයිකනය සහ PIN ආරක්ෂාව සහිතව)
             outputDiv.innerHTML = `
                 <div class="error-box" style="background: #1e293b; border: 1px solid #eab308; color: #f8fafc; text-align: center; padding: 20px;">
                     <span style="font-size: 32px; display: block; margin-bottom: 10px;">⏳</span>
@@ -364,7 +354,6 @@ Format your responses neatly with clear headings:
                         තත්පර <span id="timer-count">${remaining}</span> කින් නැවත සක්‍රිය වේ...
                     </div>
 
-                    <!-- නිර්මාණකරුට පමණක් බලාගැනීමට ඇති රහස් බොත්තම (PIN ආරක්ෂිත) -->
                     <div style="text-align: right; margin-top: 15px;">
                         <span onclick="var el=document.getElementById('dev-error-logs'); if(el.style.display === 'none') { var p = prompt('⚙️ Developer PIN එක ඇතුළත් කරන්න (රහස්‍ය අංකය 1979):'); if(p === '1979') { el.style.display = 'block'; } else if(p !== null) { alert('❌ මුරපදය වැරදියි!'); } } else { el.style.display = 'none'; }" 
                               style="cursor: pointer; opacity: 0.2; font-size: 14px; transition: opacity 0.3s;" 
@@ -372,13 +361,11 @@ Format your responses neatly with clear headings:
                               title="Kalpa's Developer Logs">⚙️</span>
                     </div>
                     
-                    <!-- Developer Logs (මුලින් සඟවා ඇත) -->
                     <div id="dev-error-logs" style="display: none; margin-top: 10px; padding: 10px; background: #000; border: 1px solid #450a0a; border-radius: 6px; font-size: 11px; color: #fca5a5; text-align: left; max-height: 150px; overflow-y: auto; white-space: pre-wrap;">
                         ${errorMessage}
                     </div>
                 </div>`;
 
-            // තත්පර ගණන අඩු කරමින් පෙන්වීම (setInterval)
             countdownTimer = setInterval(() => {
                 remaining--;
                 const timerElement = document.getElementById("timer-count");
@@ -411,7 +398,6 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
-                // 🌟 ඔබ ලබාදුන් සාර්ථක Endpoint එක: gemini-3.6-flash
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
@@ -468,7 +454,6 @@ Format your responses neatly with clear headings:
             return { text: null, error: collectedErrors.join('\n') };
         }
 
-        // 🔊 Text-To-Speech Function
         function speakBilingual(enText, siText) {
             if (!('speechSynthesis' in window)) {
                 alert("ඔබගේ Browser එකෙහි Voice/Speech පහසුකම සහය නොදක්වයි.");
@@ -500,7 +485,6 @@ Format your responses neatly with clear headings:
             }
         }
 
-        // 🧹 Formatter Function
         function formatMarkdown(text) {
             if (!text) return "";
 
@@ -568,10 +552,7 @@ Format your responses neatly with clear headings:
             translateBtn.style.cursor = "not-allowed";
             translateBtn.innerHTML = "↻ Please wait...";
 
-
-
-outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
-
+            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
 
             try {
                 const result = await askGemini(text);
@@ -581,14 +562,14 @@ outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.
                 } else {
                     startCountdown(60, result.error);
                 }
-                        } finally {
+            } catch (error) {
+                startCountdown(60, `Execution Exception: ${error.message}`);
+            } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
                 translateBtn.style.cursor = "pointer";
-                translateBtn.innerHTML = "✨ Translate (මෙතනින් පරිවර්තනය සිදුකරන්න)";
+                translateBtn.innerHTML = "✨ Translate (පරිවර්තනය මෙතනින් සිදුකරන්න)";
             }
-
-    
         };
     </script>
 </body>
