@@ -389,10 +389,10 @@ Format your responses neatly with clear headings:
                     <strong style="color: #facc15; font-size: 16px; display: block; margin-bottom: 8px;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
                     
                     <p style="font-size: 13.5px; margin: 12px auto; color: #cbd5e1; line-height: 1.6; max-width: 95%;">
-                        කරුණාකර පහත කාලය අවසන් වනතුරු රැඳී සිටින්න. නමුත් ඔබ මෙම සේවාව නොමිලේ භාවිතා කරන්නේ නම්, ඔබට එක් දිනක් තුළ ලබාගත හැකි පරිවර්තන ප්‍රමාණය පැය 24 ක් පමණ යන තුරු සීමා විය හැක. 
+                        කරුණාකර පහත කාලය අවසන් වනතුරු රැඳී සිටින්න. නමුත් ඔබ මෙම AI සේවාව නොමිලේ භාවිතා කරන්නේ නම්, ඔබට එක් දිනක් තුළ ලබාගත හැකි පරිවර්තන ප්‍රමාණය පැය 24 ක් දක්වා සීමා විය හැක. 
                     </p>
                     
-                    <div class="countdown-text" style="font-size: 15px; padding: 8px 18px; margin-top: 10px;">
+                    <div class="countdown-text" style="font-size: 12px; padding: 8px 18px; margin-top: 10px;">
                         තත්පර <span id="timer-count">${remaining}</span> කින් නැවත සක්‍රිය වේ...
                     </div>
 
@@ -415,7 +415,7 @@ Format your responses neatly with clear headings:
                 if (remaining <= 0) {
                     clearInterval(countdownTimer);
                     outputDiv.innerHTML = `<div class="loading" style="color: #4ade80; text-align: center; margin-top: 20px; font-weight: bold; background: #064e3b; padding: 15px; border-radius: 10px; border: 1px solid #10b981;">
-                        ✅ API සේවාව නැවත සක්‍රිය විය!<br><br>
+                        ✅ මෙම සේවාව නැවත සක්‍රිය විය!<br><br>
                         <span style="font-size: 13px; font-weight: normal; color: #a7f3d0;">කරුණාකර 'Translate' බොත්තම මත නැවත Click කරන්න.</span>
                     </div>`;
                 } else {
@@ -445,7 +445,7 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${currentApiKey}`;
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
 
                 const payload = {
                     contents: [{
