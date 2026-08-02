@@ -332,7 +332,6 @@ Format your responses neatly with clear headings:
             const outputDiv = document.getElementById("output");
             let remaining = fallbackSeconds;
             
-            // සැබෑ කාලයට තත්පර 5ක ආරක්ෂිත කාලයක් (buffer) එක් කිරීම
             if (errorMessage) {
                 const timeRegex = /retry in\s*([\d\.]+)/gi; 
                 let match;
@@ -351,20 +350,21 @@ Format your responses neatly with clear headings:
 
             if (countdownTimer) clearInterval(countdownTimer);
 
+            // මෙහි ඇති <p> ටැගය තුළ text-align: center සහ margin: 12px auto ලෙස යොදා සියලු අකුරු නිවැරදිව මධ්‍යගත කර ඇත
             outputDiv.innerHTML = `
                 <div class="error-box" style="background: #1e293b; border: 1px solid #eab308; color: #f8fafc; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 25px 20px;">
                     <span style="font-size: 36px; margin-bottom: 12px;">⏳</span>
-                    <strong style="color: #facc15; font-size: 16px;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
+                    <strong style="color: #facc15; font-size: 16px; text-align: center; width: 100%;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
                     
-                    <p style="font-size: 13.5px; margin: 12px 0; color: #cbd5e1; line-height: 1.6; max-width: 95%;">
+                    <p style="font-size: 13.5px; margin: 12px auto; color: #cbd5e1; line-height: 1.6; max-width: 95%; text-align: center !important;">
                         මෙම AI සේවාව නොමිලේ භාවිතා කරන බැවින්, එක්වරක් තුළ ලබාගත හැකි පරිවර්තන ප්‍රමාණය සීමා සහිත වේ. කරුණාකර පහත කාලය අවසන් වනතුරු රැඳී සිටින්න.
                     </p>
                     
-                    <div class="countdown-text" style="font-size: 15px; padding: 8px 18px; margin-top: 10px; display: inline-block;">
+                    <div class="countdown-text" style="font-size: 15px; padding: 8px 18px; margin-top: 10px; display: inline-block; text-align: center;">
                         තත්පර <span id="timer-count">${remaining}</span> කින් නැවත සක්‍රිය වේ...
                     </div>
 
-                    <div style="margin-top: 20px;">
+                    <div style="margin-top: 20px; text-align: center; width: 100%;">
                         <span onclick="var el=document.getElementById('dev-error-logs'); if(el.style.display === 'none') { var p = prompt('⚙️ Developer PIN එක ඇතුළත් කරන්න (රහස්‍ය අංකය 1979):'); if(p === '1979') { el.style.display = 'block'; } else if(p !== null) { alert('❌ මුරපදය වැරදියි!'); } } else { el.style.display = 'none'; }" 
                               style="cursor: pointer; opacity: 0.8; font-size: 28px; color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); display: inline-block; transition: all 0.3s ease;" 
                               onmouseover="this.style.opacity=1; this.style.transform='rotate(45deg) scale(1.1)';" onmouseout="this.style.opacity=0.8; this.style.transform='rotate(0deg) scale(1)';" 
