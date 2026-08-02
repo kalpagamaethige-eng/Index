@@ -32,17 +32,16 @@
 }
 
 .spinner {
-    width: 42px;
-    height: 42px;
-    /* ළා සුදු පාට පසුබිම් රවුමක් ලබා දීම (Dark background එකට කැපී පෙනීමට) */
+    width: 32px;  /* ප්‍රමාණය කුඩා කරන ලදී */
+    height: 32px; /* ප්‍රමාණය කුඩා කරන ලදී */
     border: 4px solid rgba(255, 255, 255, 0.15); 
-    /* කැරකෙන ප්‍රධාන කොටස ඔයාගේ Theme එකේ නිල් පාටින් */
     border-top: 4px solid var(--accent-color); 
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-bottom: 15px;
+    margin-top: 15px; /* අකුරුවලට පහළින් පරතරයක් ලබා දීමට margin-top භාවිත කර ඇත */
     display: inline-block;
 }
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -541,7 +540,7 @@ Format your responses neatly with clear headings:
 
 
 
-outputDiv.innerHTML = "<div class='spinner-container'><div class='spinner'></div><div>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div></div>";
+outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
 
 
             try {
