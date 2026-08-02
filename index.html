@@ -24,13 +24,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: 20px;
-            padding: 10px;
+            margin-top: 25px;
+            padding: 15px;
         }
 
         .spinner {
-            width: 32px;  
-            height: 32px; 
+            width: 36px;  
+            height: 36px; 
             border: 4px solid rgba(255, 255, 255, 0.15); 
             border-top: 4px solid var(--accent-color); 
             border-radius: 50%;
@@ -46,7 +46,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 12px;
+            padding: 14px;
             background: var(--bg-primary);
             color: var(--text-primary);
             max-width: 600px;
@@ -59,40 +59,40 @@
 
         .header-box {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             background: linear-gradient(135deg, #1e293b, #0f172a);
-            padding: 15px;
-            border-radius: 14px;
+            padding: 18px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
         }
 
         h1 {
             color: var(--accent-color);
-            margin: 0 0 5px 0;
-            font-size: 20px;
+            margin: 0 0 6px 0;
+            font-size: 21px;
         }
 
         .creator-tag {
             color: var(--accent-hover);
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 600;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             display: block;
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 11px;
+            font-size: 11.5px;
             margin: 0;
         }
 
         .container {
             background: var(--bg-card);
-            padding: 16px;
-            border-radius: 14px;
+            padding: 18px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -100,13 +100,13 @@
 
         textarea {
             width: 100%;
-            height: 110px;
+            height: 115px;
             background: var(--bg-primary);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 14px;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 14.5px;
             resize: none;
             box-sizing: border-box;
             word-spacing: -1px;
@@ -116,21 +116,22 @@
         textarea:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
         }
 
         button#translate {
             background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: white;
             border: none;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 10px;
+            padding: 13px;
+            margin-top: 12px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
             width: 100%;
-            font-size: 14px;
+            font-size: 15px;
             transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
         }
 
         button#translate:active {
@@ -138,49 +139,80 @@
         }
 
         #output {
-            margin-top: 15px;
+            margin-top: 18px;
             background: var(--bg-primary);
             border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: 10px;
-            line-height: 1.8;
-            font-size: 13.5px;
+            padding: 18px;
+            border-radius: 12px;
+            line-height: 1.9;
+            font-size: 14px;
             color: #e2e8f0;
             flex: 1;
             overflow-y: auto;
-            max-height: 50vh;
+            max-height: 55vh;
         }
 
         .heading-highlight {
             display: block;
-            background: linear-gradient(90deg, #1e293b, #0f172a);
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             color: var(--accent-color);
-            padding: 9px 13px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-hover);
-            margin-top: 24px;   
-            margin-bottom: 12px; 
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-hover);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            margin-top: 28px;   
+            margin-bottom: 14px; 
             font-weight: bold;
-            font-size: 14px;
+            font-size: 14.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .heading-highlight:first-child {
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #38bdf8;
-            border-left: 5px solid #0ea5e9;
+            border-left: 6px solid #0ea5e9;
             color: #ffffff;
-            padding: 14px 16px;
-            border-radius: 12px;
-            margin: 12px 0 20px 0;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+            padding: 16px 18px;
+            border-radius: 14px;
+            margin: 15px 0 22px 0;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+            gap: 15px;
+        }
+
+        .speak-btn {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            border: 1px solid #38bdf8;
+            border-radius: 12px;
+            width: 46px;
+            height: 46px;
+            font-size: 20px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .speak-btn:hover {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(56, 189, 248, 0.45);
+        }
+
+        .speak-btn:active {
+            transform: scale(0.95);
         }
 
         .loading {
@@ -194,9 +226,9 @@
             background: #450a0a;
             border: 1px solid #ef4444;
             color: #fca5a5;
-            padding: 16px;
-            border-radius: 8px;
-            font-size: 12.5px;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 13px;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
@@ -212,12 +244,12 @@
         .countdown-text {
             color: #facc15;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 14.5px;
             display: inline-block;
-            margin-top: 8px;
+            margin-top: 10px;
             background: #291805;
-            padding: 4px 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
             border: 1px solid #eab308;
             text-align: center !important;
         }
@@ -265,7 +297,7 @@
             "QVEuQWI4Uk42THhlWm5zb0JuTXgtTWNEdTFTeWlUUk50aFlDX0xZQTJsdFp0eXZCbUV5MncKCgoKCgoKCgoKCg",
             "QVEuQWI4Uk42TDBYb0xNdTFzbEV2Y1VpWEVhWTJacUViaklZdmZKRDNneks4eFdVMTZEZ3cKCgoKCgoKCgoK",
             "QVEuQWI4Uk42SlltSkRHdlhTaUllY3lwX3VIR292aS1lY081dnUwdGdOcWhfX3BhendaNWcKCgoKCgoKCgoK",
-            "QVEuQWI4Uk42STUyLUlIRTZfV1JJQm5jVHdmei1udWFwT0hwS01obGgxaDVPVzB1YlRmWHcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42STUyLUlIRTZfV1JJQm5jVHdmei1udWFwS0hwS01obGgxaDVPVzB1YlRmWHcKCgoKCgoKCgoK",
             "QVEuQWI4Uk42TFB5eTFtMnF6NnZwc1pWX0toaEd3MktKYTNENFc2U1NKdGo5NUQ4cXdpd0EK",
             "CkFRLkFiOFJONkxQeXkxbTJxejZ2cHNaVl9LaGhHdzJLSmEzRDRXNlNTSnRqOTVEOHF3aXdBCg",
             "QVEuQWI4Uk42SXRPQWY0ck9nbkFLWWh5aHJOQnZQcnMwaUVzd3hjeGNFdWkzM0ExWG1GMnc",
@@ -459,13 +491,13 @@ Format your responses neatly with clear headings:
             if (countdownTimer) clearInterval(countdownTimer);
 
             outputDiv.innerHTML = `
-                <div class="error-box" style="background: #1e293b; border: 1px solid #eab308; color: #f8fafc; padding: 25px 20px;">
-                    <span style="font-size: 24px; margin-bottom: 12px; display: block;">⏳</span>
+                <div class="error-box">
+                    <span style="font-size: 26px; margin-bottom: 12px; display: block;">⏳</span>
                     <strong style="color: #facc15; font-size: 16px; display: block; margin-bottom: 8px;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
                     <p style="font-size: 13.5px; margin: 12px auto; color: #cbd5e1; line-height: 1.6; max-width: 95%;">
                         ඔබ නොමිලේ භාවිතා කල සීමාව අවසන් වී ඇත. කරුණාකර පසුව නැවත උත්සාහ කරන්න.
                     </p>
-                    <div class="countdown-text" style="font-size: 12px; padding: 8px 18px; margin-top: 10px;">
+                    <div class="countdown-text">
                         තත්පර <span id="timer-count">${remaining}</span> කින් නැවත සක්‍රිය වේ...
                     </div>
                 </div>`;
@@ -498,7 +530,7 @@ Format your responses neatly with clear headings:
                     continue;
                 }
 
-                // මෙහි Gemini 3.6 අනුවාදය යොදා ඇත
+                // Gemini 3.6 අනුවාදය ලෙස තබා ඇත
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
                 const payload = {
                     contents: [{ role: "user", parts: [{ text: promptText }] }],
@@ -552,6 +584,7 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/^---$/gim, '');
 
+            // ප්‍රධාන පරිවර්තන පෙට්ටිය (සුදු පැහැති අකුරු, වරහන් ඉවත් කර ඇත)
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
                 let cleanEn = enText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
                 let cleanSi = siText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
@@ -562,17 +595,19 @@ Format your responses neatly with clear headings:
                 return `
                     <div class="main-translation-box">
                         <div style="flex-grow: 1;">
-                            <div style="color: #ffffff; font-size: 16px; font-weight: bold; margin-bottom: 6px;">${cleanEn}</div>
-                            <div style="color: #e2e8f0; font-size: 15px;">${cleanSi}</div>
+                            <div style="color: #ffffff; font-size: 16.5px; font-weight: bold; margin-bottom: 6px;">${cleanEn}</div>
+                            <div style="color: #e2e8f0; font-size: 15px; line-height: 1.6;">${cleanSi}</div>
                         </div>
-                        <button onclick="speakText('${safeEn}')" style="background: var(--accent-color); border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                        <button class="speak-btn" onclick="speakText('${safeEn}')" title="ශ්‍රවණය කරන්න">
                             🔊
                         </button>
                     </div>
                 `;
             });
 
-            formatted = formatted.replace(/### (.*?)\n/g, '<h3 style="color: var(--accent-color); margin-top: 15px; margin-bottom: 8px; font-size: 16px;">$1</h3>');
+            // මාතෘකා ලස්සන කොටු ලෙස හැඩතල ගැන්වීම
+            formatted = formatted.replace(/### (.*?)\n/g, '<span class="heading-highlight">$1</span>');
+
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             formatted = formatted.replace(/\n/g, '<br>');
 
@@ -596,7 +631,7 @@ Format your responses neatly with clear headings:
             const cachedResult = localStorage.getItem(cacheKey);
 
             if (cachedResult) {
-                outputDiv.innerHTML = formatMarkdown(cachedResult) + "<br><br><span style='font-size: 11px; color: var(--text-secondary); display: block; text-align: center;'>(⚡ මතකයෙන් ක්ෂණිකව ලබාගත් ප්‍රතිඵලයකි)</span>";
+                outputDiv.innerHTML = formatMarkdown(cachedResult) + "<br><br><span style='font-size: 11.5px; color: var(--text-secondary); display: block; text-align: center;'>(⚡ මතකයෙන් ක්ෂණිකව ලබාගත් ප්‍රතිඵලයකි)</span>";
                 return;
             }
 
