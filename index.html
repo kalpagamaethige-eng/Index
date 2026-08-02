@@ -674,7 +674,9 @@
             }
         }
 
-        function formatMarkdown(text) {
+
+
+            function formatMarkdown(text) {
             if (!text) return "";
 
             let formatted = text;
@@ -682,9 +684,25 @@
             formatted = formatted.replace(/^---$/gim, '');
 
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
-                let cleanEn = enText.replace(/\*\*/g, '').trim();
-                let cleanSi = siText.replace(/\*\*/g, '').trim();
+                // මෙහිදී සුදු පැහැති ප්‍රධාන පෙට්ටිය සඳහා පමණක් වරහන් ඉවත් කරනු ලැබේ
+                let cleanEn = enText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
+                let cleanSi = siText.replace(/\*\*/g, '').replace(/[()]/g, '').trim(); 
                 if (!cleanEn && !cleanSi) return "";
+
+                return `
+                    <div class="main-translation-box" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 12px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; gap: 15px;">
+                        <div style="flex-grow: 1;">
+                            <div style="color: #ffffff; font-size: 16px; font-weight: bold; margin-bottom: 6px;">${cleanEn}</div>
+                            <div style="color: #e2e8f0; font-size: 15px;">${cleanSi}</div>
+                        </div>
+                        <button onclick="speakText('${cleanEn.replace(/'/g, "\\'")}')" style="background: var(--accent-color); border: none; width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: white; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                            🔊
+                        </button>
+                    </div>
+                `;
+            });
+
+
                 
                 let safeEn = cleanEn.replace(/'/g, "\\'");
                 let safeSi = cleanSi.replace(/'/g, "\\'");
