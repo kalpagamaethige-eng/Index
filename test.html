@@ -336,33 +336,65 @@ Format your responses neatly with clear headings:
 ### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples)
 ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
-        function startCountdown(seconds, errorMessage) {
+            function startCountdown(fallbackSeconds, errorMessage) {
             const outputDiv = document.getElementById("output");
-            let remaining = seconds;
+            let remaining = fallbackSeconds;
+            
+            // API දෝෂයෙන් 'retry in X s' තත්පර ගණන ස්වයංක්‍රීයව වෙන්කර ගැනීම
+            if (errorMessage) {
+                const timeMatch = errorMessage.match(/retry in ([\d\.]+)s/);
+                if (timeMatch && timeMatch[1]) {
+                    remaining = Math.ceil(parseFloat(timeMatch[1])); // දශම ගණන් වටයා ගැනීම
+                }
+            }
 
             if (countdownTimer) clearInterval(countdownTimer);
 
-            function updateDisplay() {
-                outputDiv.innerHTML = `
-                    <div class="error-box">
-                        ⚠️ <strong>දෝෂයක් සිදුවී ඇත (Error Display):</strong>\n
-                        ${errorMessage}\n\n
-                        ⏳ <strong>නැවත සක්‍රිය වන වේලාව (Countdown):</strong><br>
-                        <span class="countdown-text">තත්පර ${remaining} කින් නැවත උත්සාහ කරන්න...</span>
-                    </div>`;
-            }
+            // පාරිභෝගිකයාට පෙන්වන ලස්සන කොටුව (රහස්‍ය Developer අයිකනය සහ PIN ආරක්ෂාව සහිතව)
+            outputDiv.innerHTML = `
+                <div class="error-box" style="background: #1e293b; border: 1px solid #eab308; color: #f8fafc; text-align: center; padding: 20px;">
+                    <span style="font-size: 32px; display: block; margin-bottom: 10px;">⏳</span>
+                    <strong style="color: #facc15; font-size: 16px;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
+                    
+                    <p style="font-size: 13.5px; margin: 12px 0; color: #cbd5e1; line-height: 1.6;">
+                        මෙම AI සේවාව නොමිලේ භාවිතා කරන බැවින්, එක්වරක් තුළ ලබාගත හැකි පරිවර්තන ප්‍රමාණය සීමා සහිත වේ. කරුණාකර පහත කාලය අවසන් වනතුරු රැඳී සිටින්න.
+                    </p>
+                    
+                    <div class="countdown-text" style="font-size: 15px; padding: 6px 15px; display: inline-block;">
+                        තත්පර <span id="timer-count">${remaining}</span> කින් නැවත සක්‍රිය වේ...
+                    </div>
 
-            updateDisplay();
+                    <!-- නිර්මාණකරුට පමණක් බලාගැනීමට ඇති රහස් බොත්තම (PIN ආරක්ෂිත) -->
+                    <div style="text-align: right; margin-top: 15px;">
+                        <span onclick="var el=document.getElementById('dev-error-logs'); if(el.style.display === 'none') { var p = prompt('⚙️ Developer PIN එක ඇතුළත් කරන්න (රහස්‍ය අංකය 1979):'); if(p === '1234') { el.style.display = 'block'; } else if(p !== null) { alert('❌ මුරපදය වැරදියි!'); } } else { el.style.display = 'none'; }" 
+                              style="cursor: pointer; opacity: 0.2; font-size: 14px; transition: opacity 0.3s;" 
+                              onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.2" 
+                              title="Kalpa's Developer Logs">⚙️</span>
+                    </div>
+                    
+                    <!-- Developer Logs (මුලින් සඟවා ඇත) -->
+                    <div id="dev-error-logs" style="display: none; margin-top: 10px; padding: 10px; background: #000; border: 1px solid #450a0a; border-radius: 6px; font-size: 11px; color: #fca5a5; text-align: left; max-height: 150px; overflow-y: auto; white-space: pre-wrap;">
+                        ${errorMessage}
+                    </div>
+                </div>`;
 
+            // තත්පර ගණන අඩු කරමින් පෙන්වීම (setInterval)
             countdownTimer = setInterval(() => {
                 remaining--;
+                const timerElement = document.getElementById("timer-count");
+                
                 if (remaining <= 0) {
                     clearInterval(countdownTimer);
-                    outputDiv.innerHTML = `<div class="loading" style="color: #4ade80;">✅ API එක නැවත සක්‍රිය විය! කරුණාකර 'Translate & Learn' මත නැවත Click කරන්න.</div>`;
+                    outputDiv.innerHTML = `<div class="loading" style="color: #4ade80; text-align: center; margin-top: 20px; font-weight: bold; background: #064e3b; padding: 15px; border-radius: 10px; border: 1px solid #10b981;">
+                        ✅ API සේවාව නැවත සක්‍රිය විය!<br><br>
+                        <span style="font-size: 13px; font-weight: normal; color: #a7f3d0;">කරුණාකර 'Translate' බොත්තම මත නැවත Click කරන්න.</span>
+                    </div>`;
                 } else {
-                    updateDisplay();
+                    if (timerElement) timerElement.innerText = remaining;
                 }
             }, 1000);
+        }
+
         }
 
         async function askGemini(promptText) {
