@@ -276,7 +276,7 @@
 
     <div class="container">
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I goes to school yesterday)..."></textarea>
-        <button id="translate">🔴 Translater (මෙතනින් පරිවර්තනය සිදුකරන්න)</button>
+        <button id="translate">✨ Translate (මෙතනින් පරිවර්තනය සිදුකරන්න)</button>
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
 
@@ -535,8 +535,10 @@ Format your responses neatly with clear headings:
             if (countdownTimer) clearInterval(countdownTimer);
 
             translateBtn.disabled = true;
-            translateBtn.style.opacity = "0.6";
+            translateBtn.style.opacity = "0.8";
             translateBtn.style.cursor = "not-allowed";
+            translateBtn.innerHTML = "↻ පිළිතුර සකස් වෙමින් පවති...";
+
 
 
 outputDiv.innerHTML = "<div class='spinner-container'><div class='spinner'></div><div>ගුරුවරයා පිළිතුරක් සකස් කරමින් පවති...</div></div>";
@@ -550,13 +552,14 @@ outputDiv.innerHTML = "<div class='spinner-container'><div class='spinner'></div
                 } else {
                     startCountdown(60, result.error);
                 }
-            } catch (error) {
-                startCountdown(60, `Execution Exception: ${error.message}`);
-            } finally {
+                        } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
                 translateBtn.style.cursor = "pointer";
+                translateBtn.innerHTML = "✨ Translate (මෙතනින් පරිවර්තනය සිදුකරන්න)";
             }
+
+    
         };
     </script>
 </body>
