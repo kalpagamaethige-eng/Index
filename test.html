@@ -46,6 +46,11 @@
     100% { transform: rotate(360deg); }
 }
 
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -535,9 +540,7 @@ Format your responses neatly with clear headings:
             translateBtn.style.opacity = "0.6";
             translateBtn.style.cursor = "not-allowed";
 
-    
-            outputDiv.innerHTML = "<div class='spinner-container'><div>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
-
+    outputDiv.innerHTML = "<div class='spinner-container'><div>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
 
 
             try {
