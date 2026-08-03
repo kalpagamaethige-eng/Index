@@ -34,7 +34,6 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* 📌 මුල් ප්‍රමාණයෙන්ම සහ පෙනුමෙන්ම ඇති Header Box එක */
         .header-box {
             text-align: center; margin-bottom: 15px; background: linear-gradient(135deg, var(--bg-card), var(--bg-primary));
             padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -44,16 +43,16 @@
         .creator-tag { color: var(--accent-hover); font-size: 12px; font-weight: 600; margin-bottom: 3px; display: block; }
         .subtitle { color: var(--text-secondary); font-size: 11px; margin: 0; }
 
-        /* ☀️ දවල්/රෑ වෙනස් කරන බොත්තම අකුරු නොකැපෙන සේ ඉහළ දකුණු කෙළවරේ සකසා ඇත */
+        /* 📌 Header එක තුළ ඉහළ දකුණු කෙළවරේ සකස් කළ හතරැස් Theme Toggle බොත්තම (ඇස නොගැටෙන සේ මෘදු ස්වරූපයෙන්) */
         #theme-toggle {
             position: absolute; top: 12px; right: 12px;
-            background: var(--bg-primary); border: 1px solid var(--border-color);
-            color: var(--accent-color); width: 36px; height: 36px;
-            border-radius: 50%; cursor: pointer; font-size: 18px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            color: var(--text-secondary); width: 34px; height: 34px;
+            border-radius: 8px; cursor: pointer; font-size: 16px;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.2s; z-index: 10;
         }
-        #theme-toggle:hover { transform: scale(1.1); background: var(--accent-color); color: white; }
+        #theme-toggle:hover { background: var(--border-color); color: var(--text-primary); }
 
         .container { background: var(--bg-card); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 1; display: flex; flex-direction: column; transition: background 0.3s; }
         
@@ -64,7 +63,6 @@
         }
         textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15); }
 
-        /* 🎯 පරිවර්තන බොත්තම සහ දෙපැත්තේ හතරැස් බටන් සඳහා Flex පේළිය */
         .action-row {
             display: flex;
             gap: 8px;
@@ -72,16 +70,16 @@
             align-items: center;
         }
 
-        /* වම් සහ දකුණු පැත්තේ හතරැස් අයිකන් බොත්තම් (Settings & Advanced) */
+        /* 🎯 දෙපැත්තේ හතරැස් බටන් (ඇස වැඩිපුර නොඇදී, මෘදු පෙනුමකින් යුක්ත වන සේ සකසා ඇත) */
         .side-square-btn {
-            background: var(--bg-primary);
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
-            color: var(--accent-color);
+            color: var(--text-secondary);
             width: 48px;
             height: 48px;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -89,12 +87,11 @@
             transition: all 0.2s;
         }
         .side-square-btn:hover {
-            background: var(--accent-color);
-            color: white;
-            transform: scale(1.05);
+            background: var(--border-color);
+            color: var(--text-primary);
         }
 
-        /* මැද පිහිටි ප්‍රධාන පරිවර්තන බොත්තම */
+        /* ප්‍රධාන පරිවර්තන බොත්තම (වැඩි අවධානයක් යොමුවන සේ) */
         button#translate {
             background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
             color: white; border: none; padding: 0 12px; height: 48px;
@@ -128,7 +125,7 @@
 </head>
 <body>
     <div class="header-box">
-        <!-- ☀️ දවල්/රෑ වෙනස් කරන බොත්තම -->
+        <!-- ☀️ ඉහළ දකුණු කෙළවරේ ඇති හතරැස් Theme Toggle බොත්තම (මෘදු පෙනුමෙන්) -->
         <button id="theme-toggle" title="Theme මාරු කරන්න">🌙</button>
 
         <span class="creator-tag">Created by Kalpa Gamaethige</span>
@@ -139,7 +136,7 @@
     <div class="container">
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I go to school yesterday)..."></textarea>
         
-        <!-- 🎛️ පරිවර්තන බොත්තම සහ දෙපැත්තේ හතරැස් බටන් පේළිය -->
+        <!-- 🎛️ පරිවර්තන බොත්තම සහ දෙපැත්තේ හතරැස් මෘදු බටන් පේළිය -->
         <div class="action-row">
             <button class="side-square-btn" id="settings-btn" title="Settings (සැකසුම්)">⚙️</button>
             <button id="translate">✨ Translate Now (පරිවර්තනය)</button>
@@ -164,12 +161,10 @@
             localStorage.setItem('theme', theme);
         });
 
-        // ⚙️ Settings බටන් එක ක්ලික් කළ විට
         document.getElementById('settings-btn').addEventListener('click', () => {
             alert("⚙️ Settings මෙනුව මෙහි ක්‍රියාත්මක කළ හැක.");
         });
 
-        // 🚀 Advanced බටන් එක ක්ලික් කළ විට
         document.getElementById('advanced-btn').addEventListener('click', () => {
             alert("🚀 Advanced පිටු වෙත පිවිසීම මෙහි ක්‍රියාත්මක කළ හැක.");
         });
