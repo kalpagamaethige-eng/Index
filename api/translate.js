@@ -9,7 +9,6 @@ export default async function handler(req, res) {
   const { prompt } = req.body;
   if (!prompt) return res.status(400).json({ error: 'Prompt is required' });
 
-  // නිෂ්පාදකයාගේ රහස් අංකය පරීක්ෂා කිරීම (Admin Secret Header)
   const clientSecret = req.headers['x-admin-secret'];
   const serverSecret = process.env.ADMIN_SECRET || 'kalpa123'; 
   const isAdmin = clientSecret === serverSecret;
@@ -21,7 +20,6 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Error: GEMINI_API_KEYS not found in Environment Variables' });
   }
 
-  // Model ලැයිස්තුව (ඉහළ සිට පහළට)
   const MODELS = [
     'gemini-3.6-flash',
     'gemini-3.5-flash',
@@ -33,12 +31,10 @@ export default async function handler(req, res) {
   let randomKeyIndex = Math.floor(Math.random() * API_KEYS.length);
   let errorLogs = [];
 
-  // 1. ප්‍රධාන ලූපය: Model එකින් එක මාරු වන්නේ ඉහත සියලුම Keys අසාර්ථක වුවහොත් පමණි
   for (const modelName of MODELS) {
-    
-    // 2. අදාළ Model එක යටතේ ඇති සෑම API Key එකක්ම එකින් එක පරීක්ෂා කරයි
     for (let i = 0; i < API_KEYS.length; i++) {
-      const currentKey = API_KEYS[(randomKeyIndex + i) % API_KEYS.length];
+      const currentKeyIndex = (randomKeyIndex + i) % API_KEYS.length;
+      const currentKey = API_KEYS[currentKeyIndex];
       
       try {
         const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${currentKey}`, {
@@ -52,12 +48,17 @@ export default async function handler(req, res) {
         
         const data = await geminiRes.json();
         
-        // සාර්ථක ප්‍රතිචාරයක් ලැබුනොත් වහාම එය ආපසු යවයි
         if (geminiRes.ok && data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+          // ආරක්ෂාව සඳහා API Key එකේ මුල් අකුරු කිහිපයක් සහ අග අකුරු පමණක් පෙන්වීම (Masking)
+          const maskedKey = currentKey.length > 8 
+            ? currentKey.substring(0, 4) + "..." + currentKey.substring(currentKey.length - 4) 
+            : "********";
+
           return res.status(200).json({
             ...data,
             _debugInfo: isAdmin ? {
               activeModel: modelName,
+              maskedKey: `Key #${currentKeyIndex + 1} (${maskedKey})`,
               fallbackOccurred: modelName !== MODELS[0],
               errorsEncountered: errorLogs
             } : undefined
@@ -65,7 +66,7 @@ export default async function handler(req, res) {
         }
         
         let errReason = data.error?.message || 'Unknown error';
-        errorLogs.push(`Model: ${modelName} | KeyIndex: ${(randomKeyIndex + i) % API_KEYS.length} | Error: ${errReason}`);
+        errorLogs.push(`Model: ${modelName} | Key #${currentKeyIndex + 1} | Error: ${errReason}`);
         
       } catch (error) {
         errorLogs.push(`Model: ${modelName} | Exception: ${error.message}`);
@@ -73,7 +74,6 @@ export default async function handler(req, res) {
     }
   }
   
-  // සියලුම Models සහ සියලුම Keys අසාර්ථක වූ විට පමණක් මෙය ක්‍රියාත්මක වේ
   return res.status(429).json({ 
     error: "සියලුම API Models සහ Keys වල සීමාවන් ඉක්මවා ගොස් ඇත.",
     _debugInfo: isAdmin ? { errorsEncountered: errorLogs } : undefined
