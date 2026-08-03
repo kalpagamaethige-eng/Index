@@ -15,43 +15,43 @@
             --text-primary: #f8fafc; --text-secondary: #94a3b8;
         }
         body.light-mode {
-            --bg-primary: #f1f5f9; --bg-card: #ffffff; --border-color: #cbd5e1;
+            --bg-primary: #e2e8f0; --bg-card: #ffffff; --border-color: #475569;
             --accent-color: #0284c7; --accent-hover: #0369a1;
-            --text-primary: #0f172a; --text-secondary: #475569;
+            --text-primary: #0f172a; --text-secondary: #334155;
         }
 
-        /* ☀️ Light Mode එකේදී Header සහ Container එක පරිවර්තන බටන් එකේ නිල් පැහැයට හැරවීම */
+        /* ☀️ Light Mode සඳහා විශේෂිත වර්ණ සැකසුම් */
+        body.light-mode {
+            background: #e2e8f0; /* තවත් ටිකක් ලා අළු පැහැති පසුබිම */
+        }
+
         body.light-mode .header-box {
             background: linear-gradient(135deg, #0284c7, #0369a1);
             border-color: #0284c7;
         }
-        body.light-mode .header-box h1 {
-            color: #ffffff;
-        }
-        body.light-mode .header-box .creator-tag {
-            color: #e0f2fe;
-        }
-        body.light-mode .header-box .subtitle {
-            color: #e0f2fe;
-        }
+        body.light-mode .header-box h1 { color: #ffffff; }
+        body.light-mode .header-box .creator-tag { color: #e0f2fe; }
+        body.light-mode .header-box .subtitle { color: #e0f2fe; }
 
+        /* පරිවර්තන පෙට්ටිය වටේ කොටස තද අළු පැහැයට හැරවීම */
         body.light-mode .container {
             background: #ffffff;
-            border-color: #0284c7;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+            border-color: #475569;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         body.light-mode textarea {
             background: #f8fafc;
             border-color: #cbd5e1;
         }
-        /* ☀️ Light Mode එකේදී දෙපස ඇති හතරැස් බටන් තරමක් අඳුරු පැහැයකට හැරවීම */
+
+        /* දෙපස ඇති හතරැස් බටන් තද අළු පැහැයට හැරවීම */
         body.light-mode .side-square-btn {
-            background: #e2e8f0;
-            border-color: #cbd5e1;
-            color: #334155;
+            background: #475569;
+            border-color: #334155;
+            color: #ffffff;
         }
         body.light-mode .side-square-btn:hover {
-            background: #cbd5e1;
+            background: #334155;
         }
 
         body.light-mode .lang-line { color: #0f172a; }
