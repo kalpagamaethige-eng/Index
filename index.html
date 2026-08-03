@@ -150,38 +150,30 @@
         }
 
         .heading-highlight {
-            display: flex;
-            flex-direction: column;
+            display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
             padding: 9px 13px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
-            margin-top: 10px;   
+            margin-top: 16px;   
             margin-bottom: 8px; 
             font-weight: bold;
             font-size: 14px;
         }
 
-        .heading-highlight span.sub-title-en {
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-weight: normal;
-            margin-top: 2px;
-        }
-
         .heading-highlight:first-child {
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid rgba(255, 255, 255, 0.7);
-            border-left: 5px solid rgba(255, 255, 255, 0.9);
-            color: rgba(255, 255, 255, 0.85);
+            border: 1px solid #38bdf8;
+            border-left: 5px solid #0ea5e9;
+            color: #ffffff;
             padding: 14px 16px;
             border-radius: 12px;
-            margin: 8px 0 12px 0;
+            margin: 12px 0 20px 0;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
             display: flex;
             align-items: center;
@@ -200,20 +192,12 @@
             font-size: 14.5px;
             font-weight: 600;
             line-height: 1.4;
-            color: rgba(248, 250, 252, 0.9);
+            color: #f8fafc;
         }
 
         .lang-line.sinhala {
             color: #38bdf8;
             font-size: 14px;
-        }
-
-        .verb-underline {
-            text-decoration: underline;
-            text-decoration-color: #facc15;
-            text-underline-offset: 3px;
-            color: #facc15;
-            font-weight: bold;
         }
 
         .speak-btn {
@@ -656,7 +640,7 @@ Format your responses neatly with clear headings:
                 </div>`;
             });
 
-            // මාතෘකා දෙකඩ කර (ඉංග්‍රීසි අර්ථය පහළ පේළියට ගෙන යාම) හැඩතල ගැන්වීම
+            // මාතෘකා දෙකඩ කර (සිංහල නම ඉහළින් සහ ඉංග්‍රීසි නම යටින්) පෙන්වීම
             formatted = formatted.replace(/(?:###|##)\s*(.*?)\s*\((.*?)\)/gim, (match, siTitle, enTitle) => {
                 return `<span class="heading-highlight">${siTitle.trim()}<span class="sub-title-en">${enTitle.trim()}</span></span>`;
             });
@@ -673,6 +657,11 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*/gim, (match, title) => {
                 return `<span class="heading-highlight">${title.trim()}</span>`;
+            });
+
+            // වාක්‍යයේ කාලය යටතේ එන ඉංග්‍රීසි සහ සිංහල කාල නාමයන් නිවැරදිව පෙන්වීම
+            formatted = formatted.replace(/-\s*\((.*?)\/(.*?)\)/gim, (match, enTense, siTense) => {
+                return `- <strong>${enTense.trim()}</strong> (${siTense.trim()})`;
             });
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
