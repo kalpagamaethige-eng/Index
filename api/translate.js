@@ -30,6 +30,7 @@ export default async function handler(req, res) {
 
   let randomKeyIndex = Math.floor(Math.random() * API_KEYS.length);
   let errorLogs = [];
+  let deadKeys = new Set();
 
   for (const modelName of MODELS) {
     for (let i = 0; i < API_KEYS.length; i++) {
@@ -49,7 +50,6 @@ export default async function handler(req, res) {
         const data = await geminiRes.json();
         
         if (geminiRes.ok && data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-          // ආරක්ෂාව සඳහා API Key එකේ මුල් අකුරු කිහිපයක් සහ අග අකුරු පමණක් පෙන්වීම (Masking)
           const maskedKey = currentKey.length > 8 
             ? currentKey.substring(0, 4) + "..." + currentKey.substring(currentKey.length - 4) 
             : "********";
@@ -58,7 +58,9 @@ export default async function handler(req, res) {
             ...data,
             _debugInfo: isAdmin ? {
               activeModel: modelName,
-              maskedKey: `Key #${currentKeyIndex + 1} (${maskedKey})`,
+              keyStatus: `Key #${currentKeyIndex + 1} of ${API_KEYS.length} (${maskedKey})`,
+              deadKeysCount: deadKeys.size,
+              deadKeysList: Array.from(deadKeys),
               fallbackOccurred: modelName !== MODELS[0],
               errorsEncountered: errorLogs
             } : undefined
@@ -66,6 +68,10 @@ export default async function handler(req, res) {
         }
         
         let errReason = data.error?.message || 'Unknown error';
+        if (geminiRes.status === 429 || geminiRes.status === 400 || errReason.includes('API key not valid')) {
+          deadKeys.add(`Key #${currentKeyIndex + 1}`);
+        }
+
         errorLogs.push(`Model: ${modelName} | Key #${currentKeyIndex + 1} | Error: ${errReason}`);
         
       } catch (error) {
@@ -76,6 +82,10 @@ export default async function handler(req, res) {
   
   return res.status(429).json({ 
     error: "සියලුම API Models සහ Keys වල සීමාවන් ඉක්මවා ගොස් ඇත.",
-    _debugInfo: isAdmin ? { errorsEncountered: errorLogs } : undefined
+    _debugInfo: isAdmin ? { 
+      deadKeysCount: deadKeys.size,
+      deadKeysList: Array.from(deadKeys),
+      errorsEncountered: errorLogs 
+    } : undefined
   });
 }
