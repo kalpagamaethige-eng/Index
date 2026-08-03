@@ -150,35 +150,27 @@
         }
 
         .heading-highlight {
-            display: flex;
-            flex-direction: column;
+            display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
-            padding: 9px 13px;
+            padding: 7px 11px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
-            margin-top: 14px;   
-            margin-bottom: 8px; 
+            margin-top: 12px;   
+            margin-bottom: 6px; 
             font-weight: bold;
             font-size: 14px;
         }
 
-        .heading-highlight span.sub-title-en {
-            font-size: 12px;
-            color: var(--text-secondary);
-            font-weight: normal;
+        .heading-highlight:first-child {
             margin-top: 2px;
         }
 
-        .heading-highlight:first-child {
-            margin-top: 4px;
-        }
-
-        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන කොටුවේ වටේ රාමුව කහ පැහැයෙන් පෙන්වීම */
+        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පෙට්ටියේ රාමුව සුදු පැහැයට හරවා ඇත */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #eab308;
-            border-left: 5px solid #eab308;
+            border: 1px solid #ffffff;
+            border-left: 5px solid #ffffff;
             color: #ffffff;
             padding: 14px 16px;
             border-radius: 12px;
@@ -207,33 +199,6 @@
         .lang-line.sinhala {
             color: #38bdf8;
             font-size: 14px;
-        }
-
-        /* ලැයිස්තු අයිතම සඳහා විශාල තිත් ලකුණක් (•) යෙදීම */
-        .output-bullet {
-            display: inline-block;
-            font-weight: bold;
-            font-size: 16px;
-            color: var(--accent-color);
-            margin-right: 6px;
-        }
-
-        /* ඉංග්‍රීසි සහ සිංහල අර්ථ වෙනම පේළිවලට පෙන්වීම සඳහා */
-        .bilingual-row {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 8px;
-        }
-
-        .bilingual-en {
-            font-weight: 600;
-            color: #f8fafc;
-        }
-
-        .bilingual-si {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 2px;
         }
 
         .speak-btn {
@@ -488,7 +453,6 @@
             }
         }
 
-        // ඉතාම පිරිසිදු සහ ස්ථාවර systemPrompt එක (වාක්‍යයේ කාලය සහ උදාහරණ 5ක් ඇතුළත් කර ඇත)
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
 1. Translate English ↔ Sinhala accurately.
@@ -645,8 +609,7 @@ Format your responses neatly with clear headings:
             }
         }
 
-        // ඔබ දුන් මුල්ම, ඉතාමත් ස්ථාවර සහ පිරිසිදු formatMarkdown ක්‍රමය මෙහි යොදා ඇත.
-        // කිසිදු විකෘති වීමක් සිදු නොවී Layout එක නියමිත පරිදි පෙන්වනු ඇත.
+        // ඉතාමත් පිරිසිදු සහ ස්ථාවර මූලික formatMarkdown ක්‍රමය මත - වෙනුවට ඩොට් (•) සලකුණ යොදා ඇත
         function formatMarkdown(text) {
             if (!text) return "";
 
@@ -683,8 +646,8 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-            formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
-            formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
+            // (-) ලකුණ වෙනුවට ඩොට් සලකුණ (•) යෙදීම
+            formatted = formatted.replace(/^\s*-\s+/gim, '• ');
 
             formatted = formatted.split('\n')
                 .map(line => line.trim())
