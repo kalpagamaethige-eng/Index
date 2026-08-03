@@ -75,13 +75,45 @@
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
         /* Action Row */
-        .action-row { display: flex; gap: 6px; margin-top: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
-        .side-square-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-secondary); width: 42px; height: 48px; border-radius: 10px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
-        .side-square-btn:hover { background: var(--border-color); color: var(--text-primary); }
-        .side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
+.action-row { 
+    display: flex; 
+    flex-direction: column; /* උඩ යටට */
+    gap: 10px; 
+    margin-top: 10px; 
+    align-items: center; 
+}
 
-        button#translate { background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; padding: 0 12px; height: 48px; border-radius: 10px; cursor: pointer; font-weight: bold; flex: 1; min-width: 130px; font-size: 14px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        button#translate:active { transform: scale(0.98); }
+.top-buttons {
+    display: flex;
+    gap: 6px;
+    justify-content: center; /* මැදට */
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; }
+.side-square-btn:hover { background: var(--bg-hover); }
+.side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
+
+button#translate { 
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); 
+    color: white; 
+    border: none; 
+    padding: 0 12px; 
+    height: 48px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    width: 100%; /* පළලට */
+    max-width: 400px;
+    font-size: 15px; 
+    transition: all 0.2s; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+}
+button#translate:active { transform: scale(0.98); }
 
         #output { margin-top: 15px; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 16px; border-radius: 10px; line-height: 1.8; font-size: 13.5px; color: var(--text-primary); flex: 1; overflow-y: auto; max-height: 50vh; transition: background 0.3s, color 0.3s, border 0.3s; }
         .heading-highlight { display: block; background: linear-gradient(90deg, var(--bg-card), var(--bg-primary)); color: var(--accent-color); padding: 9px 13px; border-radius: 8px; border-left: 4px solid var(--accent-hover); margin-top: 14px; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
