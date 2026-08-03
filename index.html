@@ -153,20 +153,21 @@
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
-            padding: 7px 11px;
+            padding: 9px 13px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
-            margin-top: 12px;   
-            margin-bottom: 6px; 
+            margin-top: 14px;   
+            margin-bottom: 8px; 
             font-weight: bold;
             font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .heading-highlight:first-child {
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
-        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පෙට්ටියේ රාමුව සුදු පැහැයට හරවා ඇත */
+        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පෙට්ටියේ රාමුව සුදු පැහැයෙන් පෙන්වීම */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #ffffff;
@@ -199,6 +200,15 @@
         .lang-line.sinhala {
             color: #38bdf8;
             font-size: 14px;
+        }
+
+        /* විශාල කරන ලද ඩොට් සලකුණ සඳහා අලංකාර ස්ට්රයිල් එකක් */
+        .bullet-dot {
+            color: var(--accent-color);
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 6px;
+            display: inline-block;
         }
 
         .speak-btn {
@@ -458,7 +468,7 @@ Your responsibilities:
 1. Translate English ↔ Sinhala accurately.
 2. Identify and state the Tense of the sentence clearly (e.g., Present Simple Tense / සරල වර්තමාන කාලය).
 3. Correct grammar mistakes and awkward phrasing in the user's input.
-4. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT].
+4. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT] (Do NOT use brackets [] around the text in the main translation).
 5. Break down sentence structure clearly (Identify: Subject / උක්තය, Verb / ක්‍රියාපදය, Object / කර්මය, Modifiers/Other / වෙනත් කොටස්).
 6. If the input is a question, answer the underlying query clearly with key information and explanatory points in Sinhala.
 7. Provide multiple alternative meanings or contexts if a single word or phrase has multiple senses.
@@ -467,7 +477,7 @@ Your responsibilities:
 
 Format your responses neatly with clear headings:
 ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation)
-[EN_TEXT] || [SI_TEXT]
+EN_TEXT || SI_TEXT
 
 ### ⏰ වාක්‍යයේ කාලය
 - (උදා: Past Simple Tense / සරල අතීත කාලය)
@@ -609,7 +619,6 @@ Format your responses neatly with clear headings:
             }
         }
 
-        // ඉතාමත් පිරිසිදු සහ ස්ථාවර මූලික formatMarkdown ක්‍රමය මත - වෙනුවට ඩොට් (•) සලකුණ යොදා ඇත
         function formatMarkdown(text) {
             if (!text) return "";
 
@@ -617,9 +626,10 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/^---$/gim, '');
 
+            // ස්පීකර් පෙට්ටියේ කිසිදු [ ] වරහනක් නොපෙන්වන සේ පිරිසිදු කිරීම
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
-                let cleanEn = enText.replace(/\*\*/g, '').trim();
-                let cleanSi = siText.replace(/\*\*/g, '').trim();
+                let cleanEn = enText.replace(/\*\*/g, '').replace(/[\[\]()]/g, '').trim();
+                let cleanSi = siText.replace(/\*\*/g, '').replace(/[\[\]()]/g, '').trim();
                 if (!cleanEn && !cleanSi) return "";
                 
                 let safeEn = cleanEn.replace(/'/g, "\\'");
@@ -646,7 +656,7 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-            // (-) ලකුණ වෙනුවට ඩොට් සලකුණ (•) යෙදීම
+            // වාක්‍ය මුල ඇති (-) සලකුණු ඉවත් කර ඒ වෙනුවට ඩොට් සලකුණ (•) යෙදීම
             formatted = formatted.replace(/^\s*-\s+/gim, '• ');
 
             formatted = formatted.split('\n')
