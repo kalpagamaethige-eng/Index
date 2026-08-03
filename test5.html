@@ -20,17 +20,28 @@
             --text-primary: #0f172a; --text-secondary: #475569;
         }
 
-        /* ☀️ Light Mode එකේදී Header සහ Container සඳහා විශේෂ අඳුරු/මෘදු තද පැහැ හයිලට් කිරීම */
+        /* ☀️ Light Mode එකේදී Header සහ Container එක පරිවර්තන බටන් එකේ නිල් පැහැයට හැරවීම */
         body.light-mode .header-box {
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-            border-color: #94a3b8;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-color: #0284c7;
         }
+        body.light-mode .header-box h1 {
+            color: #ffffff;
+        }
+        body.light-mode .header-box .creator-tag {
+            color: #e0f2fe;
+        }
+        body.light-mode .header-box .subtitle {
+            color: #e0f2fe;
+        }
+
         body.light-mode .container {
-            background: #f8fafc;
-            border-color: #cbd5e1;
+            background: #ffffff;
+            border-color: #0284c7;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
         }
         body.light-mode textarea {
-            background: #ffffff;
+            background: #f8fafc;
             border-color: #cbd5e1;
         }
         /* ☀️ Light Mode එකේදී දෙපස ඇති හතරැස් බටන් තරමක් අඳුරු පැහැයකට හැරවීම */
