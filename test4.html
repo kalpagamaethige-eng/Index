@@ -149,28 +149,29 @@
             max-height: 50vh;
         }
 
-        /* වාක්‍යයේ කාලය ඇතුළු මාතෘකා කොටු වල ඉහළ සහ පහළ හිස් ඉඩ බාගයකින් (50%) අඩු කර ඇත */
         .heading-highlight {
             display: block;
             background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
-            padding: 7px 11px;
+            padding: 9px 13px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
-            margin-top: 12px;   
-            margin-bottom: 6px; 
+            margin-top: 14px;   
+            margin-bottom: 8px; 
             font-weight: bold;
             font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .heading-highlight:first-child {
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
+        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පෙට්ටියේ රාමුව සුදු පැහැයෙන් පෙන්වීම */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #38bdf8;
-            border-left: 5px solid #0ea5e9;
+            border: 1px solid #ffffff;
+            border-left: 5px solid #ffffff;
             color: #ffffff;
             padding: 14px 16px;
             border-radius: 12px;
@@ -196,8 +197,9 @@
             color: #f8fafc;
         }
 
+        /* පරිවර්තන පෙට්ටියේ දෙවන වගන්තිය (සිංහල) කහ පැහැයෙන් පෙන්වීම */
         .lang-line.sinhala {
-            color: #38bdf8;
+            color: #fef08a;
             font-size: 14px;
         }
 
@@ -453,23 +455,24 @@
             }
         }
 
+        // ප්‍රධාන මාතෘකා වලට ගැලපෙන අයුරින් ඉමෝජි ඇතුළත් කර යාවත්කාලීන කළ systemPrompt එක
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
 1. Translate English ↔ Sinhala accurately.
-2. Identify and state the Tense of the sentence clearly (e.g., Present Simple, Past Continuous, Future Perfect, etc.) along with its Sinhala grammatical equivalent.
+2. Identify and state the Tense of the sentence clearly (e.g., Present Simple Tense / සරල වර්තමාන කාලය).
 3. Correct grammar mistakes and awkward phrasing in the user's input.
-4. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT].
+4. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT] (Do NOT use brackets [] around the text).
 5. Break down sentence structure clearly (Identify: Subject / උක්තය, Verb / ක්‍රියාපදය, Object / කර්මය, Modifiers/Other / වෙනත් කොටස්).
 6. If the input is a question, answer the underlying query clearly with key information and explanatory points in Sinhala.
 7. Provide multiple alternative meanings or contexts if a single word or phrase has multiple senses.
 8. Provide up to 5 similar sentences, patterns, or vocabulary examples to enrich learning.
 9. Encourage practice with a clear follow-up question.
 
-Format your responses neatly with clear headings:
+Format your responses neatly with clear headings containing emojis:
 ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation)
-[EN_TEXT] || [SI_TEXT]
+EN_TEXT || SI_TEXT
 
-### ⏰ වාක්‍යයේ කාලය
+### ⏰ වාක්‍යයේ කාලය (Sentence Tense)
 - (උදා: Past Simple Tense / සරල අතීත කාලය)
 - **පැහැදිලි කිරීම (Explanation)**: (මෙම වාක්‍යය මෙම කාලයට අයත් වන්නේ මන්දැයි කෙටි පැහැදිලි කිරීමක්)
 
@@ -616,22 +619,19 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/^---$/gim, '');
 
-            // ඉහළ ප්‍රධාන සුදු පැහැති පරිවර්තන පෙට්ටිය සඳහා පමණක් වරහන් ඉවත් කරනු ලැබේ
+            // ස්පීකර් පෙට්ටියේ පළමු වගන්තිය සුදු පැහැයෙන් සහ දෙවන වගන්තිය (පරිවර්තනය) කහ පැහැයෙන් පෙන්වීම
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
-                let cleanEn = enText.replace(/\*\*/g, '').trim();
-                let cleanSi = siText.replace(/\*\*/g, '').trim();
+                let cleanEn = enText.replace(/\*\*/g, '').replace(/[\[\]()]/g, '').trim();
+                let cleanSi = siText.replace(/\*\*/g, '').replace(/[\[\]()]/g, '').trim();
                 if (!cleanEn && !cleanSi) return "";
                 
-                let displayEn = cleanEn.replace(/[()]/g, '');
-                let displaySi = cleanSi.replace(/[()]/g, '');
-
                 let safeEn = cleanEn.replace(/'/g, "\\'");
                 let safeSi = cleanSi.replace(/'/g, "\\'");
 
                 return `<div class="main-translation-box">
                     <div class="translation-content">
-                        <div class="lang-line english">🇬🇧 ${displayEn}</div>
-                        <div class="lang-line sinhala">🇱🇰 ${displaySi}</div>
+                        <div class="lang-line english" style="color: #ffffff;">🇬🇧 ${cleanEn}</div>
+                        <div class="lang-line sinhala" style="color: #facc15;">🇱🇰 ${cleanSi}</div>
                     </div>
                     <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
                 </div>`;
@@ -649,8 +649,8 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-            formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
-            formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
+            // (-) ලකුණ වෙනුවට ඩොට් සලකුණ (•) පමණක් යෙදීම
+            formatted = formatted.replace(/^\s*-\s+/gim, '• ');
 
             formatted = formatted.split('\n')
                 .map(line => line.trim())
