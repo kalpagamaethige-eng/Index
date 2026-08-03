@@ -136,13 +136,18 @@
                     <label class="switch"><input type="checkbox" id="dark-mode-switch"><span class="slider"></span></label>
                 </div>
                 
-                <!-- Admin Developer Panel Section -->
+                <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:10px; height:40px; font-size:13px;">🗑️ ඉතිහාසය හිස් කරන්න</button>
+
+                <!-- Admin Developer Panel Section (सੈකසුම් තීරුවේ අවසානයටම දමා ඇත) -->
                 <div style="flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px;">
                     <span style="font-weight: 600; color: var(--accent-color); font-size:13.5px;">🔒 Admin Developer Panel</span>
-                    <input type="password" id="admin-secret-input" placeholder="Admin Secret Pin එක ලියන්න..." style="width:100%; background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); padding:8px; border-radius:6px; font-size:13px; box-sizing:border-box; margin-top:4px;">
+                    <input type="password" id="admin-secret-input" placeholder="Admin Password එක ලියන්න..." style="width:100%; background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); padding:8px; border-radius:6px; font-size:13px; box-sizing:border-box; margin-top:4px;">
+                    
+                    <!-- Admin Status Screen (Password එක නිවැරදි වූ පසු හෝ Live පරීක්ෂාවේදී මෙහි දත්ත පෙන්වයි) -->
+                    <div id="admin-panel-screen" style="display:none; width:100%; margin-top:8px; background:#000; color:#00ff00; padding:8px; border-radius:6px; font-family:monospace; font-size:11px; box-sizing:border-box; border:1px solid var(--accent-color);">
+                        දත්ත ලබා ගනිමින් පවතී...
+                    </div>
                 </div>
-
-                <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:12px; height:40px; font-size:13px;">🗑️ ඉතිහාසය හිස් කරන්න</button>
             </div>
             <div id="history-tab" class="tab-content"></div>
             <div id="favorites-tab" class="tab-content"></div>
@@ -179,11 +184,6 @@
             <button id="translate">✨ Translate</button>
         </div>
 
-        <!-- Admin Server Status & Logs Box (Initially hidden) -->
-        <div id="admin-logs-box" style="display:none; margin-top:12px; background:#000; color:#00ff00; padding:10px; border-radius:8px; font-family:monospace; font-size:11px; max-height:120px; overflow-y:auto; border:1px solid var(--accent-color);">
-            Server Logs මෙහි දිස් වනු ඇත...
-        </div>
-
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
 
@@ -204,11 +204,34 @@ Your responsibilities: 1. Translate accurately. 2. Identify Tense. 3. Correct gr
 Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation) ENGLISH_SENTENCE || SINHALA_SENTENCE... ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
         const adminSecretInput = document.getElementById('admin-secret-input');
+        const adminPanelScreen = document.getElementById('admin-panel-screen');
+
         if(adminSecretInput) {
             adminSecretInput.value = localStorage.getItem('kalpa_admin_secret') || '';
             adminSecretInput.oninput = () => {
                 localStorage.setItem('kalpa_admin_secret', adminSecretInput.value);
+                updateAdminPanelDisplay();
             };
+        }
+
+        function updateAdminPanelDisplay(debugInfo = null) {
+            if(!adminPanelScreen) return;
+            const secret = localStorage.getItem('kalpa_admin_secret') || '';
+            if (!secret) {
+                adminPanelScreen.style.display = 'none';
+                return;
+            }
+
+            adminPanelScreen.style.display = 'block';
+            if (debugInfo) {
+                adminPanelScreen.innerHTML = 
+                    `<strong>[ACTIVE MODEL]:</strong> ${debugInfo.activeModel || 'N/A'}<br>` +
+                    `<strong>[API KEY USED]:</strong> ${debugInfo.maskedKey || 'N/A'}<br>` +
+                    `<strong>[FALLBACK OCCURRED]:</strong> ${debugInfo.fallbackOccurred ? 'YES ⚠️' : 'NO ✅'}<br>` +
+                    `<strong>[ERRORS]:</strong><br>` + (debugInfo.errorsEncountered.join('<br>') || 'None');
+            } else {
+                adminPanelScreen.innerHTML = `🔒 Password ඇතුළත් කර ඇත. පරිවර්තනයක් සිදුකළ විට හෝ Test කළ විට මෙහි Server තත්ත්වය පෙනෙනු ඇත.`;
+            }
         }
 
         async function askGemini(promptText) {
@@ -224,16 +247,8 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                 });
                 const data = await response.json();
                 
-                const logsBox = document.getElementById('admin-logs-box');
                 if (data._debugInfo && adminSecret) {
-                    if(logsBox) {
-                        logsBox.style.display = 'block';
-                        logsBox.innerHTML = `<strong>[ACTIVE MODEL]:</strong> ${data._debugInfo.activeModel || 'N/A'}<br>` +
-                                            `<strong>[FALLBACK OCCURRED]:</strong> ${data._debugInfo.fallbackOccurred ? 'YES ⚠️' : 'NO ✅'}<br>` +
-                                            `<strong>[ERRORS]:</strong><br>` + (data._debugInfo.errorsEncountered.join('<br>') || 'None');
-                    }
-                } else if(logsBox) {
-                    logsBox.style.display = 'none';
+                    updateAdminPanelDisplay(data._debugInfo);
                 }
 
                 if (response.ok && data?.candidates?.[0]?.content?.parts?.[0]?.text) {
@@ -436,7 +451,12 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
         const settingsModal = document.getElementById('settings-modal');
         const advancedModal = document.getElementById('advanced-modal');
         
-        document.getElementById('settings-btn').onclick = () => { settingsModal.classList.add('active'); loadHistoryUI(); loadFavoritesUI(); };
+        document.getElementById('settings-btn').onclick = () => { 
+            settingsModal.classList.add('active'); 
+            loadHistoryUI(); 
+            loadFavoritesUI(); 
+            updateAdminPanelDisplay();
+        };
         document.getElementById('advanced-btn').onclick = () => { advancedModal.classList.add('active'); };
         
         document.querySelectorAll('.close-modal').forEach(btn => {
