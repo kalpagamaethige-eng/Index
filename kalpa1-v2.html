@@ -138,7 +138,7 @@
                 
                 <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:10px; height:40px; font-size:13px;">🗑️ ඉතිහාසය හිස් කරන්න</button>
 
-                <!-- Admin Developer Panel Section (අවසානයටම දමා ඇත) -->
+                <!-- Admin Developer Panel Section -->
                 <div style="flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px;">
                     <span style="font-weight: 600; color: var(--accent-color); font-size:13.5px;">🔒 Admin Developer Panel</span>
                     <input type="password" id="admin-secret-input" placeholder="Admin Password එක ලියන්න..." style="width:100%; background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); padding:8px; border-radius:6px; font-size:13px; box-sizing:border-box; margin-top:4px;">
@@ -395,6 +395,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             favTab.innerHTML = html;
         }
 
+        // --- යාවත්කාලීන කළ මයික් (Speech Recognition) කොටස ---
         const micBtn = document.getElementById('mic-btn');
         const inputField = document.getElementById('input');
         
@@ -405,21 +406,47 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             recognition.interimResults = false;
 
             micBtn.onclick = () => {
+                if (location.protocol !== 'https:' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+                    showToast("⚠️ මයික්‍රෆෝනය ක්‍රියාත්මක වීමට HTTPS අවශ්‍ය වේ.");
+                    return;
+                }
+
                 const text = inputField.value.trim();
                 const isSinhala = /[\u0D80-\u0DFF]/.test(text);
                 recognition.lang = isSinhala ? 'si-LK' : 'en-US';
-                recognition.start();
-                micBtn.classList.add('listening');
-                micBtn.innerText = "🔴";
+                
+                try {
+                    recognition.start();
+                    micBtn.classList.add('listening');
+                    micBtn.innerText = "🔴";
+                    showToast("කතා කරන්න... (Listening)");
+                } catch (err) {
+                    console.error("Mic start error:", err);
+                    showToast("මයික්‍රෆෝනය ආරම්භ කිරීමේ දෝෂයකි.");
+                    micBtn.classList.remove('listening');
+                    micBtn.innerText = "🎤";
+                }
             };
 
             recognition.onresult = (event) => {
                 inputField.value = event.results[0][0].transcript;
                 micBtn.classList.remove('listening');
                 micBtn.innerText = "🎤";
+                showToast("හඬ පණිවිඩය සාර්ථකයි!");
             };
 
-            recognition.onerror = recognition.onend = () => {
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error:", event.error);
+                micBtn.classList.remove('listening');
+                micBtn.innerText = "🎤";
+                if (event.error === 'not-allowed') {
+                    showToast("❌ මයික්‍රෆෝන අවසරය (Permission) ලබා දී නැත!");
+                } else {
+                    showToast("දෝෂයක් ඇති විය: " + event.error);
+                }
+            };
+
+            recognition.onend = () => {
                 micBtn.classList.remove('listening');
                 micBtn.innerText = "🎤";
             };
