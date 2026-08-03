@@ -138,13 +138,12 @@
                 
                 <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:10px; height:40px; font-size:13px;">🗑️ ඉතිහාසය හිස් කරන්න</button>
 
-                <!-- Admin Developer Panel Section (सੈකසුම් තීරුවේ අවසානයටම දමා ඇත) -->
+                <!-- Admin Developer Panel Section (අවසානයටම දමා ඇත) -->
                 <div style="flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px;">
                     <span style="font-weight: 600; color: var(--accent-color); font-size:13.5px;">🔒 Admin Developer Panel</span>
                     <input type="password" id="admin-secret-input" placeholder="Admin Password එක ලියන්න..." style="width:100%; background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); padding:8px; border-radius:6px; font-size:13px; box-sizing:border-box; margin-top:4px;">
                     
-                    <!-- Admin Status Screen (Password එක නිවැරදි වූ පසු හෝ Live පරීක්ෂාවේදී මෙහි දත්ත පෙන්වයි) -->
-                    <div id="admin-panel-screen" style="display:none; width:100%; margin-top:8px; background:#000; color:#00ff00; padding:8px; border-radius:6px; font-family:monospace; font-size:11px; box-sizing:border-box; border:1px solid var(--accent-color);">
+                    <div id="admin-panel-screen" style="display:none; width:100%; margin-top:8px; background:#000; color:#00ff00; padding:8px; border-radius:6px; font-family:monospace; font-size:11px; box-sizing:border-box; border:1px solid var(--accent-color); max-height: 180px; overflow-y: auto;">
                         දත්ත ලබා ගනිමින් පවතී...
                     </div>
                 </div>
@@ -224,13 +223,18 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
 
             adminPanelScreen.style.display = 'block';
             if (debugInfo) {
+                let deadKeysHtml = debugInfo.deadKeysList && debugInfo.deadKeysList.length > 0 
+                    ? debugInfo.deadKeysList.join(', ') 
+                    : 'None (සියල්ල ක්‍රියාත්මකය)';
+
                 adminPanelScreen.innerHTML = 
                     `<strong>[ACTIVE MODEL]:</strong> ${debugInfo.activeModel || 'N/A'}<br>` +
-                    `<strong>[API KEY USED]:</strong> ${debugInfo.maskedKey || 'N/A'}<br>` +
+                    `<strong>[CURRENT KEY STATUS]:</strong> ${debugInfo.keyStatus || 'N/A'}<br>` +
+                    `<strong>[DEAD / EXHAUSTED KEYS]:</strong> (${debugInfo.deadKeysCount || 0}) [${deadKeysHtml}]<br>` +
                     `<strong>[FALLBACK OCCURRED]:</strong> ${debugInfo.fallbackOccurred ? 'YES ⚠️' : 'NO ✅'}<br>` +
-                    `<strong>[ERRORS]:</strong><br>` + (debugInfo.errorsEncountered.join('<br>') || 'None');
+                    `<strong>[RECENT ERRORS]:</strong><br>` + (debugInfo.errorsEncountered.slice(-3).join('<br>') || 'None');
             } else {
-                adminPanelScreen.innerHTML = `🔒 Password ඇතුළත් කර ඇත. පරිවර්තනයක් සිදුකළ විට හෝ Test කළ විට මෙහි Server තත්ත්වය පෙනෙනු ඇත.`;
+                adminPanelScreen.innerHTML = `🔒 Password ඇතුළත් කර ඇත. පරිවර්තනයක් සිදුකළ විට හෝ යමක් සෙවූ විට මෙහි Live තත්ත්වය පෙනෙනු ඇත.`;
             }
         }
 
