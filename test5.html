@@ -43,18 +43,7 @@
         .creator-tag { color: var(--accent-hover); font-size: 12px; font-weight: 600; margin-bottom: 3px; display: block; }
         .subtitle { color: var(--text-secondary); font-size: 11px; margin: 0; }
 
-        /* ⚙️ Header එකේ ඉහළ දකුණු කෙළවරේ ඇති Settings අයිකන බොත්තම */
-        #main-settings-toggle {
-            position: absolute; top: 12px; right: 12px;
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            color: var(--text-secondary); width: 34px; height: 34px;
-            border-radius: 8px; cursor: pointer; font-size: 16px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s; z-index: 10;
-        }
-        #main-settings-toggle:hover { background: var(--border-color); color: var(--text-primary); }
-
-        /* 🪟 Settings Modal / Popup Menu Design */
+        /* 🪟 Settings Popup Modal Menu */
         .settings-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(3px);
@@ -160,9 +149,6 @@
 </head>
 <body>
     <div class="header-box">
-        <!-- ⚙️ ප්‍රධාන Settings අයිකනය (මෙය ක්ලික් කළ විට Settings මෙනුව විවෘත වේ) -->
-        <button id="main-settings-toggle" title="Settings (සැකසුම්)">⚙️</button>
-
         <span class="creator-tag">Created by Kalpa Gamaethige</span>
         <h1>KALPA AI English Translator & Teacher</h1>
         <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉගෙනුම් සහකරු</p>
@@ -184,8 +170,6 @@
                     <span class="slider"></span>
                 </label>
             </div>
-
-            <!-- 💡 අනාගතයේදී අවශ්‍ය වෙනත් Controls මෙතැනට පහසුවෙන් එකතු කරගත හැක -->
         </div>
     </div>
 
@@ -193,7 +177,8 @@
         <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I go to school yesterday)..."></textarea>
         
         <div class="action-row">
-            <button class="side-square-btn" id="left-settings-btn" title="Settings">⚙️</button>
+            <!-- ⚙️ වම් පැත්තේ Settings බටන් එක -->
+            <button class="side-square-btn" id="settings-btn" title="Settings (සැකසුම්)">⚙️</button>
             <button id="translate">✨ Translate Now (පරිවර්තනය)</button>
             <button class="side-square-btn" id="advanced-btn" title="Advanced (වැඩිදුර විශේෂාංග)">🚀</button>
         </div>
@@ -204,8 +189,7 @@
     <script>
         const body = document.body;
         const settingsModal = document.getElementById('settings-modal');
-        const mainSettingsToggle = document.getElementById('main-settings-toggle');
-        const leftSettingsBtn = document.getElementById('left-settings-btn');
+        const settingsBtn = document.getElementById('settings-btn');
         const closeSettings = document.getElementById('close-settings');
         const darkModeSwitch = document.getElementById('dark-mode-switch');
 
@@ -215,16 +199,11 @@
             body.classList.add('light-mode');
             darkModeSwitch.checked = false;
         } else {
-            darkModeSwitch.checked = true; // Dark mode යනු Default අගයයි
+            darkModeSwitch.checked = true;
         }
 
-        // Settings Modal එක විවෘත කිරීම (ඉහළ දකුණු Settings අයිකනය මඟින්)
-        mainSettingsToggle.addEventListener('click', () => {
-            settingsModal.classList.add('active');
-        });
-
-        // පහළ වම් පැත්තේ ඇති Settings බටන් එක මඟිනුත් Modal එක විවෘත වීමට සැලසීම
-        leftSettingsBtn.addEventListener('click', () => {
+        // වම් පැත්තේ Settings බටන් එක ක්ලික් කළ විට Modal එක විවෘත වීම
+        settingsBtn.addEventListener('click', () => {
             settingsModal.classList.add('active');
         });
 
