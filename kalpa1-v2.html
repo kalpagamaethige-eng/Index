@@ -75,45 +75,19 @@
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
         /* Action Row */
-.action-row { 
-    display: flex; 
-    flex-direction: column; /* උඩ යටට */
-    gap: 10px; 
-    margin-top: 10px; 
-    align-items: center; 
-}
+        .action-row { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; align-items: center; }
+        .top-buttons { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; width: 100%; }
+        .side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; }
+        .side-square-btn:hover { background: var(--border-color); }
+        .side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.top-buttons {
-    display: flex;
-    gap: 6px;
-    justify-content: center; /* මැදට */
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; }
-.side-square-btn:hover { background: var(--bg-hover); }
-.side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
-
-button#translate { 
-    background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); 
-    color: white; 
-    border: none; 
-    padding: 0 12px; 
-    height: 48px; 
-    border-radius: 10px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    width: 100%; /* පළලට */
-    max-width: 400px;
-    font-size: 15px; 
-    transition: all 0.2s; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 8px; 
-}
-button#translate:active { transform: scale(0.98); }
+        button#translate { 
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); 
+            color: white; border: none; padding: 0 12px; height: 48px; border-radius: 10px; 
+            cursor: pointer; font-weight: bold; width: 100%; max-width: 400px; font-size: 15px; 
+            transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; 
+        }
+        button#translate:active { transform: scale(0.98); }
 
         #output { margin-top: 15px; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 16px; border-radius: 10px; line-height: 1.8; font-size: 13.5px; color: var(--text-primary); flex: 1; overflow-y: auto; max-height: 50vh; transition: background 0.3s, color 0.3s, border 0.3s; }
         .heading-highlight { display: block; background: linear-gradient(90deg, var(--bg-card), var(--bg-primary)); color: var(--accent-color); padding: 9px 13px; border-radius: 8px; border-left: 4px solid var(--accent-hover); margin-top: 14px; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
@@ -161,7 +135,14 @@ button#translate:active { transform: scale(0.98); }
                     <span>🌙 රාත්‍රී ප්‍රකාරය (Dark Mode)</span>
                     <label class="switch"><input type="checkbox" id="dark-mode-switch"><span class="slider"></span></label>
                 </div>
-                <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:10px; height:40px; font-size:13px;">🗑️ ඉතිහාසය හිස් කරන්න</button>
+                
+                <!-- Admin Developer Panel Section -->
+                <div style="flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+                    <span style="font-weight: 600; color: var(--accent-color); font-size:13.5px;">🔒 Admin Developer Panel</span>
+                    <input type="password" id="admin-secret-input" placeholder="Admin Secret Pin එක ලියන්න..." style="width:100%; background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); padding:8px; border-radius:6px; font-size:13px; box-sizing:border-box; margin-top:4px;">
+                </div>
+
+                <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:12px; height:40px; font-size:13px;">🗑️ ඉතිහාසය හිස් කරන්න</button>
             </div>
             <div id="history-tab" class="tab-content"></div>
             <div id="favorites-tab" class="tab-content"></div>
@@ -187,20 +168,21 @@ button#translate:active { transform: scale(0.98); }
             <button class="mic-btn" id="mic-btn" title="Voice Input">🎤</button>
         </div>
         
-        <!-- Action Row -->
-<div class="action-row">
-    <!-- උඩ පේලිය: පොඩි බටන් 5 -->
-    <div class="top-buttons">
-        <button class="side-square-btn" id="settings-btn" title="Settings">⚙️</button>
-        <button class="side-square-btn" id="copy-btn" title="Copy Output">📋</button>
-        <button class="side-square-btn" id="clear-btn" title="Clear All">🗑️</button>
-        <button class="side-square-btn" id="export-btn" title="Export TXT">💾</button>
-        <button class="side-square-btn" id="advanced-btn" title="Advanced Tools">🚀</button>
-    </div>
+        <div class="action-row">
+            <div class="top-buttons">
+                <button class="side-square-btn" id="settings-btn" title="Settings">⚙️</button>
+                <button class="side-square-btn" id="copy-btn" title="Copy Output">📋</button>
+                <button class="side-square-btn" id="clear-btn" title="Clear All">🗑️</button>
+                <button class="side-square-btn" id="export-btn" title="Export TXT">💾</button>
+                <button class="side-square-btn" id="advanced-btn" title="Advanced Tools">🚀</button>
+            </div>
+            <button id="translate">✨ Translate</button>
+        </div>
 
-    <!-- පහල පේලිය: Translate බටන් එක විතරයි -->
-    <button id="translate">✨ Translate</button>
-</div>
+        <!-- Admin Server Status & Logs Box (Initially hidden) -->
+        <div id="admin-logs-box" style="display:none; margin-top:12px; background:#000; color:#00ff00; padding:10px; border-radius:8px; font-family:monospace; font-size:11px; max-height:120px; overflow-y:auto; border:1px solid var(--accent-color);">
+            Server Logs මෙහි දිස් වනු ඇත...
+        </div>
 
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
@@ -221,16 +203,39 @@ Your responsibilities: 1. Translate accurately. 2. Identify Tense. 3. Correct gr
 8. 5 Similar Examples 9. Practice Question.
 Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation) ENGLISH_SENTENCE || SINHALA_SENTENCE... ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
-        // Vercel Backend Proxy හරහා Gemini API Call කිරීම (API Keys Frontend එකෙන් ಸಂಪූර්ණයෙන්ම ඉවත් කර ඇත)
+        const adminSecretInput = document.getElementById('admin-secret-input');
+        if(adminSecretInput) {
+            adminSecretInput.value = localStorage.getItem('kalpa_admin_secret') || '';
+            adminSecretInput.oninput = () => {
+                localStorage.setItem('kalpa_admin_secret', adminSecretInput.value);
+            };
+        }
+
         async function askGemini(promptText) {
             try {
+                const adminSecret = localStorage.getItem('kalpa_admin_secret') || '';
                 const response = await fetch('/api/translate', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'x-admin-secret': adminSecret 
+                    },
                     body: JSON.stringify({ prompt: systemPrompt + "\n\nUser Input: " + promptText })
                 });
                 const data = await response.json();
                 
+                const logsBox = document.getElementById('admin-logs-box');
+                if (data._debugInfo && adminSecret) {
+                    if(logsBox) {
+                        logsBox.style.display = 'block';
+                        logsBox.innerHTML = `<strong>[ACTIVE MODEL]:</strong> ${data._debugInfo.activeModel || 'N/A'}<br>` +
+                                            `<strong>[FALLBACK OCCURRED]:</strong> ${data._debugInfo.fallbackOccurred ? 'YES ⚠️' : 'NO ✅'}<br>` +
+                                            `<strong>[ERRORS]:</strong><br>` + (data._debugInfo.errorsEncountered.join('<br>') || 'None');
+                    }
+                } else if(logsBox) {
+                    logsBox.style.display = 'none';
+                }
+
                 if (response.ok && data?.candidates?.[0]?.content?.parts?.[0]?.text) {
                     return { text: data.candidates[0].content.parts[0].text, error: null };
                 } else {
@@ -244,7 +249,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
         function startCountdown(fallbackSeconds, errorMessage) {
             const outputDiv = document.getElementById("output");
             let remaining = fallbackSeconds;
-            outputDiv.innerHTML = `<div class="error-box"><span style="font-size: 24px;">⏳</span><strong>API සීමාව / Quota අවසන් විය</strong><p>ප්‍රධාන සේවාදායකයේ (Server) API සීමාව ඉක්මවා ගොස් ඇත. (${errorMessage || 'Quota Exceeded'})</p><div class="countdown-text">තත්පර <span id="timer-count">${remaining}</span> කින් නැවත උත්සාහ කරන්න...</div></div>`;
+            outputDiv.innerHTML = `<div class="error-box"><span style="font-size: 24px;">⏳</span><strong>API සීමාව / Quota අවසන් විය</strong><p>සියලුම සේවාදායකයන්හි සීමාවන් ඉක්මවා ගොස් ඇත. (${errorMessage || 'Quota Exceeded'})</p><div class="countdown-text">තත්පර <span id="timer-count">${remaining}</span> කින් නැවත උත්සාහ කරන්න...</div></div>`;
             const timerInterval = setInterval(() => {
                 remaining--; 
                 const timerElement = document.getElementById("timer-count");
@@ -371,7 +376,6 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             favTab.innerHTML = html;
         }
 
-        // Mic Auto Language Support
         const micBtn = document.getElementById('mic-btn');
         const inputField = document.getElementById('input');
         
@@ -504,7 +508,6 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             else { outputDiv.innerHTML = `<div class="error-box">දෝෂයක් සිදු විය.</div>`; }
         };
 
-        // Main Translate Button with full UI disabling and spinner loading
         document.getElementById("translate").onclick = async () => {
             const text = inputField.value.trim();
             const outputDiv = document.getElementById("output");
@@ -520,7 +523,6 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                 return;
             }
 
-            // සියලුම බටන් එකවර Disable කිරීම
             document.querySelectorAll('button').forEach(btn => btn.disabled = true);
             translateBtn.innerHTML = "↻ <div class='spinner' style='width:16px; height:16px; margin-top:0; display:inline-block;'></div>";
             outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
@@ -534,7 +536,6 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                 } else { startCountdown(60, result.error); }
             } catch (error) { startCountdown(60, `Exception: ${error.message}`); }
             finally { 
-                // සියලුම බටන් නැවත Enable කිරීම
                 document.querySelectorAll('button').forEach(btn => btn.disabled = false);
                 translateBtn.innerHTML = "✨ Translate"; 
             }
