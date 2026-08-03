@@ -149,9 +149,9 @@
             max-height: 50vh;
         }
 
-        /* මාතෘකා කොටුවල ඉහළ ඉඩ අවම කර ඇත */
         .heading-highlight {
-            display: block;
+            display: flex;
+            flex-direction: column;
             background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
             padding: 9px 13px;
@@ -163,16 +163,23 @@
             font-size: 14px;
         }
 
+        .heading-highlight span.sub-title-en {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: normal;
+            margin-top: 2px;
+        }
+
         .heading-highlight:first-child {
             margin-top: 2px;
         }
 
-        /* ප්‍රධාන පෙට්ටියේ රාමුව සුදු පැහැයට හරවා ඇත */
+        /* ප්‍රධාන පෙට්ටියේ රාමුව සුදු පැහැයට හැරවීම සහ බ්‍රයිට්නස් අඩු කිරීම */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #ffffff;
-            border-left: 5px solid #ffffff;
-            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-left: 5px solid rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.85);
             padding: 14px 16px;
             border-radius: 12px;
             margin: 8px 0 12px 0;
@@ -194,7 +201,7 @@
             font-size: 14.5px;
             font-weight: 600;
             line-height: 1.4;
-            color: #f8fafc;
+            color: rgba(248, 250, 252, 0.9);
         }
 
         .lang-line.sinhala {
@@ -202,8 +209,11 @@
             font-size: 14px;
         }
 
-        /* Verb හෝ ප්‍රධාන ක්‍රියාපද කහ පැහැයෙන් හයිලයිට් කිරීම සඳහා */
-        .highlight-verb {
+        /* ක්‍රියාපද (Verbs) යටින් ඉරක් ඇඳීම (Underline) සහ කහ පැහැ ගැන්වීම */
+        .verb-underline {
+            text-decoration: underline;
+            text-decoration-color: #facc15;
+            text-underline-offset: 3px;
             color: #facc15;
             font-weight: bold;
         }
@@ -463,13 +473,13 @@
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
 1. Translate English ↔ Sinhala accurately.
-2. Identify and state the Tense of the sentence clearly (e.g., Present Simple, Past Continuous, Future Perfect, etc.) along with its Sinhala grammatical equivalent.
+2. Identify and state the Tense of the sentence clearly (e.g., Present Simple, Past Continuous, Future Perfect, etc.) along with its English name and Sinhala grammatical equivalent.
 3. Correct grammar mistakes and awkward phrasing in the user's input.
 4. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT].
 5. Break down sentence structure clearly (Identify: Subject / උක්තය, Verb / ක්‍රියාපදය, Object / කර්මය, Modifiers/Other / වෙනත් කොටස්).
 6. If the input is a question, answer the underlying query clearly with key information and explanatory points in Sinhala.
 7. Provide multiple alternative meanings or contexts if a single word or phrase has multiple senses.
-8. Provide up to 5 similar sentences, patterns, or vocabulary examples to enrich learning.
+8. Provide up to 5 similar sentences, patterns, or vocabulary examples with their translations in parentheses on the next line.
 9. Encourage practice with a clear follow-up question.
 
 Format your responses neatly with clear headings:
@@ -489,7 +499,7 @@ Format your responses neatly with clear headings:
 
 ### 📖 ව්‍යාකරණ පැහැදිලි කිරීම සහ පිළිතුර (Grammar & Answer Details)
 ### 📚 බහු-අර්ථ සහ වෙනත් භාවිතයන් (Multiple Meanings & Uses)
-### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples - Provide up to 5 examples)
+### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples - Provide up to 5 examples, put translation on a new line in parentheses)
 ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
         function startCountdown(fallbackSeconds, errorMessage) {
@@ -623,6 +633,9 @@ Format your responses neatly with clear headings:
 
             formatted = formatted.replace(/^---$/gim, '');
 
+            // ප්‍රධාන පෙට්ටියේ ක්‍රියාපද (Verbs) හඳුනාගෙන ඒවාට යටින් ඉරක් ඇඳ කහ පැහැ ගැන්වීම (ස්වයංක්‍රීය පොදු ක්‍රියාපද සලකා බැලේ)
+            const commonVerbs = /\b(am|is|are|was|were|be|been|being|have|has|had|do|does|did|go|goes|went|gone|going|eat|ate|eaten|eating|drink|drank|drunk|drinking|come|came|coming|take|took|taken|taking|make|made|making|get|got|gotten|getting|give|gave|given|giving|see|saw|seen|seeing|know|knew|known|knowing|think|thought|thinking|want|wanted|wanting|use|used|using|find|found|finding|tell|told|telling|ask|asked|asking|work|worked|working|seem|seemed|seeming|feel|felt|feeling|try|tried|trying|leave|left|leaving|call|called|calling|rain|rains|rained|raining)\b/gi;
+
             // ඉහළ ප්‍රධාන සුදු පැහැති පරිවර්තන පෙට්ටිය සඳහා පමණක් වරහන් ඉවත් කරනු ලැබේ
             formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
                 let cleanEn = enText.replace(/\*\*/g, '').trim();
@@ -632,16 +645,24 @@ Format your responses neatly with clear headings:
                 let displayEn = cleanEn.replace(/[()]/g, '');
                 let displaySi = cleanSi.replace(/[()]/g, '');
 
+                // Verbs යටින් ඉර ඇඳීම
+                let highlightedEn = displayEn.replace(commonVerbs, (verbMatch) => `<span class="verb-underline">${verbMatch}</span>`);
+
                 let safeEn = cleanEn.replace(/'/g, "\\'");
                 let safeSi = cleanSi.replace(/'/g, "\\'");
 
                 return `<div class="main-translation-box">
                     <div class="translation-content">
-                        <div class="lang-line english">🇬🇧 ${displayEn}</div>
+                        <div class="lang-line english">🇬🇧 ${highlightedEn}</div>
                         <div class="lang-line sinhala">🇱🇰 ${displaySi}</div>
                     </div>
                     <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
                 </div>`;
+            });
+
+            // මාතෘකා දෙකඩ කර (ඉංග්‍රීසි අර්ථය පහළ පේළියට ගෙන යාම) හැඩතල ගැන්වීම
+            formatted = formatted.replace(/(?:###|##)\s*(.*?)\s*\((.*?)\)/gim, (match, siTitle, enTitle) => {
+                return `<span class="heading-highlight">${siTitle.trim()}<span class="sub-title-en">${enTitle.trim()}</span></span>`;
             });
 
             formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
@@ -650,11 +671,21 @@ Format your responses neatly with clear headings:
                 return `<span class="heading-highlight">${cleanTitle}</span>`;
             });
 
+            formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*(.*?)\s*\((.*?)\)/gim, (match, label, siText, enText) => {
+                return `<span class="heading-highlight">${label.trim()}: ${siText.trim()}<span class="sub-title-en">${enText.trim()}</span></span>`;
+            });
+
             formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*/gim, (match, title) => {
                 return `<span class="heading-highlight">${title.trim()}</span>`;
             });
 
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // සමාන වාක්‍ය උදාහරණවල ඇති ඩෑෂ් (.) ඉවත් කර පරිවර්තනය වරහන් තුළට ගෙන පහළ පේළියට සැකසීම
+            formatted = formatted.replace(/-\s*(.*?)\s*[—–-]\s*(.*?)(?=<br>|$)/gim, (match, enEx, siEx) => {
+                let cleanSiEx = siEx.replace(/[()]/g, '').trim();
+                return `- ${enEx.trim()}<br>&nbsp;&nbsp;&nbsp;&nbsp;(${cleanSiEx})`;
+            });
 
             formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
             formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
