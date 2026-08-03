@@ -187,7 +187,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
         // Vercel Backend Proxy හරහා Gemini API Call කිරීම (API Keys Frontend එකෙන් ಸಂಪූර්ණයෙන්ම ඉවත් කර ඇත)
         async function askGemini(promptText) {
             try {
-                const response = await fetch('/Index/api/translate', {
+                const response = await fetch('/api/translate', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt: systemPrompt + "\n\nUser Input: " + promptText })
