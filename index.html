@@ -156,7 +156,7 @@
             padding: 9px 13px;
             border-radius: 8px;
             border-left: 4px solid var(--accent-hover);
-            margin-top: 16px;   
+            margin-top: 14px;   
             margin-bottom: 8px; 
             font-weight: bold;
             font-size: 14px;
@@ -166,14 +166,15 @@
             margin-top: 4px;
         }
 
+        /* ප්‍රධාන පෙට්ටියේ රාමුව සුදු පැහැයට හැරවීම සහ බ්‍රයිට්නස් තරමක් අඩු කිරීම */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #38bdf8;
-            border-left: 5px solid #0ea5e9;
-            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-left: 5px solid rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.85);
             padding: 14px 16px;
             border-radius: 12px;
-            margin: 12px 0 20px 0;
+            margin: 8px 0 12px 0;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
             display: flex;
             align-items: center;
@@ -192,12 +193,21 @@
             font-size: 14.5px;
             font-weight: 600;
             line-height: 1.4;
-            color: #f8fafc;
+            color: rgba(248, 250, 252, 0.9);
         }
 
         .lang-line.sinhala {
             color: #38bdf8;
             font-size: 14px;
+        }
+
+        /* ක්‍රියාපද (Verbs) යටින් ඉරක් ඇඳීම */
+        .verb-underline {
+            text-decoration: underline;
+            text-decoration-color: #facc15;
+            text-underline-offset: 3px;
+            color: #facc15;
+            font-weight: bold;
         }
 
         .speak-btn {
@@ -455,21 +465,21 @@
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
 Your responsibilities:
 1. Translate English ↔ Sinhala accurately.
-2. Identify and state the Tense of the sentence clearly in the format (English Tense Name / Sinhala Tense Name) e.g., (Present Simple Tense / සරල වර්තමාන කාලය).
+2. Identify and state the Tense of the sentence clearly (e.g., Present Simple, Past Continuous, Future Perfect, etc.) along with its Sinhala grammatical equivalent.
 3. Correct grammar mistakes and awkward phrasing in the user's input.
 4. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT].
 5. Break down sentence structure clearly (Identify: Subject / උක්තය, Verb / ක්‍රියාපදය, Object / කර්මය, Modifiers/Other / වෙනත් කොටස්).
 6. If the input is a question, answer the underlying query clearly with key information and explanatory points in Sinhala.
 7. Provide multiple alternative meanings or contexts if a single word or phrase has multiple senses.
-8. Provide up to 5 similar sentences, patterns, or vocabulary examples with their translations in parentheses on the next line.
+8. Provide up to 5 similar sentences, patterns, or vocabulary examples to enrich learning.
 9. Encourage practice with a clear follow-up question.
 
 Format your responses neatly with clear headings:
 ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation)
 [EN_TEXT] || [SI_TEXT]
 
-### ⏰ වාක්‍යයේ කාලය (Tense)
-- (English Tense Name / සිංහල කාලයේ නම)
+### ⏰ වාක්‍යයේ කාලය
+- (උදා: Past Simple Tense / සරල අතීත කාලය)
 - **පැහැදිලි කිරීම (Explanation)**: (මෙම වාක්‍යය මෙම කාලයට අයත් වන්නේ මන්දැයි කෙටි පැහැදිලි කිරීමක්)
 
 ### ✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)
@@ -481,7 +491,7 @@ Format your responses neatly with clear headings:
 
 ### 📖 ව්‍යාකරණ පැහැදිලි කිරීම සහ පිළිතුර (Grammar & Answer Details)
 ### 📚 බහු-අර්ථ සහ වෙනත් භාවිතයන් (Multiple Meanings & Uses)
-### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples - Provide up to 5 examples, put translation on a new line in parentheses)
+### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples - Provide up to 5 examples)
 ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
         function startCountdown(fallbackSeconds, errorMessage) {
@@ -640,37 +650,17 @@ Format your responses neatly with clear headings:
                 </div>`;
             });
 
-            // මාතෘකා දෙකඩ කර (සිංහල නම ඉහළින් සහ ඉංග්‍රීසි නම යටින්) පෙන්වීම
-            formatted = formatted.replace(/(?:###|##)\s*(.*?)\s*\((.*?)\)/gim, (match, siTitle, enTitle) => {
-                return `<span class="heading-highlight">${siTitle.trim()}<span class="sub-title-en">${enTitle.trim()}</span></span>`;
-            });
-
             formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
                 let cleanTitle = title.replace(/\*\*/g, '').trim(); 
                 if (!cleanTitle) return "";
                 return `<span class="heading-highlight">${cleanTitle}</span>`;
             });
 
-            formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*(.*?)\s*\((.*?)\)/gim, (match, label, siText, enText) => {
-                return `<span class="heading-highlight">${label.trim()}: ${siText.trim()}<span class="sub-title-en">${enText.trim()}</span></span>`;
-            });
-
             formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*/gim, (match, title) => {
                 return `<span class="heading-highlight">${title.trim()}</span>`;
             });
 
-            // වාක්‍යයේ කාලය යටතේ එන ඉංග්‍රීසි සහ සිංහල කාල නාමයන් නිවැරදිව පෙන්වීම
-            formatted = formatted.replace(/-\s*\((.*?)\/(.*?)\)/gim, (match, enTense, siTense) => {
-                return `- <strong>${enTense.trim()}</strong> (${siTense.trim()})`;
-            });
-
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-            // සමාන වාක්‍ය උදාහරණවල ඇති ඩෑෂ් ඉවත් කර පරිවර්තනය වරහන් තුළට ගෙන පහළ පේළියට සැකසීම
-            formatted = formatted.replace(/-\s*(.*?)\s*[—–-]\s*(.*?)(?=<br>|$)/gim, (match, enEx, siEx) => {
-                let cleanSiEx = siEx.replace(/[()]/g, '').trim();
-                return `- ${enEx.trim()}<br>&nbsp;&nbsp;&nbsp;&nbsp;(${cleanSiEx})`;
-            });
 
             formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
             formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
