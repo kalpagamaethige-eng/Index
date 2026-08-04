@@ -10,19 +10,25 @@
 
     <style>
         :root {
-            --bg-primary: #0f172a; --bg-card: #1e293b; --border-color: #334155;
-            --accent-color: #0284c7; --accent-hover: #0369a1;
-            --text-primary: #f8fafc; --text-secondary: #94a3b8;
-            --header-bg-light: #0284c7; 
+            /* Dark mode සඳහා පෙර තිබූ මුල් වර්ණම නැවත යොදන ලදී */
+            --bg-primary: #0f172a; 
+            --bg-card: #1e293b; 
+            --border-color: #334155;
+            --accent-color: #38bdf8; 
+            --accent-hover: #0ea5e9;
+            --text-primary: #f8fafc; 
+            --text-secondary: #94a3b8;
+            --header-bg: linear-gradient(135deg, var(--bg-card), var(--bg-primary));
         }
         body.light-mode {
             --bg-primary: #e2e8f0; 
             --bg-card: #cbd5e1;   
             --border-color: #94a3b8;
-            --accent-color: #0284c7; --accent-hover: #0369a1;
+            --accent-color: #0284c7; 
+            --accent-hover: #0369a1;
             --text-primary: #0f172a; 
             --text-secondary: #334155; 
-            --header-bg-light: #0284c7; /* ස්පීකර් බටන් එකේ ඇති තද නිල් පැහැයම Header එකට යොදන ලදී */
+            --header-bg: #0284c7; /* Light mode එකේදී පමණක් ස්පීකර් බටන් එකේ පාටම Header එකට */
             --textarea-light-border: #0284c7; 
             --textarea-light-bg: #ffffff; 
             --top-btn-bg-light: #ffffff; 
@@ -31,7 +37,7 @@
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 12px; background: var(--bg-primary); color: var(--text-primary); max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
 
-        .header-box { text-align: center; margin-bottom: 15px; background: var(--header-bg-light); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); position: relative; transition: background 0.3s, border-color 0.3s; }
+        .header-box { text-align: center; margin-bottom: 15px; background: var(--header-bg); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); position: relative; transition: background 0.3s, border-color 0.3s; }
         
         body.light-mode .header-box h1, 
         body.light-mode .header-box .creator-tag, 
@@ -104,7 +110,7 @@
         .side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
 
         button#translate { 
-            background: var(--accent-color); /* ස්පීකර් බටන් එකේ ඇති තද නිල් පැහැයම Translate බටන් එකට යොදන ලදී */
+            background: var(--accent-color); 
             color: white; border: none; padding: 0 12px; height: 48px; border-radius: 10px; 
             cursor: pointer; font-weight: bold; width: 100%; max-width: 400px; font-size: 15px; 
             transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; 
