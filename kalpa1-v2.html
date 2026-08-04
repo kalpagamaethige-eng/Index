@@ -22,9 +22,10 @@
             --accent-color: #0284c7; --accent-hover: #0369a1;
             --text-primary: #0f172a; 
             --text-secondary: #334155; 
-            --header-bg-light: linear-gradient(90deg, #1e3a8a 0%, #0284c7 60%, #38bdf8 100%); 
+            /* Header ෂේඩ් එක මදක් අඩු කරන ලදී */
+            --header-bg-light: linear-gradient(90deg, #3b82f6 0%, #60a5fa 70%, #93c5fd 100%); 
             --textarea-light-border: #1e3a8a; 
-            --top-btn-bg-light: #334155; /* ඉහළ බටන් 6 සඳහා තද පැහැය */
+            --top-btn-bg-light: #64748b; /* ඉහළ බටන් 6 සඳහා වඩාත් ලා පැහැති අඳුරු ෂේඩ් එකක් */
             --top-btn-text-light: #f8fafc;
         }
 
@@ -96,7 +97,7 @@
         .action-row { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; align-items: center; }
         .top-buttons { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; width: 100%; }
         .side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        body.light-mode .top-buttons .side-square-btn { background: var(--top-btn-bg-light); color: var(--top-btn-text-light); border-color: #1e3a8a; } /* Light mode එකේදී ඉහළ බටන් 6 තද පැහැ ගැන්වීම */
+        body.light-mode .top-buttons .side-square-btn { background: var(--top-btn-bg-light); color: var(--top-btn-text-light); border-color: #94a3b8; } 
         .side-square-btn:hover { background: var(--border-color); }
         .side-square-btn.listening { background: #ef4444; animation: pulse 1.5s infinite; color: white; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
