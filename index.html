@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kalpa AI English Translator & Teacher Ver 2.3 Pro</title>
+    <title>Kalpa AI English Translator & Teacher Ver 2.4 Pro</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
@@ -139,46 +139,34 @@
             margin-top: 15px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             max-height: 65vh;
             overflow-y: auto;
         }
 
-        .output-box-wrapper {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 14px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-        }
-
-        .output-title {
-            font-size: 13px;
-            font-weight: 700;
+        .heading-highlight {
+            display: block;
+            background: linear-gradient(90deg, #1e293b, #0f172a);
             color: var(--accent-color);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 6px;
+            padding: 9px 13px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-hover);
+            margin-top: 14px;   
+            margin-bottom: 8px; 
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        .output-content {
-            font-size: 13.5px;
-            color: #e2e8f0;
-            line-height: 1.7;
-        }
-
-        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පරිවර්තන පෙට්ටිය */
+        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පරිවර්තන පෙට්ටිය (1 වන කොටුව) */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #ffffff;
             border-left: 5px solid #ffffff;
             color: #ffffff;
-            padding: 12px 14px;
-            border-radius: 10px;
-            margin: 6px 0;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin: 8px 0 12px 0;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
             display: flex;
             align-items: center;
@@ -210,8 +198,8 @@
             color: white;
             border: 1px solid #38bdf8;
             border-radius: 10px;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             font-size: 18px;
             cursor: pointer;
             display: inline-flex;
@@ -229,6 +217,17 @@
 
         .speak-btn:active {
             transform: scale(0.95);
+        }
+
+        /* වෙනත් කොටු සඳහා පොදු පෙනුම */
+        .box-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 14px 16px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            line-height: 1.8;
+            color: #e2e8f0;
         }
 
         .loading {
@@ -252,7 +251,7 @@
         .countdown-text {
             color: #facc15;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 14px;
             display: inline-block;
             margin-top: 8px;
             background: #291805;
@@ -270,12 +269,11 @@
     </div>
 
     <div class="container">
-        <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: She is cooking dinner now / What is AI?)..."></textarea>
+        <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: She is cooking dinner now / What is the capital of Sri Lanka?)..."></textarea>
         <button id="translate">✨ Translate & Analyze (පරිවර්තනය සහ විශ්ලේෂණය)</button>
-        
         <div id="output">
             <div style="text-align: center; color: var(--text-secondary); padding: 20px; font-style: italic;">
-                ප්‍රතිඵල මෙහි දිස් වනු ඇත...
+                පිළිතුර මෙහි දිස් වනු ඇත...
             </div>
         </div>
     </div>
@@ -444,34 +442,32 @@
             }
         }
 
-        // ඉතා පැහැදිලි කොටස් පහකට ප්‍රතිඵල වෙන් කර ලබා ගැනීමට සකස් කළ System Prompt එක
+        // ඔබ ඉල්ලා සිටි අංක 1 සිට 6 දක්වා කොටු වෙන වෙනම පාලනය කිරීමට සකස් කළ Prompt එක
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher, grammarian, and translator.
-When the user inputs a sentence, question, or query, you must return your response structured cleanly into FIVE distinct sections using the exact markers below:
+When the user inputs a sentence, question, or query, you must return your response structured cleanly into SIX distinct sections using the exact XML-like markers below:
 
-===TRANSLATION===
-Provide ONLY the accurate translation in format: [EN_TEXT] || [SI_TEXT] (Do NOT use brackets []). If it's a general question, provide a core statement or translation representation.
+===BOX1_TRANSLATION===
+Provide ONLY the direct translation in format: [EN_TEXT] || [SI_TEXT] (Do NOT use brackets []).
 
-===GRAMMAR_ANALYSIS===
-Provide a detailed structural analysis in both English and Sinhala clearly specifying:
-- **කාලය (Tense)**: (e.g., Present Continuous Tense / වර්තමාන සිදුවෙමින් පවතින කාලය)
-- **කතෘ / උක්තය (Subject / Actor)**: 
-- **ක්‍රියාව (Verb & Form)**: 
-- **කර්මය (Object / Receiver)**: 
-- **අනෙකුත් කොටස් (Modifiers / Other Elements)**: 
+===BOX2_TENSE_INFO===
+Provide the exact Tense (කාලය) and any relevant grammar notes or context details in both English and Sinhala clearly.
 
-===ANSWER===
-Provide comprehensive answers, grammar explanations, or answers to any general question asked by the user in both English and Sinhala clearly.
+===BOX3_GRAMMAR_PARTS===
+Provide a detailed breakdown of Subject (උක්තය), Actor/Author (කතෘ), Verb (ක්‍රියාව/ආඛ්‍යාතය), Object (කර්මය), and Modifiers in both English and Sinhala clearly.
 
-===EXAMPLES===
-Provide exactly 5 similar example sentences or patterns related to the user input in format:
+===BOX4_ANSWER===
+If the user asks a question, provide a comprehensive and correct answer with detailed explanations in both English and Sinhala. If it is just a sentence, provide a thorough explanation of its meaning and usage.
+
+===BOX5_EXAMPLES===
+Provide exactly 4 or 5 similar example sentences numbered 1 to 5, related to the user input in format:
 1. EN_EX1 || SI_EX1
 2. EN_EX2 || SI_EX2
 3. EN_EX3 || SI_EX3
 4. EN_EX4 || SI_EX4
 5. EN_EX5 || SI_EX5
 
-===PRACTICE===
-Provide a practical follow-up question or exercise to test the user's understanding in both English and Sinhala.`;
+===BOX6_PRACTICE===
+Provide a practical exercise or test question (අභ්‍යාසයක්) in both English and Sinhala to test understanding.`;
 
         function startCountdown(fallbackSeconds, errorMessage) {
             const outputDiv = document.getElementById("output");
@@ -593,7 +589,7 @@ Provide a practical follow-up question or exercise to test the user's understand
             let safeEn = cleanEn.replace(/'/g, "\\'");
             let safeSi = cleanSi.replace(/'/g, "\\'");
 
-            return `<div class="main-translation-box">
+            return `<div class="main-translation-box" style="margin: 4px 0;">
                 <div class="translation-content">
                     <div class="lang-line english" style="color: #ffffff;">🇬🇧 ${cleanEn}</div>
                     <div class="lang-line sinhala" style="color: #fef08a;">🇱🇰 ${cleanSi}</div>
@@ -605,105 +601,135 @@ Provide a practical follow-up question or exercise to test the user's understand
         function parseAndDisplayResponse(rawText) {
             if (!rawText) return;
 
-            let transSection = "";
-            let grammarSection = "";
-            let answerSection = "";
-            let examplesSection = "";
-            let practiceSection = "";
+            let box1 = "", box2 = "", box3 = "", box4 = "", box5 = "", box6 = "";
 
-            if (rawText.includes("===TRANSLATION===")) {
-                let parts = rawText.split("===TRANSLATION===");
-                let afterTrans = parts[1] || rawText;
+            if (rawText.includes("===BOX1_TRANSLATION===")) {
+                let p1 = rawText.split("===BOX1_TRANSLATION===");
+                let rest1 = p1[1] || rawText;
                 
-                let splitGrammar = afterTrans.split("===GRAMMAR_ANALYSIS===");
-                transSection = splitGrammar[0] || "";
-                let rest1 = splitGrammar[1] || "";
+                let p2 = rest1.split("===BOX2_TENSE_INFO===");
+                box1 = p2[0] || "";
+                let rest2 = p2[1] || "";
                 
-                let splitAnswer = rest1.split("===ANSWER===");
-                grammarSection = splitAnswer[0] || "";
-                let rest2 = splitAnswer[1] || "";
+                let p3 = rest2.split("===BOX3_GRAMMAR_PARTS===");
+                box2 = p3[0] || "";
+                let rest3 = p3[1] || "";
                 
-                let splitExamples = rest2.split("===EXAMPLES===");
-                answerSection = splitExamples[0] || "";
-                let rest3 = splitExamples[1] || "";
+                let p4 = rest3.split("===BOX4_ANSWER===");
+                box3 = p4[0] || "";
+                let rest4 = p4[1] || "";
                 
-                let splitPractice = rest3.split("===PRACTICE===");
-                examplesSection = splitPractice[0] || "";
-                practiceSection = splitPractice[1] || "";
+                let p5 = rest4.split("===BOX5_EXAMPLES===");
+                box4 = p5[0] || "";
+                let rest5 = p5[1] || "";
+                
+                let p6 = rest5.split("===BOX6_PRACTICE===");
+                box5 = p6[0] || "";
+                box6 = p6[1] || "";
             } else {
-                transSection = rawText;
-                grammarSection = "විස්තර නොමැත.";
-                answerSection = "විශේෂ පැහැදිලි කිරීමක් නොමැත.";
-                examplesSection = "";
-                practiceSection = "අභ්‍යාස නොමැත.";
+                box1 = rawText;
+                box2 = "විස්තර නොමැත.";
+                box3 = "විස්තර නොමැත.";
+                box4 = "විශේෂ පැහැදිලි කිරීමක් නොමැත.";
+                box5 = "";
+                box6 = "අභ්‍යාස නොමැත.";
             }
 
-            // 1. ප්‍රධාන පරිවර්තන කොටුව
-            let transLines = transSection.trim().split('\n').map(l => l.trim()).filter(l => l);
-            let transHtml = "";
+            // 1. ප්‍රධාන පරිවර්තක කොටුව (ස්පීකර් සහිතව)
+            let transLines = box1.trim().split('\n').map(l => l.trim()).filter(l => l);
+            let box1Html = "";
             transLines.forEach(line => {
                 if (line.includes("||")) {
-                    transHtml += formatPairBox(line);
+                    box1Html += formatPairBox(line);
                 } else {
-                    transHtml += `<div class="lang-line" style="padding: 6px 0;">${line.replace(/\*\*/g, '').replace(/[\[\]()]/g, '')}</div>`;
+                    box1Html += `<div class="lang-line" style="padding: 6px 0;">${line.replace(/\*\*/g, '').replace(/[\[\]()]/g, '')}</div>`;
                 }
             });
 
-            // 2. කාලය සහ ව්‍යාකරණ විශ්ලේෂණය (Grammar Analysis)
-            let formattedGrammar = grammarSection.trim()
+            // 2. කාලය සහ අමතර කරුණු
+            let box2Html = box2.trim()
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/^\s*-\s+/gim, '• ')
                 .split('\n').map(l => l.trim()).filter(l => l).join('<br>');
 
-            // 3. AI පිළිතුර සහ පැහැදිලි කිරීම
-            let formattedAnswer = answerSection.trim()
+            // 3. කතෘ, උක්ත, ආඛ්‍යාත, ක්‍රියා ආදී වෙනත් දෑ
+            let box3Html = box3.trim()
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/^\s*-\s+/gim, '• ')
                 .split('\n').map(l => l.trim()).filter(l => l).join('<br>');
 
-            // 4. උදාහරණ වාක්‍ය 5 ක්
-            let exLines = examplesSection.trim().split('\n').map(l => l.trim()).filter(l => l);
-            let exHtml = "";
+            // 4. ප්‍රශ්නයකට නිවැරදි පිළිතුර සහ ගැඹුරු විස්තරය
+            let box4Html = box4.trim()
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/^\s*-\s+/gim, '• ')
+                .split('\n').map(l => l.trim()).filter(l => l).join('<br>');
+
+            // 5. 1 සිට 4 හෝ 5 දක්වා උදාහරණ වාක්‍ය
+            let exLines = box5.trim().split('\n').map(l => l.trim()).filter(l => l);
+            let box5Html = "";
             exLines.forEach(line => {
                 let cleanLine = line.replace(/^\d+[\.\)]\s*/, '');
                 if (cleanLine.includes("||")) {
-                    exHtml += formatPairBox(cleanLine);
+                    box5Html += formatPairBox(cleanLine);
                 } else if (cleanLine) {
-                    exHtml += `<div class="lang-line" style="padding: 4px 0;">• ${cleanLine.replace(/\*\*/g, '')}</div>`;
+                    box5Html += `<div class="lang-line" style="padding: 4px 0;">• ${cleanLine.replace(/\*\*/g, '')}</div>`;
                 }
             });
 
-            // 5. අභ්‍යාස ප්‍රශ්නය (Practice)
-            let formattedPractice = practiceSection.trim()
+            // 6. අභ්‍යාසය
+            let box6Html = box6.trim()
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\n/g, '<br>');
 
-            // UI එකට කොටස් සියල්ල නිවැරදිව එකතු කිරීම
+            // UI එකට කොටස් සියල්ල නිවැරදි අනුපිළිවෙලට එකතු කිරීම
             const outputDiv = document.getElementById("output");
             outputDiv.innerHTML = `
-                <div class="output-box-wrapper">
-                    <div class="output-title">🌐 ප්‍රධාන පරිවර්තනය (Main Translation)</div>
-                    <div class="output-content">${transHtml || "පරිවර්තනයක් නොමැත."}</div>
+                <!-- 1. ප්‍රධාන පරිවර්තක කොටුව -->
+                <div>
+                    <span class="heading-highlight">1. ප්‍රධාන පරිවර්තක කොටුව (Main Translation)</span>
+                    <div class="box-section" style="background: transparent; border: none; padding: 0;">
+                        ${box1Html || "පරිවර්තනයක් නොමැත."}
+                    </div>
                 </div>
 
-                <div class="output-box-wrapper">
-                    <div class="output-title">⏰ කාලය සහ ව්‍යාකරණ විශ්ලේෂණය (Tense & Structure Analysis)</div>
-                    <div class="output-content">${formattedGrammar || "විශ්ලේෂණ දත්ත නොමැත."}</div>
+                <!-- 2. කාලය සහ අමතර කරුණු -->
+                <div>
+                    <span class="heading-highlight">2. කාලය සහ අමතර කරුණු (Tense & Extra Notes)</span>
+                    <div class="box-section">
+                        ${box2Html || "දත්ත නොමැත."}
+                    </div>
                 </div>
 
-                <div class="output-box-wrapper">
-                    <div class="output-title">💡 AI පිළිතුර සහ පැහැදිලි කිරීම (AI Answer & Explanation)</div>
-                    <div class="output-content">${formattedAnswer || "පැහැදිලි කිරීම් නොමැත."}</div>
+                <!-- 3. කතෘ, උක්ත, ආඛ්‍යාත, ක්‍රියා ආදී වෙනත් දෑ -->
+                <div>
+                    <span class="heading-highlight">3. කතෘ, උක්ත, ආඛ්‍යාත සහ ක්‍රියා විශ්ලේෂණය (Grammar Parts)</span>
+                    <div class="box-section">
+                        ${box3Html || "විශ්ලේෂණ දත්ත නොමැත."}
+                    </div>
                 </div>
 
-                <div class="output-box-wrapper">
-                    <div class="output-title">📚 උදාහරණ වාක්‍ය 5 ක් (5 Similar Examples)</div>
-                    <div class="output-content">${exHtml || "උදාහරණ නොමැත."}</div>
+                <!-- 4. ප්‍රශ්ණයක්නම් ඒ ප්‍රශ්ණයට නිවැරදි පිළිතුරක් සහ ගැඹුරු විස්තරයක් -->
+                <div>
+                    <span class="heading-highlight">4. පිළිතුර සහ ගැඹුරු විස්තරය (Answer & Detailed Explanation)</span>
+                    <div class="box-section">
+                        ${box4Html || "විශේෂ පැහැදිලි කිරීම් නොමැත."}
+                    </div>
                 </div>
 
-                <div class="output-box-wrapper" style="border-color: #38bdf8; background: linear-gradient(135deg, #0f172a, #1e293b);">
-                    <div class="output-title" style="color: #facc15;">💬 අභ්‍යාස ප්‍රශ්නය (Practice Exercise)</div>
-                    <div class="output-content" style="color: #f8fafc;">${formattedPractice || "අභ්‍යාස නොමැත."}</div>
+                <!-- 5. 1 සිට 5 දක්වා උදාහරණ වාක්‍ය -->
+                <div>
+                    <span class="heading-highlight">5. උදාහරණ වාක්‍ය (Similar Examples)</span>
+                    <div class="box-section">
+                        ${box5Html || "උදාහරණ නොමැත."}
+                    </div>
+                </div>
+
+                <!-- 6. අභ්‍යාසයක් -->
+                <div>
+                    <span class="heading-highlight" style="background: linear-gradient(90deg, #0369a1, #0284c7);">6. අභ්‍යාසය (Practice Exercise)</span>
+                    <div class="box-section" style="border-color: #38bdf8; background: linear-gradient(135deg, #0f172a, #1e293b); color: #f8fafc;">
+                        ${box6Html || "අභ්‍යාස නොමැත."}
+                    </div>
                 </div>
             `;
         }
@@ -721,7 +747,7 @@ Provide a practical follow-up question or exercise to test the user's understand
 
             if (countdownTimer) clearInterval(countdownTimer);
 
-            const cacheKey = `trans_cache_v23_${text.toLowerCase()}`;
+            const cacheKey = `trans_cache_v24_${text.toLowerCase()}`;
             const cachedResult = localStorage.getItem(cacheKey);
 
             if (cachedResult) {
@@ -735,7 +761,7 @@ Provide a practical follow-up question or exercise to test the user's understand
             translateBtn.style.cursor = "not-allowed";
             translateBtn.innerHTML = "↻ Please wait...";
 
-            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා වාක්‍යය විශ්ලේෂණය කරමින් පවතී...</div><div class='spinner'></div></div>";
+            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා වාක්‍යය වෙන වෙනම කොටු වලට බෙදා විශ්ලේෂණය කරමින් පවතී...</div><div class='spinner'></div></div>";
 
             try {
                 const result = await askGemini(text);
