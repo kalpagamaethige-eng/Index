@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kalpa AI English Translator & Teacher Ver 2.2 Pro</title>
+    <title>Kalpa AI English Translator & Teacher Ver 2.3 Pro</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
@@ -140,7 +140,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            max-height: 60vh;
+            max-height: 65vh;
             overflow-y: auto;
         }
 
@@ -170,20 +170,7 @@
             line-height: 1.7;
         }
 
-        .heading-highlight {
-            display: block;
-            background: linear-gradient(90deg, #1e293b, #0f172a);
-            color: var(--accent-color);
-            padding: 8px 12px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-hover);
-            margin-top: 10px;   
-            margin-bottom: 6px; 
-            font-weight: bold;
-            font-size: 13.5px;
-        }
-
-        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පෙට්ටියේ රාමුව සහ පෙනුම */
+        /* ස්පීකර් සලකුණ ඇති ප්‍රධාන පරිවර්තන පෙට්ටිය */
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #ffffff;
@@ -279,23 +266,22 @@
     <div class="header-box">
         <span class="creator-tag">Created by Kalpa Gamaethige</span>
         <h1>KALPA AI English Translator & Teacher</h1>
-        <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉගෙනුම් සහකරු</p>
+        <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ විශ්ලේෂණය සහ ඉගෙනුම් සහකරු</p>
     </div>
 
     <div class="container">
-        <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I go to school yesterday / What is photosynthesis?)..."></textarea>
-        <button id="translate">✨ Translate Now (පරිවර්තනය)</button>
+        <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: She is cooking dinner now / What is AI?)..."></textarea>
+        <button id="translate">✨ Translate & Analyze (පරිවර්තනය සහ විශ්ලේෂණය)</button>
         
         <div id="output">
             <div style="text-align: center; color: var(--text-secondary); padding: 20px; font-style: italic;">
-                පිළිතුර මෙහි දිස් වනු ඇත...
+                ප්‍රතිඵල මෙහි දිස් වනු ඇත...
             </div>
         </div>
     </div>
 
     <script>
         const ENCODED_KEYS = [
-            //📍API KEY  01 > ENCODE 👇
             "QVEuQWI4Uk42SnhMUGlHS1BrazljakE2ajNIaDhjT01lTXktMHlIeU5TZkZwZk5JWV9SaGcK",
             "CkFRLkFiOFJONktBTTQxUGkwem9XRXVHSHFRRlpkWmFBSlJiTzJyQVpRNnN2QWRxdkhyby1B",
             "CkFRLkFiOFJONktGQWFNYkxRandEdjNKcHRMZld0a1pOZ2s2YXx4Qmo4amxkUGJTMHFVR29B",
@@ -326,8 +312,6 @@
             "QVEuQWI4Uk42TFB5eTFtMnF6NnZwc1pWX0toaEd3MktKYTNENFc2U1NKdGo5NUQ4cXdpd0EK",
             "CkFRLkFiOFJONkxQeXkxbTJxejZ2cHNaVl9LaGhHdzJLSmEzRDRWNlNTSnRqOTVEOHF3aXdBCg",
             "QVEuQWI4Uk42SXRPQWY0ck9nbkFLWWh5aHJOQnZQcnMwaUVzd3hjeGNFdWkzM0ExWG1GMnc",
-
-            //📍API KEY : 02 > ENCODE 👇
             "QVEuQWI4Uk42SXZhN1djU0o5OGZfWkpLMXpBUnVUZGxJMDMxbmlFWVNaVTdXLS1NUHVtQmcK",
             "QVEuQWI4Uk42S3VqRU5PaWl0cm1HNDF0dnhPRWdPVUtOSVhwaTFLSnJpWnJWVndjZlBKUFE",
             "QVEuQWI4Uk42S3ZnYlBaRndIc1FjUk54ci01MHdScVhXUm51MTgxczR2TjkzM242QlZqbWc",
@@ -358,8 +342,6 @@
             "QVEuQWI4Uk42Sm1YQTN6Nk5rMDJnc3RIMFNoc2xnLWlsaXc4anI0OW9TdG9qVTFZaUJwdUEKCg",
             "CkFRLkFiOFJONkptWEEzejZOazAyZ3N0SDBTaHNsZy1pbGl3OGpyNDlvU3RvalUxWWlCcHVB",
             "QVEuQWI4Uk42S2VycExzdlpLV2YzVWVPLUxqamF0cFNwUUVrNDBiRDRCdmY0LUd5RnJLSUE",
-
-            //📍API KEY : 03 > ENCODE 👇
             "QVEuQWI4Uk42THcySEF1d0lINVhRdE9ORm1GTDVWaHlSLTE1TWZjT1U3THdzemVKZWYtckEKCg",
             "QVEuQWI4Uk42S3ozVjBtbDdsWVBPdzVMUGQ0clZ2dk1kY29VeW53TUtKRlhpaS1ZVTVsancK",
             "QVEuQWI4Uk42SzRHS1ZnWkVKb3FZdWJJV1N6MTQ1RVBRT1JBTHFCN2hvTVZBSWo1VGZ1VHc",
@@ -390,8 +372,6 @@
             "QVEuQWI4Uk42S3NYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0EKCg",
             "QVEuQWI4Uk42S3NYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0E",
             "QVEuQWI4Uk42THp1U2RobTBoTEdJR2pFeXZUQVRBdDl1Z2p6TXh4bi1qWW02dDdKS1J1UXc",
-
-            //📍API KEY : 04 > ENCODE 👇
             "CkFRLkFiOFJONktIeWo2Ylo2dnJid2RWS0otdERNMjlyQnR0ajJack5qNUdfR09ESEZZcE13",
             "QVEuQWI4Uk42S3BpdklhVE9TbkxYWmp4bEpxdTg1V2VUVS1vRzFrWHRURW9uZjJGVzVpaVEK",
             "QVEuQWI4Uk42SktHOGVpUlJMcVowTGVyQ2FfcDB2ODFiRUlhRjhpSTJqcGZybFBaeVg3a3cK",
@@ -464,23 +444,34 @@
             }
         }
 
-        // ඉතා පැහැදිලි කොටස් තුනකට ප්‍රතිඵල වෙන් කර ලබා ගැනීමට සකස් කළ System Prompt එක
-        const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
-When the user inputs a sentence, question, or general query, you must return your response structured cleanly into THREE distinct sections using the exact markers below:
+        // ඉතා පැහැදිලි කොටස් පහකට ප්‍රතිඵල වෙන් කර ලබා ගැනීමට සකස් කළ System Prompt එක
+        const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher, grammarian, and translator.
+When the user inputs a sentence, question, or query, you must return your response structured cleanly into FIVE distinct sections using the exact markers below:
 
 ===TRANSLATION===
-Provide ONLY the accurate translation in format: [EN_TEXT] || [SI_TEXT] (Do NOT use brackets []). If it's a general question, provide a short direct translated representation or core statement.
+Provide ONLY the accurate translation in format: [EN_TEXT] || [SI_TEXT] (Do NOT use brackets []). If it's a general question, provide a core statement or translation representation.
+
+===GRAMMAR_ANALYSIS===
+Provide a detailed structural analysis in both English and Sinhala clearly specifying:
+- **කාලය (Tense)**: (e.g., Present Continuous Tense / වර්තමාන සිදුවෙමින් පවතින කාලය)
+- **කතෘ / උක්තය (Subject / Actor)**: 
+- **ක්‍රියාව (Verb & Form)**: 
+- **කර්මය (Object / Receiver)**: 
+- **අනෙකුත් කොටස් (Modifiers / Other Elements)**: 
 
 ===ANSWER===
-Provide comprehensive answers, grammar explanations, tense details, structure breakdown (Subject, Verb, Object), or answers to any general question asked by the user in both English and Sinhala.
+Provide comprehensive answers, grammar explanations, or answers to any general question asked by the user in both English and Sinhala clearly.
 
 ===EXAMPLES===
-Provide exactly 5 similar example sentences, patterns, or vocabulary items related to the user input in format:
+Provide exactly 5 similar example sentences or patterns related to the user input in format:
 1. EN_EX1 || SI_EX1
 2. EN_EX2 || SI_EX2
 3. EN_EX3 || SI_EX3
 4. EN_EX4 || SI_EX4
-5. EN_EX5 || SI_EX5`;
+5. EN_EX5 || SI_EX5
+
+===PRACTICE===
+Provide a practical follow-up question or exercise to test the user's understanding in both English and Sinhala.`;
 
         function startCountdown(fallbackSeconds, errorMessage) {
             const outputDiv = document.getElementById("output");
@@ -615,30 +606,40 @@ Provide exactly 5 similar example sentences, patterns, or vocabulary items relat
             if (!rawText) return;
 
             let transSection = "";
+            let grammarSection = "";
             let answerSection = "";
             let examplesSection = "";
+            let practiceSection = "";
 
-            if (rawText.includes("===TRANSLATION===") || rawText.includes("===ANSWER===")) {
-                let partsTrans = rawText.split("===TRANSLATION===");
-                let afterTrans = partsTrans[1] || rawText;
-                let splitAnswer = afterTrans.split("===ANSWER===");
-                let transText = splitAnswer[0] || "";
-                let restAfterAns = splitAnswer[1] || "";
-                let splitExamples = restAfterAns.split("===EXAMPLES===");
-                let ansText = splitExamples[0] || "";
-                let exText = splitExamples[1] || "";
-
-                transSection = transText.trim();
-                answerSection = ansText.trim();
-                examplesSection = exText.trim();
+            if (rawText.includes("===TRANSLATION===")) {
+                let parts = rawText.split("===TRANSLATION===");
+                let afterTrans = parts[1] || rawText;
+                
+                let splitGrammar = afterTrans.split("===GRAMMAR_ANALYSIS===");
+                transSection = splitGrammar[0] || "";
+                let rest1 = splitGrammar[1] || "";
+                
+                let splitAnswer = rest1.split("===ANSWER===");
+                grammarSection = splitAnswer[0] || "";
+                let rest2 = splitAnswer[1] || "";
+                
+                let splitExamples = rest2.split("===EXAMPLES===");
+                answerSection = splitExamples[0] || "";
+                let rest3 = splitExamples[1] || "";
+                
+                let splitPractice = rest3.split("===PRACTICE===");
+                examplesSection = splitPractice[0] || "";
+                practiceSection = splitPractice[1] || "";
             } else {
                 transSection = rawText;
+                grammarSection = "විස්තර නොමැත.";
                 answerSection = "විශේෂ පැහැදිලි කිරීමක් නොමැත.";
                 examplesSection = "";
+                practiceSection = "අභ්‍යාස නොමැත.";
             }
 
-            // 1. ප්‍රධාන පරිවර්තන කොටුව හැඩගැන්වීම
-            let transLines = transSection.split('\n').map(l => l.trim()).filter(l => l);
+            // 1. ප්‍රධාන පරිවර්තන කොටුව
+            let transLines = transSection.trim().split('\n').map(l => l.trim()).filter(l => l);
             let transHtml = "";
             transLines.forEach(line => {
                 if (line.includes("||")) {
@@ -648,15 +649,20 @@ Provide exactly 5 similar example sentences, patterns, or vocabulary items relat
                 }
             });
 
-            // 2. AI පිළිතුර සහ පැහැදිලි කිරීමේ කොටුව හැඩගැන්වීම
-            let formattedAnswer = answerSection
-                .replace(/(?:###|##)\s*(.*$)/gim, '<span class="heading-highlight">$1</span>')
+            // 2. කාලය සහ ව්‍යාකරණ විශ්ලේෂණය (Grammar Analysis)
+            let formattedGrammar = grammarSection.trim()
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/^\s*-\s+/gim, '• ')
                 .split('\n').map(l => l.trim()).filter(l => l).join('<br>');
 
-            // 3. උදාහරණ වාක්‍ය 5 ක කොටුව හැඩගැන්වීම
-            let exLines = examplesSection.split('\n').map(l => l.trim()).filter(l => l);
+            // 3. AI පිළිතුර සහ පැහැදිලි කිරීම
+            let formattedAnswer = answerSection.trim()
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/^\s*-\s+/gim, '• ')
+                .split('\n').map(l => l.trim()).filter(l => l).join('<br>');
+
+            // 4. උදාහරණ වාක්‍ය 5 ක්
+            let exLines = examplesSection.trim().split('\n').map(l => l.trim()).filter(l => l);
             let exHtml = "";
             exLines.forEach(line => {
                 let cleanLine = line.replace(/^\d+[\.\)]\s*/, '');
@@ -667,12 +673,22 @@ Provide exactly 5 similar example sentences, patterns, or vocabulary items relat
                 }
             });
 
-            // UI එකට කොටස් තුන නිවැරදිව ඇතුළත් කිරීම
+            // 5. අභ්‍යාස ප්‍රශ්නය (Practice)
+            let formattedPractice = practiceSection.trim()
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>');
+
+            // UI එකට කොටස් සියල්ල නිවැරදිව එකතු කිරීම
             const outputDiv = document.getElementById("output");
             outputDiv.innerHTML = `
                 <div class="output-box-wrapper">
                     <div class="output-title">🌐 ප්‍රධාන පරිවර්තනය (Main Translation)</div>
                     <div class="output-content">${transHtml || "පරිවර්තනයක් නොමැත."}</div>
+                </div>
+
+                <div class="output-box-wrapper">
+                    <div class="output-title">⏰ කාලය සහ ව්‍යාකරණ විශ්ලේෂණය (Tense & Structure Analysis)</div>
+                    <div class="output-content">${formattedGrammar || "විශ්ලේෂණ දත්ත නොමැත."}</div>
                 </div>
 
                 <div class="output-box-wrapper">
@@ -683,6 +699,11 @@ Provide exactly 5 similar example sentences, patterns, or vocabulary items relat
                 <div class="output-box-wrapper">
                     <div class="output-title">📚 උදාහරණ වාක්‍ය 5 ක් (5 Similar Examples)</div>
                     <div class="output-content">${exHtml || "උදාහරණ නොමැත."}</div>
+                </div>
+
+                <div class="output-box-wrapper" style="border-color: #38bdf8; background: linear-gradient(135deg, #0f172a, #1e293b);">
+                    <div class="output-title" style="color: #facc15;">💬 අභ්‍යාස ප්‍රශ්නය (Practice Exercise)</div>
+                    <div class="output-content" style="color: #f8fafc;">${formattedPractice || "අභ්‍යාස නොමැත."}</div>
                 </div>
             `;
         }
@@ -700,7 +721,7 @@ Provide exactly 5 similar example sentences, patterns, or vocabulary items relat
 
             if (countdownTimer) clearInterval(countdownTimer);
 
-            const cacheKey = `trans_cache_${text.toLowerCase()}`;
+            const cacheKey = `trans_cache_v23_${text.toLowerCase()}`;
             const cachedResult = localStorage.getItem(cacheKey);
 
             if (cachedResult) {
@@ -714,7 +735,7 @@ Provide exactly 5 similar example sentences, patterns, or vocabulary items relat
             translateBtn.style.cursor = "not-allowed";
             translateBtn.innerHTML = "↻ Please wait...";
 
-            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
+            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා වාක්‍යය විශ්ලේෂණය කරමින් පවතී...</div><div class='spinner'></div></div>";
 
             try {
                 const result = await askGemini(text);
@@ -731,7 +752,7 @@ Provide exactly 5 similar example sentences, patterns, or vocabulary items relat
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
                 translateBtn.style.cursor = "pointer";
-                translateBtn.innerHTML = "✨ Translate Now (පරිවර්තනය)";
+                translateBtn.innerHTML = "✨ Translate & Analyze (පරිවර්තනය සහ විශ්ලේෂණය)";
             }
         };
     </script>
