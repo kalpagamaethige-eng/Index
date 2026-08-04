@@ -18,7 +18,7 @@
             --text-primary: #f8fafc; 
             --text-secondary: #94a3b8;
             --header-bg: linear-gradient(135deg, var(--bg-card), var(--bg-primary));
-            --translate-btn-bg: linear-gradient(135deg, #0284c7, #0369a1); /* Dark mode එකේ Translate බටන් එක තද පැහැයට සහ අකුරු වල සමාන පැහැයට හැරවීම */
+            --translate-btn-bg: linear-gradient(135deg, #38bdf8, #0284c7); /* Dark mode එකේදී අකුරු වල පාටට සමාන තද පැහැය */
         }
         body.light-mode {
             --bg-primary: #e2e8f0; 
@@ -224,7 +224,7 @@
 
     <div class="container">
         <div class="input-wrapper">
-            <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න..."></textarea>
+            <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය, ප්‍රශ්නය හෝ විමසීම ලියන්න..."></textarea>
         </div>
         
         <div class="action-row">
@@ -236,7 +236,7 @@
                 <button class="side-square-btn" id="advanced-btn" title="Advanced Tools">🚀</button>
                 <button class="side-square-btn" id="mic-btn" title="Voice Input">🎤</button>
             </div>
-            <button id="translate">✨ Translate (පරිවර්ථනය)</button>
+            <button id="translate">✨ Ask & Translate (විමසන්න සහ පරිවර්තනය)</button>
         </div>
 
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
@@ -250,13 +250,16 @@
             setTimeout(() => { toast.classList.remove('show'); }, 2500);
         }
 
-        const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator. 
-First detect if the User Input is English or Sinhala, then translate to the other language accurately.
-Your responsibilities: 1. Translate accurately. 2. Identify Tense. 3. Correct grammar.
-4. Provide Main Translation: ENGLISH_SENTENCE || SINHALA_SENTENCE 
-5. Breakdown 6. Answer Questions 7. Multiple Meanings
-8. 5 Similar Examples 9. Practice Question.
-Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation) ENGLISH_SENTENCE || SINHALA_SENTENCE... ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
+        const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher, translator, and assistant. 
+Whether the user inputs a sentence for translation or asks any general question/query, you must provide comprehensive answers and explanations in BOTH English and Sinhala languages clearly.
+Your responsibilities: 
+1. Translate accurately or answer questions thoroughly in both languages (English and Sinhala). 
+2. Identify Tense / Context. 
+3. Correct grammar if it's a sentence.
+4. Provide Main Translation/Answer in format: ENGLISH_TEXT || SINHALA_TEXT 
+5. Breakdown, explanations, and answers to any general questions in both languages. 
+6. Practice Question.
+Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිවර්තනය (Main Answer/Translation) ENGLISH_TEXT || SINHALA_TEXT... ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
         const adminSecretInput = document.getElementById('admin-secret-input');
         const adminPanelScreen = document.getElementById('admin-panel-screen');
@@ -292,7 +295,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                     `<strong>[FALLBACK OCCURRED]:</strong> ${debugInfo.fallbackOccurred ? 'YES ⚠️' : 'NO ✅'}<br>` +
                     `<strong>[RECENT ERRORS]:</strong><br>` + (debugInfo.errorsEncountered.slice(-3).join('<br>') || 'None');
             } else {
-                adminPanelScreen.innerHTML = `🔒 Password එක නිවැරදියි! පරිවර්තනයක් සිදුකළ විට හෝ යමක් සෙවූ විට මෙහි Live දෝෂ සහ දත්ත පෙනෙනු ඇත.`;
+                adminPanelScreen.innerHTML = `🔒 Password එක නිවැරදියි! විමසීමක් සිදුකළ විට මෙහි Live දෝෂ සහ දත්ත පෙනෙනු ඇත.`;
             }
         }
 
@@ -305,7 +308,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                         'Content-Type': 'application/json',
                         'x-admin-secret': adminSecret 
                     },
-                    body: JSON.stringify({ prompt: systemPrompt + "\n\nUser Input: " + promptText })
+                    body: JSON.stringify({ prompt: systemPrompt + "\n\nUser Input / Question: " + promptText })
                 });
                 const data = await response.json();
                 
@@ -447,7 +450,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             favs.forEach((item) => {
                 let safeItem = encodeURIComponent(item);
                 html += `<div class="favorite-item">
-                    <span onclick="loadHistoryItem(decodeURIComponent('### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation)<br>${safeItem}'))" style="cursor:pointer; display:inline-block; width:85%;">⭐ ${item.replace('||', '➜')}</span>
+                    <span onclick="loadHistoryItem(decodeURIComponent('### 🇱🇰 ප්‍රධාන පිළිතුර / පරිවර්තනය<br>${safeItem}'))" style="cursor:pointer; display:inline-block; width:85%;">⭐ ${item.replace('||', '➜')}</span>
                     <button class="fav-del-btn" onclick="event.stopPropagation(); toggleFavorite(decodeURIComponent('${safeItem}'), null);" title="ඉවත් කරන්න">❌</button>
                 </div>`;
             });
@@ -531,7 +534,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'AI_Translator_Translation.txt';
+            a.download = 'AI_Translator_Teacher_Output.txt';
             a.click();
             URL.revokeObjectURL(url);
             showToast("💾 File එක Download විය!");
@@ -594,7 +597,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
 
         async function runAdvancedTool(modePromptPrefix, toolName) {
             const text = inputField.value.trim();
-            if (!text) { showToast("කරුණාකර වාක්‍යයක් හෝ වචනයක් ඇතුළත් කරන්න."); return; }
+            if (!text) { showToast("කරුණාකර වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න."); return; }
             advancedModal.classList.remove('active');
             
             const outputDiv = document.getElementById("output");
@@ -613,7 +616,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             advancedModal.classList.remove('active');
             const outputDiv = document.getElementById("output");
             outputDiv.innerHTML = `<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>අර්ථය සොයමින් පවතී...</div></div>`;
-            const result = await askGemini(`Provide Synonyms, Antonyms, and 3 Example sentences for the word: "${word}" in English and Sinhala format. Format with ENGLISH_SENTENCE || SINHALA_SENTENCE.`);
+            const result = await askGemini(`Provide Synonyms, Antonyms, and 3 Example sentences for the word: "${word}" in English and Sinhala format. Format with ENGLISH_TEXT || SINHALA_TEXT.`);
             if(result.text) { outputDiv.innerHTML = formatMarkdown(result.text); }
             else { outputDiv.innerHTML = `<div class="error-box">දෝෂයක් සිදු විය.</div>`; }
         };
@@ -623,7 +626,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             const outputDiv = document.getElementById("output");
             const translateBtn = document.getElementById("translate");
             
-            if (!text) { outputDiv.innerText = "කරුණාකර වාක්‍යයක් ඇතුළත් කරන්න."; return; }
+            if (!text) { outputDiv.innerText = "කරුණාකර වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න."; return; }
 
             const cacheKey = `trans_cache_${text.toLowerCase()}`;
             const cachedResult = localStorage.getItem(cacheKey);
@@ -647,7 +650,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             } catch (error) { startCountdown(60, `Exception: ${error.message}`); }
             finally { 
                 document.querySelectorAll('button').forEach(btn => btn.disabled = false);
-                translateBtn.innerHTML = "✨ Translate"; 
+                translateBtn.innerHTML = "✨ Ask & Translate"; 
             }
         };
     </script>
