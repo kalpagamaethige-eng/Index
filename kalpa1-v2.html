@@ -18,7 +18,7 @@
             --text-primary: #f8fafc; 
             --text-secondary: #94a3b8;
             --header-bg: linear-gradient(135deg, var(--bg-card), var(--bg-primary));
-            --translate-btn-bg: linear-gradient(135deg, #0284c7, #0369a1); /* පරිවර්තන බටන් එක ඉහළ නම සහ අකුරු වල පැහැයට සමාන තද පැහැයට හැරවීම */
+            --translate-btn-bg: linear-gradient(135deg, #0284c7, #0369a1);
         }
         body.light-mode {
             --bg-primary: #e2e8f0; 
@@ -118,21 +118,24 @@
         }
         button#translate:active { transform: scale(0.98); }
 
-        #output { margin-top: 15px; background: var(--bg-primary); border: 1px solid var(--border-color); padding: 16px; border-radius: 10px; line-height: 1.8; font-size: 13.5px; color: var(--text-primary); flex: 1; overflow-y: auto; max-height: 50vh; transition: background 0.3s, color 0.3s, border 0.3s; }
-        .heading-highlight { display: block; background: linear-gradient(90deg, var(--bg-card), var(--bg-primary)); color: var(--accent-color); padding: 9px 13px; border-radius: 8px; border-left: 4px solid var(--accent-hover); margin-top: 14px; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
+        /* Output Boxes */
+        .output-section { margin-top: 15px; display: flex; flex-direction: column; gap: 12px; }
+        .output-box-wrapper { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; transition: all 0.3s; }
+        .output-title { font-size: 13px; font-weight: 700; color: var(--accent-color); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .output-content { font-size: 13.5px; color: var(--text-primary); line-height: 1.7; overflow-y: auto; max-height: 35vh; }
         
-        .main-translation-box { background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-primary) 100%); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 14px 16px; border-radius: 12px; margin: 8px 0 12px 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.3s; }
-        .translation-content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
-        .lang-line { font-size: 14.5px; font-weight: 600; line-height: 1.4; color: var(--text-primary); }
-        .lang-line.sinhala { color: #fff275; font-size: 14px; }
+        .heading-highlight { display: block; background: linear-gradient(90deg, var(--bg-card), var(--bg-primary)); color: var(--accent-color); padding: 9px 13px; border-radius: 8px; border-left: 4px solid var(--accent-hover); margin-top: 10px; margin-bottom: 6px; font-weight: bold; font-size: 13.5px; }
+        
+        .main-translation-box { background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-primary) 100%); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 12px 14px; border-radius: 10px; margin: 6px 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .translation-content { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .lang-line { font-size: 14px; font-weight: 600; line-height: 1.4; color: var(--text-primary); }
+        .lang-line.sinhala { color: #fff275; font-size: 13.5px; }
         body.light-mode .lang-line.sinhala { color: #b45309; }
         
         .btn-group-vertical { display: flex; flex-direction: column; gap: 3px; }
-        .action-icon-btn { background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 6px; width: 34px; height: 34px; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s ease; }
-        
+        .action-icon-btn { background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 6px; width: 32px; height: 32px; font-size: 13px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s ease; }
         .action-icon-btn.fav-btn { background: linear-gradient(135deg, #a855f7, #7e22ce); }
         .action-icon-btn.fav-btn.active { background: #facc15; color: #0f172a; }
-        
         .action-icon-btn.tenses-btn { background: linear-gradient(135deg, #10b981, #059669); }
 
         .spinner { 
@@ -239,7 +242,26 @@
             <button id="translate">✨ Translate (පරිවර්ථනය)</button>
         </div>
 
-        <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
+        <!-- වෙන් වෙන් වූ නිශ්චිත ප්‍රතිඵල කොටස් 3 ක් -->
+        <div class="output-section">
+            <!-- 1. ප්‍රධාන පරිවර්තන කොටුව (පරිවර්තනය පමණි) -->
+            <div class="output-box-wrapper">
+                <div class="output-title">🌐 ප්‍රධාන පරිවර්තනය (Main Translation)</div>
+                <div id="main-translation-output" class="output-content">පරිවර්තනය මෙහි දිස් වනු ඇත...</div>
+            </div>
+
+            <!-- 2. AI පිළිතුර සහ පැහැදිලි කිරීම (ප්‍රශ්න/විමසීම් සඳහා පමණි) -->
+            <div class="output-box-wrapper">
+                <div class="output-title">💡 AI පිළිතුර සහ පැහැදිලි කිරීම (AI Answer & Explanation)</div>
+                <div id="ai-answer-output" class="output-content">විමසීම් සඳහා පිළිතුරු මෙහි දිස් වනු ඇත...</div>
+            </div>
+
+            <!-- 3. උදාහරණ වාක්‍ය 5 ක් (රටාව තේරුම් ගැනීමට) -->
+            <div class="output-box-wrapper">
+                <div class="output-title">📚 උදාහරණ වාක්‍ය 5 ක් (5 Similar Examples)</div>
+                <div id="examples-output" class="output-content">රටාව තේරුම් ගැනීමට උදාහරණ මෙහි දිස් වනු ඇත...</div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -251,15 +273,22 @@
         }
 
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher, translator, and assistant. 
-Whether the user inputs a sentence for translation or asks any general question/query, you must provide comprehensive answers and explanations in BOTH English and Sinhala languages clearly.
-Your responsibilities: 
-1. Translate accurately or answer questions thoroughly in both languages (English and Sinhala). 
-2. Identify Tense / Context. 
-3. Correct grammar if it's a sentence.
-4. Provide Main Translation/Answer in format: ENGLISH_TEXT || SINHALA_TEXT 
-5. Breakdown, explanations, and answers to any general questions in both languages. 
-6. Practice Question.
-Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිවර්තනය (Main Answer/Translation) ENGLISH_TEXT || SINHALA_TEXT... ### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
+Strictly follow these separated response structures based on the User Input:
+1. [TRANSLATION]: Provide ONLY the accurate direct translation of the input text in format: ENGLISH_SENTENCE || SINHALA_SENTENCE.
+2. [ANSWER]: Provide comprehensive answers, grammar corrections, or explanations to any general question or query asked by the user in both English and Sinhala clearly.
+3. [EXAMPLES]: Provide exactly 5 similar example sentences or patterns related to the input text in format: ENGLISH_SENTENCE || SINHALA_SENTENCE.
+
+Format your full response cleanly with these exact XML-like tags or clear section headers so they can be parsed into separate UI boxes:
+===TRANSLATION===
+ENGLISH || SINHALA
+===ANSWER===
+Detailed explanation or answer in English and Sinhala.
+===EXAMPLES===
+1. ENG1 || SIN1
+2. ENG2 || SIN2
+3. ENG3 || SIN3
+4. ENG4 || SIN4
+5. ENG5 || SIN5`;
 
         const adminSecretInput = document.getElementById('admin-secret-input');
         const adminPanelScreen = document.getElementById('admin-panel-screen');
@@ -327,15 +356,15 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
         }
 
         function startCountdown(fallbackSeconds, errorMessage) {
-            const outputDiv = document.getElementById("output");
+            const mainOut = document.getElementById("main-translation-output");
             let remaining = fallbackSeconds;
-            outputDiv.innerHTML = `<div class="error-box"><span style="font-size: 24px;">⏳</span><strong>API සීමාව / Quota අවසන් විය</strong><p>සියලුම සේවාදායකයන්හි සීමාවන් ඉක්මවා ගොස් ඇත. (${errorMessage || 'Quota Exceeded'})</p><div class="countdown-text">තත්පර <span id="timer-count">${remaining}</span> කින් නැවත උත්සාහ කරන්න...</div></div>`;
+            mainOut.innerHTML = `<div class="error-box"><span style="font-size: 24px;">⏳</span><strong>API සීමාව / Quota අවසන් විය</strong><p>සියලුම සේවාදායකයන්හි සීමාවන් ඉක්මවා ගොස් ඇත. (${errorMessage || 'Quota Exceeded'})</p><div class="countdown-text">තත්පර <span id="timer-count">${remaining}</span> කින් නැවත උත්සාහ කරන්න...</div></div>`;
             const timerInterval = setInterval(() => {
                 remaining--; 
                 const timerElement = document.getElementById("timer-count");
                 if (remaining <= 0) { 
                     clearInterval(timerInterval); 
-                    outputDiv.innerHTML = `<div class="loading">✅ නැවත උත්සාහ කළ හැක.</div>`; 
+                    mainOut.innerHTML = `<div class="loading">✅ නැවත උත්සාහ කළ හැක.</div>`; 
                 } else { 
                     if (timerElement) timerElement.innerText = remaining; 
                 }
@@ -350,35 +379,85 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
             else if (siText) speak(siText, 'si-LK', 0.95);
         }
 
-        function formatMarkdown(text) {
-            if (!text) return "";
-            let formatted = text.replace(/^---$/gim, '');
-            formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
-                let cleanEn = enText.replace(/\*\*/g, '').trim();
-                let cleanSi = siText.replace(/\*\*/g, '').trim();
-                if (!cleanEn && !cleanSi) return match;
-                let safeEn = cleanEn.replace(/'/g, "\\'"); 
-                let safeSi = cleanSi.replace(/'/g, "\\'");
-                let fullTextEncoded = encodeURIComponent(cleanEn + " || " + cleanSi);
-                let isFav = isFavorite(cleanEn + " || " + cleanSi);
-                let favClass = isFav ? 'action-icon-btn fav-btn active' : 'action-icon-btn fav-btn';
-                
-                return `<div class="main-translation-box">
-                    <div class="translation-content">
-                        <div class="lang-line english">🇬🇧 ${cleanEn}</div>
-                        <div class="lang-line sinhala">🇱🇰 ${cleanSi}</div>
-                    </div>
-                    <div class="btn-group-vertical">
-                        <button class="action-icon-btn speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
-                        <button class="${favClass}" onclick="toggleFavorite(decodeURIComponent('${fullTextEncoded}'), this)" title="ප්‍රියතම ලෙස එක් කරන්න">⭐</button>
-                        <button class="action-icon-btn tenses-btn" onclick="document.getElementById('tenses-modal').classList.add('active')" title="කාල භේද 12 සහ Advance English">📖</button>
-                    </div>
-                </div>`;
+        function formatPairBox(textLine) {
+            let parts = textLine.split('||');
+            if (parts.length < 2) return `<div class="lang-line">${textLine.replace(/\*\*/g, '')}</div>`;
+            let cleanEn = parts[0].replace(/\*\*/g, '').trim();
+            let cleanSi = parts[1].replace(/\*\*/g, '').trim();
+            let safeEn = cleanEn.replace(/'/g, "\\'"); 
+            let safeSi = cleanSi.replace(/'/g, "\\'");
+            let fullTextEncoded = encodeURIComponent(cleanEn + " || " + cleanSi);
+            let isFav = isFavorite(cleanEn + " || " + cleanSi);
+            let favClass = isFav ? 'action-icon-btn fav-btn active' : 'action-icon-btn fav-btn';
+
+            return `<div class="main-translation-box">
+                <div class="translation-content">
+                    <div class="lang-line english">🇬🇧 ${cleanEn}</div>
+                    <div class="lang-line sinhala">🇱🇰 ${cleanSi}</div>
+                </div>
+                <div class="btn-group-vertical">
+                    <button class="action-icon-btn speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
+                    <button class="${favClass}" onclick="toggleFavorite(decodeURIComponent('${fullTextEncoded}'), this)" title="ප්‍රියතම ලෙස එක් කරන්න">⭐</button>
+                </div>
+            </div>`;
+        }
+
+        function parseAndDisplayResponse(rawText) {
+            if (!rawText) return;
+
+            let transSection = "";
+            let answerSection = "";
+            let examplesSection = "";
+
+            if (rawText.includes("===TRANSLATION===") || rawText.includes("===ANSWER===")) {
+                let partsTrans = rawText.split("===TRANSLATION===");
+                let afterTrans = partsTrans[1] || rawText;
+                let splitAnswer = afterTrans.split("===ANSWER===");
+                let transText = splitAnswer[0] || "";
+                let restAfterAns = splitAnswer[1] || "";
+                let splitExamples = restAfterAns.split("===EXAMPLES===");
+                let ansText = splitExamples[0] || "";
+                let exText = splitExamples[1] || "";
+
+                transSection = transText.trim();
+                answerSection = ansText.trim();
+                examplesSection = exText.trim();
+            } else {
+                transSection = rawText;
+                answerSection = "විශේෂ පැහැදිලි කිරීමක් අවශ්‍ය නොවේ.";
+                examplesSection = "";
+            }
+
+            // 1. Render Main Translation Box
+            const mainOut = document.getElementById("main-translation-output");
+            let transLines = transSection.split('\n').map(l => l.trim()).filter(l => l);
+            let transHtml = "";
+            transLines.forEach(line => {
+                if (line.includes("||")) {
+                    transHtml += formatPairBox(line);
+                } else {
+                    transHtml += `<div class="lang-line">${line.replace(/\*\*/g, '')}</div>`;
+                }
             });
-            formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => `<span class="heading-highlight">${title.replace(/\*\*/g, '').trim()}</span>`);
-            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            formatted = formatted.replace(/^\s*-\s+/gim, '• ');
-            return formatted.split('\n').map(line => line.trim()).filter(line => line).join('<br>');
+            mainOut.innerHTML = transHtml || "ප්‍රතිඵලයක් නොමැත.";
+
+            // 2. Render AI Answer & Explanation Box
+            const answerOut = document.getElementById("ai-answer-output");
+            answerOut.innerHTML = answerSection ? answerSection.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>') : "පිළිතුරු නොමැත.";
+
+            // 3. Render 5 Examples Box
+            const examplesOut = document.getElementById("examples-output");
+            let exLines = examplesSection.split('\n').map(l => l.trim()).filter(l => l);
+            let exHtml = "";
+            exLines.forEach(line => {
+                let cleanLine = line.replace(/^\d+[\.\)]\s*/, '');
+                if (cleanLine.includes("||")) {
+                    exHtml += formatPairBox(cleanLine);
+                } else if (cleanLine) {
+                    exHtml += `<div class="lang-line">• ${cleanLine.replace(/\*\*/g, '')}</div>`;
+                }
+            });
+            examplesOut.innerHTML = exHtml || "උදාහරණ නොමැත.";
         }
 
         function saveToHistory(query, resultText) {
@@ -408,7 +487,7 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
         }
 
         function loadHistoryItem(resultText) {
-            document.getElementById('output').innerHTML = formatMarkdown(resultText);
+            parseAndDisplayResponse(resultText);
             document.getElementById('settings-modal').classList.remove('active');
         }
 
@@ -450,7 +529,7 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
             favs.forEach((item) => {
                 let safeItem = encodeURIComponent(item);
                 html += `<div class="favorite-item">
-                    <span onclick="loadHistoryItem(decodeURIComponent('### 🇱🇰 ප්‍රධාන පිළිතුර / පරිවර්තනය<br>${safeItem}'))" style="cursor:pointer; display:inline-block; width:85%;">⭐ ${item.replace('||', '➜')}</span>
+                    <span onclick="loadHistoryItem(decodeURIComponent('===TRANSLATION===\\n${safeItem}'))" style="cursor:pointer; display:inline-block; width:85%;">⭐ ${item.replace('||', '➜')}</span>
                     <button class="fav-del-btn" onclick="event.stopPropagation(); toggleFavorite(decodeURIComponent('${safeItem}'), null);" title="ඉවත් කරන්න">❌</button>
                 </div>`;
             });
@@ -516,21 +595,27 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
         }
 
         document.getElementById('copy-btn').onclick = () => {
-            const outputText = document.getElementById('output').innerText;
-            if(!outputText || outputText.includes("පිළිතුර මෙහි දිස් වනු ඇත")) { showToast("ප්‍රතිඵලයක් නොමැත."); return; }
+            const outputText = document.getElementById('main-translation-output').innerText;
+            if(!outputText || outputText.includes("පරිවර්තනය මෙහි දිස් වනු ඇත")) { showToast("ප්‍රතිඵලයක් නොමැත."); return; }
             navigator.clipboard.writeText(outputText).then(() => { showToast("📋 Clipboard වෙත Copy කරගන්න ලදී!"); });
         };
 
         document.getElementById('clear-btn').onclick = () => {
             inputField.value = "";
-            document.getElementById('output').innerHTML = "පිළිතුර මෙහි දිස් වනු ඇත...";
+            document.getElementById('main-translation-output').innerHTML = "පරිවර්තනය මෙහි දිස් වනු ඇත...";
+            document.getElementById('ai-answer-output').innerHTML = "විමසීම් සඳහා පිළිතුරු මෙහි දිස් වනු ඇත...";
+            document.getElementById('examples-output').innerHTML = "රටාව තේරුම් ගැනීමට උදාහරණ මෙහි දිස් වනු ඇත...";
             showToast("සියල්ල මකාදමන ලදී.");
         };
 
         document.getElementById('export-btn').onclick = () => {
-            const outputText = document.getElementById('output').innerText;
-            if(!outputText || outputText.includes("පිළිතුර මෙහි දිස් වනු ඇත")) { showToast("ප්‍රතිඵලයක් නොමැත."); return; }
-            const blob = new Blob([outputText], { type: 'text/plain;charset=utf-8' });
+            const transText = document.getElementById('main-translation-output').innerText;
+            const ansText = document.getElementById('ai-answer-output').innerText;
+            const exText = document.getElementById('examples-output').innerText;
+            if(!transText || transText.includes("පරිවර්තනය මෙහි දිස් වනු ඇත")) { showToast("ප්‍රතිඵලයක් නොමැත."); return; }
+            
+            let fullExport = `=== MAIN TRANSLATION ===\n${transText}\n\n=== AI ANSWER & EXPLANATION ===\n${ansText}\n\n=== 5 SIMILAR EXAMPLES ===\n${exText}`;
+            const blob = new Blob([fullExport], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -600,12 +685,11 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
             if (!text) { showToast("කරුණාකර වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න."); return; }
             advancedModal.classList.remove('active');
             
-            const outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = `<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>${toolName} සකස් කරමින් පවතී...</div></div>`;
+            document.getElementById("main-translation-output").innerHTML = `<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>${toolName} සකස් කරමින් පවතී...</div></div>`;
 
             const result = await askGemini(modePromptPrefix + ": " + text);
-            if (result.text) { outputDiv.innerHTML = formatMarkdown(result.text); }
-            else { outputDiv.innerHTML = `<div class="error-box">දෝෂයක් සිදු විය.</div>`; }
+            if (result.text) { parseAndDisplayResponse(result.text); }
+            else { document.getElementById("main-translation-output").innerHTML = `<div class="error-box">දෝෂයක් සිදු විය.</div>`; }
         }
 
         document.getElementById('grammar-mode').onclick = () => runAdvancedTool("Fix grammar and explain errors for this text", "Grammar Fix");
@@ -614,37 +698,42 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
             const word = inputField.value.trim();
             if(!word) { showToast("වචනයක් ලියන්න."); return; }
             advancedModal.classList.remove('active');
-            const outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = `<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>අර්ථය සොයමින් පවතී...</div></div>`;
+            document.getElementById("main-translation-output").innerHTML = `<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>අර්ථය සොයමින් පවතී...</div></div>`;
             const result = await askGemini(`Provide Synonyms, Antonyms, and 3 Example sentences for the word: "${word}" in English and Sinhala format. Format with ENGLISH_TEXT || SINHALA_TEXT.`);
-            if(result.text) { outputDiv.innerHTML = formatMarkdown(result.text); }
-            else { outputDiv.innerHTML = `<div class="error-box">දෝෂයක් සිදු විය.</div>`; }
+            if(result.text) { parseAndDisplayResponse(result.text); }
+            else { document.getElementById("main-translation-output").innerHTML = `<div class="error-box">දෝෂයක් සිදු විය.</div>`; }
         };
 
         document.getElementById("translate").onclick = async () => {
             const text = inputField.value.trim();
-            const outputDiv = document.getElementById("output");
             const translateBtn = document.getElementById("translate");
             
-            if (!text) { outputDiv.innerText = "කරුණාකර වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න."; return; }
+            if (!text) { 
+                document.getElementById("main-translation-output").innerText = "කරුණාකර වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න."; 
+                return; 
+            }
 
             const cacheKey = `trans_cache_${text.toLowerCase()}`;
             const cachedResult = localStorage.getItem(cacheKey);
             if (cachedResult) {
-                outputDiv.innerHTML = formatMarkdown(cachedResult) + "<br><br><span style='font-size: 11px; color: var(--text-secondary); text-align: center;'>(⚡ මතකයෙන් ලබාගත් ප්‍රතිඵලයකි)</span>";
+                parseAndDisplayResponse(cachedResult);
+                showToast("⚡ මතකයෙන් ලබාගත් ප්‍රතිඵලයකි");
                 saveToHistory(text, cachedResult);
                 return;
             }
 
             document.querySelectorAll('button').forEach(btn => btn.disabled = true);
             translateBtn.innerHTML = `Please Waiting... <div class='spinner'></div>`;
-            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div></div>";
+            
+            document.getElementById("main-translation-output").innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>පරිවර්තනය කරමින් පවතී...</div></div>";
+            document.getElementById("ai-answer-output").innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>පිළිතුර සකස් කරමින් පවතී...</div></div>";
+            document.getElementById("examples-output").innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>උදාහරණ සකස් කරමින් පවතී...</div></div>";
 
             try {
                 const result = await askGemini(text);
                 if (result.text) {
                     localStorage.setItem(cacheKey, result.text);
-                    outputDiv.innerHTML = formatMarkdown(result.text);
+                    parseAndDisplayResponse(result.text);
                     saveToHistory(text, result.text);
                 } else { startCountdown(60, result.error); }
             } catch (error) { startCountdown(60, `Exception: ${error.message}`); }
