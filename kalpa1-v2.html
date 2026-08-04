@@ -24,8 +24,9 @@
             --text-secondary: #334155; 
             --header-bg-light: #0284c7; 
             --textarea-light-border: #1e3a8a; 
-            --top-btn-bg-light: #ffffff; /* ඉහළ බටන් 6 සඳහා සුදු පැහැති පසුබිමක්, සංකේත වඩාත් පැහැදිලිව පෙනීමට */
-            --top-btn-text-light: #0f172a; /* සංකේත සඳහා තද පැහැය */
+            --textarea-light-bg: #ffffff; /* වචන ලියන කොටුව ඇතුළත සුදු පැහැය */
+            --top-btn-bg-light: #ffffff; 
+            --top-btn-text-light: #0f172a; 
         }
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 12px; background: var(--bg-primary); color: var(--text-primary); max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
@@ -89,14 +90,14 @@
         
         .input-wrapper { position: relative; }
         textarea { width: 100%; height: 110px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; font-size: 14px; resize: none; box-sizing: border-box; transition: background 0.3s, color 0.3s, border 0.3s; }
-        body.light-mode textarea { border-color: var(--textarea-light-border); border-width: 1.5px; } 
+        body.light-mode textarea { background: var(--textarea-light-bg); color: #0f172a; border-color: var(--textarea-light-border); border-width: 1.5px; } /* Light mode එකේදී textarea පසුබිම සුදු පැහැයට හැරවීම */
         textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15); }
 
         /* Action Row */
         .action-row { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; align-items: center; }
         .top-buttons { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; width: 100%; }
         .side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        body.light-mode .top-buttons .side-square-btn { background: var(--top-btn-bg-light); color: var(--top-btn-text-light); border-color: #0284c7; box-shadow: 0 2px 5px rgba(0,0,0,0.15); } /* ඉහළ බටන් 6 සඳහා පැහැදිලි පසුබිමක් සහ දාරයක් ලබා දෙන ලදී */
+        body.light-mode .top-buttons .side-square-btn { background: var(--top-btn-bg-light); color: var(--top-btn-text-light); border-color: #0284c7; box-shadow: 0 2px 5px rgba(0,0,0,0.15); } 
         .side-square-btn:hover { background: var(--border-color); }
         .side-square-btn.listening { background: #ef4444; animation: pulse 1.5s infinite; color: white; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
