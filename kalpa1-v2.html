@@ -18,7 +18,7 @@
             --text-primary: #f8fafc; 
             --text-secondary: #94a3b8;
             --header-bg: linear-gradient(135deg, var(--bg-card), var(--bg-primary));
-            --translate-btn-bg: linear-gradient(135deg, #38bdf8, #0284c7); /* Dark mode එකේදී අකුරු වල පාටට සමාන තද පැහැය */
+            --translate-btn-bg: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
         }
         body.light-mode {
             --bg-primary: #e2e8f0; 
@@ -189,7 +189,7 @@
                     <input type="password" id="admin-secret-input" placeholder="Admin Password එක ලියන්න..." style="width:100%; background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); padding:10px 12px; border-radius:8px; font-size:13.5px; box-sizing:border-box; outline:none; transition: border-color 0.2s;">
                     
                     <div id="admin-panel-screen" style="display:none; width:100%; margin-top:10px; background:#000; color:#00ff00; padding:12px; border-radius:8px; font-family:monospace; font-size:11.5px; box-sizing:border-box; border:1px solid var(--accent-color); max-height: 200px; overflow-y: auto; line-height: 1.6;">
-                        පාස්වර්ඩ් එක නිවැරදියි! දත්ත පූරණය වෙමින් පවතී...
+                        පාස්වර්ඩ් එක නිවැරදියි! විමසීමක් සිදුකළ විට මෙහි Live දෝෂ සහ දත්ත පෙනෙනු ඇත.
                     </div>
                 </div>
             </div>
@@ -236,7 +236,7 @@
                 <button class="side-square-btn" id="advanced-btn" title="Advanced Tools">🚀</button>
                 <button class="side-square-btn" id="mic-btn" title="Voice Input">🎤</button>
             </div>
-            <button id="translate">✨ Ask & Translate (විමසන්න සහ පරිවර්තනය)</button>
+            <button id="translate">✨ Translate (පරිවර්ථනය)</button>
         </div>
 
         <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
@@ -650,7 +650,7 @@ Format: ### 🇱🇰 ප්‍රධාන පිළිතුර / පරිව�
             } catch (error) { startCountdown(60, `Exception: ${error.message}`); }
             finally { 
                 document.querySelectorAll('button').forEach(btn => btn.disabled = false);
-                translateBtn.innerHTML = "✨ Ask & Translate"; 
+                translateBtn.innerHTML = "✨ Translate (පරිවර්ථනය)"; 
             }
         };
     </script>
