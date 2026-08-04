@@ -13,18 +13,28 @@
             --bg-primary: #0f172a; --bg-card: #1e293b; --border-color: #334155;
             --accent-color: #38bdf8; --accent-hover: #0ea5e9;
             --text-primary: #f8fafc; --text-secondary: #94a3b8;
+            --header-bg-light: linear-gradient(135deg, #1e3a8a, #0f172a); /* Dark mode off header (Deep Blue) */
         }
         body.light-mode {
-            --bg-primary: #f1f5f9; --bg-card: #ffffff; --border-color: #cbd5e1;
+            --bg-primary: #f8fafc; /* තරමක් අළු පැහැයට හුරු පසුබිම (Soft Gray) */
+            --bg-card: #f1f5f9;   /* කාඩ්පත් සඳහාත් අළු පැහැය */
+            --border-color: #cbd5e1;
             --accent-color: #0284c7; --accent-hover: #0369a1;
             --text-primary: #0f172a; --text-secondary: #475569;
+            --header-bg-light: linear-gradient(135deg, #1e3a8a, #172554); /* Light mode එකේදී තද නිල් Header එක */
         }
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 12px; background: var(--bg-primary); color: var(--text-primary); max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
 
-        .header-box { text-align: center; margin-bottom: 15px; background: linear-gradient(135deg, var(--bg-card), var(--bg-primary)); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); position: relative; transition: background 0.3s, border-color 0.3s; }
+        .header-box { text-align: center; margin-bottom: 15px; background: var(--header-bg-light); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); position: relative; transition: background 0.3s, border-color 0.3s; }
         
-        /* ප්‍රධාන සිරස්තලය සහ කුඩා කළ Ver 2.2 Pro විලාසය */
+        /* Light mode එකේදී Header එක ඇතුළේ අකුරු සුදු පාටින් පෙන්වීමට */
+        body.light-mode .header-box h1, 
+        body.light-mode .header-box .creator-tag, 
+        body.light-mode .header-box .subtitle,
+        body.light-mode .header-box .version-badge { color: #f8fafc !important; }
+        body.light-mode .header-box .version-badge { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
+
         h1 { color: var(--accent-color); margin: 0 0 5px 0; font-size: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .version-badge { font-size: 11px; background: rgba(56, 189, 248, 0.15); color: var(--accent-color); padding: 2px 8px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 600; vertical-align: middle; }
         
