@@ -134,6 +134,7 @@
                 <button class="tab-btn" data-tab="favorites">⭐ ප්‍රියතම</button>
             </div>
             <div id="settings-tab" class="tab-content active">
+                <!-- Dark Mode ටැබ් එක දැන් ඉහළින්ම තබා ඇත -->
                 <div class="setting-item">
                     <span>🌙 රාත්‍රී ප්‍රකාරය (Dark Mode)</span>
                     <label class="switch"><input type="checkbox" id="dark-mode-switch"><span class="slider"></span></label>
@@ -148,8 +149,7 @@
                     </div>
                     <input type="password" id="admin-secret-input" placeholder="Admin Password එක ලියන්න..." style="width:100%; background:var(--bg-primary); color:var(--text-primary); border:1px solid var(--border-color); padding:10px 12px; border-radius:8px; font-size:13.5px; box-sizing:border-box; outline:none; transition: border-color 0.2s;">
                     
-                    <!-- නිවැරදි පාස්වර්ඩ් එක දුන් විට පමණක් දිග හැරෙන (Expand වන) පුවරුව -->
-                    <div id="admin-panel-screen" style="display:none; width:100%; margin-top:10px; background:#000; color:#00ff00; padding:12px; border-radius:8px; font-family:monospace; font-size:11.5px; box-sizing:border-box; border:1px solid var(--accent-color); max-height: 200px; overflow-y: auto; line-height: 1.6; animation: slideDown 0.3s ease;">
+                    <div id="admin-panel-screen" style="display:none; width:100%; margin-top:10px; background:#000; color:#00ff00; padding:12px; border-radius:8px; font-family:monospace; font-size:11.5px; box-sizing:border-box; border:1px solid var(--accent-color); max-height: 200px; overflow-y: auto; line-height: 1.6;">
                         පාස්වර්ඩ් එක නිවැරදියි! දත්ත පූරණය වෙමින් පවතී...
                     </div>
                 </div>
@@ -221,8 +221,6 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
 
         const adminSecretInput = document.getElementById('admin-secret-input');
         const adminPanelScreen = document.getElementById('admin-panel-screen');
-
-        // පෙරනිමි Admin Password එක (ඔබට අවශ්‍ය නම් වෙනස් කරගත හැක)
         const CORRECT_ADMIN_SECRET = "kalpa123";
 
         if(adminSecretInput) {
@@ -237,13 +235,11 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             if(!adminPanelScreen) return;
             const enteredSecret = localStorage.getItem('kalpa_admin_secret') || '';
             
-            // පාස්වර්ඩ් එක හිස් නම් හෝ වැරදි නම් පුවරුව සම්පූර්ණයෙන්ම වසා තබයි
             if (!enteredSecret || enteredSecret !== CORRECT_ADMIN_SECRET) {
                 adminPanelScreen.style.display = 'none';
                 return;
             }
 
-            // පාස්වර්ඩ් එක නිවැරදි නම් පුවරුව දිග හැරෙමින් පෙන්වයි
             adminPanelScreen.style.display = 'block';
             if (debugInfo) {
                 let deadKeysHtml = debugInfo.deadKeysList && debugInfo.deadKeysList.length > 0 
