@@ -10,7 +10,6 @@
 
     <style>
         :root {
-            /* Dark mode සඳහා පෙර තිබූ මුල් වර්ණම නැවත යොදන ලදී */
             --bg-primary: #0f172a; 
             --bg-card: #1e293b; 
             --border-color: #334155;
@@ -19,6 +18,7 @@
             --text-primary: #f8fafc; 
             --text-secondary: #94a3b8;
             --header-bg: linear-gradient(135deg, var(--bg-card), var(--bg-primary));
+            --translate-btn-bg: linear-gradient(135deg, #0284c7, #0369a1); /* Dark mode එකේ Translate බටන් එක තද පැහැයට සහ අකුරු වල සමාන පැහැයට හැරවීම */
         }
         body.light-mode {
             --bg-primary: #e2e8f0; 
@@ -28,11 +28,12 @@
             --accent-hover: #0369a1;
             --text-primary: #0f172a; 
             --text-secondary: #334155; 
-            --header-bg: #0284c7; /* Light mode එකේදී පමණක් ස්පීකර් බටන් එකේ පාටම Header එකට */
+            --header-bg: #0284c7; 
             --textarea-light-border: #0284c7; 
             --textarea-light-bg: #ffffff; 
             --top-btn-bg-light: #ffffff; 
             --top-btn-text-light: #0f172a; 
+            --translate-btn-bg: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
         }
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 12px; background: var(--bg-primary); color: var(--text-primary); max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
@@ -110,7 +111,7 @@
         .side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
 
         button#translate { 
-            background: var(--accent-color); 
+            background: var(--translate-btn-bg); 
             color: white; border: none; padding: 0 12px; height: 48px; border-radius: 10px; 
             cursor: pointer; font-weight: bold; width: 100%; max-width: 400px; font-size: 15px; 
             transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; 
