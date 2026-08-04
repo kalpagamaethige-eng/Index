@@ -13,7 +13,7 @@
             --bg-primary: #0f172a; --bg-card: #1e293b; --border-color: #334155;
             --accent-color: #38bdf8; --accent-hover: #0ea5e9;
             --text-primary: #f8fafc; --text-secondary: #94a3b8;
-            --header-bg-light: linear-gradient(135deg, #1e3a8a, #0f172a);
+            --header-bg-light: #0284c7; 
         }
         body.light-mode {
             --bg-primary: #e2e8f0; 
@@ -22,11 +22,10 @@
             --accent-color: #0284c7; --accent-hover: #0369a1;
             --text-primary: #0f172a; 
             --text-secondary: #334155; 
-            /* මුල් තද නිල් පැහැය තබාගෙන ෂේඩ් එක පමණක් වඩාත් මෘදු ලෙස (Soft Gradient) සකස් කරන ලදී */
-            --header-bg-light: linear-gradient(90deg, #1e3a8a 0%, #1d4ed8 50%, #3b82f6 100%); 
+            --header-bg-light: #0284c7; 
             --textarea-light-border: #1e3a8a; 
-            --top-btn-bg-light: #475569; /* වැඩි කළ කන්ට්‍රාස්ට් සහ අළු මිශ්‍ර ලා නිල්/මධ්‍යම පැහැය */
-            --top-btn-text-light: #ffffff;
+            --top-btn-bg-light: #ffffff; /* ඉහළ බටන් 6 සඳහා සුදු පැහැති පසුබිමක්, සංකේත වඩාත් පැහැදිලිව පෙනීමට */
+            --top-btn-text-light: #0f172a; /* සංකේත සඳහා තද පැහැය */
         }
 
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 12px; background: var(--bg-primary); color: var(--text-primary); max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
@@ -97,14 +96,14 @@
         .action-row { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; align-items: center; }
         .top-buttons { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; width: 100%; }
         .side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        body.light-mode .top-buttons .side-square-btn { background: var(--top-btn-bg-light); color: var(--top-btn-text-light); border-color: #334155; box-shadow: 0 2px 4px rgba(0,0,0,0.15); } /* ඉහළ බටන් 6 සඳහා වැඩි කළ කන්ට්‍රාස්ට් සහ අළු මිශ්‍ර ලා නිල් පැහැය */
+        body.light-mode .top-buttons .side-square-btn { background: var(--top-btn-bg-light); color: var(--top-btn-text-light); border-color: #0284c7; box-shadow: 0 2px 5px rgba(0,0,0,0.15); } /* ඉහළ බටන් 6 සඳහා පැහැදිලි පසුබිමක් සහ දාරයක් ලබා දෙන ලදී */
         .side-square-btn:hover { background: var(--border-color); }
         .side-square-btn.listening { background: #ef4444; animation: pulse 1.5s infinite; color: white; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
 
         button#translate { 
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); 
+            background: var(--accent-color); 
             color: white; border: none; padding: 0 12px; height: 48px; border-radius: 10px; 
             cursor: pointer; font-weight: bold; width: 100%; max-width: 400px; font-size: 15px; 
             transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; 
