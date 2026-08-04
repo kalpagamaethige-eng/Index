@@ -97,9 +97,9 @@
         .lang-line.sinhala { color: #facc15; font-size: 14px; }
         body.light-mode .lang-line.sinhala { color: #d97706; }
         
-        /* ඉහළ සිට පහළට සකස් කළ බටන් කණ්ඩායම (Vertical Button Group) */
-        .btn-group-vertical { display: flex; flex-direction: column; gap: 6px; }
-        .action-icon-btn { background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 8px; width: 38px; height: 38px; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s ease; }
+        /* බටන් තුන එකිනෙකට ඉතා ළඟින් (gap: 3px) තැබීම සඳහා සකස් කළ කොටස */
+        .btn-group-vertical { display: flex; flex-direction: column; gap: 3px; }
+        .action-icon-btn { background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 6px; width: 34px; height: 34px; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s ease; }
         .action-icon-btn.fav-btn.active { background: #facc15; color: #0f172a; }
         .action-icon-btn.tenses-btn { background: linear-gradient(135deg, #10b981, #059669); }
 
@@ -319,7 +319,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                         <div class="lang-line english">🇬🇧 ${cleanEn}</div>
                         <div class="lang-line sinhala">🇱🇰 ${cleanSi}</div>
                     </div>
-                    <!-- පරිවර්තන කොටුවේ ඉහළ සිට පහළට සකස් කළ බටන් තුන (🔊 , ⭐ , 📖) -->
+                    <!-- පරිවර්තන කොටුවේ ඉහළ සිට පහළට ඉතා ළඟින් සකස් කළ බටන් තුන (🔊 , ⭐ , 📖) -->
                     <div class="btn-group-vertical">
                         <button class="action-icon-btn speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
                         <button class="${favClass}" onclick="toggleFavorite(decodeURIComponent('${fullTextEncoded}'), this)" title="ප්‍රියතම ලෙස එක් කරන්න">⭐</button>
