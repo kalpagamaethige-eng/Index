@@ -68,17 +68,16 @@
         .container { background: var(--bg-card); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px rgba(0,0,0,0.1); flex: 1; display: flex; flex-direction: column; transition: background 0.3s, border-color 0.3s; }
         
         .input-wrapper { position: relative; }
-        textarea { width: 100%; height: 110px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; padding-right: 45px; font-size: 14px; resize: none; box-sizing: border-box; transition: background 0.3s, color 0.3s, border 0.3s; }
+        textarea { width: 100%; height: 110px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; font-size: 14px; resize: none; box-sizing: border-box; transition: background 0.3s, color 0.3s, border 0.3s; }
         textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15); }
-        .mic-btn { position: absolute; right: 8px; bottom: 8px; background: var(--accent-color); color: white; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
-        .mic-btn.listening { background: #ef4444; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
         /* Action Row */
         .action-row { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; align-items: center; }
         .top-buttons { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; width: 100%; }
-        .side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; }
+        .side-square-btn { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; width: 48px; height: 48px; cursor: pointer; font-size: 18px; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
         .side-square-btn:hover { background: var(--border-color); }
+        .side-square-btn.listening { background: #ef4444; animation: pulse 1.5s infinite; color: white; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
 
         button#translate { 
@@ -98,10 +97,12 @@
         .lang-line.sinhala { color: #facc15; font-size: 14px; }
         body.light-mode .lang-line.sinhala { color: #d97706; }
         
-        .btn-group { display: flex; gap: 6px; }
-        .speak-btn, .fav-btn { background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 10px; width: 38px; height: 38px; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s ease; }
-        .fav-btn.active { background: #facc15; color: #0f172a; }
-        
+        /* ඉහළ සිට පහළට සකස් කළ බටන් කණ්ඩායම (Vertical Button Group) */
+        .btn-group-vertical { display: flex; flex-direction: column; gap: 6px; }
+        .action-icon-btn { background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 8px; width: 38px; height: 38px; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s ease; }
+        .action-icon-btn.fav-btn.active { background: #facc15; color: #0f172a; }
+        .action-icon-btn.tenses-btn { background: linear-gradient(135deg, #10b981, #059669); }
+
         .spinner-container { display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px; padding: 10px; }
         .spinner { width: 32px; height: 32px; border: 4px solid rgba(128, 128, 128, 0.2); border-top: 4px solid var(--accent-color); border-radius: 50%; animation: spin 1s linear infinite; margin-top: 15px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -136,7 +137,7 @@
                     <label class="switch"><input type="checkbox" id="dark-mode-switch"><span class="slider"></span></label>
                 </div>
                 
-                <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:10px; height:40px; font-size:13px;">🗑️ ඉතිහාසය හිස් කරන්න</button>
+                <button class="side-square-btn" id="clear-history" style="width:100%; margin-top:10px; height:40px; font-size:13px; justify-content:center;">🗑️ ඉතිහාසය හිස් කරන්න</button>
 
                 <!-- Admin Developer Panel Section -->
                 <div style="flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 12px;">
@@ -166,10 +167,20 @@
         </div>
     </div>
 
+    <!-- Tenses & Advanced Modal -->
+    <div class="modal" id="tenses-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📖 කාල භේද 12 සහ Advance English</h3>
+                <button class="close-modal" data-close="tenses-modal">&times;</button>
+            </div>
+            <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.6;">මෙම අංශය ඉදිරියේදී කාල භේද 12 (Tenses) සහ උසස් ඉංග්‍රීසි පාඩම් සමඟ යාවත්කාලීන කිරීමට නියමිතය.</p>
+        </div>
+    </div>
+
     <div class="container">
         <div class="input-wrapper">
             <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න..."></textarea>
-            <button class="mic-btn" id="mic-btn" title="Voice Input">🎤</button>
         </div>
         
         <div class="action-row">
@@ -179,6 +190,7 @@
                 <button class="side-square-btn" id="clear-btn" title="Clear All">🗑️</button>
                 <button class="side-square-btn" id="export-btn" title="Export TXT">💾</button>
                 <button class="side-square-btn" id="advanced-btn" title="Advanced Tools">🚀</button>
+                <button class="side-square-btn" id="mic-btn" title="Voice Input">🎤</button>
             </div>
             <button id="translate">✨ Translate</button>
         </div>
@@ -300,16 +312,18 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                 let safeSi = cleanSi.replace(/'/g, "\\'");
                 let fullTextEncoded = encodeURIComponent(cleanEn + " || " + cleanSi);
                 let isFav = isFavorite(cleanEn + " || " + cleanSi);
-                let favClass = isFav ? 'fav-btn active' : 'fav-btn';
+                let favClass = isFav ? 'action-icon-btn fav-btn active' : 'action-icon-btn fav-btn';
                 
                 return `<div class="main-translation-box">
                     <div class="translation-content">
                         <div class="lang-line english">🇬🇧 ${cleanEn}</div>
                         <div class="lang-line sinhala">🇱🇰 ${cleanSi}</div>
                     </div>
-                    <div class="btn-group">
-                        <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
+                    <!-- පරිවර්තන කොටුවේ ඉහළ සිට පහළට සකස් කළ බටන් තුන (🔊 , ⭐ , 📖) -->
+                    <div class="btn-group-vertical">
+                        <button class="action-icon-btn speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
                         <button class="${favClass}" onclick="toggleFavorite(decodeURIComponent('${fullTextEncoded}'), this)" title="ප්‍රියතම ලෙස එක් කරන්න">⭐</button>
+                        <button class="action-icon-btn tenses-btn" onclick="document.getElementById('tenses-modal').classList.add('active')" title="කාල භේද 12 සහ Advance English">📖</button>
                     </div>
                 </div>`;
             });
@@ -395,7 +409,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             favTab.innerHTML = html;
         }
 
-        // --- යාවත්කාලීන කළ මයික් (Speech Recognition) කොටස ---
+        // මයික් (Speech Recognition) කොටස
         const micBtn = document.getElementById('mic-btn');
         const inputField = document.getElementById('input');
         
@@ -440,7 +454,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
                 micBtn.classList.remove('listening');
                 micBtn.innerText = "🎤";
                 if (event.error === 'not-allowed') {
-                    showToast("❌ මයික්‍රෆෝන අවසරය (Permission) ලබා දී නැත!");
+                    showToast("❌ මයික්‍රෆෝන අවසරය ලබා දී නැත!");
                 } else {
                     showToast("දෝෂයක් ඇති විය: " + event.error);
                 }
@@ -481,6 +495,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
 
         const settingsModal = document.getElementById('settings-modal');
         const advancedModal = document.getElementById('advanced-modal');
+        const tensesModal = document.getElementById('tenses-modal');
         
         document.getElementById('settings-btn').onclick = () => { 
             settingsModal.classList.add('active'); 
