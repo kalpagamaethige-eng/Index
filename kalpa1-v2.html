@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kalpa AI English Translator & Teacher V2.2 Pro</title>
+    <title>AI English Translator & Teacher V2.2 Pro</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
@@ -23,7 +23,11 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 12px; background: var(--bg-primary); color: var(--text-primary); max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
 
         .header-box { text-align: center; margin-bottom: 15px; background: linear-gradient(135deg, var(--bg-card), var(--bg-primary)); padding: 16px; border-radius: 14px; border: 1px solid var(--border-color); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); position: relative; transition: background 0.3s, border-color 0.3s; }
-        h1 { color: var(--accent-color); margin: 0 0 5px 0; font-size: 20px; }
+        
+        /* ප්‍රධාන සිරස්තලය සහ කුඩා කළ Ver 2.2 Pro විලාසය */
+        h1 { color: var(--accent-color); margin: 0 0 5px 0; font-size: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .version-badge { font-size: 11px; background: rgba(56, 189, 248, 0.15); color: var(--accent-color); padding: 2px 8px; border-radius: 20px; border: 1px solid rgba(56, 189, 248, 0.3); font-weight: 600; vertical-align: middle; }
+        
         .creator-tag { color: var(--accent-hover); font-size: 12px; font-weight: 600; margin-bottom: 3px; display: block; }
         .subtitle { color: var(--text-secondary); font-size: 11px; margin: 0; }
 
@@ -97,7 +101,7 @@
         .main-translation-box { background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-primary) 100%); border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); padding: 14px 16px; border-radius: 12px; margin: 8px 0 12px 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.3s; }
         .translation-content { flex: 1; display: flex; flex-direction: column; gap: 6px; }
         .lang-line { font-size: 14.5px; font-weight: 600; line-height: 1.4; color: var(--text-primary); }
-        .lang-line.sinhala { color: #ffff99; font-size: 14px; }
+        .lang-line.sinhala { color: #fff275; font-size: 14px; }
         body.light-mode .lang-line.sinhala { color: #d97706; }
         
         .btn-group-vertical { display: flex; flex-direction: column; gap: 3px; }
@@ -108,12 +112,11 @@
         
         .action-icon-btn.tenses-btn { background: linear-gradient(135deg, #10b981, #059669); }
 
-        /* පරිවර්තන බටන් එකේ මැද පිහිටන, වඩාත් තද පැහැයට හුරු කැරකෙන ස්පිනර් එක */
         .spinner { 
             width: 18px; 
             height: 18px; 
             border: 3px solid rgba(15, 23, 42, 0.25); 
-            border-top: 3px solid #0f172a; /* තද පැහැය */
+            border-top: 3px solid #0f172a; 
             border-radius: 50%; 
             animation: spin 0.8s linear infinite; 
             display: inline-block;
@@ -130,7 +133,7 @@
 
     <div class="header-box">
         <span class="creator-tag">Created by Kalpa Gamaethige</span>
-        <h1>KALPA AI English Translator & Teacher V2.2 Pro</h1>
+        <h1>AI English Translator & Teacher <span class="version-badge">Ver 2.2 Pro</span></h1>
         <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉගෙනුම්‌ සහකරු</p>
     </div>
 
@@ -505,7 +508,7 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'KalpaAI_Translation.txt';
+            a.download = 'AI_Translator_Translation.txt';
             a.click();
             URL.revokeObjectURL(url);
             showToast("💾 File එක Download විය!");
@@ -608,7 +611,6 @@ Format: ### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Tra
             }
 
             document.querySelectorAll('button').forEach(btn => btn.disabled = true);
-            // Translate බටන් එකේ මැදට කැරකෙන ස්පිනර් එක සහ Text එක එකට යොදන ලදී
             translateBtn.innerHTML = `Please Waiting... <div class='spinner'></div>`;
             outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div></div>";
 
