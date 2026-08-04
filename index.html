@@ -3,198 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kalpa AI English Translator & Teacher Pro</title>
+    <title>Kalpa AI English Translator & Teacher</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
-
+    
     <style>
         :root {
-            --bg-primary: #0f172a; 
-            --bg-card: #1e293b; 
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
             --border-color: #334155;
-            --accent-color: #38bdf8; 
+            --accent-color: #38bdf8;
             --accent-hover: #0ea5e9;
-            --text-primary: #f8fafc; 
+            --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
         }
 
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 12px; 
-            background: var(--bg-primary); 
-            color: var(--text-primary); 
-            max-width: 600px; 
-            margin: 0 auto; 
-            min-height: 100vh; 
-            display: flex; 
-            flex-direction: column; 
-            box-sizing: border-box; 
+        .spinner-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
         }
 
-        .header-box { 
-            text-align: center; 
-            margin-bottom: 15px; 
-            background: linear-gradient(135deg, #1e293b, #0f172a); 
-            padding: 16px; 
-            border-radius: 14px; 
-            border: 1px solid var(--border-color); 
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
-        }
-
-        h1 { 
-            color: var(--accent-color); 
-            margin: 0 0 5px 0; 
-            font-size: 20px; 
-        }
-        
-        .creator-tag { 
-            color: var(--accent-hover); 
-            font-size: 12px; 
-            font-weight: 600; 
-            margin-bottom: 3px; 
-            display: block; 
-        }
-        
-        .subtitle { 
-            color: var(--text-secondary); 
-            font-size: 11px; 
-            margin: 0; 
-        }
-
-        /* Modal Styles */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 15px; box-sizing: border-box; }
-        .modal.active { display: flex; }
-        .modal-content { background: var(--bg-card); border: 1px solid var(--border-color); width: 100%; max-width: 420px; max-height: 85vh; overflow-y: auto; padding: 22px; border-radius: 18px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); box-sizing: border-box; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
-        .modal-header h3 { margin: 0; color: var(--accent-color); font-size: 17px; font-weight: 700; }
-        .close-modal { background: rgba(255,255,255,0.05); border: none; color: var(--text-secondary); width: 32px; height: 32px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-        /* Toast Notification Styling */
-        .toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: #0284c7; color: white; padding: 10px 20px; border-radius: 25px;
-            font-size: 13.5px; font-weight: 600; opacity: 0; transition: opacity 0.3s ease;
-            z-index: 1000; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        .toast.show { opacity: 1; }
-
-        .container { 
-            background: var(--bg-card); 
-            padding: 16px; 
-            border-radius: 14px; 
-            border: 1px solid var(--border-color); 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2); 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-        }
-        
-        textarea { 
-            width: 100%; 
-            height: 110px; 
-            background: var(--bg-primary); 
-            color: var(--text-primary); 
-            border: 1px solid var(--border-color); 
-            border-radius: 10px; 
-            padding: 12px; 
-            font-size: 14px; 
-            resize: none; 
-            box-sizing: border-box; 
-        }
-        
-        textarea:focus { 
-            outline: none; 
-            border-color: var(--accent-color); 
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15); 
-        }
-
-        /* Action Row & Top 6 Buttons (රූප සටහන් වල පරිදි සරල ලස්සන පෙනුම) */
-        .action-row { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; align-items: center; }
-        .top-buttons { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; width: 100%; }
-        
-        .side-square-btn { 
-            background: var(--bg-primary); 
-            color: var(--text-primary); 
-            border: 1px solid var(--border-color); 
-            border-radius: 10px; 
-            width: 48px; 
-            height: 48px; 
-            cursor: pointer; 
-            font-size: 18px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            transition: all 0.2s; 
-        }
-        .side-square-btn:hover { background: var(--border-color); }
-        .side-square-btn.listening { background: #ef4444; color: white; }
-
-        button#translate { 
-            background: linear-gradient(135deg, #0ea5e9, #0284c7); 
-            color: white; 
-            border: none; 
-            padding: 12px; 
-            height: 48px; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            width: 100%; 
-            font-size: 15px; 
-            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
-            transition: all 0.2s; 
-        }
-        button#translate:active { transform: scale(0.98); }
-
-        /* Output & The 6 Distinct Boxes Layout */
-        #output { 
+        .spinner {
+            width: 32px;  
+            height: 32px; 
+            border: 4px solid rgba(255, 255, 255, 0.15); 
+            border-top: 4px solid var(--accent-color); 
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
             margin-top: 15px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 14px; 
-            max-height: 65vh; 
-            overflow-y: auto; 
+            display: inline-block;
         }
 
-        .section-box {
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 12px;
             background: var(--bg-primary);
+            color: var(--text-primary);
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .header-box {
+            text-align: center;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: var(--accent-color);
+            margin: 0 0 5px 0;
+            font-size: 20px;
+        }
+
+        .creator-tag {
+            color: var(--accent-hover);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 11px;
+            margin: 0;
+        }
+
+        .container {
+            background: var(--bg-card);
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        textarea {
+            width: 100%;
+            height: 110px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             border: 1px solid var(--border-color);
             border-radius: 10px;
-            padding: 14px 16px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            padding: 12px;
+            font-size: 14px;
+            resize: none;
+            box-sizing: border-box;
         }
 
-        .section-title {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-left: 4px solid var(--accent-hover);
-            padding-left: 8px;
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
         }
 
-        .section-content {
+        button#translate {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        button#translate:active {
+            transform: scale(0.98);
+        }
+
+        #output {
+            margin-top: 15px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 10px;
+            line-height: 1.8;
             font-size: 13.5px;
             color: #e2e8f0;
-            line-height: 1.7;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 50vh;
         }
 
-        /* 1 වන කොටුව: ප්‍රධාන පරිවර්තන පෙට්ටිය සහ ස්පීකර් බටන් එක */
+        .heading-highlight {
+            display: block;
+            background: linear-gradient(90deg, #1e293b, #0f172a);
+            color: var(--accent-color);
+            padding: 9px 13px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-hover);
+            margin-top: 24px;   
+            margin-bottom: 12px; 
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .heading-highlight:first-child {
+            margin-top: 4px;
+        }
+
         .main-translation-box {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #ffffff;
-            border-left: 5px solid #ffffff;
+            border: 1px solid #38bdf8;
+            border-left: 5px solid #0ea5e9;
             color: #ffffff;
-            padding: 12px 14px;
-            border-radius: 10px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            margin: 12px 0 20px 0;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
         }
 
         .translation-content {
@@ -212,7 +196,7 @@
         }
 
         .lang-line.sinhala {
-            color: #fef08a;
+            color: #38bdf8;
             font-size: 14px;
         }
 
@@ -221,8 +205,8 @@
             color: white;
             border: 1px solid #38bdf8;
             border-radius: 10px;
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             font-size: 18px;
             cursor: pointer;
             display: inline-flex;
@@ -232,442 +216,553 @@
             box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
             transition: all 0.2s ease;
         }
-        .speak-btn:hover { background: linear-gradient(135deg, #38bdf8, #0ea5e9); transform: translateY(-2px); }
 
-        .spinner-container { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            margin-top: 20px; 
-            padding: 10px; 
+        .speak-btn:hover {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(56, 189, 248, 0.4);
         }
-        
-        .spinner { 
-            width: 32px; 
-            height: 32px; 
-            border: 4px solid rgba(255, 255, 255, 0.15); 
-            border-top: 4px solid var(--accent-color); 
-            border-radius: 50%; 
-            animation: spin 1s linear infinite; 
-            margin-top: 15px; 
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .error-box { 
-            background: #450a0a; 
-            border: 1px solid #ef4444; 
-            color: #fca5a5; 
-            padding: 16px; 
-            border-radius: 8px; 
-            font-size: 12.5px; 
-            text-align: center; 
+        .speak-btn:active {
+            transform: scale(0.95);
         }
-        
-        .countdown-text { 
-            color: #facc15; 
-            font-weight: bold; 
-            font-size: 13px; 
-            display: inline-block; 
-            margin-top: 8px; 
-            background: #291805; 
-            padding: 4px 10px; 
-            border-radius: 6px; 
-            border: 1px solid #eab308; 
+
+        .loading {
+            color: var(--accent-color);
+            font-style: italic;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .error-box {
+            background: #450a0a;
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+        }
+
+        .error-box * {
+            text-align: center !important;
+        }
+
+        .countdown-text {
+            color: #facc15;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 8px;
+            background: #291805;
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid #eab308;
+            text-align: center !important;
         }
     </style>
 </head>
 <body>
-    <div id="toast" class="toast"></div>
-
     <div class="header-box">
         <span class="creator-tag">Created by Kalpa Gamaethige</span>
         <h1>KALPA AI English Translator & Teacher</h1>
-        <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ විශ්ලේෂණය සහ ඉගෙනුම් සහකරු</p>
-    </div>
-
-    <!-- Settings Modal -->
-    <div class="modal" id="settings-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>⚙️ යෙදුම් සැකසුම්</h3>
-                <button class="close-modal" data-close="settings-modal">&times;</button>
-            </div>
-            <div style="font-size: 13.5px; color: var(--text-secondary);">මෙම අංශය යෙදුම් සැකසුම් සඳහා වෙන් කර ඇත.</div>
-        </div>
+        <p class="subtitle">ද්විභාෂා පරිවර්තනය, ව්‍යාකරණ නිවැරදි කිරීම සහ ඉගෙනුම් සහකරු</p>
     </div>
 
     <div class="container">
-        <div class="input-wrapper">
-            <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: She is cooking dinner now / What is AI?)..."></textarea>
-        </div>
-        
-        <div class="action-row">
-            <div class="top-buttons">
-                <button class="side-square-btn" id="settings-btn" title="Settings">⚙️</button>
-                <button class="side-square-btn" id="copy-btn" title="Copy Output">📋</button>
-                <button class="side-square-btn" id="clear-btn" title="Clear All">🗑️</button>
-                <button class="side-square-btn" id="export-btn" title="Export TXT">💾</button>
-                <button class="side-square-btn" id="advanced-btn" title="Advanced Tools">🚀</button>
-                <button class="side-square-btn" id="mic-btn" title="Voice Input">🎤</button>
-            </div>
-            <button id="translate">✨ Translate & Analyze (පරිවර්තනය සහ විශ්ලේෂණය)</button>
-        </div>
-
-        <!-- Output: ඔබ ඉල්ලා සිටි වෙන වෙනම කොටු 6 -->
-        <div id="output">
-            <div style="text-align: center; color: var(--text-secondary); padding: 20px; font-style: italic;">
-                පිළිතුර මෙහි දිස් වනු ඇත...
-            </div>
-        </div>
+        <textarea id="input" placeholder="මෙතැනට ඔබේ වාක්‍යය හෝ ප්‍රශ්නය ලියන්න (උදා: I go to school yesterday)..."></textarea>
+        <button id="translate">✨ Translate Now (පරිවර්තනය)</button>
+        <div id="output">පිළිතුර මෙහි දිස් වනු ඇත...</div>
     </div>
 
     <script>
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 2500);
-        }
-
         const ENCODED_KEYS = [
-            "QVEuQWI4Uk42SnhMUGlHS1BrazljakE2ajNIaDhjT01lTXktMHlIeU5TZkZwZk5JWV9SaGcK",
-            "CkFRLkFiOFJONktBTTQxUGkwem9XRXVHSHFRRlpkWmFBSlJiTzJyQVpRNnN2QWRxdkhyby1B",
-            "CkFRLkFiOFJONktGQWFNYkxRandEdjNKcHRMZld0a1pOZ2s2YXx4Qmo4amxkUGJTMHFVR29B",
-            "QVEuQWI4Uk42TDhpcWxDa2JyY1lRZXNxdkFiOWI3bHhMSDBhcW1fdnJiX0F3SWdkMHNRencKCgo",
-            "QVEuQWI4Uk42SzVMWHowWFJPMmtTbE9RTWZXa1hiQWZFMTBTa2l3Y0gwZUpSb1ZSSDlQTmcKCgoKCgo"
+            
+
+
+//📍API KEY  01 > ENCODE 👇
+
+"QVEuQWI4Uk42SnhMUGlHS1BrazljakE2ajNIaDhjT01lTXktMHlIeU5TZkZwZk5JWV9SaGcK",
+"CkFRLkFiOFJONktBTTQxUGkwem9XRXVHSHFRRlpkWmFBSlJiTzJyQVpRNnN2QWRxdkhyby1B",
+"CkFRLkFiOFJONktGQWFNYkxRandEdjNKcHRMZld0a1pOZ2s2YXh4Qmo4amxkUGJTMHFVR29B",
+"QVEuQWI4Uk42TDhpcWxDa2JyY1lRZXNxdkFiOWI3bHhMSDBhcW1fdnJiX0F3SWdkMHNRencKCgo",
+"QVEuQWI4Uk42SzVMWHowWFJPMmtTbE9RTWZXa1hiQWZFMTBTa2l3Y0gwZUpSb1ZSSDlQTmcKCgoKCgo",
+"QVEuQWI4Uk42SW05ekNzNkhfanFsN19kR0Y3RUFLU2gwT05wWlA3UWl1TklyUFo0dXhCLWc",
+"QVEuQWI4Uk42TDFaMk5Qcl9MNk9qNlJlSUNJWjZsektzQy1ISU5NNHlVUHM1TlBrdFNHc3c",
+"QVEuQWI4Uk42Sk9ObnBuc3Y3Q2JKc3EtSFdBZGtoQ0VmQkZpeHMwdzZRNmY0Qkd2N2ZLMGcK",
+"QVEuQWI4Uk42THF0aC14UkswbG9mMU9rczMyWlFVaGtnc0pyNGZSRlFxLVlMZEJ4dk1jancKCg",
+"QVEuQWI4Uk42TGVWUm02R19PXzh0VU1Ed3hmSEJXN1QyYmUwRFE3WGJpb3kxbzJ0SDVqSkEKCg",
+"QVEuQWI4Uk42SWF6QWhySlczQVpRRG56elVDaFRsZWdFNkdLaGJaMXBIVk9yQ1NyRFZvb0E",
+"QVEuQWI4Uk42TDc0cHBMLWlvWWpHd2ZrOVVlWkdQUGw1UTd2N3J3cGIwTy02VVlsRmVCY3cK",
+"QVEuQWI4Uk42SWlWMVh1d1NzZzJfcEhkeGFIMVlmMFN2cjF6YTRyV280OWQzemQ4TmhQbncKCgoK",
+"QVEuQWI4Uk42S1owQlNuTGpwNzE2NzFHOTVmUDZCNmpNYlVyZGpBeFBZVzR3Vm90ZFNXVkEKCgoKCgo",
+"QVEuQWI4Uk42S3Y1NVVNUmJDdC1RTmFjWVIxTmFSaXpUa1RqbDNLUERZRU42bmNjN3NVN2cKCgoKCgoK",
+"QVEuQWI4Uk42TEdaREE0RGdFSEtmQmVXQ0VabXFhOGc3QWJCTkFmRGpPb3pQY2VENFhRb0EKCgoKCgo",
+"QVEuQWI4Uk42SlRNYnZRcEZzZEM3OENFd19sVGZUZXlLeXU0RFVwa2pyRkRtTVRtN280T3cKCgoKCgoK",
+"QVEuQWI4Uk42TC1QZDZfMFVlRXA0QnloUWtwR0NycTZ5bWMxdy0zWjFDUEZocWtlbXlEMHcKCgoKCgoK",
+"QVEuQWI4Uk42SkZpMjF5aWd0TDM1aGZGV0thcWhaYTZjNUEzZjRybDFna0VHTkZOQjFfUHcKCgoKCgoK",
+"QVEuQWI4Uk42TDhYYTdyV0o3OXdvV0lWQmNBNl9PbmhhNjdNUjBhXzRNbkRFbmpnaVY5ZWcKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42SkV1UmJrUS13REtSSlRzOEJ5Z0hDdjEwVndESVlmeTBJMGRCMEN5RnRrbkEKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42TFZNVm5OR25JMWdBZ0RMOVdiUkk5dXVVbXFSS0lkWTcxaDJod3M0bDlEZ1EKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SXlkV2dodHFheG5RSWl6TGpTbWNNME92dVlQY1hQbVlvLXJReU5HU3BaMVEKCgoKCgoKCgoKCgo",
+"QVEuQWI4Uk42THhlWm5zb0JuTXgtTWNEdTFTeWlUUk50aFlDX0xZQTJsdFp0eXZCbUV5MncKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42TDBYb0xNdTFzbEV2Y1VpWEVhWTJacUViaklZdmZKRDNneks4eFdVMTZEZ3cKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SlltSkRHdlhTaUllY3lwX3VIR292aS1lY081dnUwdGdOcWhfX3BhendaNWcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42STUyLUlIRTZfV1JJQm5jVHdmei1udWFwT0hwS01obGgxaDVPVzB1YlRmWHcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42TFB5eTFtMnF6NnZwc1pWX0toaEd3MktKYTNENFc2U1NKdGo5NUQ4cXdpd0EK",
+"CkFRLkFiOFJONkxQeXkxbTJxejZ2cHNaVl9LaGhHdzJLSmEzRDRXNlNTSnRqOTVEOHF3aXdBCg",
+"QVEuQWI4Uk42SXRPQWY0ck9nbkFLWWh5aHJOQnZQcnMwaUVzd3hjeGNFdWkzM0ExWG1GMnc",
+
+
+//📍API KEY : 02 > ENCODE 👇
+
+
+"QVEuQWI4Uk42SXZhN1djU0o5OGZfWkpLMXpBUnVUZGxJMDMxbmlFWVNaVTdXLS1NUHVtQmcK",
+"QVEuQWI4Uk42S3VqRU5PaWl0cm1HNDF0dnhPRWdPVUtOSVhwaTFLSnJpWnJWVndjZlBKUFE",
+"QVEuQWI4Uk42S3ZnYlBaRndIc1FjUk54ci01MHdScVhXUm51MTgxczR2TjkzM242QlZqbWc",
+"CkFRLkFiOFJONklWcmJXTFkza2ZLWURqZ25ydXdDYzZ0cWI1d1dzRjNZVVdxMzR0VmxManFRCgoK",
+"QVEuQWI4Uk42S2phbW1GN0NqNFI5NXZFT0RZT1VpZUpZUDZBT2JRVm5qWjFudFcwMlh5blEKCgoKCgo",
+"QVEuQWI4Uk42SlNHUlFROFA4Ni1yYjZpSkxRTHhaSGt0cUlOZkoyWUVWNWJNYk5WaFV6eEE",
+"QVEuQWI4Uk42TDdiaHRNM2xIUUlDNXRKclpQbElYRHgxZk5USVY3Snl5Sm8zWWpBUVFvYXcK",
+"QVEuQWI4Uk42TGVhaGdhMEswNDBpcXZiYXk5M2o2aVpFRUtsQURCeGFkN3VybVVNSklqdkEK",
+"QVEuQWI4Uk42SUFXUjhsdEtSY2VNVnlEeGFHMy0yUm02QmZiX2lUakhZOXMxbTBjWGd1NXcKCg",
+"QVEuQWI4Uk42TGlQQ3VEaU01UDIxNTRuVzNZUU12Y09YM0lfWVBxUXFyTWlvVlZ6aFZ5MGc",
+"QVEuQWI4Uk42S1pBVnJKdmNUeDdxdC1zT05FS3BVT1BvakNHQXo2VEhDMFhjc0UtZjRlSlEK",
+"QVEuQWI4Uk42SUJJd0NKOHZsbXdWTnZWVmc2TzNpUFlIRjFPbG00M1FUNU0xdllHRWpTWEEK",
+"QVEuQWI4Uk42S2phWElIY25KdTJJbHYyRjI5QzM3YmF6cnZ6c3hwVnZjSE1hUDVGY0NDamcKCgoK",
+"QVEuQWI4Uk42Sm5iVzJsd2lYemI0SHdfV1FOcF9TSHJuUEsyRzJZRnA4d0RudmRMNnFmbncKCgoKCgo",
+"QVEuQWI4Uk42SURYUjdXd3c5R0tBVllSOGFnWGE4TkcxTjN0c3pRNWNGTW1nOUxvSjZHbGcKCgoKCgoK",
+"QVEuQWI4Uk42SUduYUUzXzFJRFBOVnRQbmU2UVRFZnB0dzFiX1NVSVAxS1Y5NXh0UmRxTGcKCgoKCgo",
+"QVEuQWI4Uk42TGMxYjl6QndBaDNUNm5FOHA2UElsalNKcEN0anRMSS1mX1pGdWxXLWFaQ2cKCgoKCgoK",
+"QVEuQWI4Uk42TGVJMk9oaks1bUpFc2QxOGdIUmc5X2N0cGJydl9oX3dVNEFZX2xjS0l6eHcKCgoKCgoK",
+"QVEuQWI4Uk42S24wOWFhcGlVWWktc0tCcTl3ZHNLYTM4TmZtZG9wTjIzbkxKeEZwSGJfR1EKCgoKCgoK",
+"QVEuQWI4Uk42Sl9Pa2txVFFYN3YtLXRfcWZQQTExb0dXWThjX3lqMjFMdjJfaFFxaDQ0WUEKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42SXZMLXFPT2tUR2JYb1Nna1lTd0cydDM3QUlHaU03MmE1Z3pOcEtoOTVaVHcKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42S0JkOHJxMXFmY05WMERsZ1YzZTVIWGFuVXFCYVhQVVNwQ0FhQnZRc0xKa1EKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SjVBZDBheXE5Ty0yX0tEcFJ6VWgzNVNXRkJkTGZFM3VlOURNU0h0V3JoQncKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42TGtuNUhmVkMtbjdZZ0NaMGR5cnFoOGs2LXEwUnUtYlBnYlllRXo3akhuQWcKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42S1o3cVFSWi0ySlF1UTJ2OWJCYzRORk5KRlVkajgwbDhtTi1IRkpwSzlNOHcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42TFlYbTR3enJKZGc4LVFVd3JqQk44Q215MERaV0cxa3hYV3FLQTRkZkRUNGcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SVlxWExjeFdVNDRvaGNhcWdlSGVvbW9GdzhVbkY1el9LbjFkNVhLQWZyNnc",
+"QVEuQWI4Uk42Sm1YQTN6Nk5rMDJnc3RIMFNoc2xnLWlsaXc4anI0OW9TdG9qVTFZaUJwdUEKCg",
+"CkFRLkFiOFJONkptWEEzejZOazAyZ3N0SDBTaHNsZy1pbGl3OGpyNDlvU3RvalUxWWlCcHVB",
+"QVEuQWI4Uk42S2VycExzdlpLV2YzVWVPLUxqamF0cFNwUUVrNDBiRDRCdmY0LUd5RnJLSUE",
+
+
+//📍API KEY : 03 > ENCODE 👇
+
+
+"QVEuQWI4Uk42THcySEF1d0lINVhRdE9ORm1GTDVWaHlSLTE1TWZjT1U3THdzemVKZWYtckEKCg",
+"QVEuQWI4Uk42S3ozVjBtbDdsWVBPdzVMUGQ0clZ2dk1kY29VeW53TUtKRlhpaS1ZVTVsancK",
+"QVEuQWI4Uk42SzRHS1ZnWkVKb3FZdWJJV1N6MTQ1RVBRT1JBTHFCN2hvTVZBSWo1VGZ1VHc",
+"QVEuQWI4Uk42TE8yN29sS3FTN3FWYWtjY3laTEhVV2Z2ZWxIcXR4ZHhZdklzeGdDcVU4eWcKCgo",
+"QVEuQWI4Uk42TG1saXZtR0ktQndFcEduXzJyOXdOMVFiWUg5b25UNXRBUWlQcVdMVDdjUEEKCgoKCgo",
+"QVEuQWI4Uk42SlBBbFJRbzVqNWRJRkhSRlotZ3lzY1Q1ZzhxWFlaUTNuOENJdUJpbHpCUmc",
+"CkFRLkFiOFJONkl4TEVrQTZsRGRsMS02SzZjd0czNE56LUpaNnJQbEhhQm9ndWxWSHJYYWhR",
+"QVEuQWI4Uk42SXJkMGllejF0cnBNSk9LVHZjY0xSUl9tMEtOWk9rdFBUR3RvQkFkNW94dGcK",
+"QVEuQWI4Uk42SmxvM3huZ3F5XzF0YV8tTmZueFBNcEdUV3hyUkNxV212XzF1REluTVlvcWcK",
+"QVEuQWI4Uk42Sl8xNmZPZThDMmNYOVRabFdjZUF2cTRLbjV5aXNOR3c4NDlGMXoxZW1maVE",
+"QVEuQWI4Uk42SjQxTmhld1A3dVZsUVZCcllHbkVLN2hYTXBUUXZ6a0JKTTAwZS1OX2lOU2cK",
+"QVEuQWI4Uk42TGkwM0wtbEQ1UFgtOUVCOUhIeDdUalU1V2tRQ1lyRW9lUklmYjhiczhyX3cKCg",
+"QVEuQWI4Uk42SkZOX3BOemJCZS1JM3JpN2pPWnpmdXU2ZzlYRzFTeW92LWJJbVBrdXQ2RWcKCgoKCg",
+"QVEuQWI4Uk42SXVFS3R6SDFJTE9NcHExUkhQY012V1g2YmRZdm51c0VDb2dTY0pwVmRMRWcKCgoKCgo",
+"QVEuQWI4Uk42TGp2bVJ1bEtLYTJzRHFBNF9Fc1ZRS3FnbFJUOWtobm1ieEVMcWpNZ0ZHR1EKCgoKCgo",
+"QVEuQWI4Uk42SUc4Qkl5NzRtTXZacGlNTjQ0aDRIOEtTb2JvNGdLN0JmaVJIcFpnYkhiOGcKCgoKCgo",
+"QVEuQWI4Uk42TFhZYlRwSUZQbVE1d2JZRnpBZWQxckJyX2NSVEFkc0RodXFsVDhGU3NWN2cKCgoKCgoK",
+"QVEuQWI4Uk42S3hIMEhDWHNkd2tmQkh4eWM3UXhERkxydkhERUk3UzE2bEpiMlNWV3AwQXcKCgoKCgoK",
+"QVEuQWI4Uk42S0JCWENDUFFtb0xQeFZfcXpVbDV4X3pSVEtOdS1KTVhvLVNXSEhXeUVGR2cKCgoKCgoK",
+"QVEuQWI4Uk42THhfMmpVUE5zbERRRjk3ZHZPVnRiZS1pUGxRMTlUX2RCR1ZIZmw5NDVwT0EKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42Sk5EU0xuZEx3THpyZ1hDRWhCUks1MVdIcVNEeU1uV2R2WlFGeGJ2MkFnVGcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SWN2bXdJbjNVVjR5YVFyS1hzQ2xTQm9FUGh2ckh1MXZfelREbVMzT2p0b2cKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SlRrejhjbERHWWlpdHhidDF6bWVtemk2VXFycTlSVmhsWHpmZndjaUl4bHcKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42STZjMnJkMnJVYldINXVEc3NudU5DWEF0MGVjTVNELThzTVNIekVlTGtGS0EKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42S3o0UXNKSHFIUnlUSUpfbkFWRWlzWmNDeWdtbEdIaWN2RGxsN0Zoc194bHcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SnBtZzRVZU9UcFQ2X1BzNGhESXBoZHM4dzJKb3ZDcDNwT1JwZmJOSTA5NHcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42SVBDT3dhOTZoN2t6WVNIWm41cUpDMlFhR1hUR1dUeVdYUkFHZXdkUW9JdWc",
+"QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0EKCg",
+"QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0E",
+"QVEuQWI4Uk42THp1U2RobTBoTEdJR2pFeXZUQVRBdDl1Z2p6TXh4bi1qWW02dDdKS1J1UXc",
+
+
+//📍API KEY : 04 > ENCODE 👇
+
+
+"CkFRLkFiOFJONktIeWo2Ylo2dnJid2RWS0otdERNMjlyQnR0ajJack5qNUdfR09ESEZZcE13",
+"QVEuQWI4Uk42S3BpdklhVE9TbkxYWmp4bEpxdTg1V2VUVS1vRzFrWHRURW9uZjJGVzVpaVEK",
+"QVEuQWI4Uk42SktHOGVpUlJMcVowTGVyQ2FfcDB2ODFiRUlhRjhpSTJqcGZybFBaeVg3a3cK",
+"QVEuQWI4Uk42TFNFc2hSTUMzTXMxOUo4WXBxT3FfUjRoQ2NmaVl6RUxfajdjU2M2V3FWTVEKCgoKCg",
+"QVEuQWI4Uk42S3Y1UlhZaUwtU3dkTXJ1RmVMZi1MOWd4NzBjOG16Nkk2SkVnbUczWjFlV0EKCgoKCg",
+"QVEuQWI4Uk42S01sLV9hOHdNU0tJUTl1bGZqUVlKZS1XdlVDUi0teW5FQ2xaSktZbnFIZXcK",
+"QVEuQWI4Uk42TGg0U0tvLW9FTGdNM25UcExxMWVzV3JCT01PYmNxRF9xOVFrTldvb3c0eEE",
+"CkFRLkFiOFJONktRRWFEakFXRTdEUTlwYkxmTGlxZTJ5Q2lETmRlNVlfQktFRk5QWXl1QUJRCgo",
+"QVEuQWI4Uk42THd4MTZ2aW0yVnlCU3BULWM3YWNoWWdIN2ZCX1FDQzNTcFI4OUFBUEVJLVEKCg",
+"QVEuQWI4Uk42SV9hZGVOSlVacFFralR1T1JINlRkU0VENlNCSGRiWDRiVEdQM2ZFcWtOSXcK",
+"QVEuQWI4Uk42SnI2Mll6VEJubk16eFNlQ2dCeGN5eTdRRWxNU0wzZ0dKeWlKUEhEU3hoYlEK",
+"CkFRLkFiOFJONklRTy1YdHVtNjRibkJwOFI2ZWVUeXF0bDRhaWZsOGR5TzNZZmZrclB3NjdBCgoK",
+"QVEuQWI4Uk42THdZUnFSLWNZQkctUlFmbmR1UWpORDVVU2RhUHhEdmFZZkIwQVV1cE1tSlEKCgoKCg",
+"QVEuQWI4Uk42S1JUNzBTeDZCZ0x1ak9XNk5xb2hBb2hCS1BfYmZ1YUdSQjZ3bnZxeU0tV3cKCgoKCgo",
+"QVEuQWI4Uk42THNrWHIzQ2hUeml5bFVFTDhtUXNMNVZvNGR4UnNuYzhCWlNjU0hQenppLWcKCgoKCgo",
+"QVEuQWI4Uk42S0xKSVltai1kM0I2WmxGU1Uwa0ZvY2J2ajJoY1ltY3ZXdHU4R19sdDBhalEKCgoKCgoK",
+"QVEuQWI4Uk42SnR6VU1sVUYySURNaFZkdVgxZXhhOTZTVUtJclV0WUFvbTRCcno0SDdib0EKCgoKCgoK",
+"QVEuQWI4Uk42SmxJb3c0QUI3SGJBTzVhRG5EdzhiSlF1ZkNQM3FyaWRDRlpDUGpEMFlNaHcKCgoKCgoK",
+"QVEuQWI4Uk42SUNocUhHQVdqOC1ERnJsZjNVOUxDWHpTNEhtQ1dCNm9yM2taYjJWa1NkTlEKCgoKCgoK",
+"QVEuQWI4Uk42SVRFSEhDb2tDaFFlUHhfVG01SHp6Q2RINjdMdjZ3U3dxejJQUkNFcXNnd3cKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42S2JFb0pJVFVIdHJvQTlid3RydFlkNGpTanFrbW0yRnhPeDEzbEdCZFhfZ0EKCgoKCgoKCgoK",
+"QVEuQWI4Uk42S3hZbUdkN0wzOThTT1BtYzI3aERPeFVXSklxZGh3cDRVelpQUF9tUHMtUkEKCgoKCgoKCgoKCgo",
+"QVEuQWI4Uk42SW9YTVg5RFhYT0dUX21Hb3RJTkRvdnA5UUlmSjBCZ1B0dlhsRXdLcHZ6eVEKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42SzhfN2szVzlfZm5FSzlTb3lyT0Z2MTNRVzA5SHRGSXM4dFVxNjl6TlRQVkEKCgoKCgoKCgoKCg",
+"QVEuQWI4Uk42SVpGQXZPNWpKd0RGcUJTQkcyUnMyY2M2dnh5SGp3Q0pWNDhrN3JVSjU3clEKCgoKCgoKCgoK",
+"QVEuQWI4Uk42Si1WWEVSU3lXUFYtdVp2WFR6a2ZQQmlUc0gzNUJuX1lnOVotbGo1VU5MaXcKCgoKCgoKCgoK",
+"QVEuQWI4Uk42S1hxeDVkQnp5T0txendISDFvMnFwV2pPQ2wwOXZzam0xR1hTNWVzOXZGREE",
+"QVEuQWI4Uk42SlFLOUNXVEd4OFJWZDBRT2xUX1RSRFZGZWt3eVZrTTFLZmZQc2NfUlF3SGcKCg",
+"QVEuQWI4Uk42SlFLOUNXVEd4OFJWZDBRT2xUX1RSRFZGZWt3eVZrTTFLZmZQc2NfUlF3SGc",
+"QVEuQWI4Uk42SjJpUUxIZ2JiNzdCeV9sMXFTS3hTR3VWVnh1eW13a0RfQWFHZ21pVXhyM3c"
+
+
         ];
 
         let countdownTimer = null;
 
+        // Smart Key Banning: යතුරක් පැය 24කට බ්ලොක් වී ඇද්දැයි බැලීම
+        function isKeyBlocked(index) {
+            const blockedTime = localStorage.getItem(`blocked_key_${index}`);
+            if (!blockedTime) return false;
+
+            const now = new Date().getTime();
+            if (now - parseInt(blockedTime) > 86400000) { // පැය 24 = 86400000 ms
+                localStorage.removeItem(`blocked_key_${index}`);
+                return false;
+            }
+            return true;
+        }
+
+        // Smart Key Banning: දෝෂ සහිත යතුරක් පැය 24කට තාවකාලිකව වැළැක්වීම
+        function blockKey(index) {
+            const now = new Date().getTime();
+            localStorage.setItem(`blocked_key_${index}`, now.toString());
+        }
+
+        // ක්‍රියාකාරී (Active) සහ Block නොකළ යතුරක් සෙවීම
         function getValidKeyIndex() {
             for (let i = 0; i < ENCODED_KEYS.length; i++) {
-                const encodedKey = ENCODED_KEYS[i];
-                if (encodedKey && !encodedKey.includes("YOUR_")) return i;
+                if (!isKeyBlocked(i)) {
+                    const encodedKey = ENCODED_KEYS[i];
+                    if (encodedKey && !encodedKey.includes("YOUR_")) {
+                        return i;
+                    }
+                }
             }
-            return -1;
+            return -1; // සියලුම යතුරු බ්ලොක් වී නම්
         }
 
         function getActiveApiKey(index) {
-            try { return atob(ENCODED_KEYS[index].trim()); } catch (e) { return ""; }
+            try {
+                const encodedKey = ENCODED_KEYS[index];
+                if (!encodedKey || encodedKey.includes("YOUR_")) return "";
+                return atob(encodedKey.trim());
+            } catch (e) {
+                console.error("Error decoding API Key:", e);
+                return "";
+            }
         }
 
-        // කොටු 6 වෙන වෙනම ලබා ගැනීමට සකස් කළ Prompt එක
         const systemPrompt = `You are an expert bilingual English-Sinhala AI teacher and translator.
-Return your response structured cleanly into SIX distinct sections using the exact markers below:
+Your responsibilities:
+1. Translate English ↔ Sinhala accurately.
+2. Correct grammar mistakes and awkward phrasing in the user's input.
+3. Provide a clear Main Translation highlighted in both English and Sinhala format: [EN_TEXT] || [SI_TEXT].
+4. Break down sentence structure clearly (Identify: Subject / උක්තය, Verb / ක්‍රියාපදය, Object / කර්මය, Modifiers/Other / වෙනත් කොටස්).
+5. If the input is a question, answer the underlying query clearly with key information and explanatory points in Sinhala.
+6. Provide multiple alternative meanings or contexts if a single word or phrase has multiple senses.
+7. Provide similar sentences, patterns, or vocabulary examples to enrich learning.
+8. Encourage practice with a clear follow-up question.
 
-===BOX1_TRANSLATION===
-Provide ONLY the direct translation in format: [EN_TEXT] || [SI_TEXT] (Do NOT use brackets []).
+Format your responses neatly with clear headings:
+### 🇱🇰 ප්‍රධාන පරිවර්තනය (Main Translation)
+[EN_TEXT] || [SI_TEXT]
 
-===BOX2_TENSE_INFO===
-Provide the exact Tense (කාලය) and any relevant extra notes or context details in both English and Sinhala clearly.
+### ✍️ නිවැරදි කළ වාක්‍යය (Corrected Sentence)
+### 🧩 වාක්‍ය ව්‍යුහය විශ්ලේෂණය (Sentence Breakdown)
+- **උක්ත පදය (Subject)**: ...
+- **ක්‍රියා පදය (Verb)**: ...
+- **කර්ම පදය (Object)**: ...
+- **අනෙකුත් කොටස් (Modifiers/Other)**: ...
 
-===BOX3_GRAMMAR_PARTS===
-Provide a detailed breakdown of Subject (උක්තය), Actor (කතෘ), Verb (ක්‍රියාව/ආඛ්‍යාතය), Object (කර්මය), and Modifiers in both English and Sinhala clearly.
-
-===BOX4_ANSWER===
-Provide a comprehensive answer, deep explanation, or detailed breakdown regarding the user input or question in both English and Sinhala.
-
-===BOX5_EXAMPLES===
-Provide exactly 4 or 5 similar example sentences numbered 1 to 5, in format:
-1. EN_EX1 || SI_EX1
-2. EN_EX2 || SI_EX2
-3. EN_EX3 || SI_EX3
-4. EN_EX4 || SI_EX4
-5. EN_EX5 || SI_EX5
-
-===BOX6_PRACTICE===
-Provide a practical exercise or test question (අභ්‍යාසයක්) in both English and Sinhala.`;
+### 📖 ව්‍යාකරණ පැහැදිලි කිරීම සහ පිළිතුර (Grammar & Answer Details)
+### 📚 බහු-අර්ථ සහ වෙනත් භාවිතයන් (Multiple Meanings & Uses)
+### 💡 සමාන වාක්‍ය සහ උදාහරණ (Similar Sentences & Examples)
+### 💬 අභ්‍යාස ප්‍රශ්නය (Practice Question)`;
 
         function startCountdown(fallbackSeconds, errorMessage) {
             const outputDiv = document.getElementById("output");
+            let remaining = fallbackSeconds;
+            
+            if (errorMessage) {
+                const timeRegex = /retry in\s*([\d\.]+)/gi; 
+                let match;
+                let extractedTimes = [];
+                
+                while ((match = timeRegex.exec(errorMessage)) !== null) {
+                    if (match[1]) {
+                        extractedTimes.push(parseFloat(match[1]));
+                    }
+                }
+                
+                if (extractedTimes.length > 0) {
+                    remaining = Math.ceil(Math.min(...extractedTimes)) + 5; 
+                }
+            }
+
             if (countdownTimer) clearInterval(countdownTimer);
 
             outputDiv.innerHTML = `
-                <div class="error-box">
-                    <span style="font-size: 24px; margin-bottom: 8px; display: block;">⏳</span>
-                    <strong>දෛනික සීමාව ඉක්මවා ඇත!</strong>
-                    <p style="margin: 8px 0; color: #cbd5e1;">කරුණාකර තත්පර කිහිපයකින් නැවත උත්සාහ කරන්න.</p>
-                    <div class="countdown-text">තත්පර <span id="timer-count">${fallbackSeconds}</span> කින් සක්‍රිය වේ...</div>
+                <div class="error-box" style="background: #1e293b; border: 1px solid #eab308; color: #f8fafc; padding: 25px 20px;">
+                    <span style="font-size: 24px; margin-bottom: 12px; display: block;">⏳</span>
+                    <strong style="color: #facc15; font-size: 16px; display: block; margin-bottom: 8px;">දෛනික සීමාව ඉක්මවා ඇත!</strong>
+                    
+                    <p style="font-size: 13.5px; margin: 12px auto; color: #cbd5e1; line-height: 1.6; max-width: 95%;">
+                        ඔබ නොමිලේ භාවිතා කල සීමාව අවසන් වී ඇත. කරුණාකර පසුව නැවත උත්සාහ කරන්න. මෙහි සීමාව පැය 24කට වරක්‌ යළි සැකසේ   
+                    </p>
+                    
+                    <div class="countdown-text" style="font-size: 12px; padding: 8px 18px; margin-top: 10px;">
+                        තත්පර <span id="timer-count">${remaining}</span> කින් නැවත සක්‍රිය වේ...
+                    </div>
+
+                    <div style="margin-top: 20px; width: 100%;">
+                        <span onclick="var el=document.getElementById('dev-error-logs'); if(el.style.display === 'none') { var p = prompt('⚙️ Developer PIN එක ඇතුළත් කරන්න :'); if(p === '1979') { el.style.display = 'block'; } else if(p !== null) { alert('❌ මුරපදය වැරදියි!'); } } else { el.style.display = 'none'; }" 
+                              style="cursor: pointer; opacity: 0.8; font-size: 28px; color: #38bdf8; text-shadow: 0 0 10px rgba(56, 189, 248, 0.4); display: inline-block; transition: all 0.3s ease;" 
+                              onmouseover="this.style.opacity=1; this.style.transform='rotate(45deg) scale(1.1)';" onmouseout="this.style.opacity=0.8; this.style.transform='rotate(0deg) scale(1)';" 
+                              title="Kalpa's Developer Logs">&#x2699;&#xFE0E;</span>
+                    </div>
+                    
+                    <div id="dev-error-logs" style="display: none; margin-top: 15px; padding: 12px; background: #000; border: 1px solid #450a0a; border-radius: 6px; font-size: 11px; color: #fca5a5; text-align: left; max-height: 150px; overflow-y: auto; white-space: pre-wrap; width: 100%; box-sizing: border-box;">
+                        ${errorMessage}
+                    </div>
                 </div>`;
 
             countdownTimer = setInterval(() => {
-                fallbackSeconds--;
+                remaining--;
                 const timerElement = document.getElementById("timer-count");
-                if (fallbackSeconds <= 0) {
+                
+                if (remaining <= 0) {
                     clearInterval(countdownTimer);
-                    outputDiv.innerHTML = `<div class="loading" style="color: #4ade80;">✅ සේවාව සක්‍රියයි. Translate බොත්තම ඔබන්න.</div>`;
-                } else if (timerElement) {
-                    timerElement.innerText = fallbackSeconds;
+                    outputDiv.innerHTML = `<div class="loading" style="color: #4ade80; text-align: center; margin-top: 20px; font-weight: bold; background: #064e3b; padding: 15px; border-radius: 10px; border: 1px solid #10b981;">
+                        ✅ මෙම සේවාව නැවත සක්‍රිය විය!(නමුත් ඔබ මිළදීගෙන ඇති Package එක අනුව මෙහි සීමාව වෙනස් විය හැක.<br><br>
+                        <span style="font-size: 13px; font-weight: normal; color: #a7f3d0;">කරුණාකර 'Translate' බොත්තම මත නැවත Click කරන්න.</span>
+                    </div>`;
+                } else {
+                    if (timerElement) timerElement.innerText = remaining;
                 }
             }, 1000);
         }
 
         async function askGemini(promptText) {
-            let idx = getValidKeyIndex();
-            if (idx === -1) return { text: null, error: "No valid key" };
-            
-            const apiKey = getActiveApiKey(idx);
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${apiKey}`;
-            
-            try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        contents: [{ role: "user", parts: [{ text: promptText }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] }
-                    })
-                });
-                const data = await response.json();
-                if (response.ok && data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-                    return { text: data.candidates[0].content.parts[0].text, error: null };
+            let attempts = 0;
+            let collectedErrors = [];
+            const maxAttempts = ENCODED_KEYS.length;
+
+            while (attempts < maxAttempts) {
+                let currentIndex = getValidKeyIndex();
+
+                if (currentIndex === -1) {
+                    collectedErrors.push("All API keys are temporarily blocked by Smart Banning system.");
+                    break;
                 }
-                return { text: null, error: "API Error" };
-            } catch (e) {
-                return { text: null, error: e.message };
+
+                const currentApiKey = getActiveApiKey(currentIndex);
+
+                if (!currentApiKey) {
+                    blockKey(currentIndex);
+                    attempts++;
+                    continue;
+                }
+
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${currentApiKey}`;
+
+                const payload = {
+                    contents: [{
+                        role: "user",
+                        parts: [{ text: promptText }]
+                    }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    }
+                };
+
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.status === 429 || response.status === 403) {
+                        const rateMsg = data.error?.message || "Rate limit exceeded";
+                        collectedErrors.push(`Key [${currentIndex + 1}] (Status ${response.status}): ${rateMsg}`);
+                        blockKey(currentIndex); // 429 හෝ 403 ලැබුණු වහාම මෙම යතුර පැය 24කට බ්ලොක් කරමු!
+                        attempts++;
+                        continue;
+                    }
+
+                    if (!response.ok) {
+                        const errDetails = data.error?.message || 'Request failed';
+                        collectedErrors.push(`Key [${currentIndex + 1}] (Status ${response.status}): ${errDetails}`);
+                        blockKey(currentIndex);
+                        attempts++;
+                        continue;
+                    }
+
+                    if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts) {
+                        return { text: data.candidates[0].content.parts[0].text, error: null };
+                    } else {
+                        collectedErrors.push(`Key [${currentIndex + 1}]: Invalid response structure.`);
+                        blockKey(currentIndex);
+                        attempts++;
+                    }
+
+                } catch (error) {
+                    collectedErrors.push(`Key [${currentIndex + 1}]: Network Error (${error.message})`);
+                    blockKey(currentIndex);
+                    attempts++;
+                }
             }
+
+            return { text: null, error: collectedErrors.join('\n') };
         }
 
         function speakBilingual(enText, siText) {
-            if (!('speechSynthesis' in window)) return;
+            if (!('speechSynthesis' in window)) {
+                alert("ඔබගේ Browser එකෙහි Voice/Speech පහසුකම සහය නොදක්වයි.");
+                return;
+            }
+
             window.speechSynthesis.cancel();
+
             if (enText) {
                 const enUtterance = new SpeechSynthesisUtterance(enText);
                 enUtterance.lang = 'en-US';
+                enUtterance.rate = 0.9;
+                
                 enUtterance.onend = () => {
                     if (siText) {
                         const siUtterance = new SpeechSynthesisUtterance(siText);
                         siUtterance.lang = 'si-LK';
+                        siUtterance.rate = 0.95;
                         window.speechSynthesis.speak(siUtterance);
                     }
                 };
+
                 window.speechSynthesis.speak(enUtterance);
+            } else if (siText) {
+                const siUtterance = new SpeechSynthesisUtterance(siText);
+                siUtterance.lang = 'si-LK';
+                siUtterance.rate = 0.95;
+                window.speechSynthesis.speak(siUtterance);
             }
         }
 
-        function formatPairBox(textLine) {
-            let parts = textLine.split('||');
-            if (parts.length < 2) return `<div class="lang-line">${textLine.replace(/\*\*/g, '')}</div>`;
-            let cleanEn = parts[0].replace(/\*\*/g, '').replace(/[\[\]()]/g, '').trim();
-            let cleanSi = parts[1].replace(/\*\*/g, '').replace(/[\[\]()]/g, '').trim();
-            if (!cleanEn && !cleanSi) return "";
-            
-            let safeEn = cleanEn.replace(/'/g, "\\'");
-            let safeSi = cleanSi.replace(/'/g, "\\'");
+        function formatMarkdown(text) {
+            if (!text) return "";
 
-            return `<div class="main-translation-box" style="margin: 6px 0;">
-                <div class="translation-content">
-                    <div class="lang-line english" style="color: #ffffff;">🇬🇧 ${cleanEn}</div>
-                    <div class="lang-line sinhala" style="color: #fef08a;">🇱🇰 ${cleanSi}</div>
-                </div>
-                <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
-            </div>`;
-        }
+            let formatted = text;
 
-        function parseAndDisplayResponse(rawText) {
-            if (!rawText) return;
+            formatted = formatted.replace(/^---$/gim, '');
 
-            let box1 = "", box2 = "", box3 = "", box4 = "", box5 = "", box6 = "";
+            formatted = formatted.replace(/^(.*?)\s*\|\|\s*(.*?)$/gim, (match, enText, siText) => {
+                let cleanEn = enText.replace(/\*\*/g, '').trim();
+                let cleanSi = siText.replace(/\*\*/g, '').trim();
+                if (!cleanEn && !cleanSi) return "";
+                
+                let safeEn = cleanEn.replace(/'/g, "\\'");
+                let safeSi = cleanSi.replace(/'/g, "\\'");
 
-            if (rawText.includes("===BOX1_TRANSLATION===")) {
-                let p1 = rawText.split("===BOX1_TRANSLATION===");
-                let rest1 = p1[1] || rawText;
-                
-                let p2 = rest1.split("===BOX2_TENSE_INFO===");
-                box1 = p2[0] || "";
-                let rest2 = p2[1] || "";
-                
-                let p3 = rest2.split("===BOX3_GRAMMAR_PARTS===");
-                box2 = p3[0] || "";
-                let rest3 = p3[1] || "";
-                
-                let p4 = rest3.split("===BOX4_ANSWER===");
-                box3 = p4[0] || "";
-                let rest4 = p4[1] || "";
-                
-                let p5 = rest4.split("===BOX5_EXAMPLES===");
-                box4 = p5[0] || "";
-                let rest5 = p5[1] || "";
-                
-                let p6 = rest5.split("===BOX6_PRACTICE===");
-                box5 = p6[0] || "";
-                box6 = p6[1] || "";
-            } else {
-                box1 = rawText;
-                box2 = "විස්තර නොමැත.";
-                box3 = "විස්තර නොමැත.";
-                box4 = "විශේෂ පැහැදිලි කිරීමක් නොමැත.";
-                box5 = "";
-                box6 = "අභ්‍යාස නොමැත.";
-            }
-
-            // 1. ප්‍රධාන පරිවර්තක කොටුව
-            let transLines = box1.trim().split('\n').map(l => l.trim()).filter(l => l);
-            let box1Html = "";
-            transLines.forEach(line => {
-                if (line.includes("||")) box1Html += formatPairBox(line);
-                else box1Html += `<div class="lang-line" style="padding: 6px 0;">${line.replace(/\*\*/g, '')}</div>`;
+                return `<div class="main-translation-box">
+                    <div class="translation-content">
+                        <div class="lang-line english">🇬🇧 ${cleanEn}</div>
+                        <div class="lang-line sinhala">🇱🇰 ${cleanSi}</div>
+                    </div>
+                    <button class="speak-btn" onclick="speakBilingual('${safeEn}', '${safeSi}')" title="ශ්‍රවණය කරන්න">🔊</button>
+                </div>`;
             });
 
-            // 2. කාලය සහ අමතර කරුණු
-            let box2Html = box2.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^\s*-\s+/gim, '• ').split('\n').join('<br>');
-
-            // 3. කතෘ, උක්ත, ආඛ්‍යාත, ක්‍රියා
-            let box3Html = box3.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^\s*-\s+/gim, '• ').split('\n').join('<br>');
-
-            // 4. පිළිතුර සහ ගැඹුරු විස්තරය
-            let box4Html = box4.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/^\s*-\s+/gim, '• ').split('\n').join('<br>');
-
-            // 5. උදාහරණ වාක්‍ය 5 ක්
-            let exLines = box5.trim().split('\n').map(l => l.trim()).filter(l => l);
-            let box5Html = "";
-            exLines.forEach(line => {
-                let cleanLine = line.replace(/^\d+[\.\)]\s*/, '');
-                if (cleanLine.includes("||")) box5Html += formatPairBox(cleanLine);
-                else if (cleanLine) box5Html += `<div class="lang-line" style="padding: 4px 0;">• ${cleanLine.replace(/\*\*/g, '')}</div>`;
+            formatted = formatted.replace(/(?:###|##)\s*(.*$)/gim, (match, title) => {
+                let cleanTitle = title.replace(/\*\*/g, '').trim(); 
+                if (!cleanTitle) return "";
+                return `<span class="heading-highlight">${cleanTitle}</span>`;
             });
 
-            // 6. අභ්‍යාසය
-            let box6Html = box6.trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+            formatted = formatted.replace(/^(?:-|\*|\d+\.)?\s*\*\*(.*?)\*\*:\s*/gim, (match, title) => {
+                return `<span class="heading-highlight">${title.trim()}</span>`;
+            });
 
-            // රූප සටහන් වල පරිදි ඉතා පිරිසිදු ලෙස වෙන වෙනම කොටු 6 UI එකට එකතු කිරීම
-            const outputDiv = document.getElementById("output");
-            outputDiv.innerHTML = `
-                <div class="section-box">
-                    <div class="section-title">1. ප්‍රධාන පරිවර්තක කොටුව (Main Translation)</div>
-                    <div class="section-content">${box1Html || "පරිවර්තනයක් නොමැත."}</div>
-                </div>
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-                <div class="section-box">
-                    <div class="section-title">2. කාලය සහ අමතර කරුණු (Tense & Extra Notes)</div>
-                    <div class="section-content">${box2Html || "දත්ත නොමැත."}</div>
-                </div>
+            formatted = formatted.replace(/^\s*[\.\*•-]\s*$/gim, '');
+            formatted = formatted.replace(/^\s*[\*•-]\s+/gim, '• ');
 
-                <div class="section-box">
-                    <div class="section-title">3. කතෘ, උක්ත, ආඛ්‍යාත සහ ක්‍රියා (Grammar Parts)</div>
-                    <div class="section-content">${box3Html || "විශ්ලේෂණ දත්ත නොමැත."}</div>
-                </div>
+            formatted = formatted.split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .join('<br>');
 
-                <div class="section-box">
-                    <div class="section-title">4. පිළිතුර සහ ගැඹුරු විස්තරය (Answer & Detailed Explanation)</div>
-                    <div class="section-content">${box4Html || "විශේෂ පැහැදිලි කිරීම් නොමැත."}</div>
-                </div>
+            formatted = formatted.replace(/<\/span><br>/g, '</span>');
 
-                <div class="section-box">
-                    <div class="section-title">5. උදාහරණ වාක්‍ය (Similar Examples)</div>
-                    <div class="section-content">${box5Html || "උදාහරණ නොමැත."}</div>
-                </div>
-
-                <div class="section-box" style="border-color: #38bdf8; background: linear-gradient(135deg, #0f172a, #1e293b);">
-                    <div class="section-title" style="color: #facc15;">6. අභ්‍යාසය (Practice Exercise)</div>
-                    <div class="section-content" style="color: #f8fafc;">${box6Html || "අභ්‍යාස නොමැත."}</div>
-                </div>
-            `;
+            return formatted;
         }
 
-        // Voice Input Recognition Setup
-        const micBtn = document.getElementById('mic-btn');
-        const inputField = document.getElementById('input');
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-
-            micBtn.onclick = () => {
-                recognition.lang = /[\u0D80-\u0DFF]/.test(inputField.value) ? 'si-LK' : 'en-US';
-                try {
-                    recognition.start();
-                    micBtn.classList.add('listening');
-                    showToast("කතා කරන්න... (Listening)");
-                } catch (err) {
-                    showToast("මයික්‍රෆෝන දෝෂයකි.");
-                }
-            };
-            recognition.onresult = (e) => {
-                inputField.value = e.results[0][0].transcript;
-                micBtn.classList.remove('listening');
-            };
-            recognition.onerror = () => micBtn.classList.remove('listening');
-            recognition.onend = () => micBtn.classList.remove('listening');
-        } else {
-            micBtn.style.display = 'none';
-        }
-
-        // Top Action Buttons Functionality
-        document.getElementById('copy-btn').onclick = () => {
-            const text = document.getElementById('output').innerText;
-            if (!text || text.includes("පිළිතුර මෙහි දිස් වනු ඇත")) { showToast("ප්‍රතිඵලයක් නොමැත."); return; }
-            navigator.clipboard.writeText(text).then(() => showToast("📋 Clipboard වෙත Copy විය!"));
-        };
-
-        document.getElementById('clear-btn').onclick = () => {
-            inputField.value = "";
-            document.getElementById('output').innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 20px; font-style: italic;">පිළිතුර මෙහි දිස් වනු ඇත...</div>`;
-            showToast("සියල්ල මකාදමන ලදී.");
-        };
-
-        document.getElementById('export-btn').onclick = () => {
-            const text = document.getElementById('output').innerText;
-            if (!text || text.includes("පිළිතුර මෙහි දිස් වනු ඇත")) { showToast("ප්‍රතිඵලයක් නොමැත."); return; }
-            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Kalpa_AI_Translation_Analysis.txt';
-            a.click();
-            URL.revokeObjectURL(url);
-            showToast("💾 File එක Download විය!");
-        };
-
-        const settingsModal = document.getElementById('settings-modal');
-        document.getElementById('settings-btn').onclick = () => settingsModal.classList.add('active');
-        document.querySelectorAll('.close-modal').forEach(btn => btn.onclick = () => settingsModal.classList.remove('active'));
-        document.getElementById('advanced-btn').onclick = () => showToast("🚀 Advanced Tools ක්‍රියාත්මකයි!");
-
-        // Main Translate Button Handler
         document.getElementById("translate").onclick = async () => {
+            const inputField = document.getElementById("input");
             const outputDiv = document.getElementById("output");
             const translateBtn = document.getElementById("translate");
             const text = inputField.value.trim();
 
             if (!text) {
-                outputDiv.innerHTML = `<div class="error-box">කරුණාකර යම් වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න.</div>`;
+                outputDiv.innerText = "කරුණාකර යම් වාක්‍යයක් හෝ ප්‍රශ්නයක් ඇතුළත් කරන්න.";
                 return;
             }
 
             if (countdownTimer) clearInterval(countdownTimer);
 
-            const cacheKey = `trans_cache_v24_${text.toLowerCase()}`;
+            // 1. Browser Cache (LocalStorage) පරීක්ෂා කිරීම (API යතුරු ඉතිරි කර ගැනීමට)
+            const cacheKey = `trans_cache_${text.toLowerCase()}`;
             const cachedResult = localStorage.getItem(cacheKey);
 
             if (cachedResult) {
-                parseAndDisplayResponse(cachedResult);
-                showToast("⚡ මතකයෙන් ලබාගත් ප්‍රතිඵලයකි");
+                outputDiv.innerHTML = formatMarkdown(cachedResult) + "<br><br><span style='font-size: 11px; color: var(--text-secondary); display: block; text-align: center;'>(⚡ මතකයෙන් ක්ෂණිකව ලබාගත් ප්‍රතිඵලයකි)</span>";
                 return;
             }
 
             translateBtn.disabled = true;
             translateBtn.style.opacity = "0.8";
+            translateBtn.style.cursor = "not-allowed";
             translateBtn.innerHTML = "↻ Please wait...";
 
-            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා වාක්‍යය විශ්ලේෂණය කරමින් පවතී...</div><div class='spinner'></div></div>";
+            outputDiv.innerHTML = "<div class='spinner-container'><div style='font-size: 14.5px; color: var(--accent-color);'>ගුරුවරයා පිළිතුර සකස් කරමින් පවතී...</div><div class='spinner'></div></div>";
 
             try {
                 const result = await askGemini(text);
+
                 if (result.text) {
+                    // 2. සාර්ථක ප්‍රතිඵලය අනාගතය සඳහා Browser Cache එකේ සුරැකීම
                     localStorage.setItem(cacheKey, result.text);
-                    parseAndDisplayResponse(result.text);
+                    outputDiv.innerHTML = formatMarkdown(result.text);
                 } else {
                     startCountdown(60, result.error);
                 }
             } catch (error) {
-                startCountdown(60, error.message);
+                startCountdown(60, `Execution Exception: ${error.message}`);
             } finally {
                 translateBtn.disabled = false;
                 translateBtn.style.opacity = "1";
-                translateBtn.innerHTML = "✨ Translate & Analyze (පරිවර්තනය සහ විශ්ලේෂණය)";
+                translateBtn.style.cursor = "pointer";
+                translateBtn.innerHTML = "✨ Translate (පරිවර්තනය මෙතනින් සිදුකරන්න)";
             }
         };
     </script>
