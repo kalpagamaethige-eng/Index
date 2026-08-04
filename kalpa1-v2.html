@@ -11,7 +11,7 @@
     <style>
         :root {
             --bg-primary: #0f172a; --bg-card: #1e293b; --border-color: #334155;
-            --accent-color: #38bdf8; --accent-hover: #0ea5e9;
+            --accent-color: #0284c7; --accent-hover: #0369a1;
             --text-primary: #f8fafc; --text-secondary: #94a3b8;
             --header-bg-light: #0284c7; 
         }
@@ -22,9 +22,9 @@
             --accent-color: #0284c7; --accent-hover: #0369a1;
             --text-primary: #0f172a; 
             --text-secondary: #334155; 
-            --header-bg-light: #0284c7; 
-            --textarea-light-border: #1e3a8a; 
-            --textarea-light-bg: #ffffff; /* වචන ලියන කොටුව ඇතුළත සුදු පැහැය */
+            --header-bg-light: #0284c7; /* ස්පීකර් බටන් එකේ ඇති තද නිල් පැහැයම Header එකට යොදන ලදී */
+            --textarea-light-border: #0284c7; 
+            --textarea-light-bg: #ffffff; 
             --top-btn-bg-light: #ffffff; 
             --top-btn-text-light: #0f172a; 
         }
@@ -90,7 +90,7 @@
         
         .input-wrapper { position: relative; }
         textarea { width: 100%; height: 110px; background: var(--bg-primary); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; font-size: 14px; resize: none; box-sizing: border-box; transition: background 0.3s, color 0.3s, border 0.3s; }
-        body.light-mode textarea { background: var(--textarea-light-bg); color: #0f172a; border-color: var(--textarea-light-border); border-width: 1.5px; } /* Light mode එකේදී textarea පසුබිම සුදු පැහැයට හැරවීම */
+        body.light-mode textarea { background: var(--textarea-light-bg); color: #0f172a; border-color: var(--textarea-light-border); border-width: 1.5px; } 
         textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15); }
 
         /* Action Row */
@@ -104,7 +104,7 @@
         .side-square-btn:disabled, button#translate:disabled { opacity: 0.6; cursor: not-allowed; }
 
         button#translate { 
-            background: var(--accent-color); 
+            background: var(--accent-color); /* ස්පීකර් බටන් එකේ ඇති තද නිල් පැහැයම Translate බටන් එකට යොදන ලදී */
             color: white; border: none; padding: 0 12px; height: 48px; border-radius: 10px; 
             cursor: pointer; font-weight: bold; width: 100%; max-width: 400px; font-size: 15px; 
             transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; 
