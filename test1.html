@@ -52,141 +52,133 @@
         };
 
         const ENCODED_KEYS = [
+            // 🔴 API KEY 01 > ENCODE 👇
+            "QVEuQWI4Uk42SXROYmFabG5UVDFoN0FCTUtkY3RacHRoX2VrSGNsZVVOX2RYZkpIb3FSNGc",
+            "CkFRLkFiOFJONktBTTQxUGkwem9XRXVHSHFRRlpkWmFBSlJiTzJyQVpRNnN2QWRxdkhyby1B",
+            "CkFRLkFiOFJONktGQWFNYkxRandEdjNKcHRMZld0a1pOZ2s2YXh4Qmo4amxkUGJTMHFVR29B",
+            "QVEuQWI4Uk42TDhpcWxDa2JyY1lRZXNxdkFiOWI3bHhMSDBhcW1fdnJiX0F3SWdkMHNRencKCgo",
+            "QVEuQWI4Uk42SzVMWHowWFJPMmtTbE9RTWZXa1hiQWZFMTBTa2l3Y0gwZUpSb1ZSSDlQTmcKCgoKCgo",
+            "QVEuQWI4Uk42SW05ekNzNkhfanFsN19kR0Y3RUFLU2gwT05wWlA3UWl1TklyUFo0dXhCLWc",
+            "QVEuQWI4Uk42TDFaMk5Qcl_MNk9qNlJlSUNJWjZsektzQy1ISU5NNHlVUHM1TlBrdFNHc3c",
+            "QVEuQWI4Uk42Sk9ObnBuc3Y3Q2JKc3EtSFdBZGtoQ0VmQkZpeHMwdzZRNmY0Qkd2N2ZLMGcK",
+            "QVEuQWI4Uk42THF0aC14UkswbG9mMU9rczMyWlFVaGtnc0pyNGZSRlFxLVlMZEJ4dk1jancKCg",
+            "QVEuQWI4Uk42TGVWUm02R19PXzh0VU1Ed3hmSEJXN1QyYmUwRFE3WGJpb3kxbzJ0SDVqSkEKCg",
+            "QVEuQWI4Uk42SWF6QWhySlczQVpRRG56elVDaFRsZWdFNkdLaGJaMXBIVk9yQ1NyRFZvb0E",
+            "QVEuQWI4Uk42TDc0cHBMLWlvWWpHd2ZrOVVlWkdQUGw1UTd2N3J3cGIwTy02VVlsRmVCY3cK",
+            "QVEuQWI4Uk42SWlWMVh1d1NzZzJfcEhkeGFIMVlmMFN2cjF6YTRyV280OWQzemQ4TmhQbncKCgoK",
+            "QVEuQWI4Uk42S1owQlNuTGpwNzE2NzFHOTVmUDZCNmpNYlVyZGpBeFBZVzR3Vm90ZFNXVkEKCgoKCgo",
+            "QVEuQWI4Uk42S3Y1NVVNUmJDdC1RTmFjWVIxTmFSaXpUa1RqbDNLUERZRU42bmNjN3NVN2cKCgoKCgoK",
+            "QVEuQWI4Uk42TEdaREE0RGdFSEtmQmVXQ0VabXFhOGc3QWJCTkFmRGpPb3pQY2VENFhRb0EKCgoKCgo",
+            "QVEuQWI4Uk42SlRNYnZRcEZzZEM3OENFd19sVGZUZXlLeXU0RFVwa2pyRkRtTVRtN280T3cKCgoKCgoK",
+            "QVEuQWI4Uk42TC1QZDZfMFVlRXA0QnloUWtwR0NycTZ5bWMxdy0zWjFDUEZocWtlbXlEMHcKCgoKCgoK",
+            "QVEuQWI4Uk42SkZpMjF5aWd0TDM1aGZGV0thcWhaYTZjNUEzZjRybDFna0VHTkZOQjFfUHcKCgoKCgoK",
+            "QVEuQWI4Uk42TDhYYTdyV0o3OXdvV0lWQmNBNl_PbmhhNjdNUjBhXzRNbkRFbmpnaVY5ZWcKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42SkV1UmJrUS13REtSSlRzOEJ5Z0hDdjEwVndESVlmeTBJMGRCMEN5RnRrbkEKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42TFZNVm5OR25IMWdBZ0RMOVdiUkk5dXVVbXFSS0lkWTcxaDJod3M0bDlEZ1EKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SXlkV2dodHFheG5RSWl6TGpTbWNNME92dVlQY1hQbVlvLXJReU5HU3BaMVEKCgoKCgoKCgoKCgo",
+            "QVEuQWI4Uk42THhlWm5zb0JuTXgtTWNEdTFTeWlUUk50aFlDX0xZQTJsdFp0eXZCbUV5MncKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42TDBYb0xNdTFzbEV2Y1VpWEVhWTJacUViaklZdmZKRDNneks4eFdVMTZEZ3cKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SlltSkRHdlhTaUllY3lwX3VIR292aS1lY081dnUwdGdOcWhfX3BhendaNWcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42STUyLUlIRTZfV1JJQm5jVHdmei1udWFwT0hwS01obGgxaDVPVzB1YlRmWHcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42TFB5eTFtMnF6NnZwc1pWX0toaEd3MktKYTNENFc2U1NKdGo5NUQ4cXdpd0EK",
+            "CkFRLkFiOFJONkxQeXkxbTJxejZ2cHNaVl_LaGhHdzJLSmEzRDRXNlNTSnRqOTVEOHF3aXdBCg",
+            "QVEuQWI4Uk42SXRPQWY0ck9nbkFLWWh5aHJOQnZQcnMwaUVzd3hjeGNFdWkzM0ExWG1GMnc",
 
+            // 🔴 API KEY : 02 > ENCODE 👇
+            "QVEuQWI4Uk42TGNwQnhOT3lNN3RwdUpNQ0dpVkVZZ3hpT0pGSUZ3QTh6eEdHa2hicU5VRHc",
+            "QVEuQWI4Uk42S3VqRUENaWl0cm1HNDF0dnhPRWdPVUtOSVhwaTFLSnJpWnJWVndjZlBKUFE",
+            "QVEuQWI4Uk42S3ZnYlBaRndIc1FjUk54ci01MHdScVhXUm51MTgxczR2TjkzM242QlZqbWc",
+            "CkFRLkFiOFJONklWcmJXTFkza2ZLWURqZ25ydXdDYzZ0cWI1d1dzRjNZVVdxMzR0VmxManFRCgoK",
+            "QVEuQWI4Uk42S2phbW1GN0NqNFI5NXZFT0RZT1VpZUpZUDZBT2JRVm5qWjFudFcwMlh5blEKCgoKCgo",
+            "QVEuQWI4Uk42SlNHUlFROFA4Ni1yYjZpSkxRTHhaSGt0cUlOZkoyWUVWNWJNYk5WaFV6eEE",
+            "QVEuQWI4Uk42TDdiaHRNM2xIUUlDNXRKclpQbElYRHgxZk5USVY3Snl5Sm8zWWpBUVFvYXcK",
+            "QVEuQWI4Uk42TGVhaGdhMEswNDBpcXZiYXk5M2o2aVpFRUtsQURCeGFkN3VybVVNSklqdkEK",
+            "QVEuQWI4Uk42SUFXUjhsdEtSY2VNVnlEeGFHMy0yUm02QmZiX2lUakhZOXMxbTBjWGd1NXcKCg",
+            "QVEuQWI4Uk42TGlQQ3VEaU01UDIxNTRuVzNZUU12Y09YM0lfWVBxUXFyTWlvVlZ6aFZ5MGc",
+            "QVEuQWI4Uk42S1pBVnJKdmNUeDdxdC1zT05FS3BVT1BvakNHQXo2VEhDMFhjc0UtZjRlSlEK",
+            "QVEuQWI4Uk42SUJJd0NKOHZsbXdWTnZWVmc2TzNpUFlIRjFPbG00M3FUNU0xdllHRWpTWEEK",
+            "QVEuQWI4Uk42S2phWElIY25KdTJJbHYyRjI5QzM3YmF6cnZ6c3hwVnZjSE1hUDVGY0NDamcKCgoK",
+            "QVEuQWI4Uk42Sm5iVzJsd2lYemI0SHdfV1FOcF_TSHJuUEsyRzJZRnA4d0RudmRMNnFmbncKCgoKCgo",
+            "QVEuQWI4Uk42SURYUjdXd3c5R0tBVllSOGFnWGE4TkcxTjN0c3pRNWNGTW1nOUxvSjZHbGcKCgoKCgoK",
+            "QVEuQWI4Uk42SUduYUUzXzFJRFBOVnRQbmU2UVRFZnB0dzFiX1NVSVAxS1Y5NXh0UmRxTGcKCgoKCgo",
+            "QVEuQWI4Uk42TGMxYjl6QndBaDNUNm5FOHA2UElsalNKcEN0anRMSS1mX1pGdWxXLWFaQ2cKCgoKCgoK",
+            "QVEuQWI4Uk42TGVJMk9oaks1bUpFc2QxOGdIUmc5X2N0cGJydl_oX3dVNEFZX2xjS0l6eHcKCgoKCgoK",
+            "QVEuQWI4Uk42S24wOWFhcGlVWWktc0tCcTl3ZHNLYTM4TmZtZG9wTjIzbkxKeEZwSGJfR1EKCgoKCgoK",
+            "QVEuQWI4Uk42Sl_Pa2txVFFYN3YtLXRfcWZQQTExb0dXWThjX3lqMjFMdjJfaFFxaDQ0WUEKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42SXZMLXFPT2tUR2JYb1Nna1lTd0cydDM3QUlHaU03MmE1Z3pOcEtoOTVaVHcKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42S0JkOHJxMXFmY05WMERsZ1YzZTVIWGFuVXFCYVhQVVNwQ0FhQnZRc0xKa1EKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SjVBZDBheXE5Ty0yX0tEcFR6VWgzNVNXRkJkTGZFM3VlOURNU0h0V3JoQncKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42TGtuNUhmVkMtbjdZZ0NaMGR5cnFoOGs2LXEwUnUtYlBnYlllRXo3akhuQWcKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42S1o3cVFSWi0ySlF1UTJ2OWJCYzRORk5KRlVkajgwbDhtTi1IRkpwSzlNOHcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42TFlYbTR3enJKZGc4LVFVd3JqQk44Q215MERaV0cxa3hYV3FLQTRkZkRUNGcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SVlxWExjeFdVNDRvaGNhcWdlSGVvbW9GdzhVbkY1el_LbjFkNVhLQWZyNnc",
+            "QVEuQWI4Uk42Sm1YQTN6Nk5rMDJnc3RIMFNoc2xnLWlsaXc4anI0OW9TdG9qVTFZaUJwdUEKCg",
+            "CkFRLkFiOFJONkptWEEzejZOazAyZ3N0SDBTaHNsZy1pbGl3OGpyNDlvU3RojUxWWlCcHVB",
+            "QVEuQWI4Uk42S2VycExzdlpLV2YzVWVPLUxqamF0cFNwUUVrNDBiRDRCdmY0LUd5RnJLSUE",
 
-// 🔴 API KEY  01 > ENCODE 👇
+            // 🔴 API KEY : 03 > ENCODE 👇
+            "QVEuQWI4Uk42TG9jVTZLdmUtVVoyMGQ2b2pZclNkbVhVMERiU1gyMHh0UFQ4bE9TYWdPNmc",
+            "QVEuQWI4Uk42S3ozVjBtbDdsWVBPdzVMUGQ0clZ2dk1kY29VeW53TUtKRlhpaS1ZVTVsancK",
+            "QVEuQWI4Uk42SzRHS1ZnWkVKb3FZdWJJV1N6MTQ1RVBRT1JBTHFCN2hvTVZBSWo1VGZ1VHc",
+            "QVEuQWI4Uk42TE8yN29sS3FTN3FWYWtjY3laTEhVV2Z2ZWxIcXR4ZHhZdklzeGdDcVU4eWcKCgo",
+            "QVEuQWI4Uk42TG1saXZtR0ktQndFcEduXzJyOXdOMVFiWUg5b25UNXRBUWlQcVdMVDdjUEEKCgoKCgo",
+            "QVEuQWI4Uk42SlBBbFJRbzVqNWRJRkhSRlotZ3lzY1Q1ZzhxWFlaUTNuOENJdUJpbHpCUmc",
+            "CkFRLkFiOFJONkl4TEVrQTZsRGRsMS02SzZjd0czNE56LUpaNnJQbEhhQm9ndWxWSHJYYWhR",
+            "QVEuQWI4Uk42SXJkMGllejF0cnBNSk9LVHZjY0xSUl_tMEtOWk9rdFBUR3RvQkFkNW94dGcK",
+            "QVEuQWI4Uk42SmxvM3huZ3F5XzF0YV_tTmZueFBNcEdUV3hyUkNxV212XzF1REluTVlvcWcK",
+            "QVEuQWI4Uk42Sl_xNmZPZThDMmNYOVRabFdjZUF2cTRLbjV5aXNOR3c4NDlGMXoxZW1maVE",
+            "QVEuQWI4Uk42SjQxTmhld1A3dVZsUVZCcllHbkVLN2hYTXBUUXZ6a0JKTTAwZS1OX2lOU2cK",
+            "QVEuQWI4Uk42TGkwM0wtbEQ1UFgtOUVCOUhIeDdUalU1V2tRQ1lyRW9lUklmYjhiczhyX3cKCg",
+            "QVEuQWI4Uk42SkZOX3BOemJCZS1JM3JpN2pPWnpmdXU2ZzlYRzFTeW92LWJJbVBrdXQ2RWcKCgoKCg",
+            "QVEuQWI4Uk42SXVFS3R6SDFJTE9NcHExUkhQY012V1g2YmRZdm51c0VDb2dTY0pwVmRMRWcKCgoKCgo",
+            "QVEuQWI4Uk42TGp2bVJ1bEtLYTJzRHFBNF_Fc1ZRS3FnbFJUOWtobm1ieEVMcWpNZ0ZHR1EKCgoKCgo",
+            "QVEuQWI4Uk42SUc4Qkl5NzRtTXZacGlNTjQ0aDRIOEtTb2JvNGdLN0BmaVJIcFpnYkhiOGcKCgoKCgo",
+            "QVEuQWI4Uk42TFXZYlRwSUZQbVE1d2JZRnpBZWQxckJyX2NSVEFkc0RodXFsVDhGU3NWN2cKCgoKCgoK",
+            "QVEuQWI4Uk42S3hIMEhDWHNkd2tmQkh4eWM3UXhERkxydkhERUk3UzE2bEpiMlNWV3AwQXcKCgoKCgoK",
+            "QVEuQWI4Uk42S0JCWENDUFFtb0xQeFZfcXpVbDV4X3pSVEtOdS1KTVhvLVNXSEHXeUVGR2cKCgoKCgoK",
+            "QVEuQWI4Uk42THhfMmpVUE5zbERRRjk3ZHZPVnRiZS1pUGxRMTlUX2RCR1ZIZmw5NDVwT0EKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42Sk5EU0xuZEx3THpyZ1hDRWhCUks1MVdIcVNEeU1uV2R2WlFGeGJ2MkFnVGcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SWN2bXdJbjNVVjR5YVFyS1hzQ2xTQm9FUGh2ckh1MXZfelREbVMzT2p0b2cKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SlRrejhjbERHWWlpdHhidDF6bWVtemk2VXFycTlSVmhsWHpmZndjaUl4bHcKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42STZjMnJkMnJVYldINXVEc3NudU5DWEF0MGVjTVNELThzTVNIekVlTGtGS0EKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42S3o0UXNKSHFIUnlUSUpfbkFWRWlzWmNDeWdtbEdIaWN2RGxsN0Zoc1_4bHcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SnBtZzRVZU9UcFQ2X1BzNGhESXBoZHM4dzJKb3ZDcDNwT1JwZmJOSTA5NHcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42SVBDT3dhOTZoN2t6WVNIWm41cUpDMlFhR1hUR1dUeVdYUkFHZXdkUW9JdWc",
+            "QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0EKCg",
+            "QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0E",
+            "QVEuQWI4Uk42THp1U2RobTBoTEdJR2pFeXZUQVRBdDl1Z2p6TXh4bi1qWW02dDdKS1J1UXc",
 
-"QVEuQWI4Uk42SXROYmFabG5UVDFoN0FCTUtkY3RacHRoX2VrSGNsZVVOX2RYZkpIb3FSNGc",
-"CkFRLkFiOFJONktBTTQxUGkwem9XRXVHSHFRRlpkWmFBSlJiTzJyQVpRNnN2QWRxdkhyby1B",
-"CkFRLkFiOFJONktGQWFNYkxRandEdjNKcHRMZld0a1pOZ2s2YXh4Qmo4amxkUGJTMHFVR29B",
-"QVEuQWI4Uk42TDhpcWxDa2JyY1lRZXNxdkFiOWI3bHhMSDBhcW1fdnJiX0F3SWdkMHNRencKCgo",
-"QVEuQWI4Uk42SzVMWHowWFJPMmtTbE9RTWZXa1hiQWZFMTBTa2l3Y0gwZUpSb1ZSSDlQTmcKCgoKCgo",
-"QVEuQWI4Uk42SW05ekNzNkhfanFsN19kR0Y3RUFLU2gwT05wWlA3UWl1TklyUFo0dXhCLWc",
-"QVEuQWI4Uk42TDFaMk5Qcl9MNk9qNlJlSUNJWjZsektzQy1ISU5NNHlVUHM1TlBrdFNHc3c",
-"QVEuQWI4Uk42Sk9ObnBuc3Y3Q2JKc3EtSFdBZGtoQ0VmQkZpeHMwdzZRNmY0Qkd2N2ZLMGcK",
-"QVEuQWI4Uk42THF0aC14UkswbG9mMU9rczMyWlFVaGtnc0pyNGZSRlFxLVlMZEJ4dk1jancKCg",
-"QVEuQWI4Uk42TGVWUm02R19PXzh0VU1Ed3hmSEJXN1QyYmUwRFE3WGJpb3kxbzJ0SDVqSkEKCg",
-"QVEuQWI4Uk42SWF6QWhySlczQVpRRG56elVDaFRsZWdFNkdLaGJaMXBIVk9yQ1NyRFZvb0E",
-"QVEuQWI4Uk42TDc0cHBMLWlvWWpHd2ZrOVVlWkdQUGw1UTd2N3J3cGIwTy02VVlsRmVCY3cK",
-"QVEuQWI4Uk42SWlWMVh1d1NzZzJfcEhkeGFIMVlmMFN2cjF6YTRyV280OWQzemQ4TmhQbncKCgoK",
-"QVEuQWI4Uk42S1owQlNuTGpwNzE2NzFHOTVmUDZCNmpNYlVyZGpBeFBZVzR3Vm90ZFNXVkEKCgoKCgo",
-"QVEuQWI4Uk42S3Y1NVVNUmJDdC1RTmFjWVIxTmFSaXpUa1RqbDNLUERZRU42bmNjN3NVN2cKCgoKCgoK",
-"QVEuQWI4Uk42TEdaREE0RGdFSEtmQmVXQ0VabXFhOGc3QWJCTkFmRGpPb3pQY2VENFhRb0EKCgoKCgo",
-"QVEuQWI4Uk42SlRNYnZRcEZzZEM3OENFd19sVGZUZXlLeXU0RFVwa2pyRkRtTVRtN280T3cKCgoKCgoK",
-"QVEuQWI4Uk42TC1QZDZfMFVlRXA0QnloUWtwR0NycTZ5bWMxdy0zWjFDUEZocWtlbXlEMHcKCgoKCgoK",
-"QVEuQWI4Uk42SkZpMjF5aWd0TDM1aGZGV0thcWhaYTZjNUEzZjRybDFna0VHTkZOQjFfUHcKCgoKCgoK",
-"QVEuQWI4Uk42TDhYYTdyV0o3OXdvV0lWQmNBNl9PbmhhNjdNUjBhXzRNbkRFbmpnaVY5ZWcKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42SkV1UmJrUS13REtSSlRzOEJ5Z0hDdjEwVndESVlmeTBJMGRCMEN5RnRrbkEKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42TFZNVm5OR25JMWdBZ0RMOVdiUkk5dXVVbXFSS0lkWTcxaDJod3M0bDlEZ1EKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SXlkV2dodHFheG5RSWl6TGpTbWNNME92dVlQY1hQbVlvLXJReU5HU3BaMVEKCgoKCgoKCgoKCgo",
-"QVEuQWI4Uk42THhlWm5zb0JuTXgtTWNEdTFTeWlUUk50aFlDX0xZQTJsdFp0eXZCbUV5MncKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42TDBYb0xNdTFzbEV2Y1VpWEVhWTJacUViaklZdmZKRDNneks4eFdVMTZEZ3cKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SlltSkRHdlhTaUllY3lwX3VIR292aS1lY081dnUwdGdOcWhfX3BhendaNWcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42STUyLUlIRTZfV1JJQm5jVHdmei1udWFwT0hwS01obGgxaDVPVzB1YlRmWHcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42TFB5eTFtMnF6NnZwc1pWX0toaEd3MktKYTNENFc2U1NKdGo5NUQ4cXdpd0EK",
-"CkFRLkFiOFJONkxQeXkxbTJxejZ2cHNaVl9LaGhHdzJLSmEzRDRXNlNTSnRqOTVEOHF3aXdBCg",
-"QVEuQWI4Uk42SXRPQWY0ck9nbkFLWWh5aHJOQnZQcnMwaUVzd3hjeGNFdWkzM0ExWG1GMnc",
-
-// 🔴 API KEY : 02 > ENCODE 👇
-
-"QVEuQWI4Uk42TGNwQnhOT3lNN3RwdUpNQ0dpVkVZZ3hpT0pGSUZ3QTh6eEdHa2hicU5VRHc",
-"QVEuQWI4Uk42S3VqRU5PaWl0cm1HNDF0dnhPRWdPVUtOSVhwaTFLSnJpWnJWVndjZlBKUFE"
-"QVEuQWI4Uk42S3ZnYlBaRndIc1FjUk54ci01MHdScVhXUm51MTgxczR2TjkzM242QlZqbWc",
-"CkFRLkFiOFJONklWcmJXTFkza2ZLWURqZ25ydXdDYzZ0cWI1d1dzRjNZVVdxMzR0VmxManFRCgoK",
-"QVEuQWI4Uk42S2phbW1GN0NqNFI5NXZFT0RZT1VpZUpZUDZBT2JRVm5qWjFudFcwMlh5blEKCgoKCgo",
-"QVEuQWI4Uk42SlNHUlFROFA4Ni1yYjZpSkxRTHhaSGt0cUlOZkoyWUVWNWJNYk5WaFV6eEE",
-"QVEuQWI4Uk42TDdiaHRNM2xIUUlDNXRKclpQbElYRHgxZk5USVY3Snl5Sm8zWWpBUVFvYXcK",
-"QVEuQWI4Uk42TGVhaGdhMEswNDBpcXZiYXk5M2o2aVpFRUtsQURCeGFkN3VybVVNSklqdkEK",
-"QVEuQWI4Uk42SUFXUjhsdEtSY2VNVnlEeGFHMy0yUm02QmZiX2lUakhZOXMxbTBjWGd1NXcKCg",
-"QVEuQWI4Uk42TGlQQ3VEaU01UDIxNTRuVzNZUU12Y09YM0lfWVBxUXFyTWlvVlZ6aFZ5MGc",
-"QVEuQWI4Uk42S1pBVnJKdmNUeDdxdC1zT05FS3BVT1BvakNHQXo2VEhDMFhjc0UtZjRlSlEK",
-"QVEuQWI4Uk42SUJJd0NKOHZsbXdWTnZWVmc2TzNpUFlIRjFPbG00M1FUNU0xdllHRWpTWEEK",
-"QVEuQWI4Uk42S2phWElIY25KdTJJbHYyRjI5QzM3YmF6cnZ6c3hwVnZjSE1hUDVGY0NDamcKCgoK",
-"QVEuQWI4Uk42Sm5iVzJsd2lYemI0SHdfV1FOcF9TSHJuUEsyRzJZRnA4d0RudmRMNnFmbncKCgoKCgo",
-"QVEuQWI4Uk42SURYUjdXd3c5R0tBVllSOGFnWGE4TkcxTjN0c3pRNWNGTW1nOUxvSjZHbGcKCgoKCgoK",
-"QVEuQWI4Uk42SUduYUUzXzFJRFBOVnRQbmU2UVRFZnB0dzFiX1NVSVAxS1Y5NXh0UmRxTGcKCgoKCgo",
-"QVEuQWI4Uk42TGMxYjl6QndBaDNUNm5FOHA2UElsalNKcEN0anRMSS1mX1pGdWxXLWFaQ2cKCgoKCgoK",
-"QVEuQWI4Uk42TGVJMk9oaks1bUpFc2QxOGdIUmc5X2N0cGJydl9oX3dVNEFZX2xjS0l6eHcKCgoKCgoK",
-"QVEuQWI4Uk42S24wOWFhcGlVWWktc0tCcTl3ZHNLYTM4TmZtZG9wTjIzbkxKeEZwSGJfR1EKCgoKCgoK",
-"QVEuQWI4Uk42Sl9Pa2txVFFYN3YtLXRfcWZQQTExb0dXWThjX3lqMjFMdjJfaFFxaDQ0WUEKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42SXZMLXFPT2tUR2JYb1Nna1lTd0cydDM3QUlHaU03MmE1Z3pOcEtoOTVaVHcKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42S0JkOHJxMXFmY05WMERsZ1YzZTVIWGFuVXFCYVhQVVNwQ0FhQnZRc0xKa1EKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SjVBZDBheXE5Ty0yX0tEcFJ6VWgzNVNXRkJkTGZFM3VlOURNU0h0V3JoQncKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42TGtuNUhmVkMtbjdZZ0NaMGR5cnFoOGs2LXEwUnUtYlBnYlllRXo3akhuQWcKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42S1o3cVFSWi0ySlF1UTJ2OWJCYzRORk5KRlVkajgwbDhtTi1IRkpwSzlNOHcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42TFlYbTR3enJKZGc4LVFVd3JqQk44Q215MERaV0cxa3hYV3FLQTRkZkRUNGcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SVlxWExjeFdVNDRvaGNhcWdlSGVvbW9GdzhVbkY1el9LbjFkNVhLQWZyNnc",
-"QVEuQWI4Uk42Sm1YQTN6Nk5rMDJnc3RIMFNoc2xnLWlsaXc4anI0OW9TdG9qVTFZaUJwdUEKCg",
-"CkFRLkFiOFJONkptWEEzejZOazAyZ3N0SDBTaHNsZy1pbGl3OGpyNDlvU3RvalUxWWlCcHVB",
-"QVEuQWI4Uk42S2VycExzdlpLV2YzVWVPLUxqamF0cFNwUUVrNDBiRDRCdmY0LUd5RnJLSUE",
-
-// 🔴 API KEY : 03 > ENCODE 👇
-
-"QVEuQWI4Uk42TG9jVTZLdmUtVVoyMGQ2b2pZclNkbVhVMERiU1gyMHh0UFQ4bE9TYWdPNmc",
-"QVEuQWI4Uk42S3ozVjBtbDdsWVBPdzVMUGQ0clZ2dk1kY29VeW53TUtKRlhpaS1ZVTVsancK",
-"QVEuQWI4Uk42SzRHS1ZnWkVKb3FZdWJJV1N6MTQ1RVBRT1JBTHFCN2hvTVZBSWo1VGZ1VHc",
-"QVEuQWI4Uk42TE8yN29sS3FTN3FWYWtjY3laTEhVV2Z2ZWxIcXR4ZHhZdklzeGdDcVU4eWcKCgo",
-"QVEuQWI4Uk42TG1saXZtR0ktQndFcEduXzJyOXdOMVFiWUg5b25UNXRBUWlQcVdMVDdjUEEKCgoKCgo",
-"QVEuQWI4Uk42SlBBbFJRbzVqNWRJRkhSRlotZ3lzY1Q1ZzhxWFlaUTNuOENJdUJpbHpCUmc",
-"CkFRLkFiOFJONkl4TEVrQTZsRGRsMS02SzZjd0czNE56LUpaNnJQbEhhQm9ndWxWSHJYYWhR",
-"QVEuQWI4Uk42SXJkMGllejF0cnBNSk9LVHZjY0xSUl9tMEtOWk9rdFBUR3RvQkFkNW94dGcK",
-"QVEuQWI4Uk42SmxvM3huZ3F5XzF0YV8tTmZueFBNcEdUV3hyUkNxV212XzF1REluTVlvcWcK",
-"QVEuQWI4Uk42Sl8xNmZPZThDMmNYOVRabFdjZUF2cTRLbjV5aXNOR3c4NDlGMXoxZW1maVE",
-"QVEuQWI4Uk42SjQxTmhld1A3dVZsUVZCcllHbkVLN2hYTXBUUXZ6a0JKTTAwZS1OX2lOU2cK",
-"QVEuQWI4Uk42TGkwM0wtbEQ1UFgtOUVCOUhIeDdUalU1V2tRQ1lyRW9lUklmYjhiczhyX3cKCg",
-"QVEuQWI4Uk42SkZOX3BOemJCZS1JM3JpN2pPWnpmdXU2ZzlYRzFTeW92LWJJbVBrdXQ2RWcKCgoKCg",
-"QVEuQWI4Uk42SXVFS3R6SDFJTE9NcHExUkhQY012V1g2YmRZdm51c0VDb2dTY0pwVmRMRWcKCgoKCgo",
-"QVEuQWI4Uk42TGp2bVJ1bEtLYTJzRHFBNF9Fc1ZRS3FnbFJUOWtobm1ieEVMcWpNZ0ZHR1EKCgoKCgo",
-"QVEuQWI4Uk42SUc4Qkl5NzRtTXZacGlNTjQ0aDRIOEtTb2JvNGdLN0JmaVJIcFpnYkhiOGcKCgoKCgo",
-"QVEuQWI4Uk42TFhZYlRwSUZQbVE1d2JZRnpBZWQxckJyX2NSVEFkc0RodXFsVDhGU3NWN2cKCgoKCgoK",
-"QVEuQWI4Uk42S3hIMEhDWHNkd2tmQkh4eWM3UXhERkxydkhERUk3UzE2bEpiMlNWV3AwQXcKCgoKCgoK",
-"QVEuQWI4Uk42S0JCWENDUFFtb0xQeFZfcXpVbDV4X3pSVEtOdS1KTVhvLVNXSEhXeUVGR2cKCgoKCgoK",
-"QVEuQWI4Uk42THhfMmpVUE5zbERRRjk3ZHZPVnRiZS1pUGxRMTlUX2RCR1ZIZmw5NDVwT0EKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42Sk5EU0xuZEx3THpyZ1hDRWhCUks1MVdIcVNEeU1uV2R2WlFGeGJ2MkFnVGcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SWN2bXdJbjNVVjR5YVFyS1hzQ2xTQm9FUGh2ckh1MXZfelREbVMzT2p0b2cKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SlRrejhjbERHWWlpdHhidDF6bWVtemk2VXFycTlSVmhsWHpmZndjaUl4bHcKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42STZjMnJkMnJVYldINXVEc3NudU5DWEF0MGVjTVNELThzTVNIekVlTGtGS0EKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42S3o0UXNKSHFIUnlUSUpfbkFWRWlzWmNDeWdtbEdIaWN2RGxsN0Zoc194bHcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SnBtZzRVZU9UcFQ2X1BzNGhESXBoZHM4dzJKb3ZDcDNwT1JwZmJOSTA5NHcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42SVBDT3dhOTZoN2t6WVNIWm41cUpDMlFhR1hUR1dUeVdYUkFHZXdkUW9JdWc",
-"QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0EKCg",
-"QVEuQWI4Uk42SzNYX1JLaEpkdDN5M1JmbUZVcE91QzJ1X1hfWUpqZ0FUbDUyY1pjWFNJU0E",
-"QVEuQWI4Uk42THp1U2RobTBoTEdJR2pFeXZUQVRBdDl1Z2p6TXh4bi1qWW02dDdKS1J1UXc",
-
-// 🔴 API KEY : 04 > ENCODE 👇
-
-"QVEuQWI4Uk42SlR6ajNFeUF2dThYUmgwOTNzMEtmeEJfRkxXQ0k5a3RCY1g1ZG16VjhiQ3c",
-"QVEuQWI4Uk42S3BpdklhVE9TbkxYWmp4bEpxdTg1V2VUVS1vRzFrWHRURW9uZjJGVzVpaVEK",
-"QVEuQWI4Uk42SktHOGVpUlJMcVowTGVyQ2FfcDB2ODFiRUlhRjhpSTJqcGZybFBaeVg3a3cK",
-"QVEuQWI4Uk42TFNFc2hSTUMzTXMxOUo4WXBxT3FfUjRoQ2NmaVl6RUxfajdjU2M2V3FWTVEKCgoKCg",
-"QVEuQWI4Uk42S3Y1UlhZaUwtU3dkTXJ1RmVMZi1MOWd4NzBjOG16Nkk2SkVnbUczWjFlV0EKCgoKCg",
-"QVEuQWI4Uk42S01sLV9hOHdNU0tJUTl1bGZqUVlKZS1XdlVDUi0teW5FQ2xaSktZbnFIZXcK",
-"QVEuQWI4Uk42TGg0U0tvLW9FTGdNM25UcExxMWVzV3JCT01PYmNxRF9xOVFrTldvb3c0eEE",
-"CkFRLkFiOFJONktRRWFEakFXRTdEUTlwYkxmTGlxZTJ5Q2lETmRlNVlfQktFRk5QWXl1QUJRCgo",
-"QVEuQWI4Uk42THd4MTZ2aW0yVnlCU3BULWM3YWNoWWdIN2ZCX1FDQzNTcFI4OUFBUEVJLVEKCg",
-"QVEuQWI4Uk42SV9hZGVOSlVacFFralR1T1JINlRkU0VENlNCSGRiWDRiVEdQM2ZFcWtOSXcK",
-"QVEuQWI4Uk42SnI2Mll6VEJubk16eFNlQ2dCeGN5eTdRRWxNU0wzZ0dKeWlKUEhEU3hoYlEK",
-"CkFRLkFiOFJONklRTy1YdHVtNjRibkJwOFI2ZWVUeXF0bDRhaWZsOGR5TzNZZmZrclB3NjdBCgoK",
-"QVEuQWI4Uk42THdZUnFSLWNZQkctUlFmbmR1UWpORDVVU2RhUHhEdmFZZkIwQVV1cE1tSlEKCgoKCg",
-"QVEuQWI4Uk42S1JUNzBTeDZCZ0x1ak9XNk5xb2hBb2hCS1BfYmZ1YUdSQjZ3bnZxeU0tV3cKCgoKCgo",
-"QVEuQWI4Uk42THNrWHIzQ2hUeml5bFVFTDhtUXNMNVZvNGR4UnNuYzhCWlNjU0hQenppLWcKCgoKCgo",
-"QVEuQWI4Uk42S0xKSVltai1kM0I2WmxGU1Uwa0ZvY2J2ajJoY1ltY3ZXdHU4R19sdDBhalEKCgoKCgoK",
-"QVEuQWI4Uk42SnR6VU1sVUYySURNaFZkdVgxZXhhOTZTVUtJclV0WUFvbTRCcno0SDdib0EKCgoKCgoK",
-"QVEuQWI4Uk42SmxJb3c0QUI3SGJBTzVhRG5EdzhiSlF1ZkNQM3FyaWRDRlpDUGpEMFlNaHcKCgoKCgoK",
-"QVEuQWI4Uk42SUNocUhHQVdqOC1ERnJsZjNVOUxDWHpTNEhtQ1dCNm9yM2taYjJWa1NkTlEKCgoKCgoK",
-"QVEuQWI4Uk42SVRFSEhDb2tDaFFlUHhfVG01SHp6Q2RINjdMdjZ3U3dxejJQUkNFcXNnd3cKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42S2JFb0pJVFVIdHJvQTlid3RydFlkNGpTanFrbW0yRnhPeDEzbEdCZFhfZ0EKCgoKCgoKCgoK",
-"QVEuQWI4Uk42S3hZbUdkN0wzOThTT1BtYzI3aERPeFVXSklxZGh3cDRVelpQUF9tUHMtUkEKCgoKCgoKCgoKCgo",
-"QVEuQWI4Uk42SW9YTVg5RFhYT0dUX21Hb3RJTkRvdnA5UUlmSjBCZ1B0dlhsRXdLcHZ6eVEKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42SzhfN2szVzlfZm5FSzlTb3lyT0Z2MTNRVzA5SHRGSXM4dFVxNjl6TlRQVkEKCgoKCgoKCgoKCg",
-"QVEuQWI4Uk42SVpGQXZPNWpKd0RGcUJTQkcyUnMyY2M2dnh5SGp3Q0pWNDhrN3JVSjU3clEKCgoKCgoKCgoK",
-"QVEuQWI4Uk42Si1WWEVSU3lXUFYtdVp2WFR6a2ZQQmlUc0gzNUJuX1lnOVotbGo1VU5MaXcKCgoKCgoKCgoK",
-"QVEuQWI4Uk42S1hxeDVkQnp5T0txendISDFvMnFwV2pPQ2wwOXZzam0xR1hTNWVzOXZGREE",
-"QVEuQWI4Uk42SlFLOUNXVEd4OFJWZDBRT2xUX1RSRFZGZWt3eVZrTTFLZmZQc2NfUlF3SGcKCg",
-"QVEuQWI4Uk42SlFLOUNXVEd4OFJWZDBRT2xUX1RSRFZGZWt3eVZrTTFLZmZQc2NfUlF3SGc",
-"QVEuQWI4Uk42SjJpUUxIZ2JiNzdCeV9sMXFTS3hTR3VWVnh1eW13a0RfQWFHZ21pVXhyM3c"
-
-
+            // 🔴 API KEY : 04 > ENCODE 👇
+            "QVEuQWI4Uk42SlR6ajNFeUF2dThYUmgwOTNzMEtmeEJfRkxXQ0k5a3RCY1g1ZG16VjhiQ3c",
+            "QVEuQWI4Uk42S3BpdklhVE9TbkxYWmp4bEpxdTg1V2VUVS1vRzFrWHRURW9uZjJGVzVpaVEK",
+            "QVEuQWI4Uk42SktHOGVpUlJMcVowTGVyQ2FfcDB2ODFiRUlhRjhpSTJqcGZybFBaeVg3a3cK",
+            "QVEuQWI4Uk42TFNFc2hSTUMzTXMxOUo4WXBxT3FfUjRoQ2NmaVl6RUxfajdjU2M2V3FWTVEKCgoKCg",
+            "QVEuQWI4Uk42S3Y1UlhZaUwtU3dkTXJ1RmVMZi1MOWd4NzBjOG16Nkk2SkVnbUczWjFlV0EKCgoKCg",
+            "QVEuQWI4Uk42S01sLV9hOHdNU0tJUTl1bGZqUVlKZS1XdlVDUi0teW5FQ2xaSktZbnFIZXcK",
+            "QVEuQWI4Uk42TGg0U0tvLW9FTGdNM25UcExxMWVzV3JCT01PYmNxRF_qOVFrTldvb3c0eEE",
+            "CkFRLkFiOFJONktRRWFEakFXRTdEUTlwYkxmTGlxZTJ5Q2lETmRlNVlfQktFRk5QWXl1QUJRCgo",
+            "QVEuQWI4Uk42THd4MTZ2aW0yVnlCU3BULWM3YWNoWWdIN2ZCX1FDQzNTcFI4OUFBUEVJLVEKCg",
+            "QVEuQWI4Uk42SV_aZGVOSlVacFFralR1T1JINlRkU0VENlNCSGRiWDRiVEdQM2ZFcWtOSXcK",
+            "QVEuQWI4Uk42SnI2Mll6VEJubk16eFNlQ2dCeGN5eTdRRWxNU0wzZ0dKeWlKUEhkU3hoYlEK",
+            "CkFRLkFiOFJONklRTy1YdHVtNjRibkJwOFI2ZWVUeXF0bDRhaWZsOGR5TzNZZmZrclB3NjdBCgoK",
+            "QVEuQWI4Uk42THdZUnFSLWNZQkctUlFmbmR1UWpORDVVU2RhUHhEdmFZZkIwQVV1cE1tSlEKCgoKCg",
+            "QVEuQWI4Uk42S1JUNzBTeDZCZ0x1ak9XNk5xb2hBb2hCS1BfYmZ1YUdSQjZ3bnZxeU0tV3cKCgoKCgo",
+            "QVEuQWI4Uk42THNrWHIzQ2hUeml5bFVFTDhtUXNMNVZvNGR4UnNuYzhCWlNjU0hQenppLWcKCgoKCgo",
+            "QVEuQWI4Uk42S0xKSVltai1kM0I2WmxGU1Uwa0ZvY2J2ajJoY1ltY3ZXdHU4R1_sdDBhalEKCgoKCgoK",
+            "QVEuQWI4Uk42SnR6VU1sVUYySURNaFZkdVgxZXhhOTZTVUtJclV0WUFvbTRCcno0SDdib0EKCgoKCgoK",
+            "QVEuQWI4Uk42SmxJb3c0QUI3SGJBTzVhRG5EdzhiSlF1ZkNQM3FyaWRDRlpDUGpEMFlNaHcKCgoKCgoK",
+            "QVEuQWI4Uk42SUNocUhHQVdqOC1ERnJsZjNVOUxDWHpTNEhtQ1dCNm9yM2taYjJWa1NkTlEKCgoKCgoK",
+            "QVEuQWI4Uk42SVRFSEHDb2tDaFFlUHhfVG01SHp6Q2RINjdMdjZ3U3dxejJQUkNFcXNnd3cKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42S2JFb0pJVFVIdHJvQTlid3RydFlkNGpTanFrbW0yRnhPeDEzbEdCZFhfZ0EKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42S3hZbUdkN0wzOThTT1BtYzI3aERPeFVXSklxZGh3cDRVelpQUF_tUHMtUkEKCgoKCgoKCgoKCgo",
+            "QVEuQWI4Uk42SW9YTVg5RFhYT0dUX21Hb3RJTkRvdnA5UUlmSjBCZ1B0dlhsRXdLcHZ6eVEKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42SzhfN2szVzlfZm5FSzlTb3lyT0Z2MTNRVzA5SHRGSXM4dFVxNjl6TlRQVkEKCgoKCgoKCgoKCg",
+            "QVEuQWI4Uk42SVpGQXZPNWpKd0RGcUJTQkcyUnMyY2M2dnh5SGp3Q0pWNDhrN3JVSjU3clEKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42Si1WWEVSU3lXUFYtdVp2WFR6a2ZQQmlUc0gzNUJuX1lnOVotbGo1VU5MaXcKCgoKCgoKCgoK",
+            "QVEuQWI4Uk42S1hxeDVkQnp5T0txendISDFvMnFwV2pPQ2wwOXZzam0xR1hTNWVzOXZGREE",
+            "QVEuQWI4Uk42SlFLOUNXVEd4OFJWZDBRT2xUX1RSRFZGZWt3eVZrTTFLZmZQc2NfUlF3SGcKCg",
+            "QVEuQWI4Uk42SlFLOUNXVEd4OFJWZDBRT2xUX1RSRFZGZWt3eVZrTTFLZmZQc2NfUlF3SGc",
+            "QVEuQWI4Uk42SjJpUUxIZ2JiNzdCeV9sMXFTS3hTR3VWVnh1eW13a0RfQWFHZ21pVXhyM3c"
         ];
 
         const GEMINI_MODELS = [
@@ -229,7 +221,8 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 const blockedTime = localStorage.getItem(`blocked_key_${index}`);
                 if (!blockedTime) return false;
                 const now = new Date().getTime();
-                if (now - parseInt(blockedTime, 10) > 86400000) {
+                // 2-minute temporary cooldown (120000ms) to ensure continuous API key cycling
+                if (now - parseInt(blockedTime, 10) > 120000) {
                     localStorage.removeItem(`blocked_key_${index}`);
                     return false;
                 }
@@ -243,6 +236,14 @@ Verb Classification: [V1/V2/V3 status if applicable]
             try {
                 const now = new Date().getTime();
                 localStorage.setItem(`blocked_key_${index}`, now.toString());
+            } catch (e) {}
+        };
+
+        const clearAllBlockedKeys = () => {
+            try {
+                for (let i = 0; i < ENCODED_KEYS.length; i++) {
+                    localStorage.removeItem(`blocked_key_${i}`);
+                }
             } catch (e) {}
         };
 
@@ -260,129 +261,136 @@ Verb Classification: [V1/V2/V3 status if applicable]
             let collectedErrors = [];
             const activeSystemPrompt = customSystemPrompt || DEFAULT_SYSTEM_PROMPT;
 
-            for (let m = 0; m < GEMINI_MODELS.length; m++) {
-                const currentModel = GEMINI_MODELS[m];
+            for (let pass = 0; pass < 2; pass++) {
+                if (pass === 1) {
+                    clearAllBlockedKeys();
+                }
 
-                for (let i = 0; i < ENCODED_KEYS.length; i++) {
-                    if (isKeyBlocked(i)) continue;
+                for (let m = 0; m < GEMINI_MODELS.length; m++) {
+                    const currentModel = GEMINI_MODELS[m];
 
-                    const currentApiKey = getActiveApiKey(i);
-                    if (!currentApiKey) {
-                        blockKey(i);
-                        continue;
-                    }
+                    for (let i = 0; i < ENCODED_KEYS.length; i++) {
+                        if (pass === 0 && isKeyBlocked(i)) continue;
 
-                    const url = `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${currentApiKey}`;
-                    const payload = {
-                        contents: [{ role: "user", parts: [{ text: promptText }] }],
-                        systemInstruction: { parts: [{ text: activeSystemPrompt }] }
-                    };
-
-                    try {
-                        const response = await fetch(url, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(payload)
-                        });
-
-                        const data = await response.json();
-
-                        if (response.status === 429 || response.status === 403) {
-                            const rateMsg = data.error?.message || "Rate limit or quota exceeded";
-                            collectedErrors.push(`[${currentModel}] Key #${i + 1} (Status ${response.status}): ${rateMsg}`);
+                        const currentApiKey = getActiveApiKey(i);
+                        if (!currentApiKey) {
                             blockKey(i);
                             continue;
                         }
 
-                        if (!response.ok) {
-                            const errDetails = data.error?.message || 'Request failed';
-                            collectedErrors.push(`[${currentModel}] Key #${i + 1} (Status ${response.status}): ${errDetails}`);
-                            blockKey(i);
-                            continue;
-                        }
+                        const url = `https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${currentApiKey}`;
+                        const payload = {
+                            contents: [{ role: "user", parts: [{ text: promptText }] }],
+                            systemInstruction: { parts: [{ text: activeSystemPrompt }] }
+                        };
 
-                        const textOut = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                        if (textOut) {
-                            return { text: textOut, modelUsed: currentModel, keyIndex: i + 1, error: null };
-                        } else {
-                            collectedErrors.push(`[${currentModel}] Key #${i + 1}: Empty response payload.`);
+                        try {
+                            const response = await fetch(url, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(payload)
+                            });
+
+                            const data = await response.json();
+
+                            if (response.status === 404) {
+                                collectedErrors.push(`[${currentModel}] Model Not Found (404)`);
+                                break;
+                            }
+
+                            if (response.status === 429 || response.status === 403) {
+                                const rateMsg = data.error?.message || "Rate limit or quota exceeded";
+                                collectedErrors.push(`[${currentModel}] Key #${i + 1} (${response.status}): ${rateMsg}`);
+                                blockKey(i);
+                                continue;
+                            }
+
+                            if (!response.ok) {
+                                const errDetails = data.error?.message || 'Request failed';
+                                collectedErrors.push(`[${currentModel}] Key #${i + 1} (${response.status}): ${errDetails}`);
+                                blockKey(i);
+                                continue;
+                            }
+
+                            const textOut = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                            if (textOut) {
+                                return { text: textOut, modelUsed: currentModel, keyIndex: i + 1, error: null };
+                            } else {
+                                collectedErrors.push(`[${currentModel}] Key #${i + 1}: Empty response payload.`);
+                                blockKey(i);
+                            }
+                        } catch (error) {
+                            collectedErrors.push(`[${currentModel}] Key #${i + 1}: Network Error (${error.message})`);
                             blockKey(i);
                         }
-                    } catch (error) {
-                        collectedErrors.push(`[${currentModel}] Key #${i + 1}: Network/Runtime Error (${error.message})`);
-                        blockKey(i);
                     }
                 }
-            }
-
-            try {
-                const envApiKey = "";
-                const fallbackModel = "gemini-3-flash-preview";
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/${fallbackModel}:generateContent?key=${envApiKey}`;
-                const payload = {
-                    contents: [{ role: "user", parts: [{ text: promptText }] }],
-                    systemInstruction: { parts: [{ text: activeSystemPrompt }] }
-                };
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-                const data = await response.json();
-                const textOut = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (textOut) {
-                    return { text: textOut, modelUsed: fallbackModel + " (Runtime)", keyIndex: 0, error: null };
-                }
-            } catch (fallbackErr) {
-                collectedErrors.push(`Runtime Env Fallback Error: ${fallbackErr.message}`);
             }
 
             return { text: null, error: collectedErrors.join('\n') || "සියලුම API Keys සහ Gemini මාදිලි මේ මොහොතේ සීමාවී ඇත. කරුණාකර සුළු මොහොතකින් නැවත උත්සාහ කරන්න." };
         };
 
-        const speakBilingual = (enText, siText) => {
-            const clean = (str) => str ? str.replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}🇬🇧🇱🇰]/gu, '').replace(/[*_#`~|[\](){}]/g, ' ').replace(/[.\-–—:=+?/<>]/g, ' ').trim() : "";
-            
-            const cleanEn = clean(enText);
-            const cleanSi = clean(siText);
+        const cleanForSpeech = (str) => {
+            if (!str) return "";
+            return str
+                .replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{1F700}-\u{1F77F}\u{1F800}-\u{1F8FF}\u{1F900}-\u{1F9FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}🇬🇧🇱🇰]/gu, '')
+                .replace(/[*_#`~|[\](){}]/g, ' ')
+                .replace(/\[EN_TEXT\]|\[SI_TEXT\]|EN_TEXT|SI_TEXT/gi, ' ')
+                .replace(/[.\-–—:=+?/<>]/g, ' ')
+                .trim();
+        };
+
+        const playAudioFallback = (cleanText, lang) => {
+            return new Promise((resolve) => {
+                try {
+                    const audio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanText)}&tl=${lang}&client=tw-ob`);
+                    audio.onended = () => resolve();
+                    audio.onerror = () => resolve();
+                    audio.play().catch(() => resolve());
+                } catch (e) {
+                    resolve();
+                }
+            });
+        };
+
+        const speakSingleText = (text, lang = 'en') => {
+            return new Promise((resolve) => {
+                const clean = cleanForSpeech(text);
+                if (!clean) {
+                    resolve();
+                    return;
+                }
+
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(clean);
+                    utterance.lang = lang === 'en' ? 'en-US' : 'si-LK';
+                    utterance.rate = 0.9;
+                    utterance.onend = () => resolve();
+                    utterance.onerror = () => {
+                        playAudioFallback(clean, lang).then(resolve);
+                    };
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    playAudioFallback(clean, lang).then(resolve);
+                }
+            });
+        };
+
+        // Sequential Speech: Speaks English word FIRST, then Sinhala translation SECOND
+        const speakBilingual = async (enText, siText) => {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+
+            const cleanEn = cleanForSpeech(enText);
+            const cleanSi = cleanForSpeech(siText);
 
             if (cleanEn) {
-                const enAudio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanEn)}&tl=en&client=tw-ob`);
-                enAudio.play().catch(() => {
-                    if ('speechSynthesis' in window) {
-                        const u = new SpeechSynthesisUtterance(cleanEn);
-                        u.lang = 'en-US';
-                        window.speechSynthesis.speak(u);
-                    }
-                });
-
-                if (cleanSi) {
-                    enAudio.onended = () => {
-                        const siAudio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanSi)}&tl=si&client=tw-ob`);
-                        siAudio.play().catch(() => {
-                            if ('speechSynthesis' in window) {
-                                const uSi = new SpeechSynthesisUtterance(cleanSi);
-                                uSi.lang = 'si-LK';
-                                window.speechSynthesis.speak(uSi);
-                            }
-                        });
-                    };
-                } else {
-                    if ('speechSynthesis' in window) {
-                        const uSi = new SpeechSynthesisUtterance(cleanSi);
-                        uSi.lang = 'si-LK';
-                        window.speechSynthesis.speak(uSi);
-                    }
-                }
-            } else if (cleanSi) {
-                const siAudio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanSi)}&tl=si&client=tw-ob`);
-                siAudio.play().catch(() => {
-                    if ('speechSynthesis' in window) {
-                        const uSi = new SpeechSynthesisUtterance(cleanSi);
-                        uSi.lang = 'si-LK';
-                        window.speechSynthesis.speak(uSi);
-                    }
-                });
+                await speakSingleText(cleanEn, 'en');
+                await new Promise((r) => setTimeout(r, 350));
+            }
+            if (cleanSi) {
+                await speakSingleText(cleanSi, 'si');
             }
         };
 
@@ -474,7 +482,7 @@ Verb Classification: [V1/V2/V3 status if applicable]
                             </div>
                             <button
                                 onClick={() => speakBilingual(cleanEn, cleanSi)}
-                                title="ශ්‍රවණය කරන්න"
+                                title="ශ්‍රවණය කරන්න (1. English ➔ 2. Sinhala)"
                                 className="w-10 h-10 rounded-md bg-sky-500 hover:bg-sky-400 text-white flex items-center justify-center shrink-0 shadow-lg shadow-sky-500/30 transition-transform active:scale-95 touch-manipulation"
                             >
                                 <Icon name="volume-2" size={20} />
@@ -906,10 +914,10 @@ Verb Classification: [V1/V2/V3 status if applicable]
                         }
                         setOutputText(result.text);
                     } else {
-                        startCountdownTimer(60, result.error);
+                        startCountdownTimer(30, result.error);
                     }
                 } catch (err) {
-                    startCountdownTimer(60, `Execution Exception: ${err.message}`);
+                    startCountdownTimer(30, `Execution Exception: ${err.message}`);
                 } finally {
                     setLoading(false);
                 }
@@ -1052,9 +1060,9 @@ Verb Classification: [V1/V2/V3 status if applicable]
                     {countdown > 0 && (
                         <div className="bg-white dark:bg-slate-900 border border-amber-300 dark:border-amber-500/50 rounded-2xl p-5 text-center space-y-2.5 shadow-xl transition-colors duration-300">
                             <div className="text-2xl">⏳</div>
-                            <h3 className="text-amber-600 dark:text-amber-400 font-bold text-sm sm:text-base">දෛනික සීමාව ඉක්මවා ඇත!</h3>
+                            <h3 className="text-amber-600 dark:text-amber-400 font-bold text-sm sm:text-base">තාවකාලික Cooldown එකක් ක්‍රියාත්මකයි</h3>
                             <p className="text-xs text-slate-700 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
-                                ඔබ නොමිලේ භාවිතා කල සීමාව අවසන් වී ඇත. කරුණාකර පසුව නැවත උත්සාහ කරන්න.
+                                පද්ධතිය නැවත සූදානම් වෙමින් පවතී. කරුණාකර තත්පර කිහිපයකින් නැවත උත්සාහ කරන්න.
                             </p>
                             <div className="inline-block bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-mono px-3.5 py-1.5 rounded-lg">
                                 තත්පර <span className="font-bold text-amber-600 dark:text-amber-200">{countdown}</span> කින් නැවත සක්‍රිය වේ...
@@ -1544,8 +1552,9 @@ Verb Classification: [V1/V2/V3 status if applicable]
             const alphabet = ['All', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'Y', 'Z'];
 
             const verbs = [
-                { v1: "Abide", v2: "Abode/Abided", v3: "Abode/Abided", irregular: true, meaning: "රඳා පවතිනවා" },
+                // Letter A
                 { v1: "Abandon", v2: "Abandoned", v3: "Abandoned", irregular: false, meaning: "අතහැර දමනවා" },
+                { v1: "Abide", v2: "Abode/Abided", v3: "Abode/Abided", irregular: true, meaning: "රඳා පවතිනවා" },
                 { v1: "Absorb", v2: "Absorbed", v3: "Absorbed", irregular: false, meaning: "ශෝෂණය කරනවා" },
                 { v1: "Accept", v2: "Accepted", v3: "Accepted", irregular: false, meaning: "පිළිගන්නවා" },
                 { v1: "Achieve", v2: "Achieved", v3: "Achieved", irregular: false, meaning: "සාක්ෂාත් කර ගන්නවා" },
@@ -1576,7 +1585,7 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Ask", v2: "Asked", v3: "Asked", irregular: false, meaning: "අසනවා" },
                 { v1: "Assault", v2: "Assaulted", v3: "Assaulted", irregular: false, meaning: "ප්‍රහාර කරනවා" },
                 { v1: "Assist", v2: "Assisted", v3: "Assisted", irregular: false, meaning: "උපකාර කරනවා" },
-                { v1: "Assume", v2: "Assumed", v3: "Assumed", irregular: false, meaning: "ಊමා කරනවා" },
+                { v1: "Assume", v2: "Assumed", v3: "Assumed", irregular: false, meaning: "උපකල්පනය කරනවා" },
                 { v1: "Attach", v2: "Attached", v3: "Attached", irregular: false, meaning: "අමුණනවා" },
                 { v1: "Attack", v2: "Attacked", v3: "Attacked", irregular: false, meaning: "ප්‍රහාර කරනවා" },
                 { v1: "Attempt", v2: "Attempted", v3: "Attempted", irregular: false, meaning: "උත්සාහ කරනවා" },
@@ -1584,7 +1593,11 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Attract", v2: "Attracted", v3: "Attracted", irregular: false, meaning: "ආකර්ෂණය කරගන්නවා" },
                 { v1: "Avoid", v2: "Avoided", v3: "Avoided", irregular: false, meaning: "මඟහරිනවා" },
                 { v1: "Awake", v2: "Awoke", v3: "Awoken", irregular: true, meaning: "ඇහැරෙනවා" },
+
+                // Letter B
                 { v1: "Back", v2: "Backed", v3: "Backed", irregular: false, meaning: "පසුපසට යනවා" },
+                { v1: "Backbite", v2: "Backbit", v3: "Backbitten", irregular: true, meaning: "පිටුපසින් කේලාම් කියනවා" },
+                { v1: "Backslide", v2: "Backslid", v3: "Backslidden", irregular: true, meaning: "පැරණි වැරදි වලට නැවත වැටෙනවා" },
                 { v1: "Bake", v2: "Baked", v3: "Baked", irregular: false, meaning: "පුළුස්සනවා" },
                 { v1: "Balance", v2: "Balanced", v3: "Balanced", irregular: false, meaning: "තුලනය කරනවා" },
                 { v1: "Ban", v2: "Banned", v3: "Banned", irregular: false, meaning: "තහනම් කරනවා" },
@@ -1598,34 +1611,45 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Beat", v2: "Beat", v3: "Beaten", irregular: true, meaning: "පහර දෙනවා" },
                 { v1: "Become", v2: "Became", v3: "Become", irregular: true, meaning: "බවට පත්වෙනවා" },
                 { v1: "Beg", v2: "Begged", v3: "Begged", irregular: false, meaning: "යාදිනවා" },
+                { v1: "Beget", v2: "Begot", v3: "Begotten", irregular: true, meaning: "උපත දෙනවා" },
                 { v1: "Begin", v2: "Began", v3: "Begun", irregular: true, meaning: "පටන් ගන්නවා" },
                 { v1: "Behave", v2: "Behaved", v3: "Behaved", irregular: false, meaning: "හැසිරෙනවා" },
                 { v1: "Behold", v2: "Beheld", v3: "Beheld", irregular: true, meaning: "දකිනවා" },
                 { v1: "Belong", v2: "Belonged", v3: "Belonged", irregular: false, meaning: "අයත් වෙනවා" },
                 { v1: "Bend", v2: "Bent", v3: "Bent", irregular: true, meaning: "නමනවා" },
-                { v1: "Bet", v2: "Bet/Betted", v3: "Bet/Betted", irregular: true, meaning: "ඔට්ටු අල්ලනවා" },
+                { v1: "Beset", v2: "Beset", v3: "Beset", irregular: true, meaning: "වටකර ගන්නවා" },
+                { v1: "Bestrew", v2: "Bestrewed", v3: "Bestrewn", irregular: true, meaning: "විසුරුවා හරිනවා" },
+                { v1: "Bestride", v2: "Bestrode", v3: "Bestridden", irregular: true, meaning: "උඩින් හිඳගන්නවා" },
+                { v1: "Bet", v2: "Bet", v3: "Bet", irregular: true, meaning: "ඔට්ටු අල්ලනවා" },
+                { v1: "Bethink", v2: "Bethought", v3: "Bethought", irregular: true, meaning: "සිහිපත් කරනවා" },
                 { v1: "Bid", v2: "Bade/Bid", v3: "Bidden/Bid", irregular: true, meaning: "මිල නියම කරනවා" },
                 { v1: "Bind", v2: "Bound", v3: "Bound", irregular: true, meaning: "බඳිනවා" },
                 { v1: "Bite", v2: "Bit", v3: "Bitten", irregular: true, meaning: "හපනවා" },
                 { v1: "Bleed", v2: "Bled", v3: "Bled", irregular: true, meaning: "ලේ ගලනවා" },
-                { v1: "Bless", v2: "Blessed/Blest", v3: "Blessed/Blest", irregular: false, meaning: "ආශීර්වාද කරනවා" },
+                { v1: "Bless", v2: "Blessed", v3: "Blessed", irregular: false, meaning: "ආශීර්වාද කරනවා" },
                 { v1: "Blind", v2: "Blinded", v3: "Blinded", irregular: false, meaning: "අන්ධ කරනවා" },
                 { v1: "Blink", v2: "Blinked", v3: "Blinked", irregular: false, meaning: "ඇස් සලනවා" },
                 { v1: "Blow", v2: "Blew", v3: "Blown", irregular: true, meaning: "පිඹිනවා" },
+                { v1: "Bode", v2: "Boded", v3: "Boded", irregular: false, meaning: "අනාගතය පෙන්වනවා" },
                 { v1: "Boil", v2: "Boiled", v3: "Boiled", irregular: false, meaning: "උතුරවනවා" },
                 { v1: "Borrow", v2: "Borrowed", v3: "Borrowed", irregular: false, meaning: "ණයට ගන්නවා" },
                 { v1: "Bounce", v2: "Bounced", v3: "Bounced", irregular: false, meaning: "උඩ පනිනවා" },
                 { v1: "Bow", v2: "Bowed", v3: "Bowed", irregular: false, meaning: "ආචාර කරනවා" },
                 { v1: "Box", v2: "Boxed", v3: "Boxed", irregular: false, meaning: "මුෂ්ඩි පහර දෙනවා" },
                 { v1: "Break", v2: "Broke", v3: "Broken", irregular: true, meaning: "කඩනවා" },
+                { v1: "Breakthrough", v2: "Broke through", v3: "Broken through", irregular: true, meaning: "බිඳගෙන යනවා" },
                 { v1: "Breed", v2: "Bred", v3: "Bred", irregular: true, meaning: "අභිජනනය කරනවා" },
                 { v1: "Bring", v2: "Brought", v3: "Brought", irregular: true, meaning: "ගෙනෙනවා" },
                 { v1: "Broadcast", v2: "Broadcast", v3: "Broadcast", irregular: true, meaning: "විකාශය කරනවා" },
+                { v1: "Browbeat", v2: "Browbeat", v3: "Browbeaten", irregular: true, meaning: "බිය ගන්වනවා" },
                 { v1: "Brush", v2: "Brushed", v3: "Brushed", irregular: false, meaning: "මදිනවා" },
+                { v1: "Buffet", v2: "Buffeted", v3: "Buffeted", irregular: false, meaning: "පහර දෙනවා" },
                 { v1: "Build", v2: "Built", v3: "Built", irregular: true, meaning: "ගොඩනඟනවා" },
                 { v1: "Burn", v2: "Burnt/Burned", v3: "Burnt/Burned", irregular: true, meaning: "පිළිස්සනවා" },
                 { v1: "Burst", v2: "Burst", v3: "Burst", irregular: true, meaning: "පුපුරා යනවා" },
                 { v1: "Buy", v2: "Bought", v3: "Bought", irregular: true, meaning: "මිලදී ගන්නවා" },
+
+                // Letter C
                 { v1: "Calculate", v2: "Calculated", v3: "Calculated", irregular: false, meaning: "ගණනය කරනවා" },
                 { v1: "Call", v2: "Called", v3: "Called", irregular: false, meaning: "අඬගසනවා" },
                 { v1: "Camp", v2: "Camped", v3: "Camped", irregular: false, meaning: "කඳවුරු බඳිනවා" },
@@ -1647,15 +1671,19 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Check", v2: "Checked", v3: "Checked", irregular: false, meaning: "පරීක්ෂා කරනවා" },
                 { v1: "Cheer", v2: "Cheered", v3: "Cheered", irregular: false, meaning: "ප්‍රීති වෙනවා" },
                 { v1: "Chew", v2: "Chewed", v3: "Chewed", irregular: false, meaning: "හපනවා" },
+                { v1: "Chide", v2: "Chid", v3: "Chidden", irregular: true, meaning: "දොස් නඟනවා" },
                 { v1: "Choose", v2: "Chose", v3: "Chosen", irregular: true, meaning: "තෝරාගන්නවා" },
                 { v1: "Chop", v2: "Chopped", v3: "Chopped", irregular: false, meaning: "කපනවා" },
                 { v1: "Claim", v2: "Claimed", v3: "Claimed", irregular: false, meaning: "අයිතිවාසිකම් කියනවා" },
                 { v1: "Clap", v2: "Clapped", v3: "Clapped", irregular: false, meaning: "අතපොළොසන් දෙනවා" },
                 { v1: "Clean", v2: "Cleaned", v3: "Cleaned", irregular: false, meaning: "පිරිසිදු කරනවා" },
                 { v1: "Clear", v2: "Cleared", v3: "Cleared", irregular: false, meaning: "පැහැදිලි කරනවා" },
+                { v1: "Cleave", v2: "Clove/Cleft", v3: "Cloven/Cleft", irregular: true, meaning: "පළනවා" },
                 { v1: "Climb", v2: "Climbed", v3: "Climbed", irregular: false, meaning: "නඟිනවා" },
+                { v1: "Cling", v2: "Clung", v3: "Clung", irregular: true, meaning: "ඇලී සිටිනවා" },
                 { v1: "Close", v2: "Closed", v3: "Closed", irregular: false, meaning: "වහනවා" },
                 { v1: "Clothe", v2: "Clothed/Clad", v3: "Clothed/Clad", irregular: true, meaning: "ඇඳුම් අඳිනවා" },
+                { v1: "Co-operate", v2: "Co-operated", v3: "Co-operated", irregular: false, meaning: "සහයෝගයෙන් කටයුතු කරනවා" },
                 { v1: "Collect", v2: "Collected", v3: "Collected", irregular: false, meaning: "එකතු කරනවා" },
                 { v1: "Color", v2: "Colored", v3: "Colored", irregular: false, meaning: "පාට කරනවා" },
                 { v1: "Comb", v2: "Combed", v3: "Combed", irregular: false, meaning: "පීරනවා" },
@@ -1685,55 +1713,128 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Correct", v2: "Corrected", v3: "Corrected", irregular: false, meaning: "නිවැරදි කරනවා" },
                 { v1: "Cost", v2: "Cost", v3: "Cost", irregular: true, meaning: "මිල වනවා" },
                 { v1: "Count", v2: "Counted", v3: "Counted", irregular: false, meaning: "ගණන් කරනවා" },
+                { v1: "Counterfeit", v2: "Counterfeited", v3: "Counterfeited", irregular: false, meaning: "ව්‍යාජ ලෙස සකස් කරනවා" },
+                { v1: "Countersign", v2: "Countersigned", v3: "Countersigned", irregular: false, meaning: "ප්‍රතිඅත්සන් කරනවා" },
                 { v1: "Cover", v2: "Covered", v3: "Covered", irregular: false, meaning: "වසනවා" },
+                { v1: "Cower", v2: "Cowered", v3: "Cowered", irregular: false, meaning: "බියෙන් ඇකිළෙනවා" },
                 { v1: "Crack", v2: "Cracked", v3: "Cracked", irregular: false, meaning: "ඉරිතලා යනවා" },
                 { v1: "Crash", v2: "Crashed", v3: "Crashed", irregular: false, meaning: "ගැටෙනවා" },
                 { v1: "Crawl", v2: "Crawled", v3: "Crawled", irregular: false, meaning: "බඩගානවා" },
                 { v1: "Create", v2: "Created", v3: "Created", irregular: false, meaning: "නිර්මාණය කරනවා" },
                 { v1: "Creep", v2: "Crept", v3: "Crept", irregular: true, meaning: "සෙමින් යනවා" },
                 { v1: "Cross", v2: "Crossed", v3: "Crossed", irregular: false, meaning: "හරහා යනවා" },
+                { v1: "Crossbreed", v2: "Crossbred", v3: "Crossbred", irregular: true, meaning: "මුහුන් කරනවා" },
+                { v1: "Crosscut", v2: "Crosscut", v3: "Crosscut", irregular: true, meaning: "හරස් අතට කපනවා" },
                 { v1: "Cry", v2: "Cried", v3: "Cried", irregular: false, meaning: "අඬනවා" },
                 { v1: "Cure", v2: "Cured", v3: "Cured", irregular: false, meaning: "සුව කරනවා" },
+                { v1: "Curse", v2: "Cursed", v3: "Cursed", irregular: false, meaning: "ශාප කරනවා" },
                 { v1: "Cut", v2: "Cut", v3: "Cut", irregular: true, meaning: "කපනවා" },
+
+                // Letter D
                 { v1: "Damage", v2: "Damaged", v3: "Damaged", irregular: false, meaning: "හානි කරනවා" },
                 { v1: "Dance", v2: "Danced", v3: "Danced", irregular: false, meaning: "නටනවා" },
                 { v1: "Dare", v2: "Dared", v3: "Dared", irregular: false, meaning: "ධෛර්යය කරනවා" },
+                { v1: "Daydream", v2: "Daydreamt", v3: "Daydreamt", irregular: true, meaning: "දිවා සිහින දකිනවා" },
                 { v1: "Deal", v2: "Dealt", v3: "Dealt", irregular: true, meaning: "ගනුදෙනු කරනවා" },
+                { v1: "Decay", v2: "Decayed", v3: "Decayed", irregular: false, meaning: "කුණු වෙනවා" },
                 { v1: "Decide", v2: "Decided", v3: "Decided", irregular: false, meaning: "තීරණය කරනවා" },
                 { v1: "Decorate", v2: "Decorated", v3: "Decorated", irregular: false, meaning: "අලංකාර කරනවා" },
                 { v1: "Decrease", v2: "Decreased", v3: "Decreased", irregular: false, meaning: "අඩු කරනවා" },
+                { v1: "Deepen", v2: "Deepened", v3: "Deepened", irregular: false, meaning: "ගැඹුරු කරනවා" },
+                { v1: "Defeat", v2: "Defeated", v3: "Defeated", irregular: false, meaning: "පරදවනවා" },
                 { v1: "Defend", v2: "Defended", v3: "Defended", irregular: false, meaning: "ආරක්ෂා කරනවා" },
                 { v1: "Define", v2: "Defined", v3: "Defined", irregular: false, meaning: "අර්ථ දක්වනවා" },
                 { v1: "Delay", v2: "Delayed", v3: "Delayed", irregular: false, meaning: "ප්‍රමාද කරනවා" },
                 { v1: "Deliver", v2: "Delivered", v3: "Delivered", irregular: false, meaning: "බෙදාහරිනවා" },
                 { v1: "Demand", v2: "Demanded", v3: "Demanded", irregular: false, meaning: "ඉල්ලා සිටිනවා" },
+                { v1: "Demolish", v2: "Demolished", v3: "Demolished", irregular: false, meaning: "කඩා බිඳ දමනවා" },
                 { v1: "Demonstrate", v2: "Demonstrated", v3: "Demonstrated", irregular: false, meaning: "පෙන්වා දෙනවා" },
                 { v1: "Deny", v2: "Denied", v3: "Denied", irregular: false, meaning: "ප්‍රතික්ෂේප කරනවා" },
                 { v1: "Depend", v2: "Depended", v3: "Depended", irregular: false, meaning: "යැපෙනවා" },
+                { v1: "Depict", v2: "Depicted", v3: "Depicted", irregular: false, meaning: "නිරූපණය කරනවා" },
+                { v1: "Derive", v2: "Derived", v3: "Derived", irregular: false, meaning: "උපුටා ගන්නවා" },
+                { v1: "Descend", v2: "Descended", v3: "Descended", irregular: false, meaning: "පහළට බසිනවා" },
                 { v1: "Describe", v2: "Described", v3: "Described", irregular: false, meaning: "විස්තර කරනවා" },
                 { v1: "Deserve", v2: "Deserved", v3: "Deserved", irregular: false, meaning: "සුදුසු වෙනවා" },
                 { v1: "Design", v2: "Designed", v3: "Designed", irregular: false, meaning: "නිර්මාණය කරනවා" },
                 { v1: "Desire", v2: "Desired", v3: "Desired", irregular: false, meaning: "අපේක්ෂා කරනවා" },
+                { v1: "Despise", v2: "Despised", v3: "Despised", irregular: false, meaning: "තුච්ඡ කොට සලකනවා" },
                 { v1: "Destroy", v2: "Destroyed", v3: "Destroyed", irregular: false, meaning: "විනාශ කරනවා" },
+                { v1: "Detach", v2: "Detached", v3: "Detached", irregular: false, meaning: "වෙන් කරනවා" },
                 { v1: "Detect", v2: "Detected", v3: "Detected", irregular: false, meaning: "සොයාගන්නවා" },
+                { v1: "Deter", v2: "Deterred", v3: "Deterred", irregular: false, meaning: "වැළැක්වීම" },
                 { v1: "Determine", v2: "Determined", v3: "Determined", irregular: false, meaning: "නිශ්චය කරනවා" },
+                { v1: "Devalue", v2: "Devalued", v3: "Devalued", irregular: false, meaning: "අගය බාල කරනවා" },
+                { v1: "Devastate", v2: "Devastated", v3: "Devastated", irregular: false, meaning: "විනාශ කරනවා" },
                 { v1: "Develop", v2: "Developed", v3: "Developed", irregular: false, meaning: "දියුණු කරනවා" },
+                { v1: "Deviate", v2: "Deviated", v3: "Deviated", irregular: false, meaning: "බැහැර වෙනවා" },
+                { v1: "Devise", v2: "Devised", v3: "Devised", irregular: false, meaning: "ක්‍රමයක් සකස් කරනවා" },
+                { v1: "Devote", v2: "Devoted", v3: "Devoted", irregular: false, meaning: "කැප කරනවා" },
+                { v1: "Dictate", v2: "Dictated", v3: "Dictated", irregular: false, meaning: "නියම කරනවා" },
                 { v1: "Die", v2: "Died", v3: "Died", irregular: false, meaning: "මියයනවා" },
                 { v1: "Differ", v2: "Differed", v3: "Differed", irregular: false, meaning: "වෙනස් වෙනවා" },
                 { v1: "Dig", v2: "Dug", v3: "Dug", irregular: true, meaning: "හාරනවා" },
+                { v1: "Dilute", v2: "Diluted", v3: "Diluted", irregular: false, meaning: "දිය කරනවා" },
+                { v1: "Diminish", v2: "Diminished", v3: "Diminished", irregular: false, meaning: "අඩුවී යනවා" },
+                { v1: "Dip", v2: "Dipped", v3: "Dipped", irregular: false, meaning: "ගිල්වනවා" },
                 { v1: "Direct", v2: "Directed", v3: "Directed", irregular: false, meaning: "මඟපෙන්වනවා" },
                 { v1: "Disappear", v2: "Disappeared", v3: "Disappeared", irregular: false, meaning: "අතුරුදහන් වෙනවා" },
+                { v1: "Disclose", v2: "Disclosed", v3: "Disclosed", irregular: false, meaning: "හෙළිදරව් කරනවා" },
+                { v1: "Discontinue", v2: "Discontinued", v3: "Discontinued", irregular: false, meaning: "නතර කරනවා" },
+                { v1: "Discourage", v2: "Discouraged", v3: "Discouraged", irregular: false, meaning: "ධෛර්යය බිඳිනවා" },
                 { v1: "Discover", v2: "Discovered", v3: "Discovered", irregular: false, meaning: "සොයාගන්නවා" },
+                { v1: "Discriminate", v2: "Discriminated", v3: "Discriminated", irregular: false, meaning: "වෙනස්කම් කරනවා" },
                 { v1: "Discuss", v2: "Discussed", v3: "Discussed", irregular: false, meaning: "සාකච්ඡා කරනවා" },
+                { v1: "Disgrace", v2: "Disgraced", v3: "Disgraced", irregular: false, meaning: "අගෞරව කරනවා" },
+                { v1: "Dismay", v2: "Dismayed", v3: "Dismayed", irregular: false, meaning: "කම්පාවට පත් කරනවා" },
+                { v1: "Disobey", v2: "Disobeyed", v3: "Disobeyed", irregular: false, meaning: "අකීකරු වෙනවා" },
+                { v1: "Disperse", v2: "Dispersed", v3: "Dispersed", irregular: false, meaning: "විසුරුවා හරිනවා" },
+                { v1: "Display", v2: "Displayed", v3: "Displayed", irregular: false, meaning: "ප්‍රදර්ශනය කරනවා" },
+                { v1: "Dispose", v2: "Disposed", v3: "Disposed", irregular: false, meaning: "බැහැර කරනවා" },
+                { v1: "Disprove", v2: "Disproved", v3: "Disproven", irregular: false, meaning: "වැරදි බව ඔප්පු කරනවා" },
+                { v1: "Dispute", v2: "Disputed", v3: "Disputed", irregular: false, meaning: "විවාද කරනවා" },
+                { v1: "Disrupt", v2: "Disrupted", v3: "Disrupted", irregular: false, meaning: "බාධා කරනවා" },
+                { v1: "Dissolve", v2: "Dissolved", v3: "Dissolved", irregular: false, meaning: "ද්‍රාවණය කරනවා" },
+                { v1: "Distinguish", v2: "Distinguished", v3: "Distinguished", irregular: false, meaning: "වෙන්කර හඳුනාගන්නවා" },
+                { v1: "Distort", v2: "Distorted", v3: "Distorted", irregular: false, meaning: "විකෘති කරනවා" },
+                { v1: "Distract", v2: "Distracted", v3: "Distracted", irregular: false, meaning: "අවධානය වෙනතකට යොමු කරනවා" },
+                { v1: "Distribute", v2: "Distributed", v3: "Distributed", irregular: false, meaning: "බෙදාහරිනවා" },
+                { v1: "Disturb", v2: "Disturbed", v3: "Disturbed", irregular: false, meaning: "කළබල කරනවා" },
+                { v1: "Diverge", v2: "Diverged", v3: "Diverged", irregular: false, meaning: "දිශා දෙකකට බෙදී යනවා" },
+                { v1: "Divert", v2: "Diverted", v3: "Diverted", irregular: false, meaning: "වෙනත් මඟකට හරවනවා" },
                 { v1: "Divide", v2: "Divided", v3: "Divided", irregular: false, meaning: "බෙදනවා" },
+                { v1: "Divorce", v2: "Divorced", v3: "Divorced", irregular: false, meaning: "දික්කසාද වෙනවා" },
                 { v1: "Do", v2: "Did", v3: "Done", irregular: true, meaning: "කරනවා" },
+                { v1: "Doff", v2: "Doffed", v3: "Doffed", irregular: false, meaning: "ඇඳුම් ගලවනවා" },
+                { v1: "Dormant", v2: "Dormanted", v3: "Dormanted", irregular: false, meaning: "නිද්‍රාශීලී වනවා" },
+                { v1: "Dot", v2: "Dotted", v3: "Dotted", irregular: false, meaning: "තිත් තබනවා" },
+                { v1: "Doubt", v2: "Doubted", v3: "Doubted", irregular: false, meaning: "සැක කරනවා" },
+                { v1: "Draft", v2: "Drafted", v3: "Drafted", irregular: false, meaning: "කෙටුම්පත් කරනවා" },
+                { v1: "Drag", v2: "Dragged", v3: "Dragged", irregular: false, meaning: "අදිනවා" },
+                { v1: "Drain", v2: "Drained", v3: "Drained", irregular: false, meaning: "ජලය ඉවත් කරනවා" },
+                { v1: "Draping", v2: "Draped", v3: "Draped", irregular: false, meaning: "රෙදිවලින් ආවරණය කරනවා" },
                 { v1: "Draw", v2: "Drew", v3: "Drawn", irregular: true, meaning: "අඳිනවා" },
+                { v1: "Dread", v2: "Dreaded", v3: "Dreaded", irregular: false, meaning: "බියට පත්වෙනවා" },
                 { v1: "Dream", v2: "Dreamt/Dreamed", v3: "Dreamt/Dreamed", irregular: true, meaning: "සිහින දකිනවා" },
+                { v1: "Drench", v2: "Drenched", v3: "Drenched", irregular: false, meaning: "හොඳින් තෙමනවා" },
+                { v1: "Dribble", v2: "Dribbled", v3: "Dribbled", irregular: false, meaning: "පන්දු යවමින් යනවා" },
+                { v1: "Drift", v2: "Drifted", v3: "Drifted", irregular: false, meaning: "පාවී යනවා" },
+                { v1: "Drill", v2: "Drilled", v3: "Drilled", irregular: false, meaning: "සිදුරු කරනවා" },
                 { v1: "Drink", v2: "Drank", v3: "Drunk", irregular: true, meaning: "බොනවා" },
+                { v1: "Drip", v2: "Dripped", v3: "Dripped", irregular: false, meaning: "බිංදු වැටෙනවා" },
                 { v1: "Drive", v2: "Drove", v3: "Driven", irregular: true, meaning: "පදවනවා" },
+                { v1: "Drizzle", v2: "Drizzled", v3: "Drizzled", irregular: false, meaning: "පොද වැටෙනවා" },
+                { v1: "Droop", v2: "Drooped", v3: "Drooped", irregular: false, meaning: "නැමී යනවා" },
                 { v1: "Drop", v2: "Dropped", v3: "Dropped", irregular: false, meaning: "අතහරිනවා" },
                 { v1: "Drown", v2: "Drowned", v3: "Drowned", irregular: false, meaning: "ගිලෙනවා" },
+                { v1: "Drum", v2: "Drummed", v3: "Drummed", irregular: false, meaning: "බෙර වයනවා" },
                 { v1: "Dry", v2: "Dried", v3: "Dried", irregular: false, meaning: "වියළනවා" },
+                { v1: "Dull", v2: "Dulled", v3: "Dulled", irregular: false, meaning: "මන්දගාමී කරනවා" },
+                { v1: "Dump", v2: "Dumped", v3: "Dumped", irregular: false, meaning: "ඉවත දමනවා" },
+                { v1: "Dwell", v2: "Dwelt", v3: "Dwelt", irregular: true, meaning: "පදිංචිව සිටිනවා" },
+                { v1: "Dwindle", v2: "Dwindled", v3: "Dwindled", irregular: false, meaning: "ක්‍රමයෙන් අඩුවී යනවා" },
+
+                // Letters E-H
                 { v1: "Earn", v2: "Earned", v3: "Earned", irregular: false, meaning: "උපයා ගන්නවා" },
                 { v1: "Eat", v2: "Ate", v3: "Eaten", irregular: true, meaning: "කනවා" },
                 { v1: "Educate", v2: "Educated", v3: "Educated", irregular: false, meaning: "අධ්‍යාපනය දෙනවා" },
@@ -1758,6 +1859,7 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Explore", v2: "Explored", v3: "Explored", irregular: false, meaning: "ගවේෂණය කරනවා" },
                 { v1: "Express", v2: "Expressed", v3: "Expressed", irregular: false, meaning: "ප්‍රකාශ කරනවා" },
                 { v1: "Extend", v2: "Extended", v3: "Extended", irregular: false, meaning: "දිගු කරනවා" },
+
                 { v1: "Face", v2: "Faced", v3: "Faced", irregular: false, meaning: "මුහුණ දෙනවා" },
                 { v1: "Fail", v2: "Failed", v3: "Failed", irregular: false, meaning: "අසමත් වෙනවා" },
                 { v1: "Fall", v2: "Fell", v3: "Fallen", irregular: true, meaning: "වැටෙනවා" },
@@ -1772,22 +1874,65 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Forget", v2: "Forgot", v3: "Forgotten", irregular: true, meaning: "අමතක වෙනවා" },
                 { v1: "Forgive", v2: "Forgave", v3: "Forgiven", irregular: true, meaning: "සමාව දෙනවා" },
                 { v1: "Freeze", v2: "Froze", v3: "Frozen", irregular: true, meaning: "ශීත කරනවා" },
+                { v1: "Fry", v2: "Fried", v3: "Fried", irregular: false, meaning: "බදිනවා" },
+
+                { v1: "Gain", v2: "Gained", v3: "Gained", irregular: false, meaning: "ලබාගන්නවා" },
+                { v1: "Gather", v2: "Gathered", v3: "Gathered", irregular: false, meaning: "රැස්කරනවා" },
                 { v1: "Get", v2: "Got", v3: "Got/Gotten", irregular: true, meaning: "ලබාගන්නවා" },
                 { v1: "Give", v2: "Gave", v3: "Given", irregular: true, meaning: "දෙනවා" },
                 { v1: "Go", v2: "Went", v3: "Gone", irregular: true, meaning: "යනවා" },
+                { v1: "Grind", v2: "Ground", v3: "Ground", irregular: true, meaning: "අඹරනවා" },
                 { v1: "Grow", v2: "Grew", v3: "Grown", irregular: true, meaning: "වැවෙනවා" },
-                { v1: "Hang", v2: "Hung", v3: "Hung", irregular: true, meaning: "එල්ලනවා" },
+                { v1: "Guard", v2: "Guarded", v3: "Guarded", irregular: false, meaning: "ආරක්ෂා කරනවා" },
+                { v1: "Guess", v2: "Guessed", v3: "Guessed", irregular: false, meaning: "අනුමාන කරනවා" },
+                { v1: "Guide", v2: "Guided", v3: "Guided", irregular: false, meaning: "මඟපෙන්වනවා" },
+
+                { v1: "Happen", v2: "Happened", v3: "Happened", irregular: false, meaning: "සිදුවෙනවා" },
+                { v1: "Harm", v2: "Harmed", v3: "Harmed", irregular: false, meaning: "හානි කරනවා" },
+                { v1: "Hate", v2: "Hated", v3: "Hated", irregular: false, meaning: "වෛර කරනවා" },
                 { v1: "Have", v2: "Had", v3: "Had", irregular: true, meaning: "සතුව තිබෙනවා" },
+                { v1: "Heal", v2: "Healed", v3: "Healed", irregular: false, meaning: "සුව වෙනවා" },
                 { v1: "Hear", v2: "Heard", v3: "Heard", irregular: true, meaning: "ඇසෙනවා" },
+                { v1: "Help", v2: "Helped", v3: "Helped", irregular: false, meaning: "උදව් කරනවා" },
                 { v1: "Hide", v2: "Hid", v3: "Hidden", irregular: true, meaning: "සඟවනවා" },
                 { v1: "Hit", v2: "Hit", v3: "Hit", irregular: true, meaning: "පහර දෙනවා" },
                 { v1: "Hold", v2: "Held", v3: "Held", irregular: true, meaning: "අල්ලාගෙන සිටිනවා" },
+                { v1: "Hope", v2: "Hoped", v3: "Hoped", irregular: false, meaning: "බලාපොරොත්තු වෙනවා" },
+                { v1: "Hug", v2: "Hugged", v3: "Hugged", irregular: false, meaning: "වැළඳගන්නවා" },
                 { v1: "Hurt", v2: "Hurt", v3: "Hurt", irregular: true, meaning: "වේදනාව ඇති කරනවා" },
+
+                // Letters I-L
+                { v1: "Ignore", v2: "Ignored", v3: "Ignored", irregular: false, meaning: "නොසලකා හරිනවා" },
+                { v1: "Imagine", v2: "Imagined", v3: "Imagined", irregular: false, meaning: "මවාගන්නවා" },
+                { v1: "Improve", v2: "Improved", v3: "Improved", irregular: false, meaning: "දියුණු කරනවා" },
+                { v1: "Include", v2: "Included", v3: "Included", irregular: false, meaning: "ඇතුළත් කරනවා" },
+                { v1: "Increase", v2: "Increased", v3: "Increased", irregular: false, meaning: "වැඩි කරනවා" },
+                { v1: "Inform", v2: "Informed", v3: "Informed", irregular: false, meaning: "දැනුම් දෙනවා" },
+                { v1: "Inspect", v2: "Inspected", v3: "Inspected", irregular: false, meaning: "පරීක්ෂා කරනවා" },
+                { v1: "Install", v2: "Installed", v3: "Installed", irregular: false, meaning: "ස්ථාපනය කරනවා" },
+                { v1: "Intend", v2: "Intended", v3: "Intended", irregular: false, meaning: "අදහස් කරනවා" },
+                { v1: "Introduce", v2: "Introduced", v3: "Introduced", irregular: false, meaning: "හඳුන්වා දෙනවා" },
+                { v1: "Invent", v2: "Invented", v3: "Invented", irregular: false, meaning: "නිර්මාණය කරනවා" },
+                { v1: "Invite", v2: "Invited", v3: "Invited", irregular: false, meaning: "ආරාධනා කරනවා" },
+
+                { v1: "Join", v2: "Joined", v3: "Joined", irregular: false, meaning: "එකතු වෙනවා" },
+                { v1: "Joke", v2: "Joked", v3: "Joked", irregular: false, meaning: "විහිළු කරනවා" },
+                { v1: "Judge", v2: "Judged", v3: "Judged", irregular: false, meaning: "තීරණය කරනවා" },
+                { v1: "Jump", v2: "Jumped", v3: "Jumped", irregular: false, meaning: "පනිනවා" },
+
                 { v1: "Keep", v2: "Kept", v3: "Kept", irregular: true, meaning: "තබාගන්නවා" },
+                { v1: "Kick", v2: "Kicked", v3: "Kicked", irregular: false, meaning: "පයින් ගහනවා" },
+                { v1: "Kill", v2: "Killed", v3: "Killed", irregular: false, meaning: "මරනවා" },
+                { v1: "Kiss", v2: "Kissed", v3: "Kissed", irregular: false, meaning: "සිපගන්නවා" },
+                { v1: "Kneel", v2: "Knelt/Kneeled", v3: "Knelt/Kneeled", irregular: true, meaning: "දණගහනවා" },
                 { v1: "Knit", v2: "Knit/Knitted", v3: "Knit/Knitted", irregular: true, meaning: "වියනවා" },
+                { v1: "Knock", v2: "Knocked", v3: "Knocked", irregular: false, meaning: "තට්ටු කරනවා" },
                 { v1: "Know", v2: "Knew", v3: "Known", irregular: true, meaning: "දන්නවා" },
+
+                { v1: "Laugh", v2: "Laughed", v3: "Laughed", irregular: false, meaning: "හිනාවෙනවා" },
                 { v1: "Lay", v2: "Laid", v3: "Laid", irregular: true, meaning: "තබනවා" },
                 { v1: "Lead", v2: "Led", v3: "Led", irregular: true, meaning: "මුල්වී ගමන් කරනවා" },
+                { v1: "Lean", v2: "Leant/Leaned", v3: "Leant/Leaned", irregular: true, meaning: "ඇලවෙනවා" },
                 { v1: "Leap", v2: "Leapt/Leaped", v3: "Leapt/Leaped", irregular: true, meaning: "පනිනවා" },
                 { v1: "Learn", v2: "Learnt/Learned", v3: "Learnt/Learned", irregular: true, meaning: "ඉගෙන ගන්නවා" },
                 { v1: "Leave", v2: "Left", v3: "Left", irregular: true, meaning: "පිටත්ව යනවා" },
@@ -1795,20 +1940,112 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Let", v2: "Let", v3: "Let", irregular: true, meaning: "ඉඩහරිනවා" },
                 { v1: "Lie", v2: "Lay", v3: "Lain", irregular: true, meaning: "වැතිරෙනවා" },
                 { v1: "Light", v2: "Lit/Lighted", v3: "Lit/Lighted", irregular: true, meaning: "එළිය කරනවා" },
+                { v1: "Like", v2: "Liked", v3: "Liked", irregular: false, meaning: "කැමති වෙනවා" },
+                { v1: "Listen", v2: "Listened", v3: "Listened", irregular: false, meaning: "සවන් දෙනවා" },
+                { v1: "Live", v2: "Lived", v3: "Lived", irregular: false, meaning: "ජීවත් වෙනවා" },
+                { v1: "Look", v2: "Looked", v3: "Looked", irregular: false, meaning: "බලනවා" },
                 { v1: "Lose", v2: "Lost", v3: "Lost", irregular: true, meaning: "අහිමි කරගන්නවා" },
+                { v1: "Love", v2: "Loved", v3: "Loved", irregular: false, meaning: "ආදරය කරනවා" },
+
+                // Letters M-P
+                { v1: "Maintain", v2: "Maintained", v3: "Maintained", irregular: false, meaning: "නඩත්තු කරනවා" },
                 { v1: "Make", v2: "Made", v3: "Made", irregular: true, meaning: "හදනවා" },
+                { v1: "Manage", v2: "Managed", v3: "Managed", irregular: false, meaning: "පාලනය කරනවා" },
+                { v1: "Mark", v2: "Marked", v3: "Marked", irregular: false, meaning: "ලකුණු කරනවා" },
+                { v1: "Marry", v2: "Married", v3: "Married", irregular: false, meaning: "විවාහ වෙනවා" },
                 { v1: "Mean", v2: "Meant", v3: "Meant", irregular: true, meaning: "අර්ථවත් කරනවා" },
+                { v1: "Measure", v2: "Measured", v3: "Measured", irregular: false, meaning: "මනිනවා" },
                 { v1: "Meet", v2: "Met", v3: "Met", irregular: true, meaning: "හමුවෙනවා" },
+                { v1: "Melt", v2: "Melted", v3: "Melted", irregular: false, meaning: "දියවෙනවා" },
+                { v1: "Mind", v2: "Minded", v3: "Minded", irregular: false, meaning: "සලකනවා" },
+                { v1: "Miss", v2: "Missed", v3: "Missed", irregular: false, meaning: "මඟහැරෙනවා" },
+                { v1: "Mix", v2: "Mixed", v3: "Mixed", irregular: false, meaning: "කලවම් කරනවා" },
+                { v1: "Move", v2: "Moved", v3: "Moved", irregular: false, meaning: "සලනවා/යනවා" },
+
+                { v1: "Name", v2: "Named", v3: "Named", irregular: false, meaning: "නම් කරනවා" },
+                { v1: "Need", v2: "Needed", v3: "Needed", irregular: false, meaning: "අවශ්‍ය වෙනවා" },
+                { v1: "Notice", v2: "Noticed", v3: "Noticed", irregular: false, meaning: "නිරීක්ෂණය කරනවා" },
+
+                { v1: "Obey", v2: "Obeyed", v3: "Obeyed", irregular: false, meaning: "අව his ය කරනවා" },
+                { v1: "Occur", v2: "Occurred", v3: "Occurred", irregular: false, meaning: "සිදුවෙනවා" },
+                { v1: "Offer", v2: "Offered", v3: "Offered", irregular: false, meaning: "පිරිනමනවා" },
+                { v1: "Open", v2: "Opened", v3: "Opened", irregular: false, meaning: "අරිනවා" },
+                { v1: "Operate", v2: "Operated", v3: "Operated", irregular: false, meaning: "ක්‍රියාත්මක කරනවා" },
+                { v1: "Order", v2: "Ordered", v3: "Ordered", irregular: false, meaning: "නියෝග කරනවා" },
+                { v1: "Overcome", v2: "Overcame", v3: "Overcome", irregular: true, meaning: "ජයගන්නවා" },
+                { v1: "Overtake", v2: "Overtook", v3: "Overtaken", irregular: true, meaning: "පසුකර යනවා" },
+
+                { v1: "Pack", v2: "Packed", v3: "Packed", irregular: false, meaning: "ඇසුරුම් කරනවා" },
+                { v1: "Paint", v2: "Painted", v3: "Painted", irregular: false, meaning: "තීන්ත ගානවා" },
+                { v1: "Park", v2: "Parked", v3: "Parked", irregular: false, meaning: "නවත්වනවා" },
                 { v1: "Pay", v2: "Paid", v3: "Paid", irregular: true, meaning: "මුදල් ගෙවනවා" },
+                { v1: "Perform", v2: "Performed", v3: "Performed", irregular: false, meaning: "ඉටු කරනවා" },
+                { v1: "Persuade", v2: "Persuaded", v3: "Persuaded", irregular: false, meaning: "පොළඹවනවා" },
+                { v1: "Pick", v2: "Picked", v3: "Picked", irregular: false, meaning: "තෝරාගන්නවා" },
+                { v1: "Plan", v2: "Planned", v3: "Planned", irregular: false, meaning: "සැලසුම් කරනවා" },
+                { v1: "Play", v2: "Played", v3: "Played", irregular: false, meaning: "සෙල්ලම් කරනවා" },
+                { v1: "Point", v2: "Pointed", v3: "Pointed", irregular: false, meaning: "පෙන්වා දෙනවා" },
+                { v1: "Polish", v2: "Polished", v3: "Polished", irregular: false, meaning: "ඔප දමනවා" },
+                { v1: "Pour", v2: "Poured", v3: "Poured", irregular: false, meaning: "වක්කරනවා" },
+                { v1: "Practice", v2: "Practiced", v3: "Practiced", irregular: false, meaning: "පුහුණු වෙනවා" },
+                { v1: "Praise", v2: "Praised", v3: "Praised", irregular: false, meaning: "ප්‍රශංසා කරනවා" },
+                { v1: "Pray", v2: "Prayed", v3: "Prayed", irregular: false, meaning: "යාච්ඤා කරනවා" },
+                { v1: "Prefer", v2: "Preferred", v3: "Preferred", irregular: false, meaning: "වඩා කැමති වෙනවා" },
+                { v1: "Prepare", v2: "Prepared", v3: "Prepared", irregular: false, meaning: "ලෑස්ති වෙනවා" },
+                { v1: "Prevent", v2: "Prevented", v3: "Prevented", irregular: false, meaning: "වළක්වනවා" },
+                { v1: "Print", v2: "Printed", v3: "Printed", irregular: false, meaning: "මුද්‍රණය කරනවා" },
+                { v1: "Produce", v2: "Produced", v3: "Produced", irregular: false, meaning: "නිපදවනවා" },
+                { v1: "Promise", v2: "Promised", v3: "Promised", irregular: false, meaning: "පොරොන්දු වෙනවා" },
+                { v1: "Protect", v2: "Protected", v3: "Protected", irregular: false, meaning: "ආරක්ෂා කරනවා" },
+                { v1: "Prove", v2: "Proved", v3: "Proved/Proven", irregular: false, meaning: "ඔප්පු කරනවා" },
+                { v1: "Provide", v2: "Provided", v3: "Provided", irregular: false, meaning: "සපයනවා" },
+                { v1: "Publish", v2: "Published", v3: "Published", irregular: false, meaning: "ප්‍රකාශයට පත්කරනවා" },
+                { v1: "Pull", v2: "Pulled", v3: "Pulled", irregular: false, meaning: "අදිනවා" },
+                { v1: "Punish", v2: "Punished", v3: "Punished", irregular: false, meaning: "දඬුවම් කරනවා" },
+                { v1: "Push", v2: "Pushed", v3: "Pushed", irregular: false, meaning: "තල්ලු කරනවා" },
                 { v1: "Put", v2: "Put", v3: "Put", irregular: true, meaning: "තබනවා" },
-                { v1: "Quit", v2: "Quit/Quitted", v3: "Quit/Quitted", irregular: true, meaning: "අත්හැර දමනවා" },
+
+                // Letters Q-S
+                { v1: "Qualify", v2: "Qualified", v3: "Qualified", irregular: false, meaning: "සුදුසුකම් ලබනවා" },
+                { v1: "Question", v2: "Questioned", v3: "Questioned", irregular: false, meaning: "ප්‍රශ්න කරනවා" },
+                { v1: "Quit", v2: "Quit", v3: "Quit", irregular: true, meaning: "අත්හැර දමනවා" },
+
+                { v1: "Rain", v2: "Rained", v3: "Rained", irregular: false, meaning: "වැසි වැටෙනවා" },
+                { v1: "Raise", v2: "Raised", v3: "Raised", irregular: false, meaning: "ඔසවනවා" },
+                { v1: "Reach", v2: "Reached", v3: "Reached", irregular: false, meaning: "ළඟාවෙනවා" },
                 { v1: "Read", v2: "Read", v3: "Read", irregular: true, meaning: "කියවනවා" },
+                { v1: "Realize", v2: "Realized", v3: "Realized", irregular: false, meaning: "තේරුම් ගන්නවා" },
+                { v1: "Receive", v2: "Received", v3: "Received", irregular: false, meaning: "ලබාගන්නවා" },
+                { v1: "Recognize", v2: "Recognized", v3: "Recognized", irregular: false, meaning: "හඳුනාගන්නවා" },
+                { v1: "Reduce", v2: "Reduced", v3: "Reduced", irregular: false, meaning: "අඩු කරනවා" },
+                { v1: "Refuse", v2: "Refused", v3: "Refused", irregular: false, meaning: "ප්‍රතික්ෂේප කරනවා" },
+                { v1: "Regret", v2: "Regretted", v3: "Regretted", irregular: false, meaning: "කණගාටු වෙනවා" },
+                { v1: "Reject", v2: "Rejected", v3: "Rejected", irregular: false, meaning: "ප්‍රතික්ෂේප කරනවා" },
+                { v1: "Relax", v2: "Relaxed", v3: "Relaxed", irregular: false, meaning: "විවේක ගන්නවා" },
+                { v1: "Remember", v2: "Remembered", v3: "Remembered", irregular: false, meaning: "මතක තබාගන්නවා" },
+                { v1: "Remind", v2: "Reminded", v3: "Reminded", irregular: false, meaning: "මතක් කරනවා" },
+                { v1: "Remove", v2: "Removed", v3: "Removed", irregular: false, meaning: "ඉවත් කරනවා" },
+                { v1: "Repair", v2: "Repaired", v3: "Repaired", irregular: false, meaning: "අලුත්වැඩියා කරනවා" },
+                { v1: "Repeat", v2: "Repeated", v3: "Repeated", irregular: false, meaning: "නැවත කියනවා" },
+                { v1: "Reply", v2: "Replied", v3: "Replied", irregular: false, meaning: "පිළිතුරු දෙනවා" },
+                { v1: "Report", v2: "Reported", v3: "Reported", irregular: false, meaning: "වාර්තා කරනවා" },
+                { v1: "Request", v2: "Requested", v3: "Requested", irregular: false, meaning: "ඉල්ලා සිටිනවා" },
+                { v1: "Rescue", v2: "Rescued", v3: "Rescued", irregular: false, meaning: "බේරාගන්නවා" },
+                { v1: "Respect", v2: "Respected", v3: "Respected", irregular: false, meaning: "ගෞරව කරනවා" },
+                { v1: "Return", v2: "Returned", v3: "Returned", irregular: false, meaning: "ආපසු එනවා" },
+                { v1: "Reveal", v2: "Revealed", v3: "Revealed", irregular: false, meaning: "හෙළිදරව් කරනවා" },
                 { v1: "Ride", v2: "Rode", v3: "Ridden", irregular: true, meaning: "පදවනවා" },
                 { v1: "Ring", v2: "Rang", v3: "Rung", irregular: true, meaning: "නාද කරනවා" },
                 { v1: "Rise", v2: "Rose", v3: "Risen", irregular: true, meaning: "නැගී සිටිනවා" },
+                { v1: "Rub", v2: "Rubbed", v3: "Rubbed", irregular: false, meaning: "පිරිමදිනවා" },
                 { v1: "Run", v2: "Ran", v3: "Run", irregular: true, meaning: "දුවනවා" },
+
+                { v1: "Save", v2: "Saved", v3: "Saved", irregular: false, meaning: "බේරාගන්නවා / සුරකියි" },
                 { v1: "Say", v2: "Said", v3: "Said", irregular: true, meaning: "කියනවා" },
+                { v1: "Scold", v2: "Scolded", v3: "Scolded", irregular: false, meaning: "බණිනවා" },
+                { v1: "Search", v2: "Searched", v3: "Searched", irregular: false, meaning: "සොයනවා" },
                 { v1: "See", v2: "Saw", v3: "Seen", irregular: true, meaning: "දකිනවා" },
+                { v1: "Seek", v2: "Sought", v3: "Sought", irregular: true, meaning: "සොයනවා" },
                 { v1: "Sell", v2: "Sold", v3: "Sold", irregular: true, meaning: "විකුණනවා" },
                 { v1: "Send", v2: "Sent", v3: "Sent", irregular: true, meaning: "යවනවා" },
                 { v1: "Set", v2: "Set", v3: "Set", irregular: true, meaning: "පිහිටුවනවා" },
@@ -1816,119 +2053,94 @@ Verb Classification: [V1/V2/V3 status if applicable]
                 { v1: "Shake", v2: "Shook", v3: "Shaken", irregular: true, meaning: "සලනවා" },
                 { v1: "Shine", v2: "Shone", v3: "Shone", irregular: true, meaning: "බබළනවා" },
                 { v1: "Shoot", v2: "Shot", v3: "Shot", irregular: true, meaning: "වෙඩි තබනවා" },
-                { v1: "Show", v2: "Showed", v3: "Shown/Showed", irregular: true, meaning: "පෙන්වනවා" },
+                { v1: "Show", v2: "Showed", v3: "Shown", irregular: true, meaning: "පෙන්වනවා" },
+                { v1: "Shrink", v2: "Shrank", v3: "Shrunk", irregular: true, meaning: "හැකිලෙනවා" },
                 { v1: "Shut", v2: "Shut", v3: "Shut", irregular: true, meaning: "වහනවා" },
                 { v1: "Sing", v2: "Sang", v3: "Sung", irregular: true, meaning: "ගීත ගයනවා" },
                 { v1: "Sink", v2: "Sank", v3: "Sunk", irregular: true, meaning: "ගිලෙනවා" },
                 { v1: "Sit", v2: "Sat", v3: "Sat", irregular: true, meaning: "වාඩිවෙනවා" },
                 { v1: "Sleep", v2: "Slept", v3: "Slept", irregular: true, meaning: "නිදාගන්නවා" },
                 { v1: "Slide", v2: "Slid", v3: "Slid", irregular: true, meaning: "ලිස්සා යනවා" },
+                { v1: "Smell", v2: "Smelt/Smelled", v3: "Smelt/Smelled", irregular: true, meaning: "සුුවඳ දැනෙනවා" },
+                { v1: "Smile", v2: "Smiled", v3: "Smiled", irregular: false, meaning: "මඳහස් පානවා" },
                 { v1: "Speak", v2: "Spoke", v3: "Spoken", irregular: true, meaning: "කතා කරනවා" },
+                { v1: "Speed", v2: "Sped", v3: "Sped", irregular: true, meaning: "වේගයෙන් යනවා" },
+                { v1: "Spell", v2: "Spelt/Spelled", v3: "Spelt/Spelled", irregular: true, meaning: "අකුරු කරනවා" },
                 { v1: "Spend", v2: "Spent", v3: "Spent", irregular: true, meaning: "වියදම් කරනවා" },
-                { v1: "Spin", v2: "Span/Spun", v3: "Spun", irregular: true, meaning: "කැරකෙනවා" },
+                { v1: "Spill", v2: "Spilt/Spilled", v3: "Spilt/Spilled", irregular: true, meaning: "හැලෙනවා" },
+                { v1: "Spin", v2: "Spun", v3: "Spun", irregular: true, meaning: "කැරකෙනවා" },
+                { v1: "Spit", v2: "Spat", v3: "Spat", irregular: true, meaning: "කෙළ ගසනවා" },
+                { v1: "Split", v2: "Split", v3: "Split", irregular: true, meaning: "බෙදනවා" },
+                { v1: "Spoil", v2: "Spoilt/Spoiled", v3: "Spoilt/Spoiled", irregular: true, meaning: "නරක් කරනවා" },
                 { v1: "Spread", v2: "Spread", v3: "Spread", irregular: true, meaning: "පැතිරෙනවා" },
+                { v1: "Spring", v2: "Sprang", v3: "Sprung", irregular: true, meaning: "උඩ පනිනවා" },
                 { v1: "Stand", v2: "Stood", v3: "Stood", irregular: true, meaning: "සිටගෙන සිටිනවා" },
+                { v1: "Start", v2: "Started", v3: "Started", irregular: false, meaning: "පටන් ගන්නවා" },
+                { v1: "Stay", v2: "Stayed", v3: "Stayed", irregular: false, meaning: "නැවතී සිටිනවා" },
                 { v1: "Steal", v2: "Stole", v3: "Stolen", irregular: true, meaning: "සොරකම් කරනවා" },
                 { v1: "Stick", v2: "Stuck", v3: "Stuck", irregular: true, meaning: "ඇලී සිටිනවා" },
-                { v1: "Strike", v2: "Struck", v3: "Struck/Stricken", irregular: true, meaning: "පහර දෙනවා" },
+                { v1: "Sting", v2: "Stung", v3: "Stung", irregular: true, meaning: "දෂ්ට කරනවා" },
+                { v1: "Stink", v2: "Stank", v3: "Stunk", irregular: true, meaning: "දුගඳ හමනවා" },
+                { v1: "Stop", v2: "Stopped", v3: "Stopped", irregular: false, meaning: "නතර කරනවා" },
+                { v1: "Strike", v2: "Struck", v3: "Struck", irregular: true, meaning: "පහර දෙනවා" },
+                { v1: "Strive", v2: "Strove", v3: "Striven", irregular: true, meaning: "උත්සාහ කරනවා" },
+                { v1: "Study", v2: "Studied", v3: "Studied", irregular: false, meaning: "පාඩම් කරනවා" },
+                { v1: "Succeed", v2: "Succeeded", v3: "Succeeded", irregular: false, meaning: "ජයගන්නවා" },
+                { v1: "Suffer", v2: "Suffered", v3: "Suffered", irregular: false, meaning: "දුක් විඳිනවා" },
+                { v1: "Suggest", v2: "Suggested", v3: "Suggested", irregular: false, meaning: "යෝජනා කරනවා" },
                 { v1: "Swear", v2: "Swore", v3: "Sworn", irregular: true, meaning: "පොරොන්දු වෙනවා" },
+                { v1: "Sweat", v2: "Sweat/Sweated", v3: "Sweat/Sweated", irregular: true, meaning: "ඩහදිය දමනවා" },
                 { v1: "Sweep", v2: "Swept", v3: "Swept", irregular: true, meaning: "අතුගානවා" },
                 { v1: "Swim", v2: "Swam", v3: "Swum", irregular: true, meaning: "පීනනවා" },
+                { v1: "Swing", v2: "Swung", v3: "Swung", irregular: true, meaning: "පැද්දෙනවා" },
+
+                // Letters T-Z
                 { v1: "Take", v2: "Took", v3: "Taken", irregular: true, meaning: "ගන්නවා" },
+                { v1: "Talk", v2: "Talked", v3: "Talked", irregular: false, meaning: "කතා කරනවා" },
                 { v1: "Teach", v2: "Taught", v3: "Taught", irregular: true, meaning: "උගන්වනවා" },
-                { v1: "Tear", v2: "Tore", v3: "Torn", irregular: true, meaning: "ඉඳිනවා" },
+                { v1: "Tear", v2: "Tore", v3: "Torn", irregular: true, meaning: "ඉරනවා" },
                 { v1: "Tell", v2: "Told", v3: "Told", irregular: true, meaning: "පවසනවා" },
                 { v1: "Think", v2: "Thought", v3: "Thought", irregular: true, meaning: "හිතනවා" },
                 { v1: "Throw", v2: "Threw", v3: "Thrown", irregular: true, meaning: "විසි කරනවා" },
+                { v1: "Touch", v2: "Touched", v3: "Touched", irregular: false, meaning: "අල්ලනවා" },
+                { v1: "Translate", v2: "Translated", v3: "Translated", irregular: false, meaning: "පරිවර්තනය කරනවා" },
+                { v1: "Travel", v2: "Traveled", v3: "Traveled", irregular: false, meaning: "ගමන් කරනවා" },
+                { v1: "Try", v2: "Tried", v3: "Tried", irregular: false, meaning: "උත්සාහ කරනවා" },
+                { v1: "Turn", v2: "Turned", v3: "Turned", irregular: false, meaning: "හරවනවා" },
+
                 { v1: "Understand", v2: "Understood", v3: "Understood", irregular: true, meaning: "තේරුම් ගන්නවා" },
+                { v1: "Undertake", v2: "Undertook", v3: "Undertaken", irregular: true, meaning: "භාරගන්නවා" },
+                { v1: "Undo", v2: "Undid", v3: "Undone", irregular: true, meaning: "අවලංගු කරනවා" },
+                { v1: "Use", v2: "Used", v3: "Used", irregular: false, meaning: "භාවිතා කරනවා" },
+
+                { v1: "Vanish", v2: "Vanished", v3: "Vanished", irregular: false, meaning: "අතුරුදහන් වෙනවා" },
+                { v1: "Visit", v2: "Visited", v3: "Visited", irregular: false, meaning: "නරඹනවා" },
+
+                { v1: "Wait", v2: "Waited", v3: "Waited", irregular: false, meaning: "බලා සිටිනවා" },
                 { v1: "Wake", v2: "Woke", v3: "Woken", irregular: true, meaning: "ඇහැරෙනවා" },
+                { v1: "Walk", v2: "Walked", v3: "Walked", irregular: false, meaning: "ඇවිදිනවා" },
+                { v1: "Want", v2: "Wanted", v3: "Wanted", irregular: false, meaning: "අවශ්‍යයි" },
+                { v1: "Warn", v2: "Warned", v3: "Warned", irregular: false, meaning: "අනතුරු අඟවනවා" },
+                { v1: "Wash", v2: "Washed", v3: "Washed", irregular: false, meaning: "සෝදනවා" },
+                { v1: "Watch", v2: "Watched", v3: "Watched", irregular: false, meaning: "බලනවා" },
                 { v1: "Wear", v2: "Wore", v3: "Worn", irregular: true, meaning: "අඳිනවා" },
+                { v1: "Weep", v2: "Wept", v3: "Wept", irregular: true, meaning: "අඬනවා" },
                 { v1: "Win", v2: "Won", v3: "Won", irregular: true, meaning: "දිනනවා" },
+                { v1: "Wind", v2: "Wound", v3: "Wound", irregular: true, meaning: "ඔතනවා" },
+                { v1: "Wipe", v2: "Wiped", v3: "Wiped", irregular: false, meaning: "පිසදමනවා" },
+                { v1: "Withdraw", v2: "Withdrew", v3: "Withdrawn", irregular: true, meaning: "ආපසු ගන්නවා" },
+                { v1: "Withstand", v2: "Withstood", v3: "Withstood", irregular: true, meaning: "දරා සිටිනවා" },
+                { v1: "Work", v2: "Worked", v3: "Worked", irregular: false, meaning: "වැඩ කරනවා" },
+                { v1: "Worry", v2: "Worried", v3: "Worried", irregular: false, meaning: "කණගාටු වෙනවා" },
+                { v1: "Wring", v2: "Wrung", v3: "Wrung", irregular: true, meaning: "මිරිකනවා" },
                 { v1: "Write", v2: "Wrote", v3: "Written", irregular: true, meaning: "ලියනවා" },
-                { v1: "Backbite", v2: "Backbit", v3: "Backbitten", irregular: true, meaning: "පිටුපසින් කේලාම් කියනවා" },
-                { v1: "Backslide", v2: "Backslid", v3: "Backslidden/Backslid", irregular: true, meaning: "පැරණි වැරදි වලට නැවත වැටෙනවා" },
-                { v1: "Beget", v2: "Begot/Begat", v3: "Begotten", irregular: true, meaning: "උපත දෙනවා/නිපදවනවා" },
-                { v1: "Beset", v2: "Beset", v3: "Beset", irregular: true, meaning: "වටකර ගන්නවා" },
-                { v1: "Bestrew", v2: "Bestrewed", v3: "Bestrewed/Bestrewn", irregular: true, meaning: "විසුරුවා හරිනවා" },
-                { v1: "Bestride", v2: "Bestrode", v3: "Bestridden", irregular: true, meaning: "උඩින් හිඳගන්නවා" },
-                { v1: "Bethink", v2: "Bethought", v3: "Bethought", irregular: true, meaning: "සිහිපත් කරනවා" },
-                { v1: "Bode", v2: "Boded", v3: "Boded", irregular: false, meaning: "අනාගතය පෙන්වනවා" },
-                { v1: "Breakthrough", v2: "Broke through", v3: "Broken through", irregular: true, meaning: "බිඳගෙන යනවා" },
-                { v1: "Browbeat", v2: "Browbeat", v3: "Browbeaten", irregular: true, meaning: "බිය ගන්වනවා" },
-                { v1: "Buffet", v2: "Buffeted", v3: "Buffeted", irregular: false, meaning: "පහර දෙනවා" },
-                { v1: "Chide", v2: "Chid/Chided", v3: "Chidden/Chided", irregular: true, meaning: "දොස් නඟනවා" },
-                { v1: "Cleave", v2: "Clove/Cleft/Cleaved", v3: "Cloven/Cleft/Cleaved", irregular: true, meaning: "පළනවා" },
-                { v1: "Cling", v2: "Clung", v3: "Clung", irregular: true, meaning: "ඇලී සිටිනවා" },
-                { v1: "Co-operate", v2: "Co-operated", v3: "Co-operated", irregular: false, meaning: "සහයෝගයෙන් කටයුතු කරනවා" },
-                { v1: "Counterfeit", v2: "Counterfeited", v3: "Counterfeited", irregular: false, meaning: "ව්‍යාජ ලෙස සකස් කරනවා" },
-                { v1: "Countersign", v2: "Countersigned", v3: "Countersigned", irregular: false, meaning: "ප්‍රතිඅත්සන් කරනවා" },
-                { v1: "Cower", v2: "Cowered", v3: "Cowered", irregular: false, meaning: "බියෙන් ඇකිළෙනවා" },
-                { v1: "Crossbreed", v2: "Crossbred", v3: "Crossbred", irregular: true, meaning: "මුහුන් කරනවා" },
-                { v1: "Crosscut", v2: "Crosscut", v3: "Crosscut", irregular: true, meaning: "හරස් අතට කපනවා" },
-                { v1: "Curse", v2: "Cursed/Curst", v3: "Cursed/Curst", irregular: false, meaning: "ශාප කරනවා" },
-                { v1: "Daydream", v2: "Daydreamt/Daydreamed", v3: "Daydreamt/Daydreamed", irregular: true, meaning: "දිවා සිහින දකිනවා" },
-                { v1: "Decay", v2: "Decayed", v3: "Decayed", irregular: false, meaning: "කුණු වෙනවා" },
-                { v1: "Deepen", v2: "Deepened", v3: "Deepened", irregular: false, meaning: "ගැඹුරු කරනවා" },
-                { v1: "Defeat", v2: "Defeated", v3: "Defeated", irregular: false, meaning: "පරදවනවා" },
-                { v1: "Demolish", v2: "Demolished", v3: "Demolished", irregular: false, meaning: "කඩා බිඳ දමනවා" },
-                { v1: "Depict", v2: "Depicted", v3: "Depicted", irregular: false, meaning: "නිරූපණය කරනවා" },
-                { v1: "Derive", v2: "Derived", v3: "Derived", irregular: false, meaning: "උපුටා ගන්නවා" },
-                { v1: "Descend", v2: "Descended", v3: "Descended", irregular: false, meaning: "පහළට බසිනවා" },
-                { v1: "Despise", v2: "Despised", v3: "Despised", irregular: false, meaning: "තුච්ඡ කොට සලකනවා" },
-                { v1: "Detach", v2: "Detached", v3: "Detached", irregular: false, meaning: "වෙන් කරනවා" },
-                { v1: "Deter", v2: "Deterred", v3: "Deterred", irregular: false, meaning: "වැළැක්වීම" },
-                { v1: "Devalue", v2: "Devalued", v3: "Devalued", irregular: false, meaning: "අගය බාල කරනවා" },
-                { v1: "Devastate", v2: "Devastated", v3: "Devastated", irregular: false, meaning: "විනාශ කරනවා" },
-                { v1: "Deviate", v2: "Deviated", v3: "Deviated", irregular: false, meaning: "බැහැර වෙනවා" },
-                { v1: "Devise", v2: "Devised", v3: "Devised", irregular: false, meaning: "ක්‍රමයක් සකස් කරනවා" },
-                { v1: "Devote", v2: "Devoted", v3: "Devoted", irregular: false, meaning: "කැප කරනවා" },
-                { v1: "Dictate", v2: "Dictated", v3: "Dictated", irregular: false, meaning: "නියම කරනවා" },
-                { v1: "Dilute", v2: "Diluted", v3: "Diluted", irregular: false, meaning: "දිය කරනවා" },
-                { v1: "Diminish", v2: "Diminished", v3: "Diminished", irregular: false, meaning: "අඩුවී යනවා" },
-                { v1: "Dip", v2: "Dipped", v3: "Dipped", irregular: false, meaning: "ගිල්වනවා" },
-                { v1: "Disclose", v2: "Disclosed", v3: "Disclosed", irregular: false, meaning: "හෙළිදරව් කරනවා" },
-                { v1: "Discontinue", v2: "Discontinued", v3: "Discontinued", irregular: false, meaning: "නතර කරනවා" },
-                { v1: "Discourage", v2: "Discouraged", v3: "Discouraged", irregular: false, meaning: "ධෛර්යය බිඳිනවා" },
-                { v1: "Discriminate", v2: "Discriminated", v3: "Discriminated", irregular: false, meaning: "भेद දක්වනවා" },
-                { v1: "Disgrace", v2: "Disgraced", v3: "Disgraced", irregular: false, meaning: "අගෞරව කරනවා" },
-                { v1: "Dismay", v2: "Dismayed", v3: "Dismayed", irregular: false, meaning: "කම්පාවට පත් කරනවා" },
-                { v1: "Disobey", v2: "Disobeyed", v3: "Disobeyed", irregular: false, meaning: "අකීකරු වෙනවා" },
-                { v1: "Disperse", v2: "Dispersed", v3: "Dispersed", irregular: false, meaning: "විසුරුවා හරිනවා" },
-                { v1: "Display", v2: "Displayed", v3: "Displayed", irregular: false, meaning: "ප්‍රදර්ශනය කරනවා" },
-                { v1: "Dispose", v2: "Disposed", v3: "Disposed", irregular: false, meaning: "බැහැර කරනවා" },
-                { v1: "Disprove", v2: "Disproved", v3: "Disproven/Disproved", irregular: false, meaning: "වැරදි බව සාප්පු කරනවා" },
-                { v1: "Dispute", v2: "Disputed", v3: "Disputed", irregular: false, meaning: "විවාද කරනවා" },
-                { v1: "Disrupt", v2: "Disrupted", v3: "Disrupted", irregular: false, meaning: "බාධා කරනවා" },
-                { v1: "Dissolve", v2: "Dissolved", v3: "Dissolved", irregular: false, meaning: "ද්‍රාවණය කරනවා" },
-                { v1: "Distinguish", v2: "Distinguished", v3: "Distinguished", irregular: false, meaning: "වෙන්කර හඳුනාගන්නවා" },
-                { v1: "Distort", v2: "Distorted", v3: "Distorted", irregular: false, meaning: "විකෘති කරනවා" },
-                { v1: "Distract", v2: "Distracted", v3: "Distracted", irregular: false, meaning: "අවධානය වෙනතකට යොමු කරනවා" },
-                { v1: "Distribute", v2: "Distributed", v3: "Distributed", irregular: false, meaning: "බෙදාහරිනවා" },
-                { v1: "Disturb", v2: "Disturbed", v3: "Disturbed", irregular: false, meaning: "කළබල කරනවා" },
-                { v1: "Diverge", v2: "Diverged", v3: "Diverged", irregular: false, meaning: "දිශා දෙකකට බෙදී යනවා" },
-                { v1: "Divert", v2: "Diverted", v3: "Diverted", irregular: false, meaning: "වෙනත් මඟකට හරවනවා" },
-                { v1: "Divorce", v2: "Divorced", v3: "Divorced", irregular: false, meaning: "දික්කසාද වෙනවා" },
-                { v1: "Doff", v2: "Doffed", v3: "Doffed", irregular: false, meaning: "ඇඳුම් ගලවනවා" },
-                { v1: "Dormant", v2: "Dormanted", v3: "Dormanted", irregular: false, meaning: "නිද්‍රාශීලී වනවා" },
-                { v1: "Dot", v2: "Dotted", v3: "Dotted", irregular: false, meaning: "තිත් තබනවා" },
-                { v1: "Doubt", v2: "Doubted", v3: "Doubted", irregular: false, meaning: "සැක කරනවා" },
-                { v1: "Draft", v2: "Drafted", v3: "Drafted", irregular: false, meaning: "මුටු සකස් කරනවා" },
-                { v1: "Drag", v2: "Dragged", v3: "Dragged", irregular: false, meaning: "අදිනවා" },
-                { v1: "Drain", v2: "Drained", v3: "Drained", irregular: false, meaning: "ජලය ඉවත් කරනවා" },
-                { v1: "Draping", v2: "Draped", v3: "Draped", irregular: false, meaning: "රෙදිවලින් ආවරණය කරනවා" },
-                { v1: "Dread", v2: "Dreaded", v3: "Dreaded", irregular: false, meaning: "බියට පත්වෙනවා" },
-                { v1: "Drench", v2: "Drenched", v3: "Drenched", irregular: false, meaning: "හොඳින් තෙමනවා" },
-                { v1: "Dribble", v2: "Dribbled", v3: "Dribbled", irregular: false, meaning: "පන්දු යවමින් යනවා" },
-                { v1: "Drift", v2: "Drifted", v3: "Drifted", irregular: false, meaning: "පාවී යනවා" },
-                { v1: "Drill", v2: "Drilled", v3: "Drilled", irregular: false, meaning: "සිදුරු කරනවා" },
-                { v1: "Drip", v2: "Dripped", v3: "Dripped", irregular: false, meaning: "බිංදු වැටෙනවා" },
-                { v1: "Drizzle", v2: "Drizzled", v3: "Drizzled", irregular: false, meaning: "පොද වැටෙනවා" },
-                { v1: "Droop", v2: "Drooped", v3: "Drooped", irregular: false, meaning: "නැමී යනවා" },
-                { v1: "Drum", v2: "Drummed", v3: "Drummed", irregular: false, meaning: "බෙර වයනවා" },
-                { v1: "Dull", v2: "Dulled", v3: "Dulled", irregular: false, meaning: "මන්දගාමී කරනවා" },
-                { v1: "Dump", v2: "Dumped", v3: "Dumped", irregular: false, meaning: "ඉවත දමනවා" },
-                { v1: "Dwell", v2: "Dwelt/Dwelled", v3: "Dwelt/Dwelled", irregular: true, meaning: "පදිංචිව සිටිනවා" },
-                { v1: "Dwindle", v2: "Dwindled", v3: "Dwindled", irregular: false, meaning: "ක්‍රමයෙන් අඩුවී යනවා" }
+
+                { v1: "Yawn", v2: "Yawned", v3: "Yawned", irregular: false, meaning: "හයිඅරිනවා" },
+                { v1: "Yell", v2: "Yelled", v3: "Yelled", irregular: false, meaning: "කෑගසනවා" },
+                { v1: "Yield", v2: "Yielded", v3: "Yielded", irregular: false, meaning: "ඵල දරනවා" },
+
+                { v1: "Zip", v2: "Zipped", v3: "Zipped", irregular: false, meaning: "zip දමනවා" },
+                { v1: "Zoom", v2: "Zoomed", v3: "Zoomed", irregular: false, meaning: "ලංකර බලනවා" }
             ];
 
             const filtered = verbs.filter(v => {
