@@ -262,6 +262,12 @@ Verb Classification: [V1/V2/V3 status if applicable]
                             }
                         });
                     };
+                } else {
+                    if ('speechSynthesis' in window) {
+                        const uSi = new SpeechSynthesisUtterance(cleanSi);
+                        uSi.lang = 'si-LK';
+                        window.speechSynthesis.speak(uSi);
+                    }
                 }
             } else if (cleanSi) {
                 const siAudio = new Audio(`https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanSi)}&tl=si&client=tw-ob`);
@@ -2368,4 +2374,3 @@ Verb Classification: [V1/V2/V3 status if applicable]
     </script>
 </body>
 </html>
-
